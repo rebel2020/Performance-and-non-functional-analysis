@@ -1,4 +1,4 @@
-#Perfoemance Testing and Analysis Tool
+#Performance Testing and Analysis Tool
 
 ###Data Sources
 - Google Lighthouse
