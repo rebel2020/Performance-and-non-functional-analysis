@@ -1,8 +1,8 @@
 from mongoengine import Document, EmbeddedDocument, fields
 
-class PerformaceData(Document):
+class PerformanceData(Document):
     category = fields.StringField(required=True)
-    value = fields.TextField(max_length=1000000, required=True)
+    value = fields.StringField(required=True)
     createdAt = fields.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
