@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'api.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 mongoengine.connect(
-    db="tools",
+    db="performancetest",
     host="localhost"
 )
 
