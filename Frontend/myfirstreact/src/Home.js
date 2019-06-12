@@ -23,8 +23,9 @@ handleLogin = () => {
     }
 		return (
 			<div className="Welcome">
-				<h1><center>Welcome</center></h1>
-				<button onClick={this.handleLogin} >view posts</button>
+				<center><h1>Welcome</h1>
+
+				<button onClick={this.handleLogin} >view posts</button> </center>
 			</div>
 		);
 	}

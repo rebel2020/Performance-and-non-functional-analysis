@@ -25,13 +25,15 @@ class userList extends Component {
 	render() {
 		const { users, errorMsg } = this.state
 		return (
-			<center>
+			
 			<table >
+			<center>
   <tr>
     <th>createdAt</th>
     <th>name</th> 
   </tr>
-				{users.length ? users.map(post => <div key={post.id}>
+
+ {users.length ? users.map(post => <div key={post.id}>
 					
   <tr>
     <td>{post.createdAt}</td>
@@ -41,8 +43,9 @@ class userList extends Component {
 
 					</div>) : null}
         {errorMsg ? <div>{errorMsg}</div> : null}
+        </center>
 			 </table>
-		</center>)
+		)
 	}
 }
 
