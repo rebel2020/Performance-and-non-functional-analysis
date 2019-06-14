@@ -1,0 +1,10 @@
+{
+  "simulation": "RecordedSimulation",
+  "simulationId": "recordedsimulation",
+  "start": 1560505516231,
+  "description": "Jeep.com few clicks(One user)",
+  "scenarios": ["RecordedSimulation"],
+  "assertions": [
+
+  ]
+}
