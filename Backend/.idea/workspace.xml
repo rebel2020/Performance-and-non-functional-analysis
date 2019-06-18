@@ -2,15 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="17a311d9-1a51-4c11-b7e3-9ecf32106366" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NodeAPI/models/data.js" beforeDir="false" afterPath="$PROJECT_DIR$/NodeAPI/models/data.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/RESTAPI/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/RESTAPI/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/RESTAPI/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/RESTAPI/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/RESTAPI/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/RESTAPI/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frontend/myfirstreact/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/myfirstreact/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frontend/myfirstreact/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/myfirstreact/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frontend/myfirstreact/src/get.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/myfirstreact/src/get.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NodeAPI/models/Audit.js" beforeDir="false" afterPath="$PROJECT_DIR$/NodeAPI/models/Audit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NodeAPI/models/BestPracticesAudit.js" beforeDir="false" afterPath="$PROJECT_DIR$/NodeAPI/models/BestPracticesAudit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NodeAPI/models/Environment.js" beforeDir="false" afterPath="$PROJECT_DIR$/NodeAPI/models/Environment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NodeAPI/models/MetricDetailed.js" beforeDir="false" afterPath="$PROJECT_DIR$/NodeAPI/models/MetricDetailed.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NodeAPI/models/PWAAudit.js" beforeDir="false" afterPath="$PROJECT_DIR$/NodeAPI/models/PWAAudit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NodeAPI/models/PerformanceAudit.js" beforeDir="false" afterPath="$PROJECT_DIR$/NodeAPI/models/PerformanceAudit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NodeAPI/models/SEOAudit.js" beforeDir="false" afterPath="$PROJECT_DIR$/NodeAPI/models/SEOAudit.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -38,8 +36,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/NodeAPI/models/data.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" column="48" lean-forward="true" selection-start-line="13" selection-start-column="48" selection-end-line="13" selection-end-column="48" />
+            <state relative-caret-position="255">
+              <caret line="15" column="14" lean-forward="true" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -47,8 +45,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/NodeAPI/models/Environment.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+            <state relative-caret-position="204">
+              <caret line="12" column="18" lean-forward="true" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -56,8 +54,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/NodeAPI/models/BestPracticesAudit.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="21" column="30" lean-forward="true" selection-start-line="21" selection-start-column="30" selection-end-line="21" selection-end-column="30" />
+            <state relative-caret-position="331">
+              <caret line="28" column="29" lean-forward="true" selection-start-line="28" selection-start-column="29" selection-end-line="28" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -65,17 +63,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/NodeAPI/models/PWAAudit.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-9">
-              <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
+            <state relative-caret-position="221">
+              <caret line="13" column="46" lean-forward="true" selection-start-line="13" selection-start-column="46" selection-end-line="13" selection-end-column="46" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/NodeAPI/models/Audit.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="72" lean-forward="true" selection-start-line="2" selection-start-column="72" selection-end-line="2" selection-end-column="72" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/NodeAPI/models/Audit.js">
+        <entry file="file://$PROJECT_DIR$/NodeAPI/models/SEOAudit.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="53" selection-start-line="14" selection-start-column="53" selection-end-line="14" selection-end-column="53" />
+            <state relative-caret-position="331">
+              <caret line="25" column="12" lean-forward="true" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -83,8 +90,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/NodeAPI/models/MetricDetailed.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+            <state relative-caret-position="272">
+              <caret line="16" column="18" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -92,8 +99,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/NodeAPI/models/PerformanceAudit.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="45" column="36" lean-forward="true" selection-start-line="45" selection-start-column="36" selection-end-line="45" selection-end-column="36" />
+            <state relative-caret-position="348">
+              <caret line="48" column="2" lean-forward="true" selection-start-line="48" selection-start-column="2" selection-end-line="48" selection-end-column="2" />
             </state>
           </provider>
         </entry>
@@ -103,18 +110,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="157">
               <caret line="23" selection-start-line="23" selection-end-line="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/api/RESTAPI/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" selection-start-line="8" selection-end-line="8" />
-              <folding>
-                <element signature="e#0#25#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -141,12 +136,12 @@
         <option value="$PROJECT_DIR$/api/settings.py" />
         <option value="$PROJECT_DIR$/NodeAPI/models/data.js" />
         <option value="$PROJECT_DIR$/NodeAPI/models/Environment.js" />
-        <option value="$PROJECT_DIR$/NodeAPI/models/PerformanceAudit.js" />
-        <option value="$PROJECT_DIR$/NodeAPI/models/BestPracticesAudit.js" />
         <option value="$PROJECT_DIR$/NodeAPI/models/MetricDetailed.js" />
-        <option value="$PROJECT_DIR$/NodeAPI/models/SEOAudit.js" />
+        <option value="$PROJECT_DIR$/NodeAPI/models/PerformanceAudit.js" />
         <option value="$PROJECT_DIR$/NodeAPI/models/PWAAudit.js" />
+        <option value="$PROJECT_DIR$/NodeAPI/models/BestPracticesAudit.js" />
         <option value="$PROJECT_DIR$/NodeAPI/models/Audit.js" />
+        <option value="$PROJECT_DIR$/NodeAPI/models/SEOAudit.js" />
       </list>
     </option>
   </component>
@@ -250,18 +245,18 @@
       <workItem from="1560749083814" duration="599000" />
       <workItem from="1560760429037" duration="609000" />
       <workItem from="1560777535207" duration="1968000" />
-      <workItem from="1560845631191" duration="5667000" />
+      <workItem from="1560845631191" duration="6781000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17563000" />
+    <option name="totallyTimeSpent" value="18677000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27148998" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.27148998" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -275,7 +270,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.32974428" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.32974428" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32974428" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -376,59 +371,59 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NodeAPI/models/SEOAudit.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="34" lean-forward="true" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NodeAPI/models/BestPracticesAudit.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="30" lean-forward="true" selection-start-line="21" selection-start-column="30" selection-end-line="21" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/NodeAPI/models/data.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="48" lean-forward="true" selection-start-line="13" selection-start-column="48" selection-end-line="13" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NodeAPI/models/PerformanceAudit.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="45" column="36" lean-forward="true" selection-start-line="45" selection-start-column="36" selection-end-line="45" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NodeAPI/models/MetricDetailed.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+        <state relative-caret-position="255">
+          <caret line="15" column="14" lean-forward="true" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/NodeAPI/models/PWAAudit.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-9">
-          <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
+        <state relative-caret-position="221">
+          <caret line="13" column="46" lean-forward="true" selection-start-line="13" selection-start-column="46" selection-end-line="13" selection-end-column="46" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/NodeAPI/models/Environment.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+        <state relative-caret-position="204">
+          <caret line="12" column="18" lean-forward="true" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NodeAPI/models/PerformanceAudit.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="348">
+          <caret line="48" column="2" lean-forward="true" selection-start-line="48" selection-start-column="2" selection-end-line="48" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NodeAPI/models/BestPracticesAudit.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="331">
+          <caret line="28" column="29" lean-forward="true" selection-start-line="28" selection-start-column="29" selection-end-line="28" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NodeAPI/models/MetricDetailed.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="18" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/NodeAPI/models/Audit.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="53" selection-start-line="14" selection-start-column="53" selection-end-line="14" selection-end-column="53" />
+        <state relative-caret-position="34">
+          <caret line="2" column="72" lean-forward="true" selection-start-line="2" selection-start-column="72" selection-end-line="2" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NodeAPI/models/SEOAudit.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="331">
+          <caret line="25" column="12" lean-forward="true" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="12" />
         </state>
       </provider>
     </entry>

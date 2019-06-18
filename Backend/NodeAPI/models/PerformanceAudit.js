@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const MetricDetailedSchema = require('./MetricDetailed.js').MetricDetailedSchema;
+const MetricDetailedSchema = require('./MetricDetailed.js').MetricDetailed;
 
 const PerformanceSchema = Schema(
     {
@@ -45,5 +45,5 @@ const PerformanceSchema = Schema(
 
 const Data = mongoose.model('PerformanceData', PerformanceSchema);
 module.exports = {
-    PerformanceSchema: Data
+    PerformanceAudit: Data
 };

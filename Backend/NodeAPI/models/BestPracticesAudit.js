@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const MetricDetailedSchema = require('./MetricDetailed.js').MetricDetailedSchema;
+const MetricDetailedSchema = require('./MetricDetailed.js').MetricDetailed;
 
 const BestPracticesAuditSchema = new Schema(
     {
@@ -26,5 +26,5 @@ const BestPracticesAuditSchema = new Schema(
 
 const Data = mongoose.model('BestPracticeData', BestPracticesAuditSchema);
 module.exports = {
-	BestPracticeSchema : Data
+	BestPracticesAudit : Data
 }

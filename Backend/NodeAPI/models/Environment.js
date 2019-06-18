@@ -11,5 +11,5 @@ const EnvironmentSchema = new Schema(
 
 const Data = mongoose.model('EnvironmentData', EnvironmentSchema);
 module.exports = {
-	 EnvironmentSchema: Data
+	 Environment: Data
 }

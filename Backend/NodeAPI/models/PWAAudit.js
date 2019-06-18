@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const MetricDetailedSchema = require('./MetricDetailed.js').MetricDetailedSchema;
+const MetricDetailedSchema = require('./MetricDetailed.js').MetricDetailed;
 
 const PWASchema = Schema(
     {
@@ -26,5 +26,5 @@ const PWASchema = Schema(
 
 const Data = mongoose.model('PWAData', PWASchema);
 module.exports = {
-    PWASchema: Data
+    PWAAudit: Data
 };

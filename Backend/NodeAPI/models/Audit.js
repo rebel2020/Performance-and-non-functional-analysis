@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const PerformanceSchema = require('./PerformanceAudit').PerformanceSchema
-const BestPracticeSchema = require('./BestPracticesAudit').BestPracticeSchema
-const SEOSchema = require('./SEOAudit').SEOSchema
-const PWASchema = require('./PWAAudit').PWASchema
+const PerformanceSchema = require('./PerformanceAudit').PerformanceAudit
+const BestPracticeSchema = require('./BestPracticesAudit').BestPracticesAudit
+const SEOSchema = require('./SEOAudit').SEOAudit
+const PWASchema = require('./PWAAudit').PWAAudit
 
 const AuditSchema = new Schema({
     performance_audits : {type:Schema.ObjectId,ref:PerformanceSchema,default:null},
@@ -11,8 +11,7 @@ const AuditSchema = new Schema({
     seo_audits : {type:Schema.ObjectId,ref:SEOSchema,default:null},
     pwa_audits : {type:Schema.ObjectId,ref:PWASchema,default:null},
 });
-
 const Data = mongoose.model('AuditsData', AuditSchema);
 module.exports={
-    AuditSchema:Data
+    Audit:Data
 }

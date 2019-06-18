@@ -14,5 +14,5 @@ const MetricDetailedSchema = new Schema(
 
 const Data = mongoose.model('MetricData', MetricDetailedSchema);
 module.exports = {
-	MetricDetailedSchema : Data
+	MetricDetailed : Data
 }

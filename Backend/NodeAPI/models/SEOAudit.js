@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const MetricDetailedSchema = require('./MetricDetailed.js').MetricDetailedSchema;
+const MetricDetailedSchema = require('./MetricDetailed.js').MetricDetailed;
 
 const SEOSchema = Schema(
     {
@@ -23,5 +23,5 @@ const SEOSchema = Schema(
 
 const Data = mongoose.model('SEOData', SEOSchema);
 module.exports = {
-    SEOSchema: Data
+    SEOAudit: Data
 };
