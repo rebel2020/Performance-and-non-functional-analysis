@@ -28,7 +28,7 @@ SECRET_KEY = 'kp12ipz*f_t3+7b6_+t1y%%^6py1v)3!beqj&4d%gs-2uw2s6$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition

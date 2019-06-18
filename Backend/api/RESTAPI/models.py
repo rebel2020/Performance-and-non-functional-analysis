@@ -4,8 +4,5 @@ import datetime
 class PerformanceData(Document):
     category = StringField(required=True)
     value = StringField(required=True)
-    createdAt = DateTimeField(default=datetime.datetime.utcnow)
+    createdAt = StringField(default=str(datetime.date.today()))
 
-    def __unicode__(self):
-        return self.type + str(self.createdAt)
-        

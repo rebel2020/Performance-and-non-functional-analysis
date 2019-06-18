@@ -11,7 +11,7 @@ class userList extends Component {
 	}
 
 	componentDidMount() {
-		axios.get('http://5cf9ea97f26e8c00146d0113.mockapi.io/api/users')
+		axios.get('http://127.0.0.1:8000/api/?format=json')
 			.then(response => {
 				console.log(response)
 				this.setState({ users: response.data })
