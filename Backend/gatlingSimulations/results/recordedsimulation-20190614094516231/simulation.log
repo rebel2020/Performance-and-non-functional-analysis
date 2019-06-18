@@ -1,0 +1,30 @@
+RUN	RecordedSimulation	recordedsimulation	1560505516231	Jeep.com few clicks(One user)	3.1.2
+USER	RecordedSimulation	1	START	1560505517367	1560505517367
+REQUEST	1		request_0	1560505517406	1560505517949	OK	 
+REQUEST	1		request_0 Redirect 1	1560505517968	1560505518131	OK	 
+REQUEST	1		request_0 Redirect 2	1560505518152	1560505518217	OK	 
+ERROR	request_1: Failed to build request: Resource /RecordedSimulation/0001_request.dat not found 	1560505518320
+ERROR	request_2: Failed to build request: Resource /RecordedSimulation/0002_request.dat not found 	1560505518320
+ERROR	request_3: Failed to build request: Resource /RecordedSimulation/0003_request.dat not found 	1560505518321
+REQUEST	1		satelliteLib-e77bc09f274745f0dfed00973d98a0d0376cacc3.js	1560505518333	1560505518377	OK	 
+REQUEST	1		Hero.css	1560505518333	1560505518390	OK	 
+REQUEST	1		global.css	1560505518331	1560505518412	OK	 
+REQUEST	1		fonts.css	1560505518332	1560505518415	OK	 
+REQUEST	1		MainNavigation.css	1560505518332	1560505518418	OK	 
+REQUEST	1		logo-jeep.png	1560505518411	1560505518426	OK	 
+REQUEST	1		runtime.css	1560505518332	1560505518427	OK	 
+REQUEST	1		Jeep_MotorTrend2018_Logo.png	1560505518423	1560505518439	OK	 
+REQUEST	1		CHR_19_JeepCelebrationEvent_4C_250x64.png	1560505518414	1560505518441	OK	 
+REQUEST	1		MY2018-Jeep-Promo-Tile-Cherokee.jpg.image.500.jpg	1560505518426	1560505518448	OK	 
+REQUEST	1		Jeep_BHP_Spring2019_19MYCompass_PromoTile-v2.jpg.image.500.jpg	1560505518430	1560505518450	OK	 
+REQUEST	1		Jeep2019_MemorialDaySales_Desktop_BHP_LE_v2.jpg.image.1440.jpg	1560505518417	1560505518458	OK	 
+REQUEST	1		Jeep_BHP_Spring2019_19MYGrandCherokee_PromoTile-v2.jpg.image.500.jpg	1560505518440	1560505518459	OK	 
+REQUEST	1		vehicleData.getVehicle.prod.jeep.js	1560505518441	1560505518460	OK	 
+REQUEST	1		siteConfig.jeep_en_us.js	1560505518459	1560505518477	OK	 
+REQUEST	1		runtime.js	1560505518449	1560505518481	OK	 
+REQUEST	1		base.css	1560505518330	1560505518484	OK	 
+REQUEST	1		datalayer.js	1560505518450	1560505518492	OK	 
+ERROR	request_4: Failed to build request: Resource /RecordedSimulation/0004_request.dat not found 	1560505519507
+ERROR	request_6: Failed to build request: Resource /RecordedSimulation/0006_request.dat not found 	1560505532512
+ERROR	request_7: Failed to build request: Resource /RecordedSimulation/0007_request.dat not found 	1560505599514
+USER	RecordedSimulation	1	END	1560505517367	1560505599520
