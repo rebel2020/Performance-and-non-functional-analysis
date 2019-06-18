@@ -11,6 +11,7 @@ const LighthouseSchema = new Schema({
     requestedUrl : {type:String,required:true},
     finalUrl : {type:String,required:true},
     runWarnings : [{type:String}],
+    track : {type: String},
     audits : {type:Schema.ObjectId,ref:audits,default:null},
 });
 
