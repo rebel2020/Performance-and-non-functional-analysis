@@ -5,6 +5,20 @@ const routes = require('./routes');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const port = process.env.port || 8080;
+const { ApolloServer } = require("apollo-server-express");
+const typeDefs = require("./graphqlapi/schemaPerformance");
+const resolversPerformance = require("./graphqlapi/resolversPerformance");
+
+const SERVER = new ApolloServer({
+  typeDefs,
+  resolversPerformance
+})
+
+SERVER.applyMiddleware({app})
+
+app.listen(port, () => {
+  console.log(`Web server listening on: ${port}`);
+});
 
 /*const options = {
     useMongoClient: true,
@@ -17,7 +31,7 @@ const port = process.env.port || 8080;
 };*/
 
 //mongoose.connect('mongodb://RAN:ranindia18@ds121321.mlab.com:21321/ran');
-mongoose.connect('mongodb://localhost:27017/pt');
+/*mongoose.connect('mongodb://localhost:27017/pt');
 mongoose.Promise = global.Promise;
 const db = mongoose.connection;
 
@@ -27,6 +41,21 @@ db.on('error', err => {
 db.once('open',() => {
 	console.log('DB connected successfully!');
 });
+
+const typeDefs = gql`
+    type Query {
+        hello: String
+    }
+`;
+
+const resolvers = {
+    Query: {
+        hello: () => 'Hello world!'
+    }
+};
+
+const server = new ApolloServer({ typeDefs, resolvers });
+server.applyMiddleware({ app });
 
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -45,7 +74,7 @@ app.use(function(req, res, next) {
 app.use(logger('dev'));
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: false}));
-app.use('/', routes);
+//app.use('/', routes);
 
 app.use(function(req, res, next) {
   const err = new Error('Not Found');
@@ -63,4 +92,4 @@ app.use(function(err, req, res, next) {
 
 app.listen(port, () => {
   console.log(`Web server listening on: ${port}`);
-});
+});*/
