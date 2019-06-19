@@ -1,13 +1,10 @@
 const defaultData = [
 {
-	id: 1,
-	category: "Lighthouse",
-	value:"abc "
+	id: 1
+	
 },
 {
-	id: 1,
-	category: "Lighthouse",
-	value:"xyzabc "
+	id: 1	
 }
 ]
 

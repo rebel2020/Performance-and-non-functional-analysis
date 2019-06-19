@@ -7,11 +7,11 @@ const mongoose = require('mongoose');
 const port = process.env.port || 8080;
 const { ApolloServer } = require("apollo-server-express");
 const typeDefs = require("./graphqlapi/schemaPerformance");
-const resolversPerformance = require("./graphqlapi/resolversPerformance");
+const resolvers = require("./graphqlapi/resolversPerformance");
 
 const SERVER = new ApolloServer({
   typeDefs,
-  resolversPerformance
+  resolvers
 })
 
 SERVER.applyMiddleware({app})

@@ -2,13 +2,11 @@ const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
 type Environment{
-	id: Int
 	networkUserAgent: String
 	benchmarkIndex: Int
 }
 
 type MetricDetailed{
-	id: Int
 	weight: Int
 	score: Float
 	description: String
@@ -69,11 +67,12 @@ type LighthouseData{
 	finalUrl: String
 	runWarnings: [String]
 	track: String
+	fetchTime: String
 	audits: Audit!
 }
 
 type Query{
-	alldata: [LighthouseData]
+	lighthousedata: [LighthouseData]
 	data(id: Int!): LighthouseData
 }
 `;
