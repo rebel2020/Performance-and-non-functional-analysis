@@ -6,3 +6,4 @@ django-rest-framework
 django-cors-headers
 django-rest-framework-mongoengine
 mongoengine
+djongo

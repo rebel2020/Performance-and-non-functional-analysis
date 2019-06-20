@@ -5,7 +5,7 @@ from django.urls import path
 
 router = routers.DefaultRouter()
 router.register(r'', PerformanceDataViewSet)
-router.register(r'rangequery', PerformanceDataViewSet)
- 
-urlpatterns = [] 
+
+urlpatterns = []
+urlpatterns+=[url('',PerformanceDataViewSet.as_view({'post':'post','get':'get'}))]
 urlpatterns += router.urls
