@@ -11,7 +11,7 @@ class userList extends Component {
 	}
 
 	componentDidMount() {
-		axios.get('http://127.0.0.1:8000/api/?format=json')
+		axios.get('http://10.150.229.236:8080/')
 			.then(response => {
 				console.log(response)
 				this.setState({ users: response.data })

@@ -2,7 +2,10 @@ import json
 import datetime as time
 def fun(file):
     data = file
-#    data = json.dumps(data)
+    try:
+        data = json.loads(data)
+    except:
+        pass
     newData = dict()
     audits = dict()
     PAudit = dict()
@@ -29,20 +32,40 @@ def fun(file):
             else:
                 temp1 += temp[i]
         PAudit[temp1] = dict()
-        PAudit[temp1]['score'] = data['audits'][temp]['score']
-        PAudit[temp1]['scoreDisplayMode'] = data['audits'][temp]['scoreDisplayMode']
-        if 'numericValue' in data['audits'][temp]:
+        try:
+            PAudit[temp1]['score'] = data['audits'][temp]['score']
+        except:
+            pass
+        try:
+            PAudit[temp1]['scoreDisplayMode'] = data['audits'][temp]['scoreDisplayMode']
+        except:
+            pass
+        try:
             PAudit[temp1]['numericValue'] = data['audits'][temp]['numericValue']
-        if 'details' in data['audits'][temp]:
+        except:
+            pass
+        try:
             PAudit[temp1]['details'] = data['audits'][temp]['details']
-        #    PAudit[temp]['numeric_score']=data['audits'][temp]['numericValue']
-        PAudit[temp1]['description'] = data['audits'][temp]['description'].split('.')[0]
-    #    PAudit[temp]['details']=data['audits'][temp]['details']
-    t_list = data["categories"]["performance"]["auditRefs"]
+        except:
+            pass
+        try:
+            PAudit[temp1]['description'] = data['audits'][temp]['description'].split('.')[0]
+        except:
+            pass
+    t_list = []
+    try:
+        t_list = data["categories"]["performance"]["auditRefs"]
+    except:
+        pass
     for t in t_list:
-        if t['id'] in PAudit:
+        try:
             PAudit[t['id']]['weight'] = t['weight']
-    PAudit['score'] = data['categories']['performance']['score']
+        except:
+            pass
+    try:
+        PAudit['score'] = data['categories']['performance']['score']
+    except:
+        pass
     audits["performance_audits"] = PAudit
     CData = dict()
     LighthouseData = dict()

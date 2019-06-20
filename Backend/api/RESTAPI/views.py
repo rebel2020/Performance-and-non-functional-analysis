@@ -1,24 +1,51 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse,response,HttpResponseRedirect
 from django.contrib.sites import requests
+from rest_framework.exceptions import ValidationError,ParseError
 from rest_framework_mongoengine import viewsets as viewsets
-from api.RESTAPI.serializers import PerformanceDataSerializer
-from api.RESTAPI.models import PerformanceData
+from api.RESTAPI.serializers import LighthouseDataSerializer,GetlingDataSerializer
+from api.RESTAPI.models import LighthouseData,GetlingData
 import json
 from .script import fun
-class PerformanceDataViewSet(viewsets.ModelViewSet):
+class LighthouseDataViewSet(viewsets.ModelViewSet):
     lookup_field = 'id'
-    queryset = PerformanceData.objects.all()
-    serializer_class = PerformanceDataSerializer
+    queryset = LighthouseData.objects.all()
+    serializer_class = LighthouseDataSerializer
     def post(self,request):
-        newData=PerformanceData()
-        newData['value']=str(fun(request.data))
-#        newData['value'] = request.data['value']
+        newData=LighthouseData()
+        try:
+            newData['value']=str(fun(request.data['value']))
+        except:
+            try:
+                newData['value']=str(fun(request.data))
+            except:
+                raise ValidationError
         newData.save()
         return HttpResponse(request.data)
     def get(self, request):
         lookup_field = 'id'
-        queryset = PerformanceData.objects.all()
-        data = PerformanceDataSerializer(queryset,many=True)
+        queryset = LighthouseData.objects.all()
+        data = LighthouseDataSerializer(queryset,many=True)
+        data=json.dumps(data.data)
+        return HttpResponse(data)
+class GetlingDataViewSet(viewsets.ModelViewSet):
+    lookup_field = 'id'
+    queryset = GetlingData.objects.all()
+    serializer_class = GetlingDataSerializer
+    def post(self,request):
+        newData=GetlingData()
+        try:
+            newData['value']=str(fun(request.data['value']))
+        except:
+            try:
+                newData['value']=str(fun(request.data))
+            except:
+                raise ValidationError
+        newData.save()
+        return HttpResponse(request.data)
+    def get(self, request):
+        lookup_field = 'id'
+        queryset = GetlingData.objects.all()
+        data = GetlingDataSerializer(queryset,many=True)
         data=json.dumps(data.data)
         return HttpResponse(data)

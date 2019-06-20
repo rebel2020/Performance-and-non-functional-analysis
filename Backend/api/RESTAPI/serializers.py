@@ -1,7 +1,11 @@
 from rest_framework_mongoengine import serializers
-from api.RESTAPI.models import PerformanceData
+from api.RESTAPI.models import LighthouseData,GetlingData
  
-class PerformanceDataSerializer(serializers.DocumentSerializer):
+class LighthouseDataSerializer(serializers.DocumentSerializer):
     class Meta:
-        model = PerformanceData
+        model = LighthouseData
+        fields = '__all__'
+class GetlingDataSerializer(serializers.DocumentSerializer):
+    class Meta:
+        model = GetlingData
         fields = '__all__'
