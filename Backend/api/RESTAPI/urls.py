@@ -9,7 +9,7 @@ router.register(r'getling', GetlingDataViewSet)
 
 urlpatterns = []
 urlpatterns+=[
-#    url('lighthouse',LighthouseDataViewSet.as_view({'post':'post','get':'get'})),
+    url('lighthouse',LighthouseDataViewSet.as_view({'post':'post','get':'get'})),
 #    url(r'getling',GetlingDataViewSet.as_view({'post':'post','get':'get'})),
               ]
 urlpatterns += router.urls
