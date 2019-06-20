@@ -69,12 +69,10 @@ def fun(file):
     audits["performance_audits"] = PAudit
     CData = dict()
     LighthouseData = dict()
-    LighthouseData['audits'] = audits
-    LighthouseData['fetchTime'] = str(time.date.today())
-    LighthouseData['requestedUrl'] = data['requestedUrl']
-    LighthouseData['finalUrl'] = data['finalUrl']
-    LighthouseData['runWarnings'] = data['runWarnings']
-    LighthouseData['lighthouseVersion'] = data['lighthouseVersion']
-    LighthouseData['environment'] = data['environment']
-    CData['LighthouseData'] = LighthouseData
-    return CData
+    LighthouseData['audits'] = str(audits)
+    LighthouseData['requestedUrl'] = str(data['requestedUrl'])
+    LighthouseData['finalUrl'] = str(data['finalUrl'])
+    LighthouseData['runWarnings'] = str(data['runWarnings'])
+    LighthouseData['lighthouseVersion'] = str(data['lighthouseVersion'])
+    LighthouseData['environment'] = str(data['environment'])
+    return LighthouseData

@@ -14,13 +14,17 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
     def post(self,request):
         newData=LighthouseData()
         try:
-            newData['value']=str(fun(request.data['value']))
+            data=fun(request.data['value'])
         except:
             try:
-                newData['value']=str(fun(request.data))
+                data['value']=fun(request.data)
             except:
                 raise ValidationError
-        newData.save()
+        newData=LighthouseDataSerializer(data=data)
+        if newData.is_valid():
+            newData.save()
+        else:
+            raise ValidationError
         return HttpResponse(request.data)
     def get(self, request):
         lookup_field = 'id'
