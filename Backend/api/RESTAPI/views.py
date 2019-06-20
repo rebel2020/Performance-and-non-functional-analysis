@@ -39,7 +39,7 @@ class GetlingDataViewSet(viewsets.ModelViewSet):
     def post(self,request):
         newData=GetlingData()
         data=request.data
-#        print(data)
+        print(data)
         newData = GetlingDataSerializer(data=data)
         if newData.is_valid():
             newData.save()

@@ -10,6 +10,7 @@ def fun(file):
     audits = dict()
     PAudit = dict()
     details = {}
+    PAudit_list1=[]
     PAudit_list = ['first-contentful-paint', 'first-meaningful-paint', 'speed-index', 'interactive', 'first-cpu-idle',
                    'max-potential-fid', 'estimated-input-latency', 'render-blocking-resources',
                    'uses-responsive-images', 'offscreen-images', 'unminified-css', 'unminified-javascript',
@@ -31,6 +32,7 @@ def fun(file):
                 temp1 += '_'
             else:
                 temp1 += temp[i]
+        PAudit_list1+=temp1
         PAudit[temp1] = dict()
         try:
             PAudit[temp1]['score'] = data['audits'][temp]['score']
@@ -66,7 +68,7 @@ def fun(file):
         PAudit['score'] = data['categories']['performance']['score']
     except:
         pass
-    audits["performance_audits"] = PAudit
+    audits["performance_audits"] = json.dumps(PAudit)
     CData = dict()
     LighthouseData = dict()
     LighthouseData['audits'] = json.dumps(audits)
