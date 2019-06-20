@@ -1,4 +1,10 @@
 const { gql } = require('apollo-server-express');
+const Environment = require('../models/Environment').Environment;
+const MetricDetailed = require('../models/MetricDetailed').MetricDetailed;
+const PerformanceAudit = require('../models/PerformanceAudit').PerformanceAudit;
+const Audit = require('../models/Audit').Audit;
+const LighthouseData = require('../models/LighthouseData').LighthouseData;
+
 
 const typeDefs = gql`
 type Environment{
@@ -15,7 +21,7 @@ type MetricDetailed{
 	numericValue: Float
 }
 
-type PerformanceAudits{
+type PerformanceAudit{
 	first_contentful_paint: MetricDetailed
 	first_meaningful_paint: MetricDetailed
 	speed_index: MetricDetailed
@@ -55,11 +61,11 @@ type PerformanceAudits{
 }
 
 type Audit{
-	performance_audits: PerformanceAudits
+	performance_audits: PerformanceAudit
 }
 
 type LighthouseData{
-	id: Int
+	id: ID!
 	userAgent: String
 	environment: Environment
 	lighthouseVersion: String
