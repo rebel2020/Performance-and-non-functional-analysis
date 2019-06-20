@@ -1,0 +1,23 @@
+.card {
+    margin: 5%;
+    width: 500px;
+    height: 150px;
+    background-color: #ffffff;
+    text-align: center;
+    line-height: 75px;
+    font-size: 30px;
+    text-decoration: none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    border-radius: 2px;
+    animation: popout 1s ease;
+}
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+    cursor: pointer;
+}
+@keyframes popout {
+    from{transform:scale(0)}
+    to{transform:scale(1)}
+}
