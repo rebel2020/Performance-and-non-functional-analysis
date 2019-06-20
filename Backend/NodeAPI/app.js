@@ -1,10 +1,8 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const routes = require('./routes');
 const logger = require('morgan');
-const mongoose = require('mongoose');
-const port = process.env.port || 8080;
+const port = process.env.port || 3490;
 const { ApolloServer } = require("apollo-server-express");
 const typeDefs = require("./graphqlapi/schemaPerformance");
 const resolvers = require("./graphqlapi/resolversPerformance");

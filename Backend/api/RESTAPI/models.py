@@ -1,8 +1,14 @@
 from mongoengine import *
 import datetime
 
-class PerformanceData(Document):
-    category = StringField(required=True)
-    value = StringField(required=True)
-    createdAt = StringField(default=str(datetime.date.today()))
+class LighthouseData(Document):
+    audits = StringField(required=True)
+    fetchTime = StringField(default=str(datetime.date.today()))
+    requestedUrl = StringField(required=True)
+    finalUrl = StringField(required=True)
+    runWarnings = StringField()
+    lighthouseVersion = StringField(required=True)
+    environment =StringField(required=True)
 
+class GetlingData(Document):
+    value = StringField(required=True)
