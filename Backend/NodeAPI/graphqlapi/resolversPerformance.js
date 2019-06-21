@@ -1,11 +1,11 @@
-require('../config')
 const Environment = require('../models/Environment').Environment;
 const MetricDetailed = require('../models/MetricDetailed').MetricDetailed;
 const PerformanceAudit = require('../models/PerformanceAudit').PerformanceAudit;
 const Audit = require('../models/Audit').Audit;
 const LighthouseData = require('../models/LighthouseData').LighthouseData;
-
-/*const defaultData = [
+//import { promisify } from '../helpers';
+console.log(LighthouseData)
+const defaultData = [
 {
 	id: 1,
 	audits: {
@@ -85,12 +85,20 @@ const LighthouseData = require('../models/LighthouseData').LighthouseData;
 	runWarnings: [],
 	lighthouseVersion: "5.1.0"
 }	
-]*/
-
+]
 const resolversPerformance = {
 	Query: {
 		lighthousedata: async () => {
-			await LighthouseData.find({}).exec()
+			/*LighthouseData.find({}).exec(function(err, data){
+				if(err) return next(err);
+				console.log(data);
+
+				return data;
+			});*/
+			return await LighthouseData.find({}).exec();
+			 
+			//console.log(LighthouseData.find({}).exec());
+			//return defaultData;
 		},
 		data: (root, { id }) => {
 			return defaultData.filter(character => {

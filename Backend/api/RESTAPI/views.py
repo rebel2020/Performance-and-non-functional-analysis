@@ -17,7 +17,7 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
             data=fun(request.data['value'])
         except:
             try:
-                data['value']=fun(request.data)
+                data=fun(request.data)
             except:
                 raise ValidationError
         newData=LighthouseDataSerializer(data=data)
@@ -38,14 +38,13 @@ class GetlingDataViewSet(viewsets.ModelViewSet):
     serializer_class = GetlingDataSerializer
     def post(self,request):
         newData=GetlingData()
-        try:
-            newData['value']=str(fun(request.data['value']))
-        except:
-            try:
-                newData['value']=str(fun(request.data))
-            except:
-                raise ValidationError
-        newData.save()
+        data=request.data
+#        print(data)
+        newData = GetlingDataSerializer(data=data)
+        if newData.is_valid():
+            newData.save()
+        else:
+            raise ValidationError
         return HttpResponse(request.data)
     def get(self, request):
         lookup_field = 'id'

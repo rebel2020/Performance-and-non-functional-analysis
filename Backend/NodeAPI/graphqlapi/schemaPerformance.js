@@ -65,16 +65,14 @@ type Audit{
 }
 
 type LighthouseData{
-	id: ID!
-	userAgent: String
+	_id: ID
 	environment: Environment
 	lighthouseVersion: String
 	requestedUrl: String
 	finalUrl: String
 	runWarnings: [String]
-	track: String
 	fetchTime: String
-	audits: Audit!
+	audits: Audit
 }
 
 type Query{

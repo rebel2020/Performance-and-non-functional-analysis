@@ -11,4 +11,6 @@ class LighthouseData(Document):
     environment =StringField(required=True)
 
 class GetlingData(Document):
-    value = StringField(required=True)
+    stats = StringField()
+    fetchTime = StringField(default=str(datetime.date.today()))
+    scala = StringField()
