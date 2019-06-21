@@ -76,5 +76,5 @@ def fun(file):
     LighthouseData['finalUrl'] = json.dumps(data['finalUrl'])
     LighthouseData['runWarnings'] = json.dumps(data['runWarnings'])
     LighthouseData['lighthouseVersion'] = json.dumps(data['lighthouseVersion'])
-    LighthouseData['environment'] = json.dumps(data['environment'])
+    LighthouseData['environment'] = data['environment']
     return LighthouseData

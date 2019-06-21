@@ -50,6 +50,10 @@ class PerformanceAudit(EmbeddedDocument):
 class Audit(EmbeddedDocument):
     performance_audits = EmbeddedDocumentField(PerformanceAudit)
 
+class Environment(EmbeddedDocument):
+    networkUserAgent = StringField()
+    hostUserAgent =StringField()
+    benchmarkIndex = IntField()
 
 class LighthouseData(Document):
     audits = EmbeddedDocumentField(Audit)
@@ -58,10 +62,10 @@ class LighthouseData(Document):
     finalUrl = StringField(required=True)
     runWarnings = StringField()
     lighthouseVersion = StringField(required=True)
-    environment =StringField(required=True)
+    environment =EmbeddedDocumentField(Environment)
 
-class GetlingData(Document):
-    stats = StringField()
+class GatlingData(Document):
+    stats = DictField()
     fetchTime = StringField(default=str(datetime.date.today()))
     scala = StringField()
 

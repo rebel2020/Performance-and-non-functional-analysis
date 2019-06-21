@@ -5,9 +5,9 @@ class LighthouseDataSerializer(serializers.DocumentSerializer):
     class Meta:
         model = LighthouseData
         fields = '__all__'
-class GetlingDataSerializer(serializers.DocumentSerializer):
+class GatlingDataSerializer(serializers.DocumentSerializer):
     class Meta:
-        model = GetlingData
+        model = GatlingData
         fields = '__all__'
 class MetricDetailedSerializer(serializers.EmbeddedDocumentSerializer):
     class Meta:
