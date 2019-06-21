@@ -57,7 +57,7 @@ const graphData = {
     }
   ]
 };
-const HighStock = () => {
+const HighStock = props => {
   useEffect(() => {
     stock(Highcharts);
     Highcharts.stockChart("container", graphData);
