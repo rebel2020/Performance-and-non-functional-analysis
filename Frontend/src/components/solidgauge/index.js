@@ -2,86 +2,91 @@ import React, { useEffect } from "react";
 import Highcharts from "highcharts/highcharts";
 import HighchartsMore from "highcharts/highcharts-more";
 import Gauge from "highcharts/modules/solid-gauge";
-const graphData = {
-  chart: {
-    type: "solidgauge",
-    height: "80%"
-  },
-  title: {
-    text: "Activity",
-    style: {
-      fontSize: "24px"
-    }
-  },
-  tooltip: {
-    borderWidth: 0,
-    //ckgroundColor: 'none',
-    shadow: false,
-    style: {
-      fontSize: "16px"
+
+const setGraph = name => {
+  return {
+    chart: {
+      type: "solidgauge",
+      height: "100%",
+      width: "150"
     },
-    pointFormat:
-      '{series.name}<br><span style="font-size:2em; color: {point.color}; font-weight: bold">{point.y}%</span>',
-    positioner: function(labelWidth) {
-      return {
-        x: (this.chart.chartWidth - labelWidth) / 2,
-        y: this.chart.plotHeight / 2 + 15
-      };
-    }
-  },
-  pane: {
-    startAngle: 0,
-    endAngle: 360,
-    background: [
-      {
-        // Track for Move
-        outerRadius: "112%",
-        innerRadius: "88%",
-        backgroundColor: Highcharts.Color(Highcharts.getOptions().colors[0])
-          .setOpacity(0.3)
-          .get(),
-        borderWidth: 0
+    title: {
+      text: name,
+      style: {
+        fontSize: "12px"
       }
-    ]
-  },
-  yAxis: {
-    min: 0,
-    max: 100,
-    lineWidth: 0,
-    tickPositions: []
-  },
-  plotOptions: {
-    solidgauge: {
-      dataLabels: {
-        enabled: false
+    },
+    tooltip: {
+      borderWidth: 0,
+      backgroundColor: "none",
+      shadow: false,
+      style: {
+        fontSize: "12px"
       },
-      linecap: "round",
-      stickyTracking: false,
-      rounded: true
-    }
-  },
-  series: [
-    {
-      name: "Move",
-      data: [
+      pointFormat:
+        '{series.name}<br><span style="font-size:1.5em; color: {point.color}; font-weight: bold">{point.y}%</span>',
+      positioner: function(labelWidth) {
+        return {
+          x: (this.chart.chartWidth - labelWidth) / 2,
+          y: this.chart.plotHeight / 2 + 25
+        };
+      }
+    },
+    pane: {
+      startAngle: 0,
+      endAngle: 360,
+      background: [
         {
-          color: Highcharts.getOptions().colors[0],
-          radius: "112%",
+          // Track for Move
+          outerRadius: "112%",
           innerRadius: "88%",
-          y: 80
+          backgroundColor: Highcharts.Color(Highcharts.getOptions().colors[0])
+            .setOpacity(0.3)
+            .get(),
+          borderWidth: 0
         }
       ]
-    }
-  ]
+    },
+    yAxis: {
+      min: 0,
+      max: 100,
+      lineWidth: 0,
+      tickPositions: []
+    },
+    plotOptions: {
+      solidgauge: {
+        dataLabels: {
+          enabled: false
+        },
+        linecap: "round",
+        stickyTracking: false,
+        rounded: true
+      }
+    },
+    series: [
+      {
+        name: "",
+        data: [
+          {
+            color: Highcharts.getOptions().colors[0],
+            radius: "112%",
+            innerRadius: "88%",
+            y: 80
+          }
+        ]
+      }
+    ]
+  };
 };
-
-const SolidGuage = () => {
+const SolidGuage = props => {
+  const { name } = props;
+  const graphData = setGraph(name);
   useEffect(() => {
     HighchartsMore(Highcharts);
     Gauge(Highcharts);
-    Highcharts.chart("containers", graphData);
+    Highcharts.chart(name, graphData);
   });
-  return <div id="containers"></div>;
+  return <div id={name}></div>;
 };
 
 export default SolidGuage;

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Sidebar from "./Sidebar";
-import Solidgauge from "../../components/solidgauge";
+import Home from "./Home";
 import HighStock from "../../components/highstock";
 import "./main.scss";
 
@@ -8,7 +8,7 @@ const Lighthouse = () => {
   const [toggle, setToggle] = useState(false);
   const [component, changeComponent] = useState("home");
   const map = {
-    home: <Solidgauge />,
+    home: <Home />,
     performance: <HighStock component={component} />
   };
   const graph = map[component];
