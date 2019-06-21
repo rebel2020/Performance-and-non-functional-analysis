@@ -2,13 +2,28 @@ import React, { useEffect } from "react";
 import Highcharts from "highcharts/highcharts";
 import stock from "highcharts/modules/stock";
 import data from "./data";
+import Datalist from "../../components/datalist/index";
+import Selectlist from "../../components/selectlist/index";
 
 const graphData = {
+  chart: {
+    style: {
+      color: "white"
+    }
+
+    // backgroundColor: "#303030"
+  },
   rangeSelector: {
+    style: {
+      color: "white"
+    },
     selected: 1
   },
 
   title: {
+    style: {
+      color: "white"
+    },
     text: "Performace Score"
   },
 
@@ -21,6 +36,7 @@ const graphData = {
       tooltip: {
         valueDecimals: 2
       },
+
       fillColor: {
         linearGradient: {
           x1: 0,
@@ -46,6 +62,10 @@ const HighStock = () => {
     stock(Highcharts);
     Highcharts.stockChart("container", graphData);
   });
-  return <div id="container"></div>;
+  return (
+    <>
+      <Selectlist /> <Datalist /> <div id="container" />
+    </>
+  );
 };
 export default HighStock;
