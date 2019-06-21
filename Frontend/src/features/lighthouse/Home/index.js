@@ -1,12 +1,31 @@
 import React from "react";
 import SolidGauge from "../../../components/solidgauge";
+import Select from "../../../components/selectlist";
+import Datalist from "../../../components/datalist";
+import "./main.scss";
+
 const HomeComponent = () => {
   const flexItems = [
     "performance",
     "accessibility",
     "best_practices",
-    "seo",
-    "pwa"
-  ].map(item => <SolidGauge item={item} />);
-  return <div classname="flexbox"></div>;
+    "s_e_o",
+    "p_w_a"
+  ].map(item => {
+    return (
+      <div key={item}>
+        <SolidGauge name={item} />
+      </div>
+    );
+  });
+  return (
+    <>
+      <div className="flexbox filters">
+        <Datalist listId="suburls" options={[]} />
+        <Select options={["a", "b"]} />
+      </div>
+      <div className="flexbox">{flexItems}</div>
+    </>
+  );
 };
+export default HomeComponent;

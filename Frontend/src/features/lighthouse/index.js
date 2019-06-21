@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Sidebar from "./Sidebar";
-import Solidgauge from "../../components/solidgauge";
+import Home from "./Home";
+import MetricComponent from "./Metrics";
 import HighStock from "../../components/highstock";
 import "./main.scss";
 
@@ -8,8 +9,8 @@ const Lighthouse = () => {
   const [toggle, setToggle] = useState(false);
   const [component, changeComponent] = useState("home");
   const map = {
-    home: <Solidgauge />,
-    performance: <HighStock component={component} />
+    home: <Home />,
+    performance: <MetricComponent metric={component} />
   };
   const graph = map[component];
   return (
