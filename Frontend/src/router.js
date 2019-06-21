@@ -1,11 +1,11 @@
 import React from "react";
 import { BrowserRouter, Route, Redirect } from "react-router-dom";
-import Highcharts from "./features/lighthouse";
+import Lighthouse from "./features/lighthouse";
 
 const Router = () => {
   return (
     <BrowserRouter>
-      <Route exact path="/" component={Highcharts} />
+      <Route exact path="/" component={Lighthouse} />
     </BrowserRouter>
   );
 };
