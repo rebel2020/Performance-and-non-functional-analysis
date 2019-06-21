@@ -4,7 +4,8 @@ const BUILD_DIR = path.resolve(__dirname, "dist/");
 
 const configDirs = {
   BUILD_DIR: BUILD_DIR,
-  APP_DIR: APP_DIR
+  APP_DIR: APP_DIR,
+  ALIAS_PATH: path.resolve(__dirname, "src/")
 };
 
 const buildConfig = env => {

@@ -32,7 +32,7 @@ const Sidebar = props => {
       </Button>
       <Button
         className="sidelink"
-        onClick={() => changeComponent("performance")}
+        onClick={() => changeComponent("accessibility")}
       >
         {toggle ? "Accessibility" : ""}
       </Button>

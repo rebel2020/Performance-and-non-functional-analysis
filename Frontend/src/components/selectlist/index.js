@@ -1,24 +1,20 @@
 import React from "react";
 
-const Selectlist = props => {
-  const { name, className, onClick, children } = props;
-
+const SelectList = props => {
+  const { options } = props;
   return (
-   
-      <>
-  <select>
-  <option value="Website1">Website1</option>
-  <option value="Website2">Website2</option>
-  <option value="Website3">Website3</option>
-  <option value="Website4">Website4</option>
-</select>
-  
-</>
-
+    <>
+      <select>
+        {options.length <= 0
+          ? "No data"
+          : options.map(item => (
+              <option key={item} value={item}>
+                {item}
+              </option>
+            ))}
+      </select>
+    </>
   );
 };
 
-export default Selectlist;
-
-
-
+export default SelectList;

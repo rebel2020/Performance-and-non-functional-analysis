@@ -18,7 +18,12 @@ const buildConfig = configDirs => {
         }
       ]
     },
-    resolve: { extensions: ["*", ".js", ".jsx"] },
+    resolve: {
+      alias: {
+        Src: configDirs.ALIAS_PATH
+      },
+      extensions: ["*", ".js", ".jsx"]
+    },
     output: {
       path: configDirs.BUILD_DIR,
       publicPath: "/dist/",

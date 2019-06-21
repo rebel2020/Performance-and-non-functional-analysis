@@ -1,21 +1,21 @@
 import React from "react";
+import Input from "../Input";
 
 const Datalist = props => {
-  const { name, className, onClick, children } = props;
-
+  const { options, listId } = props;
+  console.log(options, listId);
   return (
-   
-      <>
-  <input list="suburls" name="suburl" placeholder="Enter Suburl"/>
-  <datalist id="suburls">
-    <option value="Performance"/>
+    <>
+      <Input className="datalistInput" list={listId} onchange={onchange} />
+      <datalist id={listId}>
+        {/* <option value="Performance"/>
     <option value="Accessibility"/>
-    <option value="SEO"/>
-    
-  </datalist>
-  
-</>
-
+    <option value="SEO"/> */}
+        {options.length <= 0
+          ? "No data"
+          : options.map(item => <option key={item} value={item} />)}
+      </datalist>
+    </>
   );
 };
 

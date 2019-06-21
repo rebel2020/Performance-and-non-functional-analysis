@@ -1,6 +1,9 @@
 import React from "react";
 import SolidGauge from "../../../components/solidgauge";
+import Select from "../../../components/selectlist";
+import Datalist from "../../../components/datalist";
 import "./main.scss";
+
 const HomeComponent = () => {
   const flexItems = [
     "performance",
@@ -15,6 +18,14 @@ const HomeComponent = () => {
       </div>
     );
   });
-  return <div className="flexbox">{flexItems}</div>;
+  return (
+    <>
+      <div className="flexbox filters">
+        <Datalist listId="suburls" options={[]} />
+        <Select options={["a", "b"]} />
+      </div>
+      <div className="flexbox">{flexItems}</div>
+    </>
+  );
 };
 export default HomeComponent;
