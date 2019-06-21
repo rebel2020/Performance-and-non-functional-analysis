@@ -72,7 +72,7 @@ type LighthouseData{
 	finalUrl: String
 	runWarnings: [String]
 	fetchTime: String
-	audits: Audit!
+	audits: Audit
 }
 
 type Query{

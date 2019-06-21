@@ -4,7 +4,7 @@ const PerformanceAudit = require('../models/PerformanceAudit').PerformanceAudit;
 const Audit = require('../models/Audit').Audit;
 const LighthouseData = require('../models/LighthouseData').LighthouseData;
 //import { promisify } from '../helpers';
-
+console.log(LighthouseData)
 const defaultData = [
 {
 	id: 1,
@@ -92,11 +92,14 @@ const resolversPerformance = {
 			LighthouseData.find({}).exec(function(err, data){
 				if(err) return next(err);
 				console.log(data);
-				console.log(defaultData[0].fetchTime);
+
+				return data;
 			});
-			//await LighthouseData.find({}).exec();
-			//console.log(LighthouseData.find({}).exec());
-			//return defaultData;
+			//console.log(await Audit.find({}).exec());
+			//return await LighthouseData.populate.find({}).exec();
+			 
+			console.log(LighthouseData.find({}).exec());
+			return defaultData;
 		},
 		data: (root, { id }) => {
 			return defaultData.filter(character => {

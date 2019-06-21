@@ -18,7 +18,6 @@
   "dependencies": {
     "@babel/core": "^7.4.5",
     "apollo-server-express": "^2.6.3",
-    "async": "^3.0.1",
     "body-parser": "^1.19.0",
     "connect": "^3.7.0",
     "eslintrc": "^1.0.6",

@@ -47,7 +47,7 @@ def fun(file):
         except:
             pass
         try:
-            PAudit[temp1]['details'] = data['audits'][temp]['details']
+            PAudit[temp1]['details'] = json.dumps(data['audits'][temp]['details'])
         except:
             pass
         try:
@@ -65,13 +65,13 @@ def fun(file):
         except:
             pass
     try:
-        PAudit['score'] = data['categories']['performance']['score']
+        PAudit['score'] = json.dumps(data['categories']['performance']['score'])
     except:
         pass
-    audits["performance_audits"] = json.dumps(PAudit)
+    audits["performance_audits"] = PAudit
     CData = dict()
     LighthouseData = dict()
-    LighthouseData['audits'] = json.dumps(audits)
+    LighthouseData['audits'] = audits
     LighthouseData['requestedUrl'] = json.dumps(data['requestedUrl'])
     LighthouseData['finalUrl'] = json.dumps(data['finalUrl'])
     LighthouseData['runWarnings'] = json.dumps(data['runWarnings'])
