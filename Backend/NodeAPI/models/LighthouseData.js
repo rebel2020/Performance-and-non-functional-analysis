@@ -12,7 +12,7 @@ const LighthouseSchema = new Schema({
     finalUrl : {type:String,required:true},
     runWarnings : [{type:String}],
     track : {type: String},
-    audits : {type:String, default:null}
+    audits : {type:Object, default:null}
 }, {collection: "lighthouse_data"});
 
 const Data = mongoose.model ('Lighthousedata', LighthouseSchema);

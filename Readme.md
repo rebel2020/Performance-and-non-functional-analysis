@@ -9,3 +9,7 @@
 
 ##Datebase
 - Mongodb
+
+    Python - python manage.py runserver
+    NodeAPI - npm run dev
+    React - npm run start
