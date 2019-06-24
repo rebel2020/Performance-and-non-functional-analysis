@@ -1,6 +1,6 @@
 import React from 'react';
 import SolidGauge from 'src/components/solidgauge';
-import Select from 'src/components/selectlist';
+// import Select from 'src/components/selectlist';
 import Datalist from 'src/components/datalist';
 import './main.scss';
 
