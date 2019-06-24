@@ -20,7 +20,7 @@ const buildConfig = configDirs => {
     },
     resolve: {
       alias: {
-        Src: configDirs.ALIAS_PATH
+        src: configDirs.ALIAS_PATH
       },
       extensions: ["*", ".js", ".jsx"]
     },

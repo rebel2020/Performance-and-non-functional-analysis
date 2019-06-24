@@ -10,6 +10,7 @@ def fun(file):
     audits = dict()
     PAudit = dict()
     details = {}
+    PAudit_list1=[]
     PAudit_list = ['first-contentful-paint', 'first-meaningful-paint', 'speed-index', 'interactive', 'first-cpu-idle',
                    'max-potential-fid', 'estimated-input-latency', 'render-blocking-resources',
                    'uses-responsive-images', 'offscreen-images', 'unminified-css', 'unminified-javascript',
@@ -31,6 +32,7 @@ def fun(file):
                 temp1 += '_'
             else:
                 temp1 += temp[i]
+        PAudit_list1+=temp1
         PAudit[temp1] = dict()
         try:
             PAudit[temp1]['score'] = data['audits'][temp]['score']
@@ -45,7 +47,7 @@ def fun(file):
         except:
             pass
         try:
-            PAudit[temp1]['details'] = data['audits'][temp]['details']
+            PAudit[temp1]['details'] = json.dumps(data['audits'][temp]['details'])
         except:
             pass
         try:
@@ -63,16 +65,16 @@ def fun(file):
         except:
             pass
     try:
-        PAudit['score'] = data['categories']['performance']['score']
+        PAudit['score'] = json.dumps(data['categories']['performance']['score'])
     except:
         pass
     audits["performance_audits"] = PAudit
     CData = dict()
     LighthouseData = dict()
-    LighthouseData['audits'] = json.dumps(audits)
+    LighthouseData['audits'] = audits
     LighthouseData['requestedUrl'] = json.dumps(data['requestedUrl'])
     LighthouseData['finalUrl'] = json.dumps(data['finalUrl'])
     LighthouseData['runWarnings'] = json.dumps(data['runWarnings'])
     LighthouseData['lighthouseVersion'] = json.dumps(data['lighthouseVersion'])
-    LighthouseData['environment'] = json.dumps(data['environment'])
+    LighthouseData['environment'] = data['environment']
     return LighthouseData

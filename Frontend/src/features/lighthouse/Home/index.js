@@ -1,7 +1,7 @@
 import React from "react";
-import SolidGauge from "../../../components/solidgauge";
-import Select from "../../../components/selectlist";
-import Datalist from "../../../components/datalist";
+import SolidGauge from "src/components/solidgauge";
+import Select from "src/components/selectlist";
+import Datalist from "src/components/datalist";
 import "./main.scss";
 
 const HomeComponent = () => {

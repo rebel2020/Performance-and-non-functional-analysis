@@ -1,36 +1,35 @@
-import React, { useState } from "react";
-import Sidebar from "./Sidebar";
-import Home from "./Home";
-import MetricComponent from "./Metrics";
-import {Query} from 'react-apollo';
-import {TEST} from "../../components/graphql/Queries";
+import React, { useState } from 'react';
+import Sidebar from './Sidebar';
+import Home from './Home';
+import MetricComponent from './Metrics';
+import { Query } from 'react-apollo';
+import { TEST } from '../../components/graphql/Queries';
+import './main.scss';
 
-import HighStock from "../../components/highstock";
-import "./main.scss";
-
-const Lighthouse = () => {
+const Lighthouse = props => {
   const [toggle, setToggle] = useState(false);
-  const [component, changeComponent] = useState("home");
+  // const [component, changeComponent] = useState('home');
+  const { comp } = props;
   const map = {
     home: <Home />,
-    performance: <MetricComponent metric={component} />
+    performance: <MetricComponent metric={comp} />
   };
-  const graph = map[component];
+  const graph = map[comp];
   return (
     <>
       <Sidebar
         toggle={toggle}
         setToggle={setToggle}
-        component={component}
-        changeComponent={changeComponent}
+        component={comp}
+        // changeComponent={changeComponent}
       />
-      <div className={toggle ? "main" : "main-extend"}>{graph}</div>
+      <div className={toggle ? 'main' : 'main-extend'}>{graph}</div>
       <Query query={TEST}>
-        {({loading,error,data}) => {
-              if(loading) console.log("loading");
-              if(error) console.log(error.message);
-              if(data) console.log(data);
-              return null;
+        {({ loading, error, data }) => {
+          if (loading) console.log('loading');
+          if (error) console.log(error.message);
+          if (data) console.log(data);
+          return null;
         }}
       </Query>
     </>

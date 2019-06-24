@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const environment = require('./Environment').Environment;
-const audits = require('./Audit').Audit
+//const audits = require('./Audit').Audit
 
 const LighthouseSchema = new Schema({
     userAgent : {type:String},
@@ -12,7 +12,7 @@ const LighthouseSchema = new Schema({
     finalUrl : {type:String,required:true},
     runWarnings : [{type:String}],
     track : {type: String},
-    audits : {type:Schema.ObjectId, ref:audits, default:null}
+    audits : {type:Object, default:null}
 }, {collection: "lighthouse_data"});
 
 const Data = mongoose.model ('Lighthousedata', LighthouseSchema);

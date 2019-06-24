@@ -1,36 +1,36 @@
-import React, { useEffect } from "react";
-import Highcharts from "highcharts/highcharts";
-import stock from "highcharts/modules/stock";
-import data from "./data";
+import React, { useEffect } from 'react';
+import Highcharts from 'highcharts/highcharts';
+import stock from 'highcharts/modules/stock';
+import data from './data';
 
 const setGraph = name => {
   return {
     chart: {
       style: {
-        color: "white"
+        color: 'white'
       }
 
       // backgroundColor: "#303030"
     },
     rangeSelector: {
       style: {
-        color: "white"
+        color: 'white'
       },
       selected: 1
     },
 
     title: {
       style: {
-        color: "black"
+        color: 'black'
       },
       text: name
     },
 
     series: [
       {
-        name: "AAPL Stock Price",
+        name: 'AAPL Stock Price',
         data: data,
-        type: "area",
+        type: 'area',
         threshold: null,
         tooltip: {
           valueDecimals: 2
@@ -49,7 +49,7 @@ const setGraph = name => {
               1,
               Highcharts.Color(Highcharts.getOptions().colors[0])
                 .setOpacity(0)
-                .get("rgba")
+                .get('rgba')
             ]
           ]
         }
@@ -64,7 +64,7 @@ const HighStock = props => {
 
   useEffect(() => {
     stock(Highcharts);
-    Highcharts.stockChart("container", graphData);
+    Highcharts.stockChart('container', graphData);
   });
 
   return <div id="container" />;

@@ -89,16 +89,17 @@ const defaultData = [
 const resolversPerformance = {
 	Query: {
 		lighthousedata: async () => {
-			/*LighthouseData.find({}).exec(function(err, data){
+			LighthouseData.find({}).exec(function(err, data){
 				if(err) return next(err);
 				console.log(data);
 
 				return data;
-			});*/
-			return await LighthouseData.find({}).exec();
+			});
+			//console.log(await Audit.find({}).exec());
+			//return await LighthouseData.populate.find({}).exec();
 			 
-			//console.log(LighthouseData.find({}).exec());
-			//return defaultData;
+			console.log(LighthouseData.find({}).exec());
+			return defaultData;
 		},
 		data: (root, { id }) => {
 			return defaultData.filter(character => {
