@@ -47,8 +47,65 @@ class PerformanceAudit(EmbeddedDocument):
 	metrics = EmbeddedDocumentField(MetricDetailed)
 	score = FloatField()
 
+class BestPracticesAudit(EmbeddedDocument):
+	appcache_manifest = EmbeddedDocumentField(MetricDetailed)
+	is_on_https = EmbeddedDocumentField(MetricDetailed)
+	uses_http2 = EmbeddedDocumentField(MetricDetailed)
+	uses_passive_event_listeners = EmbeddedDocumentField(MetricDetailed)
+	no_document_write = EmbeddedDocumentField(MetricDetailed)
+	external_anchors_use_rel_noopener = EmbeddedDocumentField(MetricDetailed)
+	geolocation_on_start = EmbeddedDocumentField(MetricDetailed)
+	doctype = EmbeddedDocumentField(MetricDetailed)
+	no_vulnerable_libraries = EmbeddedDocumentField(MetricDetailed)
+	js_libraries = EmbeddedDocumentField(MetricDetailed)
+	notification_on_start = EmbeddedDocumentField(MetricDetailed)
+	deprecations = EmbeddedDocumentField(MetricDetailed)
+	password_inputs_can_be_pasted_into = EmbeddedDocumentField(MetricDetailed)
+	errors_in_console = EmbeddedDocumentField(MetricDetailed)
+	image_aspect_ratio = EmbeddedDocumentField(MetricDetailed)
+	score = FloatField()
+
+class SEOAudit(EmbeddedDocument):
+	viewport = EmbeddedDocumentField(MetricDetailed)
+	document_title = EmbeddedDocumentField(MetricDetailed)
+	meta_description = EmbeddedDocumentField(MetricDetailed)
+	http_status_code = EmbeddedDocumentField(MetricDetailed)
+	link_text = EmbeddedDocumentField(MetricDetailed)
+	is_crawlable = EmbeddedDocumentField(MetricDetailed)
+	robots_txt = EmbeddedDocumentField(MetricDetailed)
+	image_alt = EmbeddedDocumentField(MetricDetailed)
+	hreflang = EmbeddedDocumentField(MetricDetailed)
+	canonical = EmbeddedDocumentField(MetricDetailed)
+	font_size = EmbeddedDocumentField(MetricDetailed)
+	plugins = EmbeddedDocumentField(MetricDetailed)
+	tap_targets = EmbeddedDocumentField(MetricDetailed)
+	score = FloatField()
+
+class PWAAudit(EmbeddedDocument):
+	load_fast_enough_for_pwa = EmbeddedDocumentField(MetricDetailed)
+	works_offline = EmbeddedDocumentField(MetricDetailed)
+	offline_start_url = EmbeddedDocumentField(MetricDetailed)
+	is_on_https = EmbeddedDocumentField(MetricDetailed)
+	service_worker = EmbeddedDocumentField(MetricDetailed)
+	installable_manifest = EmbeddedDocumentField(MetricDetailed)
+	redirects_http = EmbeddedDocumentField(MetricDetailed)
+	splash_screen = EmbeddedDocumentField(MetricDetailed)
+	themed_omnibox = EmbeddedDocumentField(MetricDetailed)
+	content_width = EmbeddedDocumentField(MetricDetailed)
+	viewport = EmbeddedDocumentField(MetricDetailed)
+	without_javascript = EmbeddedDocumentField(MetricDetailed)
+	apple_touch_icon = EmbeddedDocumentField(MetricDetailed)
+	pwa_cross_browser = EmbeddedDocumentField(MetricDetailed)
+	pwa_page_transitions = EmbeddedDocumentField(MetricDetailed)
+	pwa_each_page_has_url = EmbeddedDocumentField(MetricDetailed)
+	score = FloatField()
+
+
 class Audit(EmbeddedDocument):
-    performance_audits = EmbeddedDocumentField(PerformanceAudit)
+	performance_audits = EmbeddedDocumentField(PerformanceAudit)
+	best_practices_audits = EmbeddedDocumentField(BestPracticesAudit)
+	seo_audits = EmbeddedDocumentField(SEOAudit)
+	pwa_audits = EmbeddedDocumentField(PWAAudit)
 
 class Environment(EmbeddedDocument):
     networkUserAgent = StringField()
@@ -65,7 +122,7 @@ class LighthouseData(Document):
     environment =EmbeddedDocumentField(Environment)
 
 class GatlingData(Document):
-    stats = DictField()
+    stats = StringField()
     fetchTime = StringField(default=str(datetime.date.today()))
     scala = StringField()
 

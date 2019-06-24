@@ -22,13 +22,18 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
 #        newData=LighthouseDataSerializer(data=data)
 #        md = MetricDetailed(score=data['audits']['performance_audits']['first_contentful_paint']['score'])
 #        PAData = PerformanceAudit(score=data['audits']['performance_audits']['score'])
-        newData = LighthouseData(environment=data['environment'])
-        auditData = Audit(performance_audits=data['audits']['performance_audits'])
-        newData['audits']=auditData
-        newData['finalUrl']=data['finalUrl']
-        newData['lighthouseVersion']=data['lighthouseVersion']
-        newData['requestedUrl']=data['requestedUrl']
-
+        try:
+            newData = LighthouseData(environment=data['environment'])
+            auditData = Audit(performance_audits=data['audits']['performance_audits'],best_practices_audits=data['audits']['best_practices_audits'],seo_audits=data['audits']['seo_audits'],pwa_audits=data['audits']['pwa_audits'])
+            newData['audits']=auditData
+        except:
+            raise ValidationError
+        try:
+            newData['finalUrl']=data['finalUrl']
+            newData['lighthouseVersion']=data['lighthouseVersion']
+            newData['requestedUrl']=data['requestedUrl']
+        except:
+            pass
         newData.save()
         return HttpResponse(request.data)
     def get(self, request):
@@ -55,7 +60,11 @@ class GatlingDataViewSet(viewsets.ModelViewSet):
         except:
             pass
         try:
-            newData['stats'] = data
+            try:
+                data.remove('scala')
+            except:
+                pass
+            newData['stats'] = json.dumps(data)
             newData.save()
         except:
             ValidationError
