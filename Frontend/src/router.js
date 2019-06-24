@@ -16,7 +16,7 @@ const Router = () => {
         exact
         path="/lighthouse"
         render={() => {
-          return <Lighthouse comp="Home" />;
+          return <Lighthouse comp="home" />;
         }}
       />
       <Route

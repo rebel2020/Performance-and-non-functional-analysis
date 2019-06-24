@@ -9,8 +9,8 @@ const MetricComponent = props => {
   return (
     <>
       <div className="row flexbox">
-        <Datalist listId="suburls" options={[]} />
-        <Select options={['a', 'b']} />
+        <Datalist listId="urls" options={[]} />
+        {/* <Select options={['a', 'b']} /> */}
       </div>
       <HighStock metric={metric} />;
     </>
