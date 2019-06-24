@@ -5,7 +5,7 @@ import Link from 'src/components/Link';
 import './main.scss';
 
 const Sidebar = props => {
-  let { toggle, setToggle, component, changeComponent } = props;
+  let { toggle, setToggle } = props;
   let sideClass = toggle ? 'sidenav' : 'sidenav-collapse';
   return (
     <div className={sideClass}>
@@ -21,15 +21,6 @@ const Sidebar = props => {
       <Link className="sidelink" to="/lighthouse/accessibility">
         <div className="sidelink">{toggle ? 'Accessibility' : ''}</div>
       </Link>
-      {/* <Button className="sidelink" onClick={() => changeComponent('home')}>
-        {toggle ? 'Home' : ''}
-      </Button>
-      <Button className="sidelink" onClick={() => changeComponent('performance')}>
-        {toggle ? 'Performance' : ''}
-      </Button>
-      <Button className="sidelink" onClick={() => changeComponent('accessibility')}>
-        {toggle ? 'Accessibility' : ''}
-      </Button> */}
     </div>
   );
 };

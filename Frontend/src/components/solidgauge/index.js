@@ -1,27 +1,30 @@
-import React, { useEffect } from "react";
-import Highcharts from "highcharts/highcharts";
-import HighchartsMore from "highcharts/highcharts-more";
-import Gauge from "highcharts/modules/solid-gauge";
+import React, { useEffect } from 'react';
+import Highcharts from 'highcharts/highcharts';
+import HighchartsMore from 'highcharts/highcharts-more';
+import Gauge from 'highcharts/modules/solid-gauge';
 
 const setGraph = name => {
   return {
     chart: {
-      type: "solidgauge",
-      height: "100%",
-      width: "150"
+      type: 'solidgauge',
+      height: '100%',
+      width: '150'
     },
     title: {
       text: name,
       style: {
-        fontSize: "12px"
+        fontSize: '12px'
       }
+    },
+    credits: {
+      enabled: false
     },
     tooltip: {
       borderWidth: 0,
-      backgroundColor: "none",
+      backgroundColor: 'none',
       shadow: false,
       style: {
-        fontSize: "12px"
+        fontSize: '12px'
       },
       pointFormat:
         '{series.name}<br><span style="font-size:1.5em; color: {point.color}; font-weight: bold">{point.y}%</span>',
@@ -38,8 +41,8 @@ const setGraph = name => {
       background: [
         {
           // Track for Move
-          outerRadius: "112%",
-          innerRadius: "88%",
+          outerRadius: '112%',
+          innerRadius: '88%',
           backgroundColor: Highcharts.Color(Highcharts.getOptions().colors[0])
             .setOpacity(0.3)
             .get(),
@@ -58,19 +61,19 @@ const setGraph = name => {
         dataLabels: {
           enabled: false
         },
-        linecap: "round",
+        linecap: 'round',
         stickyTracking: false,
         rounded: true
       }
     },
     series: [
       {
-        name: "",
+        name: '',
         data: [
           {
             color: Highcharts.getOptions().colors[0],
-            radius: "112%",
-            innerRadius: "88%",
+            radius: '112%',
+            innerRadius: '88%',
             y: 80
           }
         ]

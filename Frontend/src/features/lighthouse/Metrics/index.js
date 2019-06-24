@@ -5,14 +5,14 @@ import HighStock from 'src/components/highstock';
 import 'src/main.scss';
 
 const MetricComponent = props => {
-  const { metric } = props;
+  // const { metric, history } = props;
   return (
     <>
-      <div className="row flexbox">
+      <div className="row flexbox filters">
         <Datalist listId="urls" options={[]} />
         {/* <Select options={['a', 'b']} /> */}
       </div>
-      <HighStock metric={metric} />
+      <HighStock {...props} />
     </>
   );
 };
