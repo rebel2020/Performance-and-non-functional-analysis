@@ -77,7 +77,7 @@ type LighthouseData{
 
 type Query{
 	lighthousedata: [LighthouseData]
-	data(id: Int!): LighthouseData
+	data(_id: ID!): LighthouseData
 }
 `;
 
