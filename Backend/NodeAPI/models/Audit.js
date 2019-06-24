@@ -10,8 +10,9 @@ const AuditSchema = new Schema({
     best_practices_audits : {type:Schema.ObjectId,ref:BestPracticeSchema,default:null},
     seo_audits : {type:Schema.ObjectId,ref:SEOSchema,default:null},
     pwa_audits : {type:Schema.ObjectId,ref:PWASchema,default:null},
+
 });
-const Data = mongoose.model('AuditsData', AuditSchema);
+const Data = mongoose.model('Audit', AuditSchema);
 module.exports={
     Audit:Data
 }
