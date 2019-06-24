@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import Sidebar from './Sidebar';
 import Home from './Home';
 import MetricComponent from './Metrics';
-import { Query } from 'react-apollo';
-import { TEST } from '../../components/graphql/Queries';
+// import { Query } from 'react-apollo';
+// import { TEST } from '../../components/graphql/Queries';
 import './main.scss';
 
 const Lighthouse = props => {
@@ -12,7 +12,8 @@ const Lighthouse = props => {
   const { comp } = props;
   const map = {
     home: <Home />,
-    performance: <MetricComponent metric={comp} />
+    performance: <MetricComponent metric={comp} />,
+    accessibility: <MetricComponent metric={comp} />
   };
   const graph = map[comp];
   return (
@@ -24,14 +25,14 @@ const Lighthouse = props => {
         // changeComponent={changeComponent}
       />
       <div className={toggle ? 'main' : 'main-extend'}>{graph}</div>
-      <Query query={TEST}>
+      {/* <Query query={TEST}>
         {({ loading, error, data }) => {
           if (loading) console.log('loading');
           if (error) console.log(error.message);
           if (data) console.log(data);
           return null;
         }}
-      </Query>
+      </Query> */}
     </>
   );
 };
