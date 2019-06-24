@@ -75,13 +75,9 @@ type LighthouseData{
 	audits: Audit
 }
 
-type Stats{
-	type: String
-}
-
 type GatlingData{
 	_id: ID
-	stats: Stats
+	stats: String
 	fetchTime: String
 	scala: String
 }
