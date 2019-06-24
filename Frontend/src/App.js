@@ -1,51 +1,41 @@
 import React, { Component } from "react";
 import { hot } from "react-hot-loader";
-import ReactHighcharts from "react-highcharts";
-// import "./App.css";
-var config = {
-  xAxis: {
-    categories: [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec"
-    ]
-  },
-  series: [
-    {
-      data: [
-        29.9,
-        71.5,
-        106.4,
-        129.2,
-        144.0,
-        176.0,
-        135.6,
-        148.5,
-        216.4,
-        194.1,
-        295.6,
-        454.4
-      ]
-    }
-  ]
-};
+import { ApolloClient, ApolloProvider, createNetworkInterface } from 'react-apollo';
+import Router from "./router";
+
+// import { ApolloClient } from 'apollo-client';
+// import { HttpLink } from 'apollo-link-http';
+// import { InMemoryCache } from 'apollo-cache-inmemory';
+
+let host = 'http://10.150.16.133:3490/graphql';
+
+// const httpLink = new HttpLink({
+//   uri: host,
+//   headers: {
+//     authorization: `Bearer ${
+//       '71d86158fa98f9e7118fccc49513e0c491b64fd1'
+//     }`,
+//   },
+// });
+
+const networkInterface = createNetworkInterface({
+  uri: host,
+});
+
+// const cache = new InMemoryCache();
+
+const client = new ApolloClient({
+  // link: httpLink,
+  // cache,
+  networkInterface,
+});
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <h1> Hello </h1>
-        <ReactHighcharts config={config}></ReactHighcharts>
-      </div>
+      <ApolloProvider client={client}>
+        <Router />
+      </ApolloProvider>
     );
   }
 }
