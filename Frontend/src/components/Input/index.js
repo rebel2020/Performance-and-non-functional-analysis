@@ -1,5 +1,5 @@
-import React from "react";
-import "./main.scss";
+import React from 'react';
+import './main.scss';
 
 const Input = props => {
   const { className, list, type, onchange } = props;
@@ -9,9 +9,7 @@ const Input = props => {
       list={list}
       type={type}
       onChange={e =>
-        onchange
-          ? onchange.bind(this, e.target.value)()
-          : console.log("change not handled")
+        onchange ? onchange.bind(this, e.target.value)() : console.log('change not handled')
       }
     />
   );
