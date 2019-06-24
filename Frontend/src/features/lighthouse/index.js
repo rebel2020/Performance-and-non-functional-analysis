@@ -1,27 +1,27 @@
-import React, { useState } from "react";
-import Sidebar from "./Sidebar";
-import Home from "./Home";
-import MetricComponent from "./Metrics";
-import HighStock from "../../components/highstock";
-import "./main.scss";
+import React, { useState } from 'react';
+import Sidebar from './Sidebar';
+import Home from './Home';
+import MetricComponent from './Metrics';
+import './main.scss';
 
-const Lighthouse = () => {
+const Lighthouse = props => {
   const [toggle, setToggle] = useState(false);
-  const [component, changeComponent] = useState("home");
+  // const [component, changeComponent] = useState('home');
+  const { comp } = props;
   const map = {
     home: <Home />,
-    performance: <MetricComponent metric={component} />
+    performance: <MetricComponent metric={comp} />
   };
-  const graph = map[component];
+  const graph = map[comp];
   return (
     <>
       <Sidebar
         toggle={toggle}
         setToggle={setToggle}
-        component={component}
-        changeComponent={changeComponent}
+        component={comp}
+        // changeComponent={changeComponent}
       />
-      <div className={toggle ? "main" : "main-extend"}>{graph}</div>
+      <div className={toggle ? 'main' : 'main-extend'}>{graph}</div>
     </>
   );
 };

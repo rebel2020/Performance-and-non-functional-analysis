@@ -1,8 +1,8 @@
-import React from "react";
-import Select from "../../../components/selectlist";
-import Datalist from "../../../components/datalist";
-import HighStock from "../../../components/highstock";
-import "Src/main.scss";
+import React from 'react';
+import Select from 'src/components/selectlist';
+import Datalist from 'src/components/datalist';
+import HighStock from 'src/components/highstock';
+import 'src/main.scss';
 
 const MetricComponent = props => {
   const { metric } = props;
@@ -10,7 +10,7 @@ const MetricComponent = props => {
     <>
       <div className="row flexbox">
         <Datalist listId="suburls" options={[]} />
-        <Select options={["a", "b"]} />
+        <Select options={['a', 'b']} />
       </div>
       <HighStock metric={metric} />;
     </>

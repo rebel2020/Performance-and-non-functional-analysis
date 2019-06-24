@@ -1,9 +1,8 @@
-import React from "react";
-import Input from "../Input";
+import React from 'react';
+import Input from '../Input';
 
 const Datalist = props => {
   const { options, listId } = props;
-  console.log(options, listId);
   return (
     <>
       <Input className="datalistInput" list={listId} onchange={onchange} />
@@ -11,9 +10,7 @@ const Datalist = props => {
         {/* <option value="Performance"/>
     <option value="Accessibility"/>
     <option value="SEO"/> */}
-        {options.length <= 0
-          ? "No data"
-          : options.map(item => <option key={item} value={item} />)}
+        {options.length <= 0 ? 'No data' : options.map(item => <option key={item} value={item} />)}
       </datalist>
     </>
   );
