@@ -14,7 +14,6 @@ const HomeComponent = () => {
       );
     }
   );
-  console.log('hello');
   return (
     <>
       <div className="flexbox filters">
