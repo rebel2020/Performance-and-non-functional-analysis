@@ -25,7 +25,7 @@ const BestPracticesAuditSchema = new Schema(
     }
 );
 
-const Data = mongoose.model('BestPracticeData', BestPracticesAuditSchema);
+const Data = mongoose.model('BestPracticesData', BestPracticesAuditSchema);
 module.exports = {
 	BestPracticesAudit : Data
 }
