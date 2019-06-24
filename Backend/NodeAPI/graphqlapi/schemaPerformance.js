@@ -75,9 +75,21 @@ type LighthouseData{
 	audits: Audit
 }
 
+type Stats{
+	type: String
+}
+
+type GatlingData{
+	_id: ID
+	stats: Stats
+	fetchTime: String
+	scala: String
+}
+
 type Query{
 	lighthousedata: [LighthouseData]
-	data(_id: ID!): LighthouseData
+	gatlingdata: [GatlingData]
+	singleLD(_id: ID!): LighthouseData
 }
 `;
 

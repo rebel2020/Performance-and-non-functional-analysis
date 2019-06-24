@@ -2,7 +2,12 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 const url = 'mongodb://localhost:27017/ptdb';
-mongoose.connect(url, {useNewUrlParser: true});
+var options = {
+  server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },
+  replset: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },
+  useNewUrlParser: true
+};
+mongoose.connect(url, options);
 
 const db = mongoose.connection;
 
@@ -11,4 +16,8 @@ db.on('error', err => {
 });
 db.once('open',() => {
 	console.log(`Connected to mongo at ${url}`);
-});
+}); 
+
+
+
+
