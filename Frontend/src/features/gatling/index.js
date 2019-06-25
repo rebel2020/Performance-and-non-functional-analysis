@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Sidebar from '../Sidebar/index';
 import './main.scss';
-import MetricComponent from './Metrics/index';
-import HighChartBar from './highchart_bar/index';
+import MetricComponent from './Gatling_Stats/index';
+
 // import { Query } from 'react-apollo';
 // import { TEST } from '../../components/graphql/Queries';
 
@@ -20,7 +20,7 @@ const Gatling = props => {
     <>
       <Sidebar toggle={toggle} setToggle={setToggle} />
       <div className={toggle ? 'main' : 'main-extend'}>{graph}</div>
-      {/* <HighChartBar/> */}
+     
       {/* <Query query={TEST}>
         {({ loading, error, data }) => {
           if (loading) console.log('loading');
