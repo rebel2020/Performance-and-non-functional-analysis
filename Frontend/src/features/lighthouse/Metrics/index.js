@@ -8,7 +8,7 @@ const MetricComponent = props => {
   return (
     <>
       <Filters date={range} />
-      <HighStock {...props} />
+      <HighStock {...props} toUrl="/lighthouse" />
     </>
   );
 };
