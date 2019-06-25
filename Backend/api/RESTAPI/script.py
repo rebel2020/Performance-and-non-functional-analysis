@@ -42,8 +42,6 @@ def fun(file):
         Audits[Audit] = dict()
     for Audit in Audit_list:
         for temp in Audit_list[Audit]:
-            if Audit == "PWAAudit_list":
-                print(temp)
             temp1 = fun1(temp)
             Audits[Audit][temp1] = dict()
             try:
@@ -89,19 +87,19 @@ def fun(file):
     LighthouseData = dict()
     LighthouseData['audits'] = audits
     try:
-        LighthouseData['requestedUrl'] = json.dumps(data['requestedUrl'])
+        LighthouseData['requestedUrl'] = data['requestedUrl']
     except:
         pass
     try:
-        LighthouseData['finalUrl'] = json.dumps(data['finalUrl'])
+        LighthouseData['finalUrl'] = data['finalUrl']
     except:
         pass
     try:
-        LighthouseData['runWarnings'] = json.dumps(data['runWarnings'])
+        LighthouseData['runWarnings'] = data['runWarnings']
     except:
         pass
     try:
-        LighthouseData['lighthouseVersion'] = json.dumps(data['lighthouseVersion'])
+        LighthouseData['lighthouseVersion'] = data['lighthouseVersion']
     except:
         pass
     try:
