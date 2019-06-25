@@ -12,7 +12,7 @@ const MetricComponent = props => {
         <Datalist listId="urls" options={[]} />
         {/* <Select options={['a', 'b']} /> */}
       </div>
-      <HighStock {...props} toUrl='/lighthouse' />
+      <HighStock {...props} toUrl="/gatling" />
     </>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import Lighthouse from './features/lighthouse';
+import Gatling from './features/gatling/index';
 
 const Router = () => {
   const [toggle, setToggle] = useState(false);
@@ -11,6 +12,27 @@ const Router = () => {
         path="/"
         render={props => {
           return <Redirect to={{ pathname: '/lighthouse' }} />;
+        }}
+      />
+       <Route
+        exact
+        path="/gatling"
+        render={props => {
+          return <Redirect to={{ pathname: '/gatling' }} />;
+        }}
+      />
+       <Route
+        exact
+        path="/gatling"
+        render={({ history }) => {
+          return (
+            <Gatling
+              history={history}
+              comp="gatling_stats"
+              toggle={toggle}
+              setToggle={setToggle}
+            />
+          );
         }}
       />
       <Route
