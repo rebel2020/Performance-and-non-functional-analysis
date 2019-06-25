@@ -8,11 +8,13 @@ const setGraph = (history, name, toUrl) => {
   console.log(history);
   return {
     chart: {
+      zoomType: 'x'
       // style: {
       //   color: 'white'
       // }
       // backgroundColor: "#303030"
     },
+
     rangeSelector: {
       // style: {
       //   color: 'white'
