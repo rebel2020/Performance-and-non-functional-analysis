@@ -8,10 +8,14 @@ const setGraph = name => {
     chart: {
       style: {
         color: 'white'
-      }
+      },
+
+      zoomType: 'x'
+
 
       // backgroundColor: "#303030"
     },
+
     rangeSelector: {
       style: {
         color: 'white'
