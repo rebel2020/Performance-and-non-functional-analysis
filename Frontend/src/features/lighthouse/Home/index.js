@@ -15,7 +15,7 @@ const HomeComponent = () => {
   );
   return (
     <div className="container">
-      <Filters date={single} />
+      <Filters date={'single'} />
       <div className="flexbox">{flexItems}</div>
     </div>
   );
