@@ -64,7 +64,7 @@ class GatlingDataViewSet(viewsets.ModelViewSet):
                 data.remove('scala')
             except:
                 pass
-            newData['stats'] = json.dumps(data)
+            newData['stats'] = str(data)
             newData.save()
         except:
             ValidationError
