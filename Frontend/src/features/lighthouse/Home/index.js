@@ -1,7 +1,6 @@
 import React from 'react';
 import SolidGauge from 'src/components/solidgauge';
-// import Select from 'src/components/selectlist';
-import Datalist from 'src/components/datalist';
+import Filters from '../../Filters';
 import './main.scss';
 
 const HomeComponent = () => {
@@ -14,15 +13,11 @@ const HomeComponent = () => {
       );
     }
   );
-  console.log('hello');
   return (
-    <>
-      <div className="flexbox filters">
-        <Datalist listId="urls" options={[]} />
-        {/* <Select options={['a', 'b']} /> */}
-      </div>
+    <div className="container">
+      <Filters date={'single'} />
       <div className="flexbox">{flexItems}</div>
-    </>
+    </div>
   );
 };
 export default HomeComponent;

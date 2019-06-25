@@ -21,6 +21,9 @@ const Sidebar = props => {
       <Link className="sidelink" to="/lighthouse/accessibility">
         <div className="sidelink">{toggle ? 'Accessibility' : ''}</div>
       </Link>
+      <Link className="sidelink" to="/gatling">
+        <div className="sidelink">{toggle ? 'Gatling' : ''}</div>
+      </Link>
       {/* <Button className="sidelink" onClick={() => changeComponent('home')}>
         {toggle ? 'Home' : ''}
       </Button>
