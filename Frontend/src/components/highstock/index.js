@@ -4,7 +4,7 @@ import stock from 'highcharts/modules/stock';
 import { Route, Redirect } from 'react-router-dom';
 import data from './data';
 
-const setGraph = (history, name) => {
+const setGraph = (history, name, toUrl) => {
   console.log(history);
   return {
     chart: {
@@ -43,7 +43,7 @@ const setGraph = (history, name) => {
             click: e => {
               console.log(e.point.x);
               history.push({
-                pathname: '/lighthouse',
+                pathname: toUrl,
                 search: '?metric=' + name + '&' + 'date=' + e.point.x,
                 state: { x: e.point.x, metric: name }
               });
@@ -73,8 +73,8 @@ const setGraph = (history, name) => {
 };
 
 const HighStock = props => {
-  const { metric, history } = props;
-  const graphData = setGraph(history, metric);
+  const { metric, history, toUrl } = props;
+  const graphData = setGraph(history, metric, toUrl);
 
   useEffect(() => {
     stock(Highcharts);

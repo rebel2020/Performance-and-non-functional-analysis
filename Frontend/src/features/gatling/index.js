@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import Sidebar from '../Sidebar/index';
-import Home from './Home';
-import MetricComponent from './Metrics';
+import './main.scss';
+import MetricComponent from './Metrics/index';
 // import { Query } from 'react-apollo';
 // import { TEST } from '../../components/graphql/Queries';
-import './main.scss';
 
-const Lighthouse = props => {
+
+const Gatling = props => {
   const { comp, toggle, setToggle, history } = props;
   const map = {
-    home: <Home />,
-    
-    performance: <MetricComponent history={history} metric={comp} />,
-    accessibility: <MetricComponent history={history} metric={comp} />
+    // home: <Home />,
+    gatling_stats:<MetricComponent history={history} metric={comp}/>
+    // performance: <MetricComponent history={history} metric={comp} />,
+    // accessibility: <MetricComponent history={history} metric={comp} />
   };
   const graph = map[comp];
   return (
@@ -31,4 +31,4 @@ const Lighthouse = props => {
   );
 };
 
-export default Lighthouse;
+export default Gatling;
