@@ -6,38 +6,16 @@ import HighChartBar from '../highchart_bar/index';
 import HighChartPie from '../highchart_pie/index';
 import Filters from '../../Filters/index';
 import 'src/main.scss';
-import './styles.scss';
 
-const RadioButtons = props => {
-  return (
-    <div className="radio_buttons">
-      <input type="radio" name="graph_option" value="perc_req" />&nbsp;
-      Percentage of Requests Succeeded
-      <br />
-      <br />
-      <input type="radio" name="graph_option" value="num_req" />&nbsp;
-      Number of Requets
-      <br />
-      <br />
-      <input type="radio" name="graph_option" value="avg_req_sec" />&nbsp;
-      Average Number of Req/Sec
-      <br />
-      <br />
-      <input type="radio" name="graph_option" value="avg_res_time" />&nbsp;
-      Average Response Time
-      <br /> <br />
-    </div>
-  );
-};
+import RadioButtons from '../../../components/radiobuttons/index';
 
 const MetricComponent = props => {
   // const { metric, history } = props;
   return (
     <>
       <div className="row flexbox filters">
-        
         <Filters date={'single'} />
-       
+
         {/* <Select options={['a', 'b']} /> */}
       </div>
       <div className="row container">
