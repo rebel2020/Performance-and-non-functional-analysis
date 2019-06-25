@@ -122,3 +122,19 @@ class LighthouseData(Document):
 	finalUrl = URLField()
 	runWarnings = ListField(StringField())
 	audits = EmbeddedDocumentField(Audit)
+
+class Bench(EmbeddedDocument):
+	cpu = FloatField(required = True)
+	ram = FloatField(required = True)
+	jvm_heap = FloatField(required =True)
+
+class ServerStats(EmbeddedDocument):
+	author_stats = EmbeddedDocumentField(Bench)
+	publisher_stats = EmbeddedDocumentField(Bench)
+	dispatcher_stats = EmbeddedDocumentField(Bench)
+
+class GatlingData(Document):
+	stats = StringField()
+	scala = StringField()
+	fetchTime = DateTimeField(default=datetime.datetime.utcnow)
+	server_stats = EmbeddedDocumentField(ServerStats)
