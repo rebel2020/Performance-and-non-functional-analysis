@@ -1,25 +1,24 @@
 import React, { useEffect } from 'react';
 import Highcharts from 'highcharts/highcharts';
 import stock from 'highcharts/modules/stock';
+import { Route, Redirect } from 'react-router-dom';
 import data from './data';
 
-const setGraph = name => {
+const setGraph = (history, name, toUrl) => {
+  console.log(history);
   return {
     chart: {
-      style: {
-        color: 'white'
-      },
-
       zoomType: 'x'
-
-
+      // style: {
+      //   color: 'white'
+      // }
       // backgroundColor: "#303030"
     },
 
     rangeSelector: {
-      style: {
-        color: 'white'
-      },
+      // style: {
+      //   color: 'white'
+      // },
       selected: 1
     },
 
@@ -29,7 +28,9 @@ const setGraph = name => {
       },
       text: name
     },
-
+    credits: {
+      enabled: false
+    },
     series: [
       {
         name: 'AAPL Stock Price',
@@ -39,7 +40,18 @@ const setGraph = name => {
         tooltip: {
           valueDecimals: 2
         },
-
+        point: {
+          events: {
+            click: e => {
+              console.log(e.point.x);
+              history.push({
+                pathname: toUrl,
+                search: '?metric=' + name + '&' + 'date=' + e.point.x,
+                state: { x: e.point.x, metric: name }
+              });
+            }
+          }
+        },
         fillColor: {
           linearGradient: {
             x1: 0,
@@ -63,8 +75,8 @@ const setGraph = name => {
 };
 
 const HighStock = props => {
-  const { metric } = props;
-  const graphData = setGraph(metric);
+  const { metric, history, toUrl } = props;
+  const graphData = setGraph(history, metric, toUrl);
 
   useEffect(() => {
     stock(Highcharts);
