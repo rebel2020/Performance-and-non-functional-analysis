@@ -10,6 +10,9 @@ const setGraph = name => {
       height: '100%',
       width: '150'
     },
+    credits: {
+      enabled: false
+    },
     title: {
       text: name,
       style: {
@@ -28,7 +31,7 @@ const setGraph = name => {
       },
       pointFormat:
         '{series.name}<br><span style="font-size:1.5em; color: {point.color}; font-weight: bold">{point.y}%</span>',
-      positioner: function(labelWidth) {
+      positioner: function (labelWidth) {
         return {
           x: (this.chart.chartWidth - labelWidth) / 2,
           y: this.chart.plotHeight / 2 + 25
