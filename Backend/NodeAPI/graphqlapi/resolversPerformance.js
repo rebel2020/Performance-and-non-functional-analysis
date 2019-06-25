@@ -16,12 +16,18 @@ const resolversPerformance = {
 			return await GatlingData.find({}).exec();
 		},
 
-		singleLD: (root, { id }) => {
-			return defaultData.filter(character => {
-				return(character.id = id)
-			})[0]
-		}
+		LD: async(root, { finalUrl }) => {
+			//console.log(finalUrl);
+			return await LighthouseData.find({finalUrl: finalUrl}).exec();
+			/*LighthouseData.find({finalUrl: finalUrl}).exec(function(err, data){
+				console.log(LighthouseData.find({}).exec());
+				if(err) return next(err);
+				console.log(data);
+				console.log(finalUrl)
+				return LighthouseData.find({}).exec();
+			});*/
 
+		}
 	}
 }
 

@@ -149,7 +149,7 @@ type GatlingData{
 type Query{
 	lighthousedata: [LighthouseData]
 	gatlingdata: [GatlingData]
-	singleLD(_id: ID!): LighthouseData
+	LD(finalUrl: String): [LighthouseData]
 }
 `;
 
