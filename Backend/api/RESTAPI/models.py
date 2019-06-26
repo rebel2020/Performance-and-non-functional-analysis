@@ -107,6 +107,17 @@ class Audit(EmbeddedDocument):
 	seo_audits = EmbeddedDocumentField(SEOAudit)
 	pwa_audits = EmbeddedDocumentField(PWAAudit)
 
+class Bench(EmbeddedDocument):
+	cpu = FloatField(required = True)
+	ram = FloatField(required = True)
+	jvm_heap = FloatField(required =True)
+
+class ServerStats(EmbeddedDocument):
+	author_stats = EmbeddedDocumentField(Bench)
+	publisher_stats = EmbeddedDocumentField(Bench)
+	dispatcher_stats = EmbeddedDocumentField(Bench)
+
+
 class Environment(EmbeddedDocument):
     networkUserAgent = StringField()
     hostUserAgent =StringField()
@@ -114,7 +125,7 @@ class Environment(EmbeddedDocument):
 
 class LighthouseData(Document):
     audits = EmbeddedDocumentField(Audit)
-    fetchTime = StringField(default=datetime.datetime.utcnow().isoformat())
+    fetchTime = DateTimeField(default=datetime.datetime.utcnow().isoformat())
     requestedUrl = StringField(required=True)
     finalUrl = StringField(required=True)
     runWarnings = StringField()
@@ -122,7 +133,7 @@ class LighthouseData(Document):
     environment =EmbeddedDocumentField(Environment)
 
 class GatlingData(Document):
-    stats = StringField()
-    fetchTime = StringField(default=datetime.datetime.utcnow().isoformat())
-    scala = StringField()
-
+	stats = StringField()
+	scala = StringField()
+	fetchTime = DateTimeField(default=datetime.datetime.utcnow().isoformat())
+	server_stats = EmbeddedDocumentField(ServerStats)
