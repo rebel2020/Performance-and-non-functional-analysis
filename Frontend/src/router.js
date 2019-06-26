@@ -14,24 +14,12 @@ const Router = () => {
           return <Redirect to={{ pathname: '/lighthouse' }} />;
         }}
       />
-       <Route
-        exact
-        path="/gatling"
-        render={props => {
-          return <Redirect to={{ pathname: '/gatling' }} />;
-        }}
-      />
-       <Route
+      <Route
         exact
         path="/gatling"
         render={({ history }) => {
           return (
-            <Gatling
-              history={history}
-              comp="gatling_stats"
-              toggle={toggle}
-              setToggle={setToggle}
-            />
+            <Gatling history={history} comp="gatling_stats" toggle={toggle} setToggle={setToggle} />
           );
         }}
       />
@@ -59,8 +47,15 @@ const Router = () => {
       <Route
         exact
         path="/lighthouse/accessibility"
-        render={() => {
-          return <Lighthouse comp="accessibility" toggle={toggle} setToggle={setToggle} />;
+        render={({ history }) => {
+          return (
+            <Lighthouse
+              history={history}
+              comp="accessibility"
+              toggle={toggle}
+              setToggle={setToggle}
+            />
+          );
         }}
       />
     </BrowserRouter>
