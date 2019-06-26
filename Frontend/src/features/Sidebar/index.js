@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import Button from 'src/components/button';
 import Link from 'src/components/Link';
-
+import useGlobal from 'src/store';
 import './main.scss';
 
 const Sidebar = props => {
-  let { toggle, setToggle, component, changeComponent } = props;
+  const [globalState, globalActions] = useGlobal();
+  const { toggle } = globalState;
   let sideClass = toggle ? 'sidenav' : 'sidenav-collapse';
   return (
     <div className={sideClass}>
-      <Button className="sidelink" onClick={() => setToggle(toggle ? false : true)}>
+      <Button className="sidelink" onClick={() => globalActions.toggle()}>
         {toggle ? 'X' : '='}
       </Button>
       <Link className="sidelink" to="/lighthouse">
