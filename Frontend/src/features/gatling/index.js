@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Sidebar from '../Sidebar/index';
 import './main.scss';
 import MetricComponent from './Gatling_Stats/index';
+import {performanceAuditFrag} from '../../components/graphql/fragments'
 
 // import { Query } from 'react-apollo';
 // import { TEST } from '../../components/graphql/Queries';
@@ -15,6 +16,7 @@ const Gatling = props => {
     // performance: <MetricComponent history={history} metric={comp} />,
     // accessibility: <MetricComponent history={history} metric={comp} />
   };
+  console.log(performanceAuditFrag);
   const graph = map[comp];
   return (
     <>
