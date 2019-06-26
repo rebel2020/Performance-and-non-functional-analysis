@@ -107,6 +107,13 @@ def fun(file):
     except:
         pass
     LighthouseData['fetchTime']=data['fetchTime']
+    urlpac=data['finalUrl']
+    urlpac=urlpac.split('/')[2]
+    print(urlpac)
+    urlpac=urlpac.split('-')
+    LighthouseData['project']=urlpac[0]
+    LighthouseData['phase']=urlpac[1]
+    LighthouseData['brand']=urlpac[2]
     return LighthouseData
 def fun1(s):
     temp = ""

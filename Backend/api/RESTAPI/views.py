@@ -29,6 +29,9 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
             auditData = Audit(performance_audits=data['audits']['performance_audits'],best_practices_audits=data['audits']['best_practices_audits'],seo_audits=data['audits']['seo_audits'],pwa_audits=data['audits']['pwa_audits'])
             newData['audits']=auditData
             newData['fetchTime'] = datetime.strptime(str(data['fetchTime']), "%Y-%m-%dT%H:%M:%S.%fZ")
+            newData['phase']=data['phase']
+            newData['brand']=data['brand']
+            newData['project']=data['project']
         except:
             raise ValidationError
         try:
@@ -55,7 +58,7 @@ class GatlingDataViewSet(viewsets.ModelViewSet):
 #        print(data)
 #        newData = GetlingDataSerializer(data=data)
         try:
-            newData['fetchTime'] = data['fetchTime']
+            newData['fetchTime'] = datetime.strptime(str(data['fetchTime']),"%Y-%m-%dT%H:%M:%S.%fZ")
         except:
             pass
         try:
@@ -63,14 +66,11 @@ class GatlingDataViewSet(viewsets.ModelViewSet):
         except:
             pass
         try:
-            try:
-                data.remove('scala')
-            except:
-                pass
-            newData['stats'] = str(data)
+            newData['stats'] = str(data['stats'])
             newData.save()
         except:
             ValidationError
+        print(data)
         return HttpResponse(request.data)
     def get(self, request):
         lookup_field = 'id'

@@ -124,13 +124,16 @@ class Environment(EmbeddedDocument):
     benchmarkIndex = IntField()
 
 class LighthouseData(Document):
-    audits = EmbeddedDocumentField(Audit)
-    fetchTime = DateTimeField(required=True)
-    requestedUrl = StringField(required=True)
-    finalUrl = StringField(required=True)
-    runWarnings = StringField()
-    lighthouseVersion = StringField(required=True)
-    environment =EmbeddedDocumentField(Environment)
+	audits = EmbeddedDocumentField(Audit)
+	fetchTime = DateTimeField(required=True)
+	requestedUrl = StringField(required=True)
+	finalUrl = StringField(required=True)
+	runWarnings = StringField()
+	lighthouseVersion = StringField(required=True)
+	environment =EmbeddedDocumentField(Environment)
+	brand=StringField()
+	phase = StringField()
+	project = StringField()
 
 class GatlingData(Document):
 	stats = StringField()
