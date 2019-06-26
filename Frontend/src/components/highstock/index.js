@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react';
 import Highcharts from 'highcharts/highcharts';
 import stock from 'highcharts/modules/stock';
-import { Route, Redirect } from 'react-router-dom';
+import formatString from 'src/utilities/formatString';
 import data from './data';
 
 const setGraph = (history, name, toUrl) => {
   console.log(history);
   return {
     chart: {
-      zoomType: 'x'
+      zoomType: 'x',
+      spacingLeft: 50,
+      spacingRight: 50
       // style: {
       //   color: 'white'
       // }
@@ -26,7 +28,7 @@ const setGraph = (history, name, toUrl) => {
       style: {
         color: 'black'
       },
-      text: name
+      text: formatString(name)
     },
     credits: {
       enabled: false

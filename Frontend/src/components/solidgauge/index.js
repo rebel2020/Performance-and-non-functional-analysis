@@ -2,8 +2,9 @@ import React, { useEffect } from 'react';
 import Highcharts from 'highcharts/highcharts';
 import HighchartsMore from 'highcharts/highcharts-more';
 import Gauge from 'highcharts/modules/solid-gauge';
+import formatString from 'src/utilities/formatString';
 
-const setGraph = name => {
+const setGraph = (name, value) => {
   return {
     chart: {
       type: 'solidgauge',
@@ -14,7 +15,7 @@ const setGraph = name => {
       enabled: false
     },
     title: {
-      text: name,
+      text: formatString(name),
       style: {
         fontSize: '12px'
       }
@@ -31,7 +32,7 @@ const setGraph = name => {
       },
       pointFormat:
         '{series.name}<br><span style="font-size:1.5em; color: {point.color}; font-weight: bold">{point.y}%</span>',
-      positioner: function (labelWidth) {
+      positioner: function(labelWidth) {
         return {
           x: (this.chart.chartWidth - labelWidth) / 2,
           y: this.chart.plotHeight / 2 + 25
@@ -77,7 +78,7 @@ const setGraph = name => {
             color: Highcharts.getOptions().colors[0],
             radius: '112%',
             innerRadius: '88%',
-            y: 80
+            y: value
           }
         ]
       }
@@ -85,8 +86,8 @@ const setGraph = name => {
   };
 };
 const SolidGuage = props => {
-  const { name } = props;
-  const graphData = setGraph(name);
+  const { name, value } = props;
+  const graphData = setGraph(name, value);
   useEffect(() => {
     HighchartsMore(Highcharts);
     Gauge(Highcharts);
