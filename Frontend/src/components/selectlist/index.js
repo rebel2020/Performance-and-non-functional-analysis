@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const SelectList = props => {
   const { options } = props;
@@ -6,11 +6,11 @@ const SelectList = props => {
     <>
       <select>
         {options.length <= 0
-          ? "No data"
+          ? 'No data'
           : options.map(item => (
               <option key={item} value={item}>
-                {item}
-              </option>
+              {item}
+            </option>
             ))}
       </select>
     </>

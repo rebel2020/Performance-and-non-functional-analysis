@@ -7,7 +7,7 @@ import './main.scss';
 const Sidebar = props => {
   const [globalState, globalActions] = useGlobal();
   const { toggle } = globalState;
-  let sideClass = toggle ? 'sidenav' : 'sidenav-collapse';
+  const sideClass = toggle ? 'sidenav' : 'sidenav-collapse';
   return (
     <div className={sideClass}>
       <Button className="sidelink" onClick={() => globalActions.toggle()}>

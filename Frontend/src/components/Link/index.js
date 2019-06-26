@@ -1,6 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import "./main.scss";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import './main.scss';
 
 const Links = props => {
   const { children, className, to } = props;

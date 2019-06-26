@@ -19,6 +19,6 @@ export const setToDate = (store, newToDate) => {
 };
 
 export const toggle = store => {
-  const toggle = store.state.toggle ? false : true;
-  store.setState({ toggle });
+  const toggleValue = !store.state.toggle;
+  store.setState({ toggle: toggleValue });
 };

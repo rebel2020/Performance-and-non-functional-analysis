@@ -16,7 +16,7 @@ const HomeComponent = () => {
   );
   return (
     <div className="container">
-      <Filters date={'single'} options={['hello', 'react']} />
+      <Filters date="single" options={['hello', 'react']} />
       <div className="flexbox">{flexItems}</div>
     </div>
   );

@@ -15,7 +15,7 @@ const Filters = props => {
         <Datalist
           className="float-right"
           listId="urls"
-          options={options ? options : []}
+          options={options || []}
           onChange={value =>
             options.includes(value) ? setPage(value) : console.log(options.includes(value))
           }

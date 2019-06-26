@@ -38,7 +38,7 @@ const setGraph = (history, name, toUrl) => {
     series: [
       {
         name: 'AAPL Stock Price',
-        data: data,
+        data,
         type: 'area',
         threshold: null,
         tooltip: {
