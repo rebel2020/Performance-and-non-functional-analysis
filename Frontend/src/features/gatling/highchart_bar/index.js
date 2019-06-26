@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { render } from 'react-dom';
 import Highcharts from 'highcharts';
 
 const options = {

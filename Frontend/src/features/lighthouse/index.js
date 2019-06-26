@@ -8,7 +8,7 @@ const Lighthouse = props => {
   const { comp, toggle, setToggle, history } = props;
   const map = {
     home: <Home />,
-    
+
     performance: <MetricComponent history={history} metric={comp} />,
     accessibility: <MetricComponent history={history} metric={comp} />
   };
@@ -20,5 +20,10 @@ const Lighthouse = props => {
     </>
   );
 };
+
+// const Lighthouse2 = React.memo(Lighthouse, (prevProps, nextProps) => {
+//   console.log(prevProps, nextProps);
+//   return true;
+// });
 
 export default Lighthouse;
