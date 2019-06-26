@@ -23,7 +23,7 @@ const MetricComponent = props => {
           <HighStock {...props} toUrl="/gatling" />
         </div>
         <div className="col m2">
-          <RadioButtons />
+          <RadioButtons values={[]}/>
         </div>
       </div>
       <div className="row">
