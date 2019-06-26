@@ -30,8 +30,8 @@ const resolversPerformance = {
 		},
 
 		LDFilter: async(root, { finalUrl, fetchTimeStart, fetchTimeEnd }) => {
-			var t1 = new Date(parseInt(fetchTimeStart));
-			var t2 = new Date(parseInt(fetchTimeEnd));
+			var t2 = new Date(parseInt(fetchTimeStart));
+			var t1 = new Date(parseInt(fetchTimeEnd));
 			console.log(finalUrl);
 			console.log(t1);
 			console.log(t2);
