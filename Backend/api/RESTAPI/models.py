@@ -125,7 +125,7 @@ class Environment(EmbeddedDocument):
 
 class LighthouseData(Document):
     audits = EmbeddedDocumentField(Audit)
-    fetchTime = DateTimeField(default=datetime.datetime.utcnow().isoformat())
+    fetchTime = DateTimeField(required=True)
     requestedUrl = StringField(required=True)
     finalUrl = StringField(required=True)
     runWarnings = StringField()

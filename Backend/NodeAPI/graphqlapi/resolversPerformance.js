@@ -36,6 +36,7 @@ const resolversPerformance = {
 			console.log(t1);
 			console.log(t2);
 			return await LighthouseData.find({finalUrl: finalUrl, fetchTime: { $lte : t1, $gte: t2} });
+
 		}
 	}
 }

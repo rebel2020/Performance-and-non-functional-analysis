@@ -26,6 +26,7 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
             newData = LighthouseData(environment=data['environment'])
             auditData = Audit(performance_audits=data['audits']['performance_audits'],best_practices_audits=data['audits']['best_practices_audits'],seo_audits=data['audits']['seo_audits'],pwa_audits=data['audits']['pwa_audits'])
             newData['audits']=auditData
+            newData['fetchTime']=data['fetchTime']
         except:
             raise ValidationError
         try:

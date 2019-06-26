@@ -106,6 +106,7 @@ def fun(file):
         LighthouseData['environment'] = data['environment']
     except:
         pass
+    LighthouseData['fetchTime']=data['fetchTime']
     return LighthouseData
 def fun1(s):
     temp = ""
