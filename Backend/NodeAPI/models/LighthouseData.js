@@ -6,7 +6,7 @@ const LighthouseSchema = new Schema({
     userAgent : {type:String},
     environment : {type: Object, default: null},
     lighthouseVersion: {type:String},
-    fetchTime : {type: Date, default: Date.now()},
+    fetchTime : {type: Date, default: null},
     requestedUrl : {type:String, required: true},
     finalUrl : {type:String, required: true},
     runWarnings : [{type:String}],

@@ -16,9 +16,9 @@ const resolversPerformance = {
 			return await GatlingData.find({}).exec();
 		},
 
-		LD: async(root, { finalUrl }) => {
-			//console.log(finalUrl);
-			return await LighthouseData.find({finalUrl: finalUrl}).exec();
+		LD: async(root, { finalUrl, requestedUrl }) => {
+			console.log(requestedUrl);
+			return await LighthouseData.find({finalUrl: finalUrl, requestedUrl: requestedUrl}).exec();
 			/*LighthouseData.find({finalUrl: finalUrl}).exec(function(err, data){
 				console.log(LighthouseData.find({}).exec());
 				if(err) return next(err);
@@ -27,6 +27,15 @@ const resolversPerformance = {
 				return LighthouseData.find({}).exec();
 			});*/
 
+		},
+
+		LDFilter: async(root, { finalUrl, fetchTimeStart, fetchTimeEnd }) => {
+			var t1 = new Date(parseInt(fetchTimeStart));
+			var t2 = new Date(parseInt(fetchTimeEnd));
+			console.log(finalUrl);
+			console.log(t1);
+			console.log(t2);
+			return await LighthouseData.find({finalUrl: finalUrl, fetchTime: { $lte : t1, $gte: t2} });
 		}
 	}
 }
