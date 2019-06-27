@@ -20,9 +20,6 @@ const setGraph = (name, value) => {
         fontSize: '12px'
       }
     },
-    credits: {
-      enabled: false
-    },
     tooltip: {
       borderWidth: 0,
       backgroundColor: 'none',
@@ -32,7 +29,7 @@ const setGraph = (name, value) => {
       },
       pointFormat:
         '{series.name}<br><span style="font-size:1.5em; color: {point.color}; font-weight: bold">{point.y}%</span>',
-      positioner: function(labelWidth) {
+      positioner(labelWidth) {
         return {
           x: (this.chart.chartWidth - labelWidth) / 2,
           y: this.chart.plotHeight / 2 + 25
@@ -93,7 +90,7 @@ const SolidGuage = props => {
     Gauge(Highcharts);
     Highcharts.chart(name, graphData);
   });
-  return <div id={name}></div>;
+  return <div id={name} />;
 };
 
 export default SolidGuage;

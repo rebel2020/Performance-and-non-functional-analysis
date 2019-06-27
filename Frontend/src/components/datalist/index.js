@@ -5,7 +5,7 @@ const Datalist = props => {
   const { options, listId, className, onChange } = props;
   return (
     <>
-      <Input className={'datalistInput ' + className} list={listId} onChange={onChange} />
+      <Input className={`datalistInput ${className}`} list={listId} onChange={onChange} />
       <datalist id={listId}>
         {/* <option value="Performance"/>
     <option value="Accessibility"/>

@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { hot } from 'react-hot-loader';
 import { ApolloProvider } from 'react-apollo';
-import Router from './router';
 
 import { ApolloClient } from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
+import Router from './router';
 
 const host = 'http://10.150.16.133:3490/graphql';
 
@@ -25,14 +25,12 @@ const client = new ApolloClient({
   cache
 });
 
-class App extends Component {
-  render() {
-    return (
-      <ApolloProvider client={client}>
-        <Router />
-      </ApolloProvider>
-    );
-  }
-}
+const App = () => {
+  return (
+    <ApolloProvider client={client}>
+      <Router />
+    </ApolloProvider>
+  );
+};
 
 export default hot(module)(App);

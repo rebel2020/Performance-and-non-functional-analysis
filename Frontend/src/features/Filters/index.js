@@ -1,20 +1,23 @@
 import React from 'react';
 import Datalist from 'src/components/datalist';
 import Input from 'src/components/Input';
+import useGlobal from 'src/store';
 import './main.scss';
 
 const Filters = props => {
-  const { date, setUrl, setDate, setToDate, options } = props;
-  // console.log(options);
+  const [globalState, globalActions] = useGlobal();
+  const { setPage, setDate, setToDate } = globalActions;
+  const { date, options } = props;
+  console.log(options);
   return (
     <div className="row filters">
       <div className="col s12 m6 l4">
         <Datalist
           className="float-right"
           listId="urls"
-          options={options ? options : []}
+          options={options || []}
           onChange={value =>
-            options.includes(value) ? setUrl(value) : console.log(options.includes(value))
+            options.includes(value) ? setPage(value) : console.log(options.includes(value))
           }
         />
       </div>

@@ -14,7 +14,7 @@ const MetricComponent = props => {
   return (
     <>
       <div className="row flexbox filters">
-        <Filters date={'single'} />
+        <Filters date="single" />
 
         {/* <Select options={['a', 'b']} /> */}
       </div>
@@ -23,7 +23,7 @@ const MetricComponent = props => {
           <HighStock {...props} toUrl="/gatling" />
         </div>
         <div className="col m2">
-          <RadioButtons options={[]} />
+          <RadioButtons values={[]} />
         </div>
       </div>
       <div className="row">
