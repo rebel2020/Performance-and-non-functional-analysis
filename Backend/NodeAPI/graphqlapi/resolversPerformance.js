@@ -20,7 +20,7 @@ const resolversPerformance = {
 
 			var timeEnd = fetchTimeEnd;
 			var timeStart = fetchTimeStart;
-			if(timeStart === undefined)
+			if(timeStart === undefined || timeStart == "")
 			{
 				timeStart = new Date(0000000000000);
 				console.log(timeStart)
@@ -30,7 +30,7 @@ const resolversPerformance = {
 				timeStart = new Date(parseInt(fetchTimeStart));
 				console.log(timeStart)
 			}
-			if(timeEnd === undefined)
+			if(timeEnd === undefined || timeEnd == "")
 			{
 				timeEnd = new Date();
 				console.log(timeEnd);
@@ -41,7 +41,7 @@ const resolversPerformance = {
 				console.log(timeEnd);
 			}
 
-			if(finalUrl === undefined)
+			if(finalUrl === undefined || finalUrl == "")
 			{
 				return await LighthouseData.find({fetchTime: { $lte : timeEnd, $gte: timeStart} });	
 			}
