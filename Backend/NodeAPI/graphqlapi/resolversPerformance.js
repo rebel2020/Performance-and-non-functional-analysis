@@ -7,7 +7,7 @@ const GatlingData = require('../models/GatlingData').GatlingData;
 
 const resolversPerformance = {
 	Query: {
-		lighthousedata: async () => {
+		allLighthousedata: async () => {
 			//console.log(await LighthouseData.find({}).exec());
 			return await LighthouseData.find({}).exec();
 		},
@@ -16,27 +16,41 @@ const resolversPerformance = {
 			return await GatlingData.find({}).exec();
 		},
 
-		LD: async(root, { finalUrl, requestedUrl }) => {
-			console.log(requestedUrl);
-			return await LighthouseData.find({finalUrl: finalUrl, requestedUrl: requestedUrl}).exec();
-			/*LighthouseData.find({finalUrl: finalUrl}).exec(function(err, data){
-				console.log(LighthouseData.find({}).exec());
-				if(err) return next(err);
-				console.log(data);
-				console.log(finalUrl)
-				return LighthouseData.find({}).exec();
-			});*/
+		lighthousedata: async(root, { finalUrl, fetchTimeStart, fetchTimeEnd }) => {
 
-		},
+			var timeEnd = fetchTimeEnd;
+			var timeStart = fetchTimeStart;
+			if(timeStart === undefined)
+			{
+				timeStart = new Date(0000000000000);
+				console.log(timeStart)
+			}
+			else
+			{
+				timeStart = new Date(parseInt(fetchTimeStart));
+				console.log(timeStart)
+			}
+			if(timeEnd === undefined)
+			{
+				timeEnd = new Date();
+				console.log(timeEnd);
+			}
+			else
+			{
+				timeEnd = new Date(parseInt(fetchTimeEnd));
+				console.log(timeEnd);
+			}
 
-		LDFilter: async(root, { finalUrl, fetchTimeStart, fetchTimeEnd }) => {
-			var t2 = new Date(parseInt(fetchTimeStart));
-			var t1 = new Date(parseInt(fetchTimeEnd));
-			console.log(finalUrl);
-			console.log(t1);
-			console.log(t2);
-			return await LighthouseData.find({finalUrl: finalUrl, fetchTime: { $lte : t1, $gte: t2} });
+			if(finalUrl === undefined)
+			{
+				return await LighthouseData.find({fetchTime: { $lte : timeEnd, $gte: timeStart} });	
+			}
 
+			else
+			{
+				return await LighthouseData.find({finalUrl: finalUrl, fetchTime: { $lte : timeEnd, $gte: timeStart} });
+			}
+			
 		}
 	}
 }

@@ -139,6 +139,11 @@ type LighthouseData{
 	audits: Audit
 }
 
+type AllLighthouseDataResult{
+	allLighthouseData: [LighthouseData]
+	averageResult: Int
+}
+
 type GatlingData{
 	_id: ID
 	stats: String
@@ -147,10 +152,9 @@ type GatlingData{
 }
 
 type Query{
-	lighthousedata: [LighthouseData]
+	allLighthousedata: [LighthouseData]
 	gatlingdata: [GatlingData]
-	LD(finalUrl: String, requestedUrl: String): [LighthouseData]
-	LDFilter(finalUrl: String, fetchTimeStart: String, fetchTimeEnd: String): [LighthouseData]
+	lighthousedata(finalUrl: String, fetchTimeStart: String, fetchTimeEnd: String): [LighthouseData]
 }
 `;
 
