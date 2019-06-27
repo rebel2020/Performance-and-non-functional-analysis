@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
+// import useGlobal from 'src/store';
 import Lighthouse from './features/lighthouse';
 import Gatling from './features/gatling/index';
 
 const Router = () => {
-  const [toggle, setToggle] = useState(false);
+  // const [globalState, globalActions] = useGlobal();
   return (
     <BrowserRouter>
       <Route
@@ -18,44 +19,28 @@ const Router = () => {
         exact
         path="/gatling"
         render={({ history }) => {
-          return (
-            <Gatling history={history} comp="gatling_stats" toggle={toggle} setToggle={setToggle} />
-          );
+          return <Gatling history={history} comp="gatling_stats" />;
         }}
       />
       <Route
         exact
         path="/lighthouse"
         render={({ history }) => {
-          return <Lighthouse history={history} comp="home" toggle={toggle} setToggle={setToggle} />;
+          return <Lighthouse history={history} comp="home" />;
         }}
       />
       <Route
         exact
         path="/lighthouse/performance"
         render={({ history }) => {
-          return (
-            <Lighthouse
-              history={history}
-              comp="performance"
-              toggle={toggle}
-              setToggle={setToggle}
-            />
-          );
+          return <Lighthouse history={history} comp="performance" />;
         }}
       />
       <Route
         exact
         path="/lighthouse/accessibility"
         render={({ history }) => {
-          return (
-            <Lighthouse
-              history={history}
-              comp="accessibility"
-              toggle={toggle}
-              setToggle={setToggle}
-            />
-          );
+          return <Lighthouse history={history} comp="accessibility" />;
         }}
       />
     </BrowserRouter>
