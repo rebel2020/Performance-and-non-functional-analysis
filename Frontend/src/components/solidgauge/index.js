@@ -77,7 +77,12 @@ const setGraph = (name, value) => {
             innerRadius: '88%',
             y: value
           }
-        ]
+        ],
+        point: {
+          event: {
+            click: e => {}
+          }
+        }
       }
     ]
   };

@@ -8,7 +8,7 @@ const Filters = props => {
   const [globalState, globalActions] = useGlobal();
   const { setPage, setDate, setToDate } = globalActions;
   const { date, options } = props;
-  console.log(options);
+  // console.log(options);
   return (
     <div className="row filters">
       <div className="col s12 m6 l4">
