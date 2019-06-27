@@ -5,8 +5,8 @@ import SolidGauge from 'src/components/solidgauge';
 import compare from 'src/utilities/compareObjects';
 import FetchData from 'src/components/graphql/utils';
 import { AVG_LIGHTHOUSE_SCORES } from 'src/components/graphql/Queries';
+import Collapsible from 'src/components/collapsible';
 import Filters from '../../Filters';
-import Collapsible from 'src/components/collapsible'
 import './main.scss';
 
 const HomeComponent = props => {
@@ -51,7 +51,7 @@ const HomeComponent = props => {
     <div className="container">
       <Filters date="single" options={['hello', 'react']} />
       <div className="flexbox">{flexItems}</div>
-      <Collapsible {...props}/>
+      <Collapsible {...props} />
       {query}
     </div>
   );

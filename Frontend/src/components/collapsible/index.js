@@ -9,22 +9,40 @@ class Collapsible extends React.Component {
     this.state = { open: false };
     this.togglePanel = this.togglePanel.bind(this);
   }
+
   togglePanel(e) {
     this.setState({ open: !this.state.open });
   }
+
   render() {
-     const {history} = this.props
+    const { history } = this.props;
     console.log(history);
     return (
-      <div className="collapse_container" >
+      <div className="collapse_container">
         <div onClick={e => this.togglePanel(e)} className="header">
           {' '}
-          Audit_Name <div className="score" >Score: NN</div>
+          Audit_Name <div className="score">Score: NN</div>
         </div>
-        {this.state.open ? <div className="content"> Content of audit displayed here <br/><br/> <Button className="collapse_link" onClick={()=>history.push('/lighthouse/performance')}>Link_to_graph</Button>  </div> : null}{' '}
+        {this.state.open ? (
+          <div className="content">
+            {' '}
+            Content of audit displayed here 
+{' '}
+<br />
+            <br />
+{' '}
+            <Button
+              className="collapse_link"
+              onClick={() => history.push('/lighthouse/performance')}
+            >
+              Link_to_graph
+            </Button>
+{' '}
+          </div>
+        ) : null}{' '}
       </div>
     );
   }
-} 
+}
 
 export default Collapsible;
