@@ -5,7 +5,7 @@ import './main.scss';
 
 const Filters = props => {
   const { date, setUrl, setDate, setToDate, options } = props;
-  console.log(options);
+  // console.log(options);
   return (
     <div className="row filters">
       <div className="col s12 m6 l4">
