@@ -2,10 +2,10 @@ import React from 'react';
 import Input from '../Input';
 
 const Datalist = props => {
-  const { options, listId } = props;
+  const { options, listId, className, onChange } = props;
   return (
     <>
-      <Input className="datalistInput" list={listId} onchange={onchange} />
+      <Input className={`datalistInput ${className}`} list={listId} onChange={onChange} />
       <datalist id={listId}>
         {/* <option value="Performance"/>
     <option value="Accessibility"/>

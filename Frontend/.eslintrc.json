@@ -20,7 +20,11 @@
   "plugins": ["react", "prettier"],
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "prettier/prettier": ["error"]
+    "prettier/prettier": ["error"],
+    "no-console": "off",
+    "react/prop-types": 0,
+    "no-unused-vars": "off",
+    "import/no-unresolved": "off"
   },
   "settings": {
     "import/resolver": {
