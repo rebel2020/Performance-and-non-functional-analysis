@@ -2,9 +2,11 @@ import React, { useEffect } from 'react';
 import Highcharts from 'highcharts/highcharts';
 import stock from 'highcharts/modules/stock';
 import formatString from 'src/utilities/formatString';
+import useGlobal from 'src/store';
 import data from './data';
 
 const setGraph = (history, name, toUrl) => {
+  const [globalState, globalActions] = useGlobal();
   console.log(history);
   return {
     chart: {
@@ -36,7 +38,7 @@ const setGraph = (history, name, toUrl) => {
     series: [
       {
         name: 'AAPL Stock Price',
-        data: data,
+        data,
         type: 'area',
         threshold: null,
         tooltip: {
@@ -46,11 +48,11 @@ const setGraph = (history, name, toUrl) => {
           events: {
             click: e => {
               console.log(e.point.x);
-              history.push({
-                pathname: toUrl,
-                search: '?metric=' + name + '&' + 'date=' + e.point.x,
-                state: { x: e.point.x, metric: name }
-              });
+              // history.push({
+              //   pathname: toUrl,
+              //   search: '?metric=' + name + '&' + 'date=' + e.point.x,
+              //   state: { x: e.point.x, metric: name }
+              // });
             }
           }
         },

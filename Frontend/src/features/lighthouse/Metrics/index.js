@@ -4,20 +4,10 @@ import Filters from '../../Filters';
 import 'src/main.scss';
 
 const MetricComponent = props => {
-  const [url, setUrl] = useState('');
-  const [date, setDate] = useState('');
-  const [toDate, setToDate] = useState('');
-  // console.log(url, date, toDate);
   console.log(props);
   return (
     <>
-      <Filters
-        date={'range'}
-        setUrl={setUrl}
-        setDate={setDate}
-        setToDate={setToDate}
-        options={[]}
-      />
+      <Filters date="range" options={[]} />
       <HighStock {...props} toUrl="/lighthouse" />
     </>
   );
