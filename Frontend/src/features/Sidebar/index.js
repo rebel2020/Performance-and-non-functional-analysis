@@ -10,7 +10,7 @@ const Sidebar = props => {
   const sideClass = toggle ? 'sidenav' : 'sidenav-collapse';
   return (
     <div className={sideClass}>
-      <Button className="sidelink" onClick={() => globalActions.toggle()}>
+      <Button className="sidelink" type="button" onClick={() => globalActions.toggle()}>
         {toggle ? 'X' : '='}
       </Button>
       <Link className="sidelink" to="/lighthouse">

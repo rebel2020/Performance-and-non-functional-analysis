@@ -15,10 +15,6 @@ const RadioButtons = props => {
         <br />
         <br />
       </>
-      // &nbsp;
-      // {text}
-      // <br />
-      // <br />
     );
   });
   return (
