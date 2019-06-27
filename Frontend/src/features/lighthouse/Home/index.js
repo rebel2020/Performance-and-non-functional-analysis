@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import SolidGauge from 'src/components/solidgauge';
 import Filters from '../../Filters';
+import Collapsible from 'src/components/collapsible'
 import './main.scss';
 
-const HomeComponent = () => {
+const HomeComponent = (props) => {
   const [url, setUrl] = useState('');
   const [date, setDate] = useState('');
   console.log(url, date);
@@ -21,6 +22,7 @@ const HomeComponent = () => {
     <div className="container">
       <Filters date={'single'} options={['hello', 'react']} setDate={setDate} setUrl={setUrl} />
       <div className="flexbox">{flexItems}</div>
+      <Collapsible {...props}/>
     </div>
   );
 };

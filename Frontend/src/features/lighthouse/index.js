@@ -7,7 +7,7 @@ import './main.scss';
 const Lighthouse = props => {
   const { comp, toggle, setToggle, history } = props;
   const map = {
-    home: <Home />,
+    home: <Home history={history}/>,
 
     performance: <MetricComponent history={history} metric={comp} />,
     accessibility: <MetricComponent history={history} metric={comp} />
