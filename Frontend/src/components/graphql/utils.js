@@ -6,7 +6,7 @@ const FetchData = (QueryData, setData) => {
     <Query query={QueryData}>
       {({ loading, error, data }) => {
         if (error) console.log(error.message);
-        if (loading) console.log(loading);
+        else if (loading) console.log(loading);
         else {
           setData(data);
         }

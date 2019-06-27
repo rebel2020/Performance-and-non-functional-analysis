@@ -6,6 +6,7 @@ import MetricComponent from './Metrics';
 import './main.scss';
 
 const Lighthouse = props => {
+  console.log('lindex');
   const { comp, history } = props;
   const [globalState, globalActions] = useGlobal();
   const { toggle } = globalState;
