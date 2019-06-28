@@ -4,12 +4,12 @@ import previousState from 'src/utilities/previousState';
 import SolidGauge from 'src/components/solidgauge';
 import compare from 'src/utilities/compareObjects';
 import FetchData from 'src/components/graphql/utils';
-import { AVG_LIGHTHOUSE_SCORES,getAudits } from 'src/components/graphql/Queries';
+import { AVG_LIGHTHOUSE_SCORES, getAudits } from 'src/components/graphql/Queries';
 import Collapsible from 'src/components/collapsible';
 import map from 'src/utilities/map';
 import Filters from '../../Filters';
 import './main.scss';
-import {AuditData} from '../../../utilities/parseAuditData'
+import { AuditData } from '../../../utilities/parseAuditData';
 
 const HomeComponent = props => {
   const [globalState, globalActions] = useGlobal();
@@ -17,13 +17,13 @@ const HomeComponent = props => {
   const [data, setData] = useState({ lighthousedata: [{ audits: {} }] });
   const [query, setQuery] = useState(<></>);
   const variables = {
-    finalUrl:"http://fca-qa1-jeep-sape.test.com/",
-    fetchTimeStart:"1561623842607",
-    fetchTimeEnd: "1561623842607"
-  }
+    finalUrl: 'http://fca-qa1-jeep-sape.test.com/',
+    fetchTimeStart: '1561623842607',
+    fetchTimeEnd: '1561623842607'
+  };
   useEffect(() => {
     // setQuery(FetchData(getAudits("seo"), setData,variables));
-    setQuery(FetchData(AVG_LIGHTHOUSE_SCORES,setData));
+    setQuery(FetchData(AVG_LIGHTHOUSE_SCORES, setData));
   }, []);
   const prevState = previousState({ env, brand, page, date });
   const onMount = useRef(true);
@@ -93,6 +93,7 @@ const HomeComponent = props => {
     <div className="container">
       <Filters date="single" options={['hello', 'react']} />
       <div className="flexbox">{flexItems}</div>
+      <Collapsible {...props} />
       <div>{DispAudit}</div>
       {query}
     </div>

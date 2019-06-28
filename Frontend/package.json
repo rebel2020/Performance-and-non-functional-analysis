@@ -43,6 +43,7 @@
     "webpack-dev-server": "^3.7.1"
   },
   "dependencies": {
+    "@blueprintjs/core": "^3.16.2",
     "apollo-cache-inmemory": "^1.6.2",
     "apollo-client": "^2.6.3",
     "apollo-link-http": "^1.5.15",
@@ -53,6 +54,7 @@
     "react-apollo": "^2.5.8",
     "react-dom": "^16.8.6",
     "react-hot-loader": "^4.11.1",
+    "react-icons": "^3.7.0",
     "react-router-dom": "^5.0.1"
   }
 }
