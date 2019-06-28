@@ -5,7 +5,7 @@ const Input = props => {
   const { className, list, type, onChange, max, min } = props;
   return (
     <input
-      className={className}
+      className="datalistInput"
       list={list}
       type={type}
       max={max}
