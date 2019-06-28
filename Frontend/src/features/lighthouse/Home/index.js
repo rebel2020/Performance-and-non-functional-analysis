@@ -6,6 +6,7 @@ import compare from 'src/utilities/compareObjects';
 import FetchData from 'src/components/graphql/utils';
 import { AVG_LIGHTHOUSE_SCORES } from 'src/components/graphql/Queries';
 import Collapsible from 'src/components/collapsible';
+import map from 'src/utilities/map';
 import Filters from '../../Filters';
 import './main.scss';
 
@@ -31,12 +32,6 @@ const HomeComponent = props => {
 
   console.log(data);
   const obj = data.lighthousedata[0] ? data.lighthousedata[0].audits : {};
-  const map = {
-    performance: 'performance_audits',
-    best_practices: 'best_practices_audits',
-    p_w_a: 'pwa_audits',
-    s_e_o: 'seo_audits'
-  };
   const flexItems = ['best_practices', 'performance', 'p_w_a', 's_e_o'].map((item, i) => {
     return (
       <div key={item}>

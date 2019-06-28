@@ -8,7 +8,7 @@ const Router = () => {
       {ROUTES.map((route, index) => {
         return (
           <Route
-            key={route}
+            key={route.path}
             exact={route.exact}
             path={route.path}
             render={({ history }) => route.main(history)}
