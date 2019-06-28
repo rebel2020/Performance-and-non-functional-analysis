@@ -91,6 +91,7 @@ const getQuery = value => {
       fetchTimeEnd:$fetchTimeEnd    
     ){ 
       _id
+      fetchTime
       audits {
         ${value}
       }
