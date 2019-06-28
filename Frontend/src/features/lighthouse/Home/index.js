@@ -9,14 +9,20 @@ import Collapsible from 'src/components/collapsible';
 import map from 'src/utilities/map';
 import Filters from '../../Filters';
 import './main.scss';
+import {AuditData} from '../../../utilities/parseAuditData'
 
 const HomeComponent = props => {
   const [globalState, globalActions] = useGlobal();
   const { env, brand, page, date } = globalState;
   const [data, setData] = useState({ lighthousedata: [{ audits: {} }] });
   const [query, setQuery] = useState(<></>);
+  const variables = {
+    finalUrl:"http://fca-qa1-jeep-sape.test.com/",
+    fetchTimeStart:"1561623842607",
+    fetchTimeEnd: "1561623842607"
+  }
   useEffect(() => {
-    // setQuery(FetchData(getAudits("seo"), setData,{finalUrl:$finalUrl fetchTimeStart:$fetchTimeStartfetchTimeEnd:$fetchTimeEnd}));
+    // setQuery(FetchData(getAudits("seo"), setData,variables));
     setQuery(FetchData(AVG_LIGHTHOUSE_SCORES,setData));
   }, []);
   const prevState = previousState({ env, brand, page, date });
@@ -31,7 +37,8 @@ const HomeComponent = props => {
     }
   });
 
-  console.log(data);
+  // console.log(data.lighthousedata[0].audits);
+  AuditData(data.lighthousedata[0].audits);
   const obj = data.lighthousedata[0] ? data.lighthousedata[0].audits : {};
   const flexItems = ['best_practices', 'performance', 'p_w_a', 's_e_o'].map((item, i) => {
     return (

@@ -6,8 +6,6 @@ const metricDetailFrag = {
       weight
       score
       description
-      detail
-      scoreDisplayMode
       numericValue
     }
   `
