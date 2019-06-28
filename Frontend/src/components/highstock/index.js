@@ -1,13 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Highcharts from 'highcharts/highcharts';
 import stock from 'highcharts/modules/stock';
-import formatString from 'src/utilities/formatString';
 import useGlobal from 'src/store';
-import data from './data';
+import previousState from 'src/utilities/previousState';
+import compare from 'src/utilities/compareObjects';
+import formatString from 'src/utilities/formatString';
+import FetchData from 'src/components/graphql/utils';
+import map from 'src/utilities/map';
+import getTimeRange from 'src/utilities/getTimeRange';
+import { AVG_LIGHTHOUSE_SCORES, getQuery } from 'src/components/graphql/Queries';
+import datal from './datal';
 
-const setGraph = (history, name, toUrl) => {
+const setGraph = (history, name, toUrl, data) => {
   const [globalState, globalActions] = useGlobal();
-  console.log(history);
   return {
     chart: {
       zoomType: 'x',
@@ -48,11 +53,13 @@ const setGraph = (history, name, toUrl) => {
           events: {
             click: e => {
               console.log(e.point.x);
-              // history.push({
-              //   pathname: toUrl,
-              //   search: '?metric=' + name + '&' + 'date=' + e.point.x,
-              //   state: { x: e.point.x, metric: name }
-              // });
+              getTimeRange(e.point.x);
+              history.push({
+                pathname: `/lighthouse/${name}`,
+                search: `?date=${e.point.x}`,
+                // state: { x: e.point.x, metric: name }
+                audit: 'first_contentful_paint'
+              });
             }
           }
         },
@@ -64,10 +71,10 @@ const setGraph = (history, name, toUrl) => {
             y2: 1
           },
           stops: [
-            [0, Highcharts.getOptions().colors[0]],
+            [0, 'white'],
             [
               1,
-              Highcharts.Color(Highcharts.getOptions().colors[0])
+              Highcharts.Color('white')
                 .setOpacity(0)
                 .get('rgba')
             ]
@@ -79,14 +86,44 @@ const setGraph = (history, name, toUrl) => {
 };
 
 const HighStock = props => {
+  const [globalState, globalActions] = useGlobal();
+  const { env, brand, page, date, toDate } = globalState;
   const { metric, history, toUrl } = props;
-  const graphData = setGraph(history, metric, toUrl);
-
+  const [data, setData] = useState({ lighthousedata: [] });
+  const [query, setQuery] = useState(<></>);
+  const prevState = previousState({ env, brand, page, date, toDate });
+  const onMount = useRef(true);
+  console.log(data, date);
+  const arr = data.lighthousedata.map(obj => [
+    parseInt(obj.fetchTime, 10),
+    obj.audits[map[metric]].score
+  ]);
+  const graphData = setGraph(history, metric, toUrl, arr);
   useEffect(() => {
-    stock(Highcharts);
+    if (onMount.current) {
+      stock(Highcharts);
+      if (history.location.audit)
+        setQuery(
+          FetchData(getQuery(`${map[metric]} { ${history.location.audit} { score }}`), setData)
+        );
+      else setQuery(FetchData(getQuery(`${map[metric]} { score }`), setData));
+      onMount.current = false;
+      return;
+    }
     Highcharts.stockChart('container', graphData);
+    if (!compare(prevState, { env, brand, page, date, toDate })) {
+      if (history.location.audit)
+        setQuery(
+          FetchData(getQuery(`${map[metric]} { ${history.location.audit} { score }}`), setData)
+        );
+      else setQuery(FetchData(getQuery(`${map[metric]} { score }`), setData));
+    }
   });
-
-  return <div id="container" />;
+  return (
+    <>
+      <div id="container" />
+      {query}
+    </>
+  );
 };
 export default HighStock;

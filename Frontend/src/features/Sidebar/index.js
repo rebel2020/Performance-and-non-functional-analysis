@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Button from 'src/components/button';
+
 import Link from 'src/components/Link';
 import useGlobal from 'src/store';
 import { FaHome, FaTruckLoading, FaUniversalAccess } from 'react-icons/fa';
@@ -14,9 +14,13 @@ const Sidebar = props => {
   const sideClass = toggle ? 'sidenav' : 'sidenav-collapse';
   return (
     <div className={sideClass}>
-      <Button className="sidelink" type="button" onClick={() => globalActions.toggle()}>
-        {toggle ? 'X' : '='}
-      </Button>
+      <div className="row">
+        <div className="text-center col m12">
+        <button className="btn--float bg--paper color--black" type="button" onClick={() => globalActions.toggle()}>
+          {toggle ? '<<' : '>>'}
+        </button>
+        </div>
+      </div>
       <Link className="sidelink" to="/lighthouse">
         <div className="sidelink">
           {

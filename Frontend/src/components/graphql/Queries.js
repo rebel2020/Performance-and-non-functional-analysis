@@ -7,8 +7,13 @@ import {
 } from './fragments';
 
 const AVG_LIGHTHOUSE_SCORES = gql`
-  {
-    lighthousedata {
+  query avgLightHouseScores($finalUrl:String,$fetchTimeStart:String,$fetchTimeEnd:String){
+    lighthousedata(
+      finalUrl:$finalUrl
+      fetchTimeStart:$fetchTimeStart
+      fetchTimeEnd:$fetchTimeEnd
+    )
+    {
       _id
       audits {
         performance_audits {
@@ -27,59 +32,53 @@ const AVG_LIGHTHOUSE_SCORES = gql`
     }
   }
 `;
-
-const PERFORMANCE_AUDITS = gql`
-  {
-    lighthousedata {
+const mapper = {
+  "performance":performanceAuditFrag,
+  "best_practices":bestPracticeAuditFrag,
+  "seo":seoAuditFrag,
+  "pwa":pwaAuditFrag
+}
+const getAudits = (value) => {
+  const val = mapper[value];
+  console.log("yo",val);
+  return gql`
+  query performanceAudits($finalUrl:String,$fetchTimeStart:String,$fetchTimeEnd:String){
+    lighthousedata(
+      finalUrl:$finalUrl
+      fetchTimeStart:$fetchTimeStart
+      fetchTimeEnd:$fetchTimeEnd
+    ){
       audits {
-        performance_audits {
-          ...performanceAudits
+        ${value}_audits {
+          ...${value}Audits
         }
       }
     }
   }
-  ${performanceAuditFrag.audits}
+  ${val.audits}
 `;
+}
 
-const BESTPRACTICE_AUDITS = gql`
-  {
-    lighthousedata {
-      audits {
-        best_practices_audits {
-          ...bestPracticeAudits
-        }
-      }
-    }
-  }
-  ${bestPracticeAuditFrag.audits}
-`;
-
-const PWA_AUDITS = gql`
-  {
-    lighthousedata {
+const getQuery = value => {
+  return gql`
+  query getdetails($finalUrl:String,$fetchTimeStart:String,$fetchTimeEnd:String){
+    lighthousedata(
+      finalUrl:$finalUrl
+      fetchTimeStart:$fetchTimeStart
+      fetchTimeEnd:$fetchTimeEnd    
+    ){ 
       _id
+      fetchTime
       audits {
-        pwa_audits {
-          ...pwaAudits
-        }
+        ${value}
       }
     }
   }
-  ${pwaAuditFrag.audits}
-`;
+  `;
+};
 
-const SEO_AUDITS = gql`
-  {
-    lighthousedata {
-      _id
-      audits {
-        seo_audits {
-          ...seoAudits
-        }
-      }
-    }
-  }
-  ${seoAuditFrag.audits}
-`;
-
-export { AVG_LIGHTHOUSE_SCORES, PERFORMANCE_AUDITS, BESTPRACTICE_AUDITS, PWA_AUDITS, SEO_AUDITS };
+export {
+  AVG_LIGHTHOUSE_SCORES,
+  getQuery,
+  getAudits
+};

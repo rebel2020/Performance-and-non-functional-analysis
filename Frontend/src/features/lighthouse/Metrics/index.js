@@ -5,7 +5,6 @@ import Filters from '../../Filters';
 import 'src/main.scss';
 
 const MetricComponent = props => {
-  console.log(props);
   return (
     <>
       <Filters date="range" options={[]} />
