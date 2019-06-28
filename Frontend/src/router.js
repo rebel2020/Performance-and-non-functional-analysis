@@ -43,6 +43,13 @@ const Router = () => {
           return <Lighthouse history={history} comp="accessibility" />;
         }}
       />
+      <Route
+        exact
+        path="/lighthouse/compare"
+        render={({ history }) => {
+          return <Lighthouse history={history} comp="compare" />;
+        }}
+      />
     </BrowserRouter>
   );
 };

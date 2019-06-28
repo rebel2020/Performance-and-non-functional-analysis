@@ -1,110 +1,134 @@
-import React from 'react';
-//import HighStock from 'src/components/highstock';
-import Filters from '../../Filters';
-import 'src/main.scss';
+/* eslint-disable react/destructuring-assignment */
+import React, { Component } from 'react';
+import { Checkbox } from '@blueprintjs/core';
+import LineChart from './linechart';
 
-//const MetricComponent = props => {
-  // const { metric, history } = props;
+class Compare extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isEnabled1: false,
+      isEnabled2: false,
+      isEnabled3: false,
+      isEnabled4: false,
+      isEnabled5: false
+    };
+  }
 
-  class LineChart extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-           
-        }
+  handlecheck1 = () => {
+    this.setState({
+      isEnabled1: !this.state.isEnabled1
+    });
+  };
+
+  handlecheck2 = () => {
+    this.setState({
+      isEnabled2: !this.state.isEnabled2
+    });
+  };
+
+  handlecheck3 = () => {
+    this.setState({
+      isEnabled3: !this.state.isEnabled3
+    });
+  };
+
+  handlecheck4 = () => {
+    this.setState({
+      isEnabled4: !this.state.isEnabled4
+    });
+  };
+
+  handlecheck5 = () => {
+    this.setState({
+      isEnabled5: !this.state.isEnabled5
+    });
+  };
+
+  render() {
+    let graph1 = <></>;
+    let graph2 = <></>;
+    let graph3 = <></>;
+    let graph4 = <></>;
+    let graph5 = <></>;
+    if (this.state.isEnabled1 === true) {
+      graph1 = (
+        <div className="Chart1">
+          <LineChart />
+        </div>
+      );
     }
-
-    componentDidMount() {
-        this.highChartsRender();
-      
+    if (this.state.isEnabled2 === true) {
+      graph2 = (
+        <div className="Chart2">
+          <LineChart />
+        </div>
+      );
     }
-
-
-highChartsRender =() => {
-       
-Highcharts.chart('container', {
-
-    title: {
-        text: 'Lighthouse comparison'
-    },
-    credits: {
-      enabled: false
-    },
-
-    subtitle: {
-        text: ''    
-    },
-
-    yAxis: {
-        title: {
-            text: 'Percentage'
-        }
-    },
-
-    legend: {
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'middle'
-    },
-
-    plotOptions: {
-        series: {
-            label: {
-                connectorAllowed: false
-            },
-            pointStart: 0 
-        }
-    },
-
-    series: [{
-        name: 'Performance',
-        data: [50, 52, 57, 69, 97, 11, 13, 15]
-    }, {
-        name: 'Accessibility',
-        data: [24, 64, 97, 85, 49, 82, 38, 40]
-    }, {
-        name: 'Best Practices',
-        data: [74, 77, 60, 71, 85, 77, 47, 87]
-    }, {
-        name: 'SEO',
-        data: [null, null, 79, 69, 51, 45, 34, 34]
-    }, {
-        name: 'Progressive Web App',
-        data: [29, 59, 81, 48, 89, 81, 82, 81]
-    }],
-
-    responsive: {
-        rules: [{
-            condition: {
-                maxWidth: 500
-            },
-            chartOptions: {
-                legend: {
-                    layout: 'horizontal',
-                    align: 'center',
-                    verticalAlign: 'bottom'
-                }
-            }
-        }]
+    if (this.state.isEnabled3 === true) {
+      graph3 = (
+        <div className="Chart3">
+          <LineChart />
+        </div>
+      );
     }
-
-});
+    if (this.state.isEnabled4 === true) {
+      graph4 = (
+        <div className="Chart4">
+          <LineChart />
+        </div>
+      );
+    }
+    if (this.state.isEnabled5 === true) {
+      graph5 = (
+        <div className="Chart5">
+          <LineChart />
+        </div>
+      );
+    }
+    return (
+      <div>
+        <div>
+          <Checkbox
+            checked={this.state.isEnabled1}
+            label="Performance"
+            onChange={this.handlecheck1}
+          />
+        </div>
+        <div>
+          <Checkbox checked={this.state.isEnabled2} onChange={this.handlecheck2}>
+            {' '}
+            Accessibility
+          </Checkbox>
+        </div>
+        <div>
+          <Checkbox checked={this.state.isEnabled3} onChange={this.handlecheck3}>
+            {' '}
+            Best Practices
+          </Checkbox>
+        </div>
+        <div>
+          <Checkbox checked={this.state.isEnabled4} onChange={this.handlecheck4}>
+            {' '}
+            SEO
+          </Checkbox>
+        </div>
+        <div>
+          <Checkbox checked={this.state.isEnabled5} onChange={this.handlecheck5}>
+            {' '}
+            Progressive Web App
+          </Checkbox>
+        </div>
+        <div>
+          {graph5}
+          {graph4}
+          {graph3}
+          {graph2}
+          {graph1}
+        </div>
+      </div>
+    );
+  }
 }
 
-render() {
-
-        return (
-            <Filters date={'range'} />
-             <div id="container">
-             </div>
-            
-        );
-    }
-}
-
-export default LineChart;
-
-
-
-
-  
+export default Compare;

@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import SolidGauge from 'src/components/solidgauge';
 import FetchData from 'src/components/graphql/utils';
 import { AVG_LIGHTHOUSE_SCORES } from 'src/components/graphql/Queries';
+import Collapsible from 'src/components/collapsible';
 import Filters from '../../Filters';
-import Collapsible from 'src/components/collapsible'
 import './main.scss';
 
 const usePrevious = value => {
@@ -45,7 +45,7 @@ const HomeComponent = props => {
     <div className="container">
       <Filters date="single" options={['hello', 'react']} />
       <div className="flexbox">{flexItems}</div>
-      <Collapsible {...props}/>
+      <Collapsible {...props} />
       {query}
     </div>
   );
