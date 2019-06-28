@@ -6,6 +6,11 @@ import { ApolloClient } from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import Router from './router';
+import './material_styles/buttons.scss';
+import './material_styles/cards_tiles.scss';
+import './material_styles/collapsible.scss';
+import './material_styles/colors.scss';
+import './material_styles/utility.scss';
 
 const host = 'http://10.150.16.133:3490/graphql';
 
