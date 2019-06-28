@@ -82,4 +82,29 @@ const SEO_AUDITS = gql`
   ${seoAuditFrag.audits}
 `;
 
-export { AVG_LIGHTHOUSE_SCORES, PERFORMANCE_AUDITS, BESTPRACTICE_AUDITS, PWA_AUDITS, SEO_AUDITS };
+const getQuery = value => {
+  return gql`
+  query getdetails($finalUrl:String,$fetchTimeStart:String,$fetchTimeEnd:String){
+    lighthousedata(
+      finalUrl:$finalUrl
+      fetchTimeStart:$fetchTimeStart
+      fetchTimeEnd:$fetchTimeEnd    
+    ){ 
+      _id
+      fetchTime
+      audits {
+        ${value}
+      }
+    }
+  }
+  `;
+};
+
+export {
+  AVG_LIGHTHOUSE_SCORES,
+  PERFORMANCE_AUDITS,
+  BESTPRACTICE_AUDITS,
+  PWA_AUDITS,
+  SEO_AUDITS,
+  getQuery
+};
