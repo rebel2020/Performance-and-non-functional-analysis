@@ -106,7 +106,7 @@ const HighStock = props => {
     p_w_a: 'pwa_audits',
     s_e_o: 'seo_audits'
   };
-  const arr = datal.lighthousedata.map(obj => [obj.fetchTime, obj.audits[map[metric]].score]);
+  const arr = data.lighthousedata.map(obj => [obj.fetchTime, obj.audits[map[metric]].score]);
   // setValues(arr);
   const graphData = setGraph(history, metric, toUrl, arr);
   useEffect(() => {

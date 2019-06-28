@@ -77,7 +77,7 @@ const HomeComponent = props => {
         {...props}
         key={item.first_contentful_paint.id}
         k={item.first_contentful_paint.id}
-        title={'first_contentful_paint'}
+        title="First sdkjdks"
         desc={item.first_contentful_paint.description}
         score={item.first_contentful_paint.score}
         weight={item.first_contentful_paint.weight}
