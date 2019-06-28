@@ -19,7 +19,7 @@ const MetricComponent = props => {
         {/* <Select options={['a', 'b']} /> */}
       </div>
       <div className="row container">
-        <div className="col m10">
+        <div className="col m12">
           <HighStock {...props} toUrl="/gatling" />
         </div>
         <div className="col m2">

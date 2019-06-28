@@ -90,7 +90,7 @@ const HomeComponent = props => {
     );
   });
   return (
-    <div className="container">
+    <div className="container tile">
       <Filters date="single" options={['hello', 'react']} />
       <div className="flexbox">{flexItems}</div>
       <div>{DispAudit}</div>
