@@ -4,19 +4,26 @@ import previousState from 'src/utilities/previousState';
 import SolidGauge from 'src/components/solidgauge';
 import compare from 'src/utilities/compareObjects';
 import FetchData from 'src/components/graphql/utils';
-import { AVG_LIGHTHOUSE_SCORES } from 'src/components/graphql/Queries';
+import { AVG_LIGHTHOUSE_SCORES,getAudits } from 'src/components/graphql/Queries';
 import Collapsible from 'src/components/collapsible';
 import map from 'src/utilities/map';
 import Filters from '../../Filters';
 import './main.scss';
+import {AuditData} from '../../../utilities/parseAuditData'
 
 const HomeComponent = props => {
   const [globalState, globalActions] = useGlobal();
   const { env, brand, page, date } = globalState;
   const [data, setData] = useState({ lighthousedata: [{ audits: {} }] });
   const [query, setQuery] = useState(<></>);
+  const variables = {
+    finalUrl:"http://fca-qa1-jeep-sape.test.com/",
+    fetchTimeStart:"1561623842607",
+    fetchTimeEnd: "1561623842607"
+  }
   useEffect(() => {
-    setQuery(FetchData(AVG_LIGHTHOUSE_SCORES, setData));
+    // setQuery(FetchData(getAudits("seo"), setData,variables));
+    setQuery(FetchData(AVG_LIGHTHOUSE_SCORES,setData));
   }, []);
   const prevState = previousState({ env, brand, page, date });
   const onMount = useRef(true);
@@ -30,7 +37,8 @@ const HomeComponent = props => {
     }
   });
 
-  console.log(data);
+  // console.log(data.lighthousedata[0].audits);
+  AuditData(data.lighthousedata[0].audits);
   const obj = data.lighthousedata[0] ? data.lighthousedata[0].audits : {};
   const flexItems = ['best_practices', 'performance', 'p_w_a', 's_e_o'].map((item, i) => {
     return (
