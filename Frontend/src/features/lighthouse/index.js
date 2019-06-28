@@ -10,7 +10,7 @@ const Lighthouse = props => {
   const [globalState, globalActions] = useGlobal();
   const { toggle } = globalState;
   const map = {
-    home: <Home history={history}/>,
+    home: <Home history={history} />,
     performance: <MetricComponent history={history} metric={comp} />,
     accessibility: <MetricComponent history={history} metric={comp} />
   };
