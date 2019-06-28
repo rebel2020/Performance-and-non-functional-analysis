@@ -129,7 +129,7 @@ const performanceAuditFrag = {
 
 const bestPracticeAuditFrag = {
   audits: gql`
-    fragment bestPracticeAudits on BestPracticesAudit {
+    fragment best_practicesAudits on BestPracticesAudit {
       appcache_manifest {
         ...metricDetails
       }
@@ -284,7 +284,6 @@ const seoAuditFrag = {
   `
 };
 export {
-  metricDetailFrag,
   performanceAuditFrag,
   bestPracticeAuditFrag,
   pwaAuditFrag,
