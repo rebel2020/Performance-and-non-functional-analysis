@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 
 import Link from 'src/components/Link';
 import useGlobal from 'src/store';
-import { FaHome, FaTruckLoading, FaUniversalAccess } from 'react-icons/fa';
-import { MdCompareArrows } from 'react-icons/md';
+import { FaHome, FaTruckLoading, FaUniversalAccess, FaSearch } from 'react-icons/fa';
+import { MdCompareArrows, MdTrendingUp, MdAddAlert } from 'react-icons/md';
 import { GoGraph } from 'react-icons/go';
+import { TiMessages, TiStarOutline } from 'react-icons/ti';
 
 import './main.scss';
 
@@ -54,7 +55,7 @@ const Sidebar = props => {
       <Link className="sidelink" to="/lighthouse/pwa">
         <div className="sidelink">
           <div className="txt-center">
-            <MdCompareArrows />
+            <MdTrendingUp />
           </div>
 
           {toggle ? 'PWA' : ''}
@@ -63,7 +64,7 @@ const Sidebar = props => {
       <Link className="sidelink" to="/lighthouse/seo">
         <div className="sidelink">
           <div className="txt-center">
-            <MdCompareArrows />
+            <FaSearch />
           </div>
 
           {toggle ? 'SEO' : ''}
@@ -72,7 +73,7 @@ const Sidebar = props => {
       <Link className="sidelink" to="/lighthouse/best_practices">
         <div className="sidelink">
           <div className="txt-center">
-            <MdCompareArrows />
+            <TiStarOutline />
           </div>
 
           {toggle ? 'Best Practices' : ''}
@@ -81,7 +82,7 @@ const Sidebar = props => {
       <Link className="sidelink" to="/lighthouse/reccomendations">
         <div className="sidelink">
           <div className="txt-center">
-            <MdCompareArrows />
+            <TiMessages />
           </div>
 
           {toggle ? 'Reccomendations' : ''}
@@ -90,7 +91,7 @@ const Sidebar = props => {
       <Link className="sidelink" to="/lighthouse/alerts">
         <div className="sidelink">
           <div className="txt-center">
-            <MdCompareArrows />
+            <MdAddAlert />
           </div>
           {toggle ? 'Alerts' : ''}
         </div>
