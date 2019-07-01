@@ -12,18 +12,27 @@ const Collapsible = props => {
           <div className={`collapsible-${k}-area`}>
             <div className="row">
               <p className=" col m6">{desc}</p>
-              <p className="text-right col m6">Score:{score}</p>
+              <p className="text-right col m6">
+                Score:
+                {score}
+              </p>
             </div>
             <br />
             <div className="row">
-              <p className=" col m6">Weightage:{weight}</p>
-              <p className="text-right col m6">NumericValue:{nv}</p>
+              <p className=" col m6">
+                Weightage:
+                {weight}
+              </p>
+              <p className="text-right col m6">
+                NumericValue:
+                {nv}
+              </p>
             </div>
             <br />
             <div className="row">
               <button
                 className="btn--raised left col m2"
-                onClick={() => history.push('/lighthouse/' + link)}
+                onClick={() => history.push(`/lighthouse/${link}`)}
               >
                 Graph
               </button>

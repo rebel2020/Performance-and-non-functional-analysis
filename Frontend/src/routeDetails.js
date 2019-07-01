@@ -28,7 +28,23 @@ const ROUTES = [
     exact: true,
     path: '/lighthouse/accessibility',
     main: (history, toggle, setToggle) => <Lighthouse history={history} comp="accessibility" />
-  }
+  },
+  {
+    exact: true,
+    path: '/lighthouse/bestPractices',
+    main: (history, toggle, setToggle) => <Lighthouse history={history} comp="bestPractices" />
+  },
+  {
+    exact: true,
+    path: '/lighthouse/seo',
+    main: (history, toggle, setToggle) => <Lighthouse history={history} comp="seo" />
+  },
+  {
+    exact: true,
+    path: '/lighthouse/pwa',
+    main: (history, toggle, setToggle) => <Lighthouse history={history} comp="pwa" />
+  },
+
 ];
 
 export default ROUTES;
