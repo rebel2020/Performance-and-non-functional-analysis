@@ -11,7 +11,7 @@ import Filters from '../../Filters';
 import Audits from '../Audits';
 import './main.scss';
 import { AuditData } from '../../../utilities/parseAuditData';
-// import Alert from '../../../components/alerts/index';
+import Alert from '../../../components/alerts/index';
 
 const HomeComponent = props => {
   const [globalState, globalActions] = useGlobal();
