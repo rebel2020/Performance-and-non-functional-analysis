@@ -1,8 +1,9 @@
 .datalistInput{
-    width: inherit;
-    padding-inline-start: 1vw;
-    border-radius: 3vw;
-    min-width: 250px;
-    max-width: 350px;
-    margin-bottom: 10px
+    width: 100%;
+    padding: 12px 20px;
+    margin: 3px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
