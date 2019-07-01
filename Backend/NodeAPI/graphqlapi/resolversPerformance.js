@@ -43,12 +43,12 @@ const resolversPerformance = {
 
 			if(finalUrl === undefined || finalUrl == "")
 			{
-				return await LighthouseData.find({fetchTime: { $lte : timeEnd, $gte: timeStart} });	
+				return await LighthouseData.find({fetchTime: { $lte : timeEnd, $gte: timeStart} }).sort({fetchTime: -1});	
 			}
 
 			else
 			{
-				return await LighthouseData.find({finalUrl: finalUrl, fetchTime: { $lte : timeEnd, $gte: timeStart} });
+				return await LighthouseData.find({finalUrl: finalUrl, fetchTime: { $lte : timeEnd, $gte: timeStart} }).sort({fetchTime: -1});
 			}
 			
 		}
