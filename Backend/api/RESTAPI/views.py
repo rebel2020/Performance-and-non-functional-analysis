@@ -38,9 +38,9 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
             newData['finalUrl']=data['finalUrl']
             newData['lighthouseVersion']=data['lighthouseVersion']
             newData['requestedUrl']=data['requestedUrl']
-#            newData['phase'] = data['phase']
- #           newData['brand'] = data['brand']
-  #          newData['project'] = data['project']
+            newData['phase'] = data['phase']
+            newData['brand'] = data['brand']
+            newData['project'] = data['project']
         except:
             pass
         newData.save()
@@ -82,7 +82,6 @@ class GatlingDataViewSet(viewsets.ModelViewSet):
             serverData = ServerStats(author_stats=author_stats,publisher_stats=publisher_stats,dispatcher_stats=dispatcher_stats)
             newData['server_stats']=serverData
         except:
-            print("AAAAAAA")
             pass
         try:
             newData['url'] = data['url']
@@ -94,7 +93,7 @@ class GatlingDataViewSet(viewsets.ModelViewSet):
         except:
             pass
         try:
-            newData['stats'] = str(data['stats'])
+            newData['stats'] = json.dumps(data['stats'])
             newData.save()
         except:
             ValidationError
