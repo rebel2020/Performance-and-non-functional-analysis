@@ -23,7 +23,7 @@ const HomeComponent = props => {
   }
   useEffect(() => {
     // setQuery(FetchData(getAudits("seo"), setData,variables));
-    setQuery(FetchData(AVG_LIGHTHOUSE_SCORES,setData));
+    setQuery(FetchData(AVG_LIGHTHOUSE_SCORES,setData,variables));
   }, []);
   const prevState = previousState({ env, brand, page, date });
   const onMount = useRef(true);
@@ -37,8 +37,9 @@ const HomeComponent = props => {
     }
   });
 
-  // console.log(data.lighthousedata[0].audits);
-  AuditData(data.lighthousedata[0].audits);
+  // console.log(data.lighthousedata[0]);
+  if(data.lighthousedata[0])
+    AuditData(data.lighthousedata[0].data);
   const obj = data.lighthousedata[0] ? data.lighthousedata[0].audits : {};
   const flexItems = ['best_practices', 'performance', 'p_w_a', 's_e_o'].map((item, i) => {
     return (

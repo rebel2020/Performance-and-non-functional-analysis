@@ -1,6 +1,8 @@
 import React from 'react';
 
 const AuditData = (data) => {
+    if(!data)        
+        return [];
     const audit = [];
     const auditName = Object.keys(data)[0];
     let keys = [];
