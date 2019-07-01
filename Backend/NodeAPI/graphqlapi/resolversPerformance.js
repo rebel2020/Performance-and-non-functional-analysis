@@ -5,6 +5,23 @@ const Audit = require('../models/Audit').Audit;
 const LighthouseData = require('../models/LighthouseData').LighthouseData;
 const GatlingData = require('../models/GatlingData').GatlingData;
 
+const defaultAverageData = [
+{
+	"performanceAverage": 5.2,
+	"seoAverage": 5.2,
+	"pwaAverage" : 1.2,
+	"bestPracticesAverage": 1.6,
+	"fetchDate": "27th May"
+}, 
+{
+	"performanceAverage": 5.2,
+	"seoAverage": 5.2,
+	"pwaAverage" : 1.2,
+	"bestPracticesAverage": 1.6,
+	"fetchDate": "28th May"
+}
+]
+
 const resolversPerformance = {
 	Query: {
 		allLighthousedata: async () => {
@@ -78,9 +95,18 @@ const resolversPerformance = {
 			// }
 			
 		},
-
 		average: async () => {
-
+				
+				const q = await LighthouseData.aggregate(
+						[
+							{
+								$group: { _id : { month: { $month: "$fetchTime" }, day: { $dayOfMonth: "$fetchTime" }, year: { $year: "$fetchTime" } } }
+							}
+						]
+					);
+				console.log(q);
+				
+			return defaultAverageData;	
 		}
 	}
 }

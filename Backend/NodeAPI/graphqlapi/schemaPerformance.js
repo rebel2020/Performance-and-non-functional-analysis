@@ -147,6 +147,7 @@ type AuditsAverage{
 	seoAverage: Float
 	pwaAverage: Float
 	bestPracticesAverage: Float
+	fetchDate: String
 }
 
 type AllLighthouseDataResult{
