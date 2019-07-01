@@ -14,6 +14,7 @@ def fun(file):
     weight_dict["BPAudit_list"] = "best-practices"
     weight_dict["SEAudit_list"] = "seo"
     weight_dict["PWAAudit_list"] = "pwa"
+    weight_dict["AAudit_list"] = "accessibility"
     PAudit_list = ['first-contentful-paint', 'first-meaningful-paint', 'speed-index', 'interactive', 'first-cpu-idle',
                    'max-potential-fid', 'estimated-input-latency', 'render-blocking-resources',
                    'uses-responsive-images', 'offscreen-images', 'unminified-css', 'unminified-javascript',
@@ -32,12 +33,22 @@ def fun(file):
                        'service-worker', 'installable-manifest', 'redirects-http', 'splash-screen', 'themed-omnibox',
                        'content-width', 'viewport', 'without-javascript', 'apple-touch-icon', 'pwa-cross-browser',
                        'pwa-page-transitions', 'pwa-each-page-has-url']
+    AAudit_list = ['accesskeys', 'aria-allowed-attr', 'aria-required-attr', 'aria-required-children',
+                     'aria-required-parent', 'aria-roles', 'aria-valid-attr-value', 'aria-valid-attr', 'audio-caption',
+                     'button-name', 'bypass', 'color-contrast', 'definition-list', 'dlitem', 'document-title',
+                     'duplicate-id', 'frame-title', 'html-has-lang', 'html-lang-valid', 'image-alt', 'input-image-alt',
+                     'label', 'layout-table', 'link-name', 'list-', 'listitem', 'meta-refresh', 'meta-viewport',
+                     'object-alt', 'tabindex', 'td-headers-attr', 'th-has-data-cells', 'valid-lang', 'video-caption',
+                     'video-description', 'logical-tab-order', 'focusable-controls', 'interactive-element-affordance',
+                     'managed-focus', 'focus-traps', 'custom-controls-labels', 'custom-controls-roles',
+                     'visual-order-follows-dom', 'offscreen-content-hidden', 'heading-levels', 'use-landmarks']
 
     Audit_list = dict()
     Audit_list["PWAAudit_list"] = PWAAudit_list
     Audit_list["PAudit_list"]=PAudit_list
     Audit_list["BPAudit_list"]=BPAudit_list
     Audit_list["SEAudit_list"] = SEAudit_list
+    Audit_list["AAudit_list"] = AAudit_list
     for Audit in Audit_list:
         Audits[Audit] = dict()
     for Audit in Audit_list:
@@ -83,6 +94,7 @@ def fun(file):
     audits["best_practices_audits"]=Audits["BPAudit_list"]
     audits["performance_audits"]=Audits["PAudit_list"]
     audits["pwa_audits"]=Audits["PWAAudit_list"]
+    audits["accessibility_audits"] = Audits["AAudit_list"]
     CData = dict()
     LighthouseData = dict()
     LighthouseData['audits'] = audits
@@ -107,13 +119,6 @@ def fun(file):
     except:
         pass
     LighthouseData['fetchTime']=data['fetchTime']
-    urlpac=data['finalUrl']
-    urlpac=urlpac.split('/')[2]
-    print(urlpac)
-    urlpac=urlpac.split('-')
-    LighthouseData['project']=urlpac[0]
-    LighthouseData['phase']=urlpac[1]
-    LighthouseData['brand']=urlpac[2]
     return LighthouseData
 def fun1(s):
     temp = ""
