@@ -43,8 +43,7 @@ const ROUTES = [
     exact: true,
     path: '/lighthouse/pwa',
     main: (history, toggle, setToggle) => <Lighthouse history={history} comp="pwa" />
-  },
-
+  }
 ];
 
 export default ROUTES;
