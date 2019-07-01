@@ -119,6 +119,9 @@ def fun(file):
     except:
         pass
     LighthouseData['fetchTime']=data['fetchTime']
+    LighthouseData['brand'] = data['brand']
+    LighthouseData['phase'] = data['phase']
+    LighthouseData['project'] = data['project']
     return LighthouseData
 def fun1(s):
     temp = ""
