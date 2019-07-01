@@ -7,12 +7,12 @@ import 'src/main.scss';
 
 const MetricComponent = props => {
   const { history } = props;
+  const { metric } = history.location;
   let auditContainer = <></>;
-  if (history.location.audit)
-    auditContainer = <Audits metric={history.location.audit} {...props} />;
+  if (metric) auditContainer = <Audits metric={metric} {...props} />;
   return (
     <>
-      <Filters date="range" options={['hello']} />
+      <Filters date="range" options={['http://fca-qa1-jeep-sape.test.com/']} />
       <HighStock {...props} toUrl="/lighthouse" />
       {auditContainer}
     </>

@@ -6,15 +6,16 @@ const AuditData = data => {
   let keys = [];
   if (data[auditName]) {
     keys = Object.keys(data[auditName]);
-    keys.forEach(value => {
+    keys.forEach((value, i) => {
       audit.push({
+        id: i,
         title: value,
         ...data[auditName][value]
       });
     });
   }
-  console.log(audit);
+  // console.log(audit);
   return audit;
 };
 
-export { AuditData };
+export default AuditData;

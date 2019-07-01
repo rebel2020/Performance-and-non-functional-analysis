@@ -11,11 +11,13 @@ export const setPage = (store, newPage) => {
 };
 
 export const setDate = (store, newDate) => {
-  store.setState({ date: newDate });
+  const startTime = new Date(newDate).getTime();
+  store.setState({ date: startTime });
 };
 
 export const setToDate = (store, newToDate) => {
-  store.setState({ toDate: newToDate });
+  const endTime = new Date(newToDate).setDate(new Date(newToDate).getDate() + 1);
+  store.setState({ toDate: endTime });
 };
 
 export const toggle = store => {
