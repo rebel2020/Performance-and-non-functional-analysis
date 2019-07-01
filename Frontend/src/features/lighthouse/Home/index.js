@@ -57,11 +57,17 @@ const HomeComponent = props => {
   });
 
   let auditContainer = <></>;
+  const numal = 3;
+  let alertContainer = <></>;
+
+  if (numal > 0) {
+    alertContainer = <Alert history={history} numalerts={numal} {...props} />;
+  }
   if (history.location.audit)
     auditContainer = <Audits metric={history.location.audit} {...props} />;
   return (
     <>
-      <Alert numalerts={0} />
+      <div className="container tile">{alertContainer}</div>
       <div className="container tile">
         <Filters date="single" options={['hello', 'react']} />
 

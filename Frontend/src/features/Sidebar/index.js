@@ -78,16 +78,16 @@ const Sidebar = props => {
           {toggle ? 'Best Practices' : ''}
         </div>
       </Link>
-      <Link className="sidelink" to="/lighthouse/reccomendations">
+      <Link className="sidelink" to="/lighthouse/recommendations">
         <div className="sidelink">
           <div className="txt-center">
             <MdCompareArrows />
           </div>
 
-          {toggle ? 'Reccomendations' : ''}
+          {toggle ? 'Recommendations' : ''}
         </div>
       </Link>
-      <Link className="sidelink" to="/lighthouse/alerts">
+      <Link className="sidelink" to="/alerts">
         <div className="sidelink">
           <div className="txt-center">
             <MdCompareArrows />
