@@ -19,4 +19,4 @@ const AuditData = (data) => {
     return audit;
 }
 
-export {AuditData};
+export { AuditData };
