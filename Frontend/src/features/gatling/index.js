@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import useGlobal from 'src/store';
+
 import Sidebar from '../Sidebar/index';
 import './main.scss';
 import MetricComponent from './Gatling_Stats/index';
@@ -8,7 +10,9 @@ import { performanceAuditFrag } from '../../components/graphql/fragments';
 // import { TEST } from '../../components/graphql/Queries';
 
 const Gatling = props => {
-  const { comp, toggle, setToggle, history } = props;
+  const { comp, history } = props;
+  const [globalState, globalActions] = useGlobal();
+  const { toggle } = globalState;
   const map = {
     // home: <Home />,
     gatling_stats: <MetricComponent history={history} metric={comp} />
@@ -19,7 +23,7 @@ const Gatling = props => {
   const graph = map[comp];
   return (
     <>
-      <Sidebar toggle={toggle} setToggle={setToggle} />
+      <Sidebar />
       <div className={toggle ? 'main' : 'main-extend'}>{graph}</div>
 
       {/* <Query query={TEST}>

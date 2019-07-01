@@ -11,6 +11,7 @@ import Filters from '../../Filters';
 import Audits from '../Audits';
 import './main.scss';
 import { AuditData } from '../../../utilities/parseAuditData';
+import Alert from '../../../components/alerts/index';
 
 const HomeComponent = props => {
   const [globalState, globalActions] = useGlobal();
@@ -59,13 +60,17 @@ const HomeComponent = props => {
   if (history.location.audit)
     auditContainer = <Audits metric={history.location.audit} {...props} />;
   return (
-    <div className="container tile">
-      <Filters date="single" options={['hello', 'react']} />
-      <div className="flexbox">{flexItems}</div>
-      {/* <div>{DispAudit}</div> */}
-      {auditContainer}
-      {query}
-    </div>
+    <>
+      <Alert numalerts={0} />
+      <div className="container tile">
+        <Filters date="single" options={['hello', 'react']} />
+
+        <div className="flexbox">{flexItems}</div>
+        {/* <div>{DispAudit}</div> */}
+        {auditContainer}
+        {query}
+      </div>
+    </>
   );
 };
 export default HomeComponent;

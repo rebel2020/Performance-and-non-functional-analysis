@@ -11,11 +11,11 @@ const MetricComponent = props => {
   if (history.location.audit)
     auditContainer = <Audits metric={history.location.audit} {...props} />;
   return (
-    <>
+    <div className="container tile">
       <Filters date="range" options={['hello']} />
       <HighStock {...props} toUrl="/lighthouse" />
       {auditContainer}
-    </>
+    </div>
   );
 };
 
