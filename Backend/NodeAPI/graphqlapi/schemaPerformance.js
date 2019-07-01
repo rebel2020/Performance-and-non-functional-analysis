@@ -168,7 +168,8 @@ type GatlingData{
 type Query{
 	allLighthousedata: [LighthouseData]
 	gatlingdata: [GatlingData]
-	lighthousedata(finalUrl: String, fetchTimeStart: String, fetchTimeEnd: String): [LighthouseData]
+	lighthousedata(finalUrl: String, fetchTimeStart: String, fetchTimeEnd: String,
+						 project: String, phase: String, brand: String): [LighthouseData]
 	average: [AuditsAverage]
 }
 `;
