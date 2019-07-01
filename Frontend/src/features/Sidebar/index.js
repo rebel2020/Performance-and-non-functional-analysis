@@ -27,52 +27,81 @@ const Sidebar = props => {
       </div>
       <Link className="sidelink" to="/lighthouse">
         <div className="sidelink">
-          {
-            <h3>
-              <FaHome />
-            </h3>
-          }
+          <div className="text-center">
+            <FaHome />
+          </div>
           {toggle ? 'Home' : ''}
         </div>
       </Link>
       <Link className="sidelink" to="/lighthouse/performance">
         <div className="sidelink">
-          {
-            <h3>
-              <GoGraph />
-            </h3>
-          }
+          <div className="txt-center">
+            <GoGraph />
+          </div>
           {toggle ? 'Performance' : ''}
         </div>
       </Link>
       <Link className="sidelink" to="/lighthouse/accessibility">
         <div className="sidelink">
-          {
-            <h3>
-              <FaUniversalAccess />
-            </h3>
-          }
+          <div className="txt-center">
+            <FaUniversalAccess />
+          </div>
+
           {toggle ? 'Accessibility' : ''}
+        </div>
+      </Link>
+
+      <Link className="sidelink" to="/lighthouse/pwa">
+        <div className="sidelink">
+          <div className="txt-center">
+            <MdCompareArrows />
+          </div>
+
+          {toggle ? 'PWA' : ''}
+        </div>
+      </Link>
+      <Link className="sidelink" to="/lighthouse/seo">
+        <div className="sidelink">
+          <div className="txt-center">
+            <MdCompareArrows />
+          </div>
+
+          {toggle ? 'SEO' : ''}
+        </div>
+      </Link>
+      <Link className="sidelink" to="/lighthouse/best_practices">
+        <div className="sidelink">
+          <div className="txt-center">
+            <MdCompareArrows />
+          </div>
+
+          {toggle ? 'Best Practices' : ''}
+        </div>
+      </Link>
+      <Link className="sidelink" to="/lighthouse/reccomendations">
+        <div className="sidelink">
+          <div className="txt-center">
+            <MdCompareArrows />
+          </div>
+
+          {toggle ? 'Reccomendations' : ''}
+        </div>
+      </Link>
+      <Link className="sidelink" to="/lighthouse/alerts">
+        <div className="sidelink">
+          <div className="txt-center">
+            <MdCompareArrows />
+          </div>
+          {toggle ? 'Alerts' : ''}
         </div>
       </Link>
       <Link className="sidelink" to="/gatling">
         <div className="sidelink">
-          {
-            <h3>
-              <FaTruckLoading />
-            </h3>
-          }
+          <div className="txt-center">
+            <FaTruckLoading />
+          </div>
+
           {toggle ? 'Gatling' : ''}
-        </div>
-      </Link>
-      <Link className="sidelink" to="/lighthouse/compare">
-        <div className="sidelink">
-          {
-            <h3>
-              <MdCompareArrows />
-            </h3>
-          }
-          {toggle ? 'Compare' : ''}
         </div>
       </Link>
       {/* <Button className="sidelink" onClick={() => changeComponent('home')}>

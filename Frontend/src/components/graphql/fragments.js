@@ -281,9 +281,4 @@ const seoAuditFrag = {
     ${metricDetailFrag.metricDetail}
   `
 };
-export {
-  performanceAuditFrag,
-  bestPracticeAuditFrag,
-  pwaAuditFrag,
-  seoAuditFrag
-};
+export { performanceAuditFrag, bestPracticeAuditFrag, pwaAuditFrag, seoAuditFrag };

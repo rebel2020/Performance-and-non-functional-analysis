@@ -8,12 +8,15 @@ import { AVG_LIGHTHOUSE_SCORES, getAudits } from 'src/components/graphql/Queries
 import Collapsible from 'src/components/collapsible';
 import map from 'src/utilities/map';
 import Filters from '../../Filters';
+import Audits from '../Audits';
 import './main.scss';
 import { AuditData } from '../../../utilities/parseAuditData';
+import Alert from '../../../components/alerts/index';
 
 const HomeComponent = props => {
   const [globalState, globalActions] = useGlobal();
   const { env, brand, page, date } = globalState;
+  const { history } = props;
   const [data, setData] = useState({ lighthousedata: [{ audits: {} }] });
   const [query, setQuery] = useState(<></>);
   const variables = {
@@ -38,7 +41,7 @@ const HomeComponent = props => {
   });
 
   // console.log(data.lighthousedata[0].audits);
-  AuditData(data.lighthousedata[0].audits);
+  // AuditData(data.lighthousedata[0].audits);
   const obj = data.lighthousedata[0] ? data.lighthousedata[0].audits : {};
   const flexItems = ['best_practices', 'performance', 'p_w_a', 's_e_o'].map((item, i) => {
     return (
@@ -46,57 +49,28 @@ const HomeComponent = props => {
         <SolidGauge
           name={item}
           value={Math.round(obj[map[item]] ? obj[map[item]].score * 100 : '')}
+          // value={70}
+          {...props}
         />
       </div>
     );
   });
 
-  const pa = [
-    {
-      first_contentful_paint: {
-        id: 1,
-        weight: 3,
-        score: 0.49,
-        description:
-          'First Contentful Paint marks the time at which the first text or image is painted',
-        numericValue: 4034,
-        link: 'performance'
-      },
-      user_timings: {
-        weight: 0,
-        score: null,
-        description:
-          "Consider instrumenting your app with the User Timing API to measure your app's real-world performance during key user experiences",
-        numericValue: null,
-        link: 'performance'
-      }
-    }
-  ];
-
-  const DispAudit = pa.map((item, i) => {
-    console.log(item.id);
-    return (
-      <Collapsible
-        {...props}
-        key={item.first_contentful_paint.id}
-        k={item.first_contentful_paint.id}
-        title="First sdkjdks"
-        desc={item.first_contentful_paint.description}
-        score={item.first_contentful_paint.score}
-        weight={item.first_contentful_paint.weight}
-        nv={item.first_contentful_paint.numericValue}
-        link={item.first_contentful_paint.link}
-      />
-    );
-  });
+  let auditContainer = <></>;
+  if (history.location.audit)
+    auditContainer = <Audits metric={history.location.audit} {...props} />;
   return (
-    <div className="container">
-      <Filters date="single" options={['hello', 'react']} />
-      <div className="flexbox">{flexItems}</div>
-      <Collapsible {...props} />
-      <div>{DispAudit}</div>
-      {query}
-    </div>
+    <>
+      <Alert numalerts={0} />
+      <div className="container tile">
+        <Filters date="single" options={['hello', 'react']} />
+
+        <div className="flexbox">{flexItems}</div>
+        {/* <div>{DispAudit}</div> */}
+        {auditContainer}
+        {query}
+      </div>
+    </>
   );
 };
 export default HomeComponent;

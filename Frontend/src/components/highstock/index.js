@@ -7,12 +7,13 @@ import compare from 'src/utilities/compareObjects';
 import formatString from 'src/utilities/formatString';
 import FetchData from 'src/components/graphql/utils';
 import map from 'src/utilities/map';
-import getTimeRange from 'src/utilities/getTimeRange';
+import { getTimeRange, getDate } from 'src/utilities/timeConversions';
 import { AVG_LIGHTHOUSE_SCORES, getQuery } from 'src/components/graphql/Queries';
 import datal from './datal';
 
 const setGraph = (history, name, toUrl, data) => {
   const [globalState, globalActions] = useGlobal();
+  const { page } = globalState;
   return {
     chart: {
       zoomType: 'x',
@@ -52,14 +53,14 @@ const setGraph = (history, name, toUrl, data) => {
         point: {
           events: {
             click: e => {
-              console.log(e.point.x);
-              getTimeRange(e.point.x);
-              history.push({
-                pathname: `/lighthouse/${name}`,
-                search: `?date=${e.point.x}`,
-                // state: { x: e.point.x, metric: name }
-                audit: 'first_contentful_paint'
-              });
+              if (page)
+                history.push({
+                  pathname: `/lighthouse/${name}`,
+                  search: `audit=${history.location.audit || name}`,
+                  // state: { x: e.point.x, metric: name }
+                  audit: history.location.audit || name
+                });
+              else alert('select a particular page');
             }
           }
         },
@@ -91,13 +92,22 @@ const HighStock = props => {
   const { metric, history, toUrl } = props;
   const [data, setData] = useState({ lighthousedata: [] });
   const [query, setQuery] = useState(<></>);
-  const prevState = previousState({ env, brand, page, date, toDate });
+  const audit = history.location.audit || '';
+  const prevState = previousState({ env, brand, page, date, toDate, audit });
   const onMount = useRef(true);
   console.log(data, date);
-  const arr = data.lighthousedata.map(obj => [
-    parseInt(obj.fetchTime, 10),
-    obj.audits[map[metric]].score
-  ]);
+  let arr = [];
+  if (history.location.audit) {
+    arr = data.lighthousedata.map(obj => {
+      return obj.audits[map[metric]]
+        ? [parseInt(obj.fetchTime, 10), obj.audits[map[metric]][history.location.audit].score]
+        : [];
+    });
+  } else
+    arr = data.lighthousedata.map(obj => [
+      parseInt(obj.fetchTime, 10),
+      obj.audits[map[metric]].score
+    ]);
   const graphData = setGraph(history, metric, toUrl, arr);
   useEffect(() => {
     if (onMount.current) {
@@ -111,7 +121,7 @@ const HighStock = props => {
       return;
     }
     Highcharts.stockChart('container', graphData);
-    if (!compare(prevState, { env, brand, page, date, toDate })) {
+    if (!compare(prevState, { env, brand, page, date, toDate, audit })) {
       if (history.location.audit)
         setQuery(
           FetchData(getQuery(`${map[metric]} { ${history.location.audit} { score }}`), setData)
