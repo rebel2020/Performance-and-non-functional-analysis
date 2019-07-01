@@ -1,7 +1,11 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useEffect } from 'react';
 import Highcharts from 'highcharts/highcharts';
 import HighchartsMore from 'highcharts/highcharts-more';
 import Gauge from 'highcharts/modules/solid-gauge';
+import useGlobal from 'src/store';
+
 import formatString from 'src/utilities/formatString';
 
 const setGraph = (name, value) => {
@@ -77,25 +81,35 @@ const setGraph = (name, value) => {
             innerRadius: '88%',
             y: value
           }
-        ],
-        point: {
-          event: {
-            click: e => {}
-          }
-        }
+        ]
       }
     ]
   };
 };
 const SolidGuage = props => {
-  const { name, value } = props;
+  const [globalState, globalActions] = useGlobal();
+  const { env, brand, page, date } = globalState;
+  const { name, value, history } = props;
   const graphData = setGraph(name, value);
   useEffect(() => {
     HighchartsMore(Highcharts);
     Gauge(Highcharts);
     Highcharts.chart(name, graphData);
   });
-  return <div id={name} />;
+  return (
+    <div
+      onClick={e => {
+        if (page)
+          history.push({
+            pathname: `/lighthouse`,
+            search: `audits=${name}`,
+            metric: name
+          });
+        else alert('select a particular page');
+      }}
+      id={name}
+    />
+  );
 };
 
 export default SolidGuage;

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Collapsible = props => {
-  const { history, k, title, desc, score, weight, nv, link } = props;
+  const { metric, history, k, title, desc, score, weight, nv, link } = props;
   console.log(title);
   return (
     <>
@@ -31,8 +31,15 @@ const Collapsible = props => {
             <br />
             <div className="row">
               <button
+                type="button"
                 className="btn--raised left col m2"
-                onClick={() => history.push(`/lighthouse/${link}`)}
+                onClick={() =>
+                  history.push({
+                    pathname: `/lighthouse/${metric}`,
+                    search: `audit=${title}`,
+                    audit: title
+                  })
+                }
               >
                 Graph
               </button>
