@@ -5,6 +5,8 @@ import useGlobal from 'src/store';
 import { FaHome, FaTruckLoading, FaUniversalAccess, FaSearch } from 'react-icons/fa';
 import { MdCompareArrows, MdTrendingUp, MdAddAlert } from 'react-icons/md';
 import { GoGraph } from 'react-icons/go';
+import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
+
 import { TiMessages, TiStarOutline } from 'react-icons/ti';
 
 import './main.scss';
@@ -18,18 +20,28 @@ const Sidebar = props => {
       <div className="row">
         <div className="text-center col m12">
           <button
-            className="btn--float bg--paper color--black"
+            className="btn--flat bg--customgrey color--white"
             type="button"
             onClick={() => globalActions.toggle()}
           >
-            {toggle ? '<<' : '>>'}
+            {toggle ? (
+              <h2>
+                <IoIosArrowBack />
+              </h2>
+            ) : (
+              <h2>
+                <IoIosArrowForward />
+              </h2>
+            )}
           </button>
         </div>
       </div>
       <Link className="sidelink" to="/lighthouse">
         <div className="sidelink">
           <div className="text-center">
-            <FaHome />
+            <h2>
+              <FaHome />
+            </h2>
           </div>
           {toggle ? 'Home' : ''}
         </div>
@@ -37,7 +49,9 @@ const Sidebar = props => {
       <Link className="sidelink" to="/lighthouse/performance">
         <div className="sidelink">
           <div className="txt-center">
-            <GoGraph />
+            <h2>
+              <GoGraph />
+            </h2>
           </div>
           {toggle ? 'Performance' : ''}
         </div>
@@ -45,7 +59,9 @@ const Sidebar = props => {
       <Link className="sidelink" to="/lighthouse/accessibility">
         <div className="sidelink">
           <div className="txt-center">
-            <FaUniversalAccess />
+            <h2>
+              <FaUniversalAccess />
+            </h2>
           </div>
 
           {toggle ? 'Accessibility' : ''}
@@ -55,7 +71,9 @@ const Sidebar = props => {
       <Link className="sidelink" to="/lighthouse/pwa">
         <div className="sidelink">
           <div className="txt-center">
-            <MdTrendingUp />
+            <h2>
+              <MdTrendingUp />
+            </h2>
           </div>
 
           {toggle ? 'PWA' : ''}
@@ -64,7 +82,9 @@ const Sidebar = props => {
       <Link className="sidelink" to="/lighthouse/seo">
         <div className="sidelink">
           <div className="txt-center">
-            <FaSearch />
+            <h2>
+              <FaSearch />
+            </h2>
           </div>
 
           {toggle ? 'SEO' : ''}
@@ -73,7 +93,9 @@ const Sidebar = props => {
       <Link className="sidelink" to="/lighthouse/best_practices">
         <div className="sidelink">
           <div className="txt-center">
-            <TiStarOutline />
+            <h2>
+              <TiStarOutline />
+            </h2>
           </div>
 
           {toggle ? 'Best Practices' : ''}
@@ -82,7 +104,9 @@ const Sidebar = props => {
       <Link className="sidelink" to="/lighthouse/recommendations">
         <div className="sidelink">
           <div className="txt-center">
-            <TiMessages />
+            <h2>
+              <TiMessages />
+            </h2>
           </div>
 
           {toggle ? 'Recommendations' : ''}
@@ -91,7 +115,9 @@ const Sidebar = props => {
       <Link className="sidelink" to="/alerts">
         <div className="sidelink">
           <div className="txt-center">
-            <MdAddAlert />
+            <h2>
+              <MdAddAlert />
+            </h2>
           </div>
           {toggle ? 'Alerts' : ''}
         </div>
@@ -99,7 +125,9 @@ const Sidebar = props => {
       <Link className="sidelink" to="/gatling">
         <div className="sidelink">
           <div className="txt-center">
-            <FaTruckLoading />
+            <h2>
+              <FaTruckLoading />
+            </h2>
           </div>
 
           {toggle ? 'Gatling' : ''}

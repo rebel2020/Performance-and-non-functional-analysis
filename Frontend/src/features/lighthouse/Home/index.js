@@ -67,8 +67,8 @@ const HomeComponent = props => {
     auditContainer = <Audits metric={history.location.audit} {...props} />;
   return (
     <>
-      <div className="container tile">{alertContainer}</div>
-      <div className="container tile">
+      <div className="container">{alertContainer}</div>
+      <div className="container ">
         <Filters date="single" options={['hello', 'react']} />
 
         <div className="flexbox">{flexItems}</div>
