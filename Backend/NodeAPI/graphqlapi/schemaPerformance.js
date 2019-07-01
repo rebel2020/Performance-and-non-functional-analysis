@@ -137,11 +137,25 @@ type LighthouseData{
 	runWarnings: [String]
 	fetchTime: String
 	audits: Audit
+	phase: String
+	brand: String
+	project: String
+}
+
+type AuditsAverage{
+	performanceAverage: Float
+	seoAverage: Float
+	pwaAverage: Float
+	bestPracticesAverage: Float
 }
 
 type AllLighthouseDataResult{
 	allLighthouseData: [LighthouseData]
-	averageResult: Int
+	averageResult: AuditsAverage
+}
+
+type AllLightHouseDataComputation{
+	averageResult: [AuditsAverage]
 }
 
 type GatlingData{
@@ -155,6 +169,7 @@ type Query{
 	allLighthousedata: [LighthouseData]
 	gatlingdata: [GatlingData]
 	lighthousedata(finalUrl: String, fetchTimeStart: String, fetchTimeEnd: String): [LighthouseData]
+	average: [AuditsAverage]
 }
 `;
 

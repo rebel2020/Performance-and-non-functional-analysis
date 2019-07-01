@@ -11,7 +11,10 @@ const LighthouseSchema = new Schema({
     finalUrl : {type:String, required: true},
     runWarnings : [{type:String}],
     track : {type: String},
-    audits : {type:Object, default: null}
+    audits : {type:Object, default: null},
+    project: {type: String},
+    brand: {type: String},
+    phase: {type: String}
 }, {collection: "lighthouse_data"});
 
 const Data = mongoose.model ('Lighthousedata', LighthouseSchema);

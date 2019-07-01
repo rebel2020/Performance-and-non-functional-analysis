@@ -51,6 +51,10 @@ const resolversPerformance = {
 				return await LighthouseData.find({finalUrl: finalUrl, fetchTime: { $lte : timeEnd, $gte: timeStart} }).sort({fetchTime: -1});
 			}
 			
+		},
+
+		average: async () => {
+			
 		}
 	}
 }
