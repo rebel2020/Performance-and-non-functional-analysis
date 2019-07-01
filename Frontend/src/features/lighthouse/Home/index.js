@@ -38,7 +38,7 @@ const HomeComponent = props => {
   });
 
   // console.log(data.lighthousedata[0].audits);
-  AuditData(data.lighthousedata[0].audits);
+  // AuditData(data.lighthousedata[0].audits);
   const obj = data.lighthousedata[0] ? data.lighthousedata[0].audits : {};
   const flexItems = ['best_practices', 'performance', 'p_w_a', 's_e_o'].map((item, i) => {
     return (
