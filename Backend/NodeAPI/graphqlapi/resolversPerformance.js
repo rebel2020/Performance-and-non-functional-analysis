@@ -27,10 +27,10 @@ const resolversPerformance = {
 			}
 
 			const newOptions = Object.fromEntries(Object.entries(options)
-				   .filter(arr => {
-				   		console.log(arr[0]);
-				   		return (arr[1] !== "" && arr[0] !== "fetchTimeStart" && arr[0] !== "fetchTimeEnd")  
-				   }));
+				.filter(arr => {
+					console.log(arr[0]);
+					return (arr[1] !== "" && arr[0] !== "fetchTimeStart" && arr[0] !== "fetchTimeEnd")  
+				}));
 
 			console.log(newOptions);
 
@@ -55,11 +55,11 @@ const resolversPerformance = {
 				console.log(timeEnd);
 			}
 			return await LighthouseData
-							.find({
-									...newOptions,
-									fetchTime: { $lte : timeEnd, $gte: timeStart} 
-								})
-							.sort({fetchTime: -1});
+			.find({
+				...newOptions,
+				fetchTime: { $lte : timeEnd, $gte: timeStart} 
+			})
+			.sort({fetchTime: -1});
 
 			// if(finalUrl === undefined || finalUrl == "")
 			// {
@@ -75,23 +75,68 @@ const resolversPerformance = {
 			// 		finalUrl: finalUrl, 
 			// 		fetchTime: { $lte : timeEnd, $gte: timeStart} }).sort({fetchTime: -1});
 			// }
-			
 		},
-		average: async () => {
-				
-				return await LighthouseData.aggregate(
-						[
-							{
-								$group: { 
-									_id : { month: { $month: "$fetchTime" }, day: { $dayOfMonth: "$fetchTime" }, year: { $year: "$fetchTime" } },
-									performanceAverage: {  $avg: "$audits.performance_audits.score"  },
-									seoAverage: { $avg: "$audits.seo_audits.score"  },
-									bestPracticesAverage: { $avg: "$audits.best_practices_audits.score" },
-									pwaAverage: { $avg: "$audits.pwa_audits.score" }
-								}
-							}
-						]
-					);
+
+		average: async (root, options) => {
+
+			const  { finalUrl, fetchTimeStart, fetchTimeEnd, project, phase, brand } = options;
+			var timeEnd = fetchTimeEnd;
+			var timeStart = fetchTimeStart;
+
+			for(let prop in options){
+				if(prop === ''){
+					delete prop;
+				}
+			}
+
+			const newOptions = Object.fromEntries(Object.entries(options)
+				.filter(arr => {
+					console.log(arr[0]);
+					return (arr[1] !== "" && arr[0] !== "fetchTimeStart" && arr[0] !== "fetchTimeEnd")  
+				}));
+
+			console.log(newOptions);
+
+			if(timeStart === undefined || timeStart == "")
+			{
+				timeStart = new Date(0000000000000);
+				console.log(timeStart)
+			}
+			else
+			{
+				timeStart = new Date(parseInt(fetchTimeStart));
+				console.log(timeStart)
+			}
+			if(timeEnd === undefined || timeEnd == "")
+			{
+				timeEnd = new Date();
+				console.log(timeEnd);
+			}
+			else
+			{
+				timeEnd = new Date(parseInt(timeEnd));
+				console.log(timeEnd);
+			}
+
+			return await LighthouseData.aggregate(
+				[
+				{
+					$match: {
+						...newOptions,
+						fetchTime: { $lte : timeEnd, $gte: timeStart}
+					}
+				},
+				{
+					$group: { 
+						_id : { month: { $month: "$fetchTime" }, day: { $dayOfMonth: "$fetchTime" }, year: { $year: "$fetchTime" } },
+						performanceAverage: {  $avg: "$audits.performance_audits.score"  },
+						seoAverage: { $avg: "$audits.seo_audits.score"  },
+						bestPracticesAverage: { $avg: "$audits.best_practices_audits.score" },
+						pwaAverage: { $avg: "$audits.pwa_audits.score" }
+					}
+				}
+				]
+				);
 
 		}
 	}

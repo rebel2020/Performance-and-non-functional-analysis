@@ -177,7 +177,8 @@ type Query{
 	gatlingdata: [GatlingData]
 	lighthousedata(finalUrl: String, fetchTimeStart: String, fetchTimeEnd: String,
 						 project: String, phase: String, brand: String): [LighthouseData]
-	average: [AuditsAverage]
+	average(finalUrl: String, fetchTimeStart: String, fetchTimeEnd: String,
+						 project: String, phase: String, brand: String): [AuditsAverage]
 }
 `;
 
