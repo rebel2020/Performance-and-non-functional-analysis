@@ -40,9 +40,8 @@ const mapper = {
 }
 const getAudits = (value) => {
   const val = mapper[value];
-  console.log("yo",val);
   return gql`
-  query performanceAudits($finalUrl:String,$fetchTimeStart:String,$fetchTimeEnd:String){
+  query Audits($finalUrl:String,$fetchTimeStart:String,$fetchTimeEnd:String){
     lighthousedata(
       finalUrl:$finalUrl
       fetchTimeStart:$fetchTimeStart
@@ -77,8 +76,17 @@ const getQuery = value => {
   `;
 };
 
+const GATLING = gql`
+query{
+  gatlingdata{
+    stats
+  }
+}
+`
+
 export {
   AVG_LIGHTHOUSE_SCORES,
   getQuery,
-  getAudits
+  getAudits,
+  GATLING
 };
