@@ -7,11 +7,21 @@ import {
 } from './fragments';
 
 const AVG_LIGHTHOUSE_SCORES = gql`
-  query avgLightHouseScores($finalUrl: String, $fetchTimeStart: String, $fetchTimeEnd: String) {
+  query avgLightHouseScores(
+    $finalUrl: String
+    $fetchTimeStart: String
+    $fetchTimeEnd: String
+    $brand: String
+    $project: String
+    $phase: String
+  ) {
     lighthousedata(
       finalUrl: $finalUrl
       fetchTimeStart: $fetchTimeStart
       fetchTimeEnd: $fetchTimeEnd
+      brand: $brand
+      project: $project
+      phase: $phase
     ) {
       _id
       audits {
@@ -39,13 +49,16 @@ const mapper = {
 };
 const getAudits = value => {
   const val = mapper[value];
-  console.log('yo', val);
   return gql`
-  query performanceAudits($finalUrl:String,$fetchTimeStart:String,$fetchTimeEnd:String){
+  query Audits($finalUrl:String,$fetchTimeStart:String,$fetchTimeEnd:String,
+    $brand:String,$project:String,$phase:String){
     lighthousedata(
       finalUrl:$finalUrl
       fetchTimeStart:$fetchTimeStart
       fetchTimeEnd:$fetchTimeEnd
+      brand:$brand
+      project:$project
+      phase:$phase
     ){
       audits {
         ${value}_audits {
@@ -60,11 +73,16 @@ const getAudits = value => {
 
 const getQuery = value => {
   return gql`
-  query getdetails($finalUrl:String,$fetchTimeStart:String,$fetchTimeEnd:String){
+  query getdetails($finalUrl:String,$fetchTimeStart:String,$fetchTimeEnd:String,
+    $brand:String,$project:String,$phase:String){
     lighthousedata(
       finalUrl:$finalUrl
       fetchTimeStart:$fetchTimeStart
       fetchTimeEnd:$fetchTimeEnd    
+      brand:$brand
+      project:$project
+      phase:$phase
+
     ){ 
       _id
       fetchTime
@@ -76,4 +94,12 @@ const getQuery = value => {
   `;
 };
 
-export { AVG_LIGHTHOUSE_SCORES, getQuery, getAudits };
+const GATLING = gql`
+  query {
+    gatlingdata {
+      stats
+    }
+  }
+`;
+
+export { AVG_LIGHTHOUSE_SCORES, getQuery, getAudits, GATLING };
