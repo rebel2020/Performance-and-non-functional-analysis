@@ -1,0 +1,59 @@
+.sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #353232;
+  overflow-x: hidden;
+  padding-top: 20px;
+  transition: 0.5s;
+  
+}
+.sidenav-collapse {
+  height: 100%;
+  width: 80px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color:#353232;
+  overflow-x: hidden;
+  padding-top: 20px;
+  transition: 0.5s;
+}
+
+.sidelink {
+  // width: inherit;
+  text-align: center;
+  color: #ffffff;
+  padding: 10px;
+  text-decoration: none;
+  background-color: transparent;
+  border: none;
+}
+.sidelink:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
