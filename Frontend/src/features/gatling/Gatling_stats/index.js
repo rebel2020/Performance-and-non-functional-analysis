@@ -12,7 +12,7 @@ import RadioButtons from '../../../components/radiobuttons/index';
 const MetricComponent = props => {
   // const { metric, history } = props;
   return (
-    <div className="container tile">
+    <div className="container">
       <Filters date="range" />
 
       {/* <Select options={['a', 'b']} /> */}

@@ -12,7 +12,7 @@ const RadioButtons = props => {
     console.log(values[item]);
 
     if (!item) {
-      radiotype = <input type="radio" name="graph_option" value={values[0].value} checked />;
+      radiotype = <input type="radio" name="graph_option" value={values[0].value} defaultChecked />;
     } else {
       radiotype = <input type="radio" name="graph_option" value={values[item].value} />;
     }
