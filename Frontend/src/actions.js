@@ -24,3 +24,7 @@ export const toggle = store => {
   const toggleValue = !store.state.toggle;
   store.setState({ toggle: toggleValue });
 };
+
+export const setLists = (store, lists) => {
+  store.setState({ filterLists: lists });
+};
