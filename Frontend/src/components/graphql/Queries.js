@@ -112,7 +112,6 @@ const GATLING = gql`
   }
 `;
 
-<<<<<<< HEAD
 export {
   AVG_LIGHTHOUSE_SCORES,
   getQuery,
@@ -120,6 +119,3 @@ export {
   GATLING,
   LIST
 };
-=======
-export { AVG_LIGHTHOUSE_SCORES, getQuery, getAudits, GATLING };
->>>>>>> 2cb7ef04cf49249663d87a7f726e6039cd4c20c3
