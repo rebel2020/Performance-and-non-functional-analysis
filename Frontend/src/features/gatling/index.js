@@ -19,7 +19,6 @@ const Gatling = props => {
     // performance: <MetricComponent history={history} metric={comp} />,
     // accessibility: <MetricComponent history={history} metric={comp} />
   };
-  console.log(performanceAuditFrag);
   const graph = map[comp];
   return (
     <>

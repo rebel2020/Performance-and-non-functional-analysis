@@ -10,19 +10,18 @@ import Collapsible from 'src/components/collapsible';
 
 const Audit = props => {
   const [globalState, globalActions] = useGlobal();
-  const { env, brand, page, date } = globalState;
+  const { phase, brand, page, date } = globalState;
   const { history } = props;
   const { metric, time } = history.location;
   const [query, setQuery] = useState(<></>);
   const [data, setData] = useState({ lighthousedata: [{ audits: {} }] });
-  const prevState = previousState({ env, brand, page, date, metric, time });
+  const prevState = previousState({ phase, brand, page, date, metric, time });
   const map = {
     performance: 'performance',
     best_practices: 'best_practices',
     s_e_o: 'seo',
     p_w_a: 'pwa'
   };
-  console.log(time);
   const timeRange = time
     ? {
         fetchTimeStart: time,
@@ -30,6 +29,8 @@ const Audit = props => {
       }
     : getTimeRange(date);
   const variables = {
+    phase,
+    brand,
     finalUrl: page,
     ...timeRange
   };
@@ -40,14 +41,14 @@ const Audit = props => {
       onMount.current = false;
       return;
     }
-    if (!compare(prevState, { env, brand, page, date, metric, time })) {
+    if (!compare(prevState, { phase, brand, page, date, metric, time })) {
       setQuery(FetchData(getAudits(map[metric]), setData, variables));
     }
   });
   const auditsData = AuditData(data.lighthousedata[0] ? data.lighthousedata[0].audits : {});
   console.log(data);
   const DispAudit = auditsData.map(item => {
-    console.log(item.id);
+    // console.log(item.id);
     return (
       <Collapsible
         {...props}

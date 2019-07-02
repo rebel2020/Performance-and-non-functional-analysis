@@ -5,12 +5,18 @@ import * as actions from './actions';
 
 const today = new Date();
 const initialState = {
-  env: '',
+  phase: '',
   brand: '',
   page: '',
   date: today.getTime(),
   toDate: '',
-  toggle: false
+  toggle: false,
+  filterLists: {
+    brand: [],
+    phase: [],
+    project: [],
+    finalUrl: []
+  }
 };
 
 const useGlobal = useGlobalHook(React, initialState, actions);
