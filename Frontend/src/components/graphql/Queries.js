@@ -94,6 +94,16 @@ const getQuery = value => {
   `;
 };
 
+const LIST = gql`
+  query {  
+    lighthousedata{
+      phase
+      brand
+      project
+      finalUrl
+    }
+}
+`
 const GATLING = gql`
   query {
     gatlingdata {
@@ -102,4 +112,10 @@ const GATLING = gql`
   }
 `;
 
-export { AVG_LIGHTHOUSE_SCORES, getQuery, getAudits, GATLING };
+export {
+  AVG_LIGHTHOUSE_SCORES,
+  getQuery,
+  getAudits,
+  GATLING,
+  LIST
+};
