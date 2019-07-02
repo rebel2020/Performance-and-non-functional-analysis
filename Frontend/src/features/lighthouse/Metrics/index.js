@@ -11,11 +11,11 @@ const MetricComponent = props => {
   let auditContainer = <></>;
   if (metric) auditContainer = <Audits metric={metric} {...props} />;
   return (
-    <>
+    <div className="container tile">
       <Filters date="range" options={['http://fca-qa1-jeep-sape.test.com/']} />
       <HighStock {...props} toUrl="/lighthouse" />
       {auditContainer}
-    </>
+    </div>
   );
 };
 

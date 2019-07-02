@@ -9,6 +9,8 @@ import FetchData from 'src/components/graphql/utils';
 import { AVG_LIGHTHOUSE_SCORES, getAudits } from 'src/components/graphql/Queries';
 import SolidGauge from 'src/components/solidgauge';
 import Collapsible from 'src/components/collapsible';
+import AuditData from 'src/utilities/parseAuditData';
+import Alert from 'src/components/alerts/index';
 import Filters from '../../Filters';
 import Audits from '../Audits';
 import './main.scss';
@@ -55,14 +57,25 @@ const HomeComponent = props => {
 
   let auditContainer = <></>;
   if (metric) auditContainer = <Audits metric={metric} {...props} />;
+
+  const numal = 3;
+  let alertContainer = <></>;
+
+  if (numal > 0) {
+    alertContainer = <Alert history={history} numalerts={numal} {...props} />;
+  }
   return (
-    <div className="container tile">
-      <Filters date="single" options={['http://fca-qa1-jeep-sape.test.com/']} />
-      <div className="flexbox">{flexItems}</div>
-      {/* <div>{DispAudit}</div> */}
-      {auditContainer}
-      {query}
-    </div>
+    <>
+      <div className="container">{alertContainer}</div>
+      <div className="container ">
+        <Filters date="single" options={['http://fca-qa1-jeep-sape.test.com/']} />
+
+        <div className="flexbox">{flexItems}</div>
+        {/* <div>{DispAudit}</div> */}
+        {auditContainer}
+        {query}
+      </div>
+    </>
   );
 };
 export default HomeComponent;

@@ -2,6 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import Lighthouse from './features/lighthouse';
 import Gatling from './features/gatling';
+import AlertPage from './features/AlertPage';
 
 const ROUTES = [
   {
@@ -31,18 +32,28 @@ const ROUTES = [
   },
   {
     exact: true,
-    path: '/lighthouse/bestPractices',
-    main: (history, toggle, setToggle) => <Lighthouse history={history} comp="bestPractices" />
+    path: '/lighthouse/best_practices',
+    main: (history, toggle, setToggle) => <Lighthouse history={history} comp="best_practices" />
   },
   {
     exact: true,
     path: '/lighthouse/seo',
-    main: (history, toggle, setToggle) => <Lighthouse history={history} comp="seo" />
+    main: (history, toggle, setToggle) => <Lighthouse history={history} comp="s_e_o" />
   },
   {
     exact: true,
     path: '/lighthouse/pwa',
-    main: (history, toggle, setToggle) => <Lighthouse history={history} comp="pwa" />
+    main: (history, toggle, setToggle) => <Lighthouse history={history} comp="p_w_a" />
+  },
+  {
+    exact: true,
+    path: '/lighthouse/recommendations',
+    main: (history, toggle, setToggle) => <Lighthouse history={history} />
+  },
+  {
+    exact: true,
+    path: '/alerts',
+    main: (history, toggle, setToggle) => <AlertPage history={history} />
   }
 ];
 
