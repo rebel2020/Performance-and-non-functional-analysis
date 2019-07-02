@@ -142,12 +142,18 @@ type LighthouseData{
 	project: String
 }
 
+type FetchDate{
+	month: Int
+	day: Int
+	year: Int
+}
+
 type AuditsAverage{
 	performanceAverage: Float
 	seoAverage: Float
 	pwaAverage: Float
 	bestPracticesAverage: Float
-	fetchDate: String
+	_id: FetchDate
 }
 
 type AllLighthouseDataResult{

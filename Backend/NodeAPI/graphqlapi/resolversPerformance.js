@@ -5,27 +5,9 @@ const Audit = require('../models/Audit').Audit;
 const LighthouseData = require('../models/LighthouseData').LighthouseData;
 const GatlingData = require('../models/GatlingData').GatlingData;
 
-const defaultAverageData = [
-{
-	"performanceAverage": 5.2,
-	"seoAverage": 5.2,
-	"pwaAverage" : 1.2,
-	"bestPracticesAverage": 1.6,
-	"fetchDate": "27th May"
-}, 
-{
-	"performanceAverage": 5.2,
-	"seoAverage": 5.2,
-	"pwaAverage" : 1.2,
-	"bestPracticesAverage": 1.6,
-	"fetchDate": "28th May"
-}
-]
-
 const resolversPerformance = {
 	Query: {
 		allLighthousedata: async () => {
-			//console.log(await LighthouseData.find({}).exec());
 			return await LighthouseData.find({}).exec();
 		},
 
@@ -97,16 +79,20 @@ const resolversPerformance = {
 		},
 		average: async () => {
 				
-				const q = await LighthouseData.aggregate(
+				return await LighthouseData.aggregate(
 						[
 							{
-								$group: { _id : { month: { $month: "$fetchTime" }, day: { $dayOfMonth: "$fetchTime" }, year: { $year: "$fetchTime" } } }
+								$group: { 
+									_id : { month: { $month: "$fetchTime" }, day: { $dayOfMonth: "$fetchTime" }, year: { $year: "$fetchTime" } },
+									performanceAverage: {  $avg: "$audits.performance_audits.score"  },
+									seoAverage: { $avg: "$audits.seo_audits.score"  },
+									bestPracticesAverage: { $avg: "$audits.best_practices_audits.score" },
+									pwaAverage: { $avg: "$audits.pwa_audits.score" }
+								}
 							}
 						]
 					);
-				console.log(q);
-				
-			return defaultAverageData;	
+
 		}
 	}
 }
