@@ -4,6 +4,7 @@ const MetricDetailed = require('../models/MetricDetailed').MetricDetailed;
 const PerformanceAudit = require('../models/PerformanceAudit').PerformanceAudit;
 const PWAAudit = require('../models/PWAAudit').PWAAudit;
 const SEOAudit = require('../models/SEOAudit').SEOAudit;
+const AccessibilityAudit = require('../models/AccessibilityAudit').AccessibilityAudit;
 const BestPracticesAudit = require('../models/BestPracticesAudit').BestPracticesAudit;
 const Audit = require('../models/Audit').Audit;
 const LighthouseData = require('../models/LighthouseData').LighthouseData;
@@ -60,6 +61,56 @@ type PerformanceAudit{
 	main_thread_tasks: MetricDetailed
 	diagnostics: MetricDetailed
 	metrics: MetricDetailed
+	score: Float
+}
+
+type AccessibilityAudit{
+	accesskeys: MetricDetailed
+	aria_allowed_attr: MetricDetailed
+	aria_required_attr : MetricDetailed
+	aria_required_children: MetricDetailed
+	aria_required_parent : MetricDetailed
+	aria_roles: MetricDetailed
+	aria_valid_attr_value: MetricDetailed
+	aria_valid_attr: MetricDetailed
+	audio_caption: MetricDetailed
+	button_name : MetricDetailed
+	bypass : MetricDetailed
+	color_contrast: MetricDetailed
+	definition_list : MetricDetailed
+	dlitem: MetricDetailed
+	document_title : MetricDetailed
+	duplicate_id: MetricDetailed
+	frame_title: MetricDetailed
+	html_has_lang: MetricDetailed
+	html_lang_valid: MetricDetailed
+	image_alt: MetricDetailed
+	input_image_alt : MetricDetailed
+	label : MetricDetailed
+	layout_table: MetricDetailed
+	link_name : MetricDetailed
+	list_ : MetricDetailed
+	listitem : MetricDetailed
+	meta_refresh: MetricDetailed
+	meta_viewport: MetricDetailed
+	object_alt: MetricDetailed
+	tabindex: MetricDetailed
+	td_headers_attr: MetricDetailed
+	th_has_data_cells: MetricDetailed
+	valid_lang: MetricDetailed
+	video_caption: MetricDetailed
+	video_description: MetricDetailed
+	logical_tab_order: MetricDetailed
+	focusable_controls: MetricDetailed
+	interactive_element_affordance: MetricDetailed
+	managed_focus: MetricDetailed
+	focus_traps: MetricDetailed
+	custom_controls_labels: MetricDetailed
+	custom_controls_roles: MetricDetailed
+	visual_order_follows_dom: MetricDetailed
+	offscreen_content_hidden: MetricDetailed
+	heading_levels: MetricDetailed
+	use_landmarks: MetricDetailed
 	score: Float
 }
 
@@ -125,7 +176,7 @@ type Audit{
 	best_practices_audits: BestPracticesAudit
 	pwa_audits: PWAAudit
 	seo_audits: SEOAudit
-
+	accessibility_audits: AccessibilityAudit
 }
 
 type LighthouseData{
@@ -153,16 +204,8 @@ type AuditsAverage{
 	seoAverage: Float
 	pwaAverage: Float
 	bestPracticesAverage: Float
+	accessibilityAverage: Float
 	_id: FetchDate
-}
-
-type AllLighthouseDataResult{
-	allLighthouseData: [LighthouseData]
-	averageResult: AuditsAverage
-}
-
-type AllLightHouseDataComputation{
-	averageResult: [AuditsAverage]
 }
 
 type GatlingData{

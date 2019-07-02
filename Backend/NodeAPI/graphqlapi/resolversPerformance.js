@@ -132,7 +132,8 @@ const resolversPerformance = {
 						performanceAverage: {  $avg: "$audits.performance_audits.score"  },
 						seoAverage: { $avg: "$audits.seo_audits.score"  },
 						bestPracticesAverage: { $avg: "$audits.best_practices_audits.score" },
-						pwaAverage: { $avg: "$audits.pwa_audits.score" }
+						pwaAverage: { $avg: "$audits.pwa_audits.score" },
+						accessibilityAverage: { $avg: "$audits.accessibility_audits.score"}
 					}
 				}
 				]
