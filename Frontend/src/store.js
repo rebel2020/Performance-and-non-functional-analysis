@@ -5,7 +5,7 @@ import * as actions from './actions';
 
 const today = new Date();
 const initialState = {
-  env: '',
+  phase: '',
   brand: '',
   page: '',
   date: today.getTime(),

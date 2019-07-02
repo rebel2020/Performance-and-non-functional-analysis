@@ -1,13 +1,13 @@
-export const setEnv = (store, newEnv) => {
-  store.setState({ env: newEnv });
+export const setEnv = (store, newPhase) => {
+  store.setState({ phase: newPhase === 'All' ? '' : newPhase });
 };
 
 export const setBrand = (store, newBrand) => {
-  store.setState({ brand: newBrand });
+  store.setState({ brand: newBrand === 'All' ? '' : newBrand });
 };
 
 export const setPage = (store, newPage) => {
-  store.setState({ page: newPage });
+  store.setState({ page: newPage === 'All' ? '' : newPage });
 };
 
 export const setDate = (store, newDate) => {

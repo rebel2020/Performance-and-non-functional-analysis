@@ -8,7 +8,7 @@ import './main.scss';
 const Filters = props => {
   const [globalState, globalActions] = useGlobal();
   const { setPage, setDate, setToDate, setBrand, setEnv, setPagecomp } = globalActions;
-  const { env, brand, page, date, toDate } = globalState;
+  const { phase, brand, page, date, toDate } = globalState;
   const { dateRange, options } = props;
   // console.log(options);
   return (
@@ -17,8 +17,8 @@ const Filters = props => {
         <Datalist
           className="datalistInput"
           placeholder="Env"
-          value={env}
-          listId="env"
+          value={phase}
+          listId="phase"
           options={options || []}
           onChange={value =>
             options.includes(value) ? setEnv(value) : console.log(options.includes(value))

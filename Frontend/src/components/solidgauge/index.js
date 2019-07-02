@@ -88,7 +88,7 @@ const setGraph = (name, value) => {
 };
 const SolidGuage = props => {
   const [globalState, globalActions] = useGlobal();
-  const { env, brand, page, date } = globalState;
+  const { phase, brand, page, date } = globalState;
   const { name, value, history } = props;
   const graphData = setGraph(name, value);
   useEffect(() => {

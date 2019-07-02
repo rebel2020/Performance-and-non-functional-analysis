@@ -3,7 +3,7 @@ import React from 'react';
 
 const RadioButtons = props => {
   const setRadio = event => {
-    console.log(event.target.value);
+    // console.log(event.target.value);
   };
   const { values } = props;
   const radiotxt = values.map((text, value) => {
