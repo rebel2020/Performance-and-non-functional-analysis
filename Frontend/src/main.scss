@@ -1,0 +1,46 @@
+.container {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+}
+.row {  
+    display: flex;
+    flex-wrap: wrap;
+}
+.col {
+    position: relative;
+    width: 100%;
+    padding-right: -15px;
+    padding-left: -15px;
+    // flex-basis: 0;
+    // flex-grow: 1;
+    max-width: 100%;
+}
+@for $i from 1 through 12 {
+    .col.s#{$i} {
+        width: ($i / 12) * 100%;
+    }
+}
+@media only screen and (min-width: 601px){
+    @for $i from 1 through 12 {
+        .col.m#{$i} {
+            width: ($i / 12) * 100%;
+        }
+    }
+}
+@media only screen and (min-width: 769px){
+    @for $i from 1 through 12 {
+        .col.l#{$i} {
+            width: ($i / 12) * 100%;
+        }
+    }
+}
+.center{
+    text-align: center    
+}
+.float-left {
+    float: left;
+}
+.float-right {
+    float: right;
+}
