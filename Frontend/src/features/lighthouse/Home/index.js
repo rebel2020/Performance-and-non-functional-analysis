@@ -11,6 +11,7 @@ import Filters from '../../Filters';
 import Audits from '../Audits';
 import './main.scss';
 import { AuditData } from '../../../utilities/parseAuditData';
+import Alert from '../../../components/alerts/index';
 
 const HomeComponent = props => {
   const [globalState, globalActions] = useGlobal();
@@ -26,6 +27,7 @@ const HomeComponent = props => {
   useEffect(() => {
     // setQuery(FetchData(getAudits("seo"), setData,variables));
     setQuery(FetchData(AVG_LIGHTHOUSE_SCORES,setData,variables));
+    // setQuery(FetchData(AVG_LIGHTHOUSE_SCORES, setData));
   }, []);
   const prevState = previousState({ env, brand, page, date });
   const onMount = useRef(true);
@@ -39,9 +41,8 @@ const HomeComponent = props => {
     }
   });
 
-  // console.log(data.lighthousedata[0]);
-  if(data.lighthousedata[0])
-    AuditData(data.lighthousedata[0].data);
+  // console.log(data.lighthousedata[0].audits);
+  // AuditData(data.lighthousedata[0].audits);
   const obj = data.lighthousedata[0] ? data.lighthousedata[0].audits : {};
   const flexItems = ['best_practices', 'performance', 'p_w_a', 's_e_o'].map((item, i) => {
     return (
@@ -57,16 +58,26 @@ const HomeComponent = props => {
   });
 
   let auditContainer = <></>;
+  const numal = 3;
+  let alertContainer = <></>;
+
+  if (numal > 0) {
+    alertContainer = <Alert history={history} numalerts={numal} {...props} />;
+  }
   if (history.location.audit)
     auditContainer = <Audits metric={history.location.audit} {...props} />;
   return (
-    <div className="container tile">
-      <Filters date="single" options={['hello', 'react']} />
-      <div className="flexbox">{flexItems}</div>
-      {/* <div>{DispAudit}</div> */}
-      {auditContainer}
-      {query}
-    </div>
+    <>
+      <div className="container">{alertContainer}</div>
+      <div className="container ">
+        <Filters date="single" options={['hello', 'react']} />
+
+        <div className="flexbox">{flexItems}</div>
+        {/* <div>{DispAudit}</div> */}
+        {auditContainer}
+        {query}
+      </div>
+    </>
   );
 };
 export default HomeComponent;

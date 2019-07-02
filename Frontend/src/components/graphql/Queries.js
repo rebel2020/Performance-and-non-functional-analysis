@@ -7,13 +7,12 @@ import {
 } from './fragments';
 
 const AVG_LIGHTHOUSE_SCORES = gql`
-  query avgLightHouseScores($finalUrl:String,$fetchTimeStart:String,$fetchTimeEnd:String){
+  query avgLightHouseScores($finalUrl: String, $fetchTimeStart: String, $fetchTimeEnd: String) {
     lighthousedata(
-      finalUrl:$finalUrl
-      fetchTimeStart:$fetchTimeStart
-      fetchTimeEnd:$fetchTimeEnd
-    )
-    {
+      finalUrl: $finalUrl
+      fetchTimeStart: $fetchTimeStart
+      fetchTimeEnd: $fetchTimeEnd
+    ) {
       _id
       audits {
         performance_audits {
@@ -33,12 +32,12 @@ const AVG_LIGHTHOUSE_SCORES = gql`
   }
 `;
 const mapper = {
-  "performance":performanceAuditFrag,
-  "best_practices":bestPracticeAuditFrag,
-  "seo":seoAuditFrag,
-  "pwa":pwaAuditFrag
-}
-const getAudits = (value) => {
+  performance: performanceAuditFrag,
+  best_practices: bestPracticeAuditFrag,
+  seo: seoAuditFrag,
+  pwa: pwaAuditFrag
+};
+const getAudits = value => {
   const val = mapper[value];
   return gql`
   query Audits($finalUrl:String,$fetchTimeStart:String,$fetchTimeEnd:String){
@@ -56,7 +55,7 @@ const getAudits = (value) => {
   }
   ${val.audits}
 `;
-}
+};
 
 const getQuery = value => {
   return gql`

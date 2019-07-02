@@ -12,12 +12,11 @@ import RadioButtons from '../../../components/radiobuttons/index';
 const MetricComponent = props => {
   // const { metric, history } = props;
   return (
-    <>
-      <div className="row flexbox filters">
-        <Filters date="single" />
+    <div className="container tile">
+      <Filters date="range" />
 
-        {/* <Select options={['a', 'b']} /> */}
-      </div>
+      {/* <Select options={['a', 'b']} /> */}
+
       <div className="row container">
         <div className="col m12">
           <HighStock {...props} toUrl="/gatling" />
@@ -27,14 +26,14 @@ const MetricComponent = props => {
         </div>
       </div>
       <div className="row">
-        <div className="col m6">
+        <div className="col m5">
           <HighChartBar {...props} />
         </div>
-        <div className="col m6">
+        <div className="col m5">
           <HighChartPie {...props} />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
