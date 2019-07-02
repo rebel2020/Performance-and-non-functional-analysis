@@ -13,7 +13,7 @@ const MetricComponent = props => {
   // const { metric, history } = props;
   return (
     <div className="container tile">
-      <Filters date="range" />
+      <Filters dateRange="range" />
 
       {/* <Select options={['a', 'b']} /> */}
 

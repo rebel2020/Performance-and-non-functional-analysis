@@ -1,9 +1,16 @@
-.datalistInput{
+.custom-input{
     width: 80%;
-    padding: 12px 18px;
     margin: 3px 0;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+}
+.datalistInput{
+    @extend .custom-input;
+    padding: 12px 18px;
+}
+.dateInput{
+    @extend .custom-input;
+    padding: 12px 2px;
 }
