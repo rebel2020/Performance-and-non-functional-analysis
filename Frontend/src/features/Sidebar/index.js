@@ -112,7 +112,7 @@ const Sidebar = props => {
           {toggle ? 'Recommendations' : ''}
         </div>
       </Link>
-      <Link className="sidelink" to="/alerts">
+      <Link className="sidelink" to="/lighthouse/alerts">
         <div className="sidelink">
           <div className="txt-center">
             <h2>

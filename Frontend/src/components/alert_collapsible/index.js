@@ -1,0 +1,50 @@
+import React from 'react';
+
+const AlertCollapsible = props => {
+  const { k, history, title, desc, perc } = props;
+  let alcol;
+
+  if (perc >= 20) {
+    alcol = 'bg--pomegranate color--white';
+  } else {
+    alcol = 'bg--amber color--white';
+  }
+
+  return (
+    <>
+      <div className="row">
+        <div className="collapsible col m11">
+          <input type="checkbox" id={`collapsible-${k}`} />
+          <label htmlFor={`collapsible-${k}`} className={alcol}>
+            {title}
+          </label>
+          <div className={`collapsible-${k}-area`}>
+            <div className="row">
+              <p className=" col m6">{desc}</p>
+            </div>
+            <br />
+
+            <br />
+            <div className="row">
+              <button
+                type="button"
+                className="btn--raised left col m4"
+                onClick={() =>
+                  history.push({
+                    pathname: `/lighthouse/recommendations`
+                    // search: `recommendation=${title}`,
+                    // recommendation: title
+                  })
+                }
+              >
+                Show more in recommendations
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default AlertCollapsible;

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import useGlobal from 'src/store';
 
 import Sidebar from '../Sidebar/index';
+import AlertContent from './AlertContent/index';
 
 // import { Query } from 'react-apollo';
 // import { TEST } from '../../components/graphql/Queries';
@@ -20,7 +21,9 @@ const AlertPage = props => {
   return (
     <>
       <Sidebar />
-      <div className={toggle ? 'main' : 'main-extend'}>{graph}</div>
+      <div className={toggle ? 'main' : 'main-extend'}>
+        <AlertContent history={history} />
+      </div>
 
       {/* <Query query={TEST}>
         {({ loading, error, data }) => {

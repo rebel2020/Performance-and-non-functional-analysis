@@ -52,7 +52,7 @@ const ROUTES = [
   },
   {
     exact: true,
-    path: '/alerts',
+    path: '/lighthouse/alerts',
     main: (history, toggle, setToggle) => <AlertPage history={history} />
   }
 ];
