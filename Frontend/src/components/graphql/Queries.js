@@ -7,15 +7,21 @@ import {
 } from './fragments';
 
 const AVG_LIGHTHOUSE_SCORES = gql`
-  query avgLightHouseScores($finalUrl: String, $fetchTimeStart: String, $fetchTimeEnd: String,
-     $brand:String,$project:String,$phase:String) {
+  query avgLightHouseScores(
+    $finalUrl: String
+    $fetchTimeStart: String
+    $fetchTimeEnd: String
+    $brand: String
+    $project: String
+    $phase: String
+  ) {
     lighthousedata(
       finalUrl: $finalUrl
       fetchTimeStart: $fetchTimeStart
       fetchTimeEnd: $fetchTimeEnd
-      brand:$brand
-      project:$project
-      phase:$phase
+      brand: $brand
+      project: $project
+      phase: $phase
     ) {
       _id
       audits {
@@ -99,13 +105,14 @@ const LIST = gql`
 }
 `
 const GATLING = gql`
-query{
-  gatlingdata{
-    stats
+  query {
+    gatlingdata {
+      stats
+    }
   }
-}
-`
+`;
 
+<<<<<<< HEAD
 export {
   AVG_LIGHTHOUSE_SCORES,
   getQuery,
@@ -113,3 +120,6 @@ export {
   GATLING,
   LIST
 };
+=======
+export { AVG_LIGHTHOUSE_SCORES, getQuery, getAudits, GATLING };
+>>>>>>> 2cb7ef04cf49249663d87a7f726e6039cd4c20c3

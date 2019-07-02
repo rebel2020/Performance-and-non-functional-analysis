@@ -104,6 +104,7 @@ const SolidGuage = props => {
             pathname: `/lighthouse`,
             search: `audits=${name}`,
             metric: name
+            // time: new Date(date).getTime().toString()
           });
         else alert('select a particular page');
       }}
