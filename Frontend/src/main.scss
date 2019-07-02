@@ -7,31 +7,31 @@
     display: flex;
     flex-wrap: wrap;
 }
-.row .col {
+.col {
     position: relative;
     width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    flex-basis: 0;
-    flex-grow: 1;
+    padding-right: -15px;
+    padding-left: -15px;
+    // flex-basis: 0;
+    // flex-grow: 1;
     max-width: 100%;
 }
 @for $i from 1 through 12 {
-    .row .col.s#{$i} {
-        max-width: ($i / 12) * 100%;
+    .col.s#{$i} {
+        width: ($i / 12) * 100%;
     }
 }
 @media only screen and (min-width: 601px){
     @for $i from 1 through 12 {
-        .row .col.m#{$i} {
-            max-width: ($i / 12) * 100%;
+        .col.m#{$i} {
+            width: ($i / 12) * 100%;
         }
     }
 }
-@media only screen and (min-width: 1025px){
+@media only screen and (min-width: 769px){
     @for $i from 1 through 12 {
-        .row .col.l#{$i} {
-            max-width: ($i / 12) * 100%;
+        .col.l#{$i} {
+            width: ($i / 12) * 100%;
         }
     }
 }

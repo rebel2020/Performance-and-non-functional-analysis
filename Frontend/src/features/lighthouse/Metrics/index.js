@@ -9,10 +9,10 @@ const MetricComponent = props => {
   const { history } = props;
   const { metric } = history.location;
   let auditContainer = <></>;
-  if (metric) auditContainer = <Audits metric={metric} {...props} />;
+  if (metric) auditContainer = <Audits {...props} />;
   return (
-    <div className="container tile">
-      <Filters date="range" options={['http://fca-qa1-jeep-sape.test.com/']} />
+    <div className="container">
+      <Filters dateRange="range" options={['http://fca-qa1-jeep-sape.test.com/']} />
       <HighStock {...props} toUrl="/lighthouse" />
       {auditContainer}
     </div>

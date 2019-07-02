@@ -23,7 +23,7 @@ const setGraph = (history, name, toUrl, data) => {
       // style: {
       //   color: 'white'
       // }
-      // backgroundColor: "#303030"
+      // backgroundColor: '#303030'
     },
 
     rangeSelector: {
@@ -44,7 +44,7 @@ const setGraph = (history, name, toUrl, data) => {
     },
     series: [
       {
-        name: 'AAPL Stock Price',
+        name: formatString(name),
         data,
         type: 'area',
         threshold: null,
@@ -61,7 +61,7 @@ const setGraph = (history, name, toUrl, data) => {
                   // state: { x: e.point.x, metric: name }
                   metric: name,
                   audit: audit || '',
-                  time: e.point.x
+                  time: new Date(e.point.x).getTime().toString()
                 });
               else alert('select a particular page');
             }
@@ -107,16 +107,15 @@ const HighStock = props => {
   console.log(variables);
   let arr = [];
   if (audit) {
-    arr = data.lighthousedata.map(obj => {
+    arr = data.lighthousedata.reverse().map(obj => {
       return obj.audits[map[metric]]
         ? [parseInt(obj.fetchTime, 10), obj.audits[map[metric]][audit].score]
         : [];
     });
   } else
-    arr = data.lighthousedata.map(obj => [
-      parseInt(obj.fetchTime, 10),
-      obj.audits[map[metric]].score
-    ]);
+    arr = data.lighthousedata
+      .reverse()
+      .map(obj => [parseInt(obj.fetchTime, 10), obj.audits[map[metric]].score]);
   const graphData = setGraph(history, metric, toUrl, arr);
   useEffect(() => {
     if (onMount.current) {

@@ -37,12 +37,12 @@ const ROUTES = [
   },
   {
     exact: true,
-    path: '/lighthouse/seo',
+    path: '/lighthouse/s_e_o',
     main: (history, toggle, setToggle) => <Lighthouse history={history} comp="s_e_o" />
   },
   {
     exact: true,
-    path: '/lighthouse/pwa',
+    path: '/lighthouse/p_w_a',
     main: (history, toggle, setToggle) => <Lighthouse history={history} comp="p_w_a" />
   },
   {

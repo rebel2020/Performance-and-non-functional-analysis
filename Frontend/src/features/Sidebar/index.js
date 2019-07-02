@@ -68,7 +68,7 @@ const Sidebar = props => {
         </div>
       </Link>
 
-      <Link className="sidelink" to="/lighthouse/pwa">
+      <Link className="sidelink" to="/lighthouse/p_w_a">
         <div className="sidelink">
           <div className="txt-center">
             <h2>
@@ -79,7 +79,7 @@ const Sidebar = props => {
           {toggle ? 'PWA' : ''}
         </div>
       </Link>
-      <Link className="sidelink" to="/lighthouse/seo">
+      <Link className="sidelink" to="/lighthouse/s_e_o">
         <div className="sidelink">
           <div className="txt-center">
             <h2>

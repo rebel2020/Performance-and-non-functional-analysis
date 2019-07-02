@@ -2,12 +2,13 @@ import React from 'react';
 import './main.scss';
 
 const Input = props => {
-  const { className, list, type, onChange, max, min, placeholder } = props;
+  const { className, value, list, type, onChange, max, min, placeholder } = props;
   return (
     <input
-      className="datalistInput"
+      className={className}
       list={list}
       type={type}
+      value={value}
       max={max}
       min={min}
       placeholder={placeholder}
