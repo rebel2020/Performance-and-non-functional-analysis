@@ -3,7 +3,7 @@ import useGlobal from 'src/store';
 
 import Sidebar from '../Sidebar/index';
 import './main.scss';
-import MetricComponent from './Gatling_Stats/index';
+import MetricComponent from './Gatling_stats/index';
 import { performanceAuditFrag } from '../../components/graphql/fragments';
 
 // import { Query } from 'react-apollo';
