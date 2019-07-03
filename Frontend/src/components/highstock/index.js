@@ -98,26 +98,26 @@ const HighStock = props => {
   const audit = history.location.audit || '';
   const prevState = previousState({ phase, brand, page, date, toDate, audit });
   const onMount = useRef(true);
-  // console.log(data, date);
+  // console.log(date, toDate);
   const variables = {
     phase,
     brand,
     finalUrl: page,
-    fetchTimestart: date,
-    fetchTimeEnd: toDate
+    fetchTimeStart: date.toString(),
+    fetchTimeEnd: toDate.toString()
   };
-  // console.log(variables);
+  console.log(variables);
   let arr = [];
   if (audit) {
     arr = data.lighthousedata.reverse().map(obj => {
       return obj.audits[map[metric]]
-        ? [parseInt(obj.fetchTime, 10), obj.audits[map[metric]][audit].score]
+        ? [parseInt(obj.fetchTime, 10), obj.audits[map[metric]][audit].score * 100]
         : [];
     });
   } else
     arr = data.lighthousedata
       .reverse()
-      .map(obj => [parseInt(obj.fetchTime, 10), obj.audits[map[metric]].score]);
+      .map(obj => [parseInt(obj.fetchTime, 10), obj.audits[map[metric]].score * 100]);
   const graphData = setGraph(history, metric, toUrl, arr);
   useEffect(() => {
     if (onMount.current) {
@@ -130,6 +130,7 @@ const HighStock = props => {
     }
     Highcharts.stockChart('container', graphData);
     if (!compare(prevState, { phase, brand, page, date, toDate, audit })) {
+      console.log('again');
       if (audit)
         setQuery(FetchData(getQuery(`${map[metric]} { ${audit} { score }}`), setData, variables));
       else setQuery(FetchData(getQuery(`${map[metric]} { score }`), setData, variables));

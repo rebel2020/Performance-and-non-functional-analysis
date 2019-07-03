@@ -1,6 +1,6 @@
 import React from 'react';
 import useGlobalHook from './utilities/customHook';
-
+import { getDate } from './utilities/timeConversions';
 import * as actions from './actions';
 
 const today = new Date();
@@ -8,7 +8,7 @@ const initialState = {
   phase: '',
   brand: '',
   page: '',
-  date: today.getTime(),
+  date: new Date(getDate(today.getTime(), -1)).getTime(),
   toDate: '',
   toggle: false,
   filterLists: {

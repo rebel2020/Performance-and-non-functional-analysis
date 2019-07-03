@@ -28,7 +28,8 @@ const HomeComponent = props => {
     finalUrl: page,
     ...getTimeRange(date)
   };
-  console.log(data);
+  console.log(variables);
+  // console.log(data);
   const prevState = previousState({ phase, brand, page, date });
   const onMount = useRef(true);
   useEffect(() => {

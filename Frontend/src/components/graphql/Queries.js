@@ -6,6 +6,29 @@ import {
   seoAuditFrag
 } from './fragments';
 
+const mapper = {
+  performance: performanceAuditFrag,
+  best_practices: bestPracticeAuditFrag,
+  seo: seoAuditFrag,
+  pwa: pwaAuditFrag
+};
+
+const AVG_SCORES = gql`
+query {  
+  average{
+    _id
+    {
+      day
+      month
+      year
+    }
+    performanceAverage
+    seoAverage
+    pwaAverage
+    bestPracticesAverage
+  }
+} `
+
 const AVG_LIGHTHOUSE_SCORES = gql`
   query avgLightHouseScores(
     $finalUrl: String
@@ -41,12 +64,7 @@ const AVG_LIGHTHOUSE_SCORES = gql`
     }
   }
 `;
-const mapper = {
-  performance: performanceAuditFrag,
-  best_practices: bestPracticeAuditFrag,
-  seo: seoAuditFrag,
-  pwa: pwaAuditFrag
-};
+
 const getAudits = value => {
   const val = mapper[value];
   return gql`
@@ -95,15 +113,15 @@ const getQuery = value => {
 };
 
 const LIST = gql`
-  query {  
-    lighthousedata{
+  query {
+    lighthousedata {
       phase
       brand
       project
       finalUrl
     }
-}
-`
+  }
+`;
 const GATLING = gql`
   query {
     gatlingdata {
@@ -112,10 +130,4 @@ const GATLING = gql`
   }
 `;
 
-export {
-  AVG_LIGHTHOUSE_SCORES,
-  getQuery,
-  getAudits,
-  GATLING,
-  LIST
-};
+export { AVG_LIGHTHOUSE_SCORES, getQuery, getAudits, GATLING, LIST };
