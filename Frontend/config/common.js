@@ -1,9 +1,9 @@
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const buildConfig = configDirs => {
   return {
     entry: {
-      index: "./src/index.js"
+      index: './src/index.js'
       // dashboard: "./src/features/dashboard/index.js",
       // highcharts: "./src/features/highcharts/index.js"
     },
@@ -13,8 +13,8 @@ const buildConfig = configDirs => {
         {
           test: /\.(js|jsx)$/,
           exclude: /(node_modules|bower_components)/,
-          loader: "babel-loader",
-          options: { presets: ["@babel/env"] }
+          loader: 'babel-loader',
+          options: { presets: ['@babel/env'] }
         }
       ]
     },
@@ -22,14 +22,18 @@ const buildConfig = configDirs => {
       alias: {
         src: configDirs.ALIAS_PATH
       },
-      extensions: ["*", ".js", ".jsx"]
+      extensions: ['*', '.js', '.jsx']
     },
     output: {
       path: configDirs.BUILD_DIR,
-      publicPath: "/dist/",
-      filename: "bundle.js"
+      publicPath: '/',
+      filename: 'bundle.js'
     },
-    plugins: [new HtmlWebpackPlugin()]
+    plugins: [
+      new HtmlWebpackPlugin({
+        template: './public/index.html'
+      })
+    ]
   };
 };
 

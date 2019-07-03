@@ -184,6 +184,8 @@ class GatlingData(Document):
 	scala = StringField()
 	fetchTime = DateTimeField(default=datetime.datetime.utcnow)
 	server_stats = EmbeddedDocumentField(ServerStats)
+	brand = StringField()
+	environment = StringField()
 
 class URLData(Document):
 	urls = ListField(URLField())
