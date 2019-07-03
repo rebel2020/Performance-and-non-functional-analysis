@@ -215,13 +215,32 @@ type GatlingData{
 	scala: String
 }
 
+type PerformanceAuditRecommendation{
+	first_contentful_paint: String
+	first_meaningful_paint: String
+	speed_index: String
+	interactive: String
+	first_cpu_idle: String
+}
+
+type SEOAuditRecommendation{
+	abc: String
+	ijk: String
+}
+
+type RecommendationData{
+	PerformanceAuditRecommendations: PerformanceAuditRecommendation
+	SEOAuditRecommendations: SEOAuditRecommendation
+}
+
 type Query{
 	allLighthousedata: [LighthouseData]
 	gatlingdata: [GatlingData]
 	lighthousedata(finalUrl: String, fetchTimeStart: String, fetchTimeEnd: String,
 						 project: String, phase: String, brand: String): [LighthouseData]
 	average(finalUrl: String, fetchTimeStart: String, fetchTimeEnd: String,
-						 project: String, phase: String, brand: String): [AuditsAverage]
+						 project: String, phase: String, brand: String): [AuditsAverage],
+	recommendation: RecommendationData
 }
 `;
 
