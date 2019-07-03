@@ -1,0 +1,42 @@
+{
+   "PerformanceAudit":
+	{
+		"first_contentful_paint":
+		{
+			"1. Use in-line styles for above the fold content"
+			"2. Use an automated tool like penthouse and Apache’s mod_pagespeed to keep your site sustainably scalable"
+			"3. Reduce the scope and complexity of style calculations"
+			"4. If a style isn’t being used, remove it via Chrome Dev Tool’s built-in Code Coverage functionality"
+		},
+
+		"first_meaningful_paint":
+		{
+			"1. Load the resources needed for your above-the-fold content before you load scripts necessary for offscreen elements"
+			"2. Ditch the fancy fonts or include a fallback font"
+		},
+
+		"speed_index":
+		{
+			"1. Minimize main-thread work"
+			"2. Reduce JavaScript execution time"
+			"3. Minimize Critical Requests Depth"
+			"4. Eliminate Render-Blocking Resources"
+			"5. Defer offscreen images"
+		},
+
+		"interactive":
+		{
+			"1. Defer or remove unnecessary JavaScript work that occurs during page load"
+			"2. Optimize JavaScript Bootup"
+			"3. Reduce JavaScript Payloads with Tree Shaking"
+			"4. Reduce JavaScript Payloads with Code Splitting"
+		},
+
+		"first_cpu_idle":
+		{
+			"1. Minimize the number of required resources that must be downloaded and executed before a page can load"
+			"2. Reduce the size of required resources"
+		}
+
+	}
+}
