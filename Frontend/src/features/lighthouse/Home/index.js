@@ -17,17 +17,19 @@ import './main.scss';
 
 const HomeComponent = props => {
   const [globalState, globalActions] = useGlobal();
-  const { env, brand, page, date } = globalState;
+  const { phase, brand, page, date } = globalState;
   const { history } = props;
   const { metric } = history.location;
   const [data, setData] = useState({ lighthousedata: [{ audits: {} }] });
   const [query, setQuery] = useState(<></>);
   const variables = {
+    phase,
+    brand,
     finalUrl: page,
     ...getTimeRange(date)
   };
-  console.log(variables);
-  const prevState = previousState({ env, brand, page, date });
+  console.log(data);
+  const prevState = previousState({ phase, brand, page, date });
   const onMount = useRef(true);
   useEffect(() => {
     if (onMount.current) {
@@ -35,7 +37,7 @@ const HomeComponent = props => {
       onMount.current = false;
       return;
     }
-    if (!compare(prevState, { env, brand, page, date })) {
+    if (!compare(prevState, { phase, brand, page, date })) {
       setQuery(FetchData(AVG_LIGHTHOUSE_SCORES, setData, variables));
     }
   });

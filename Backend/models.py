@@ -50,7 +50,53 @@ class PerformanceAudit(EmbeddedDocument):
 	metrics = EmbeddedDocumentField(MetricDetailed)
 	score = FloatField()
 
-# class AcessibilityAudit(EmbeddedDocument):
+class AcessibilityAudit(EmbeddedDocument):
+	accesskeys = EmbeddedDocumentField(MetricDetailed)
+	aria_allowed_attr = EmbeddedDocumentField(MetricDetailed)
+	aria_required_attr = EmbeddedDocumentField(MetricDetailed)
+	aria_required_children = EmbeddedDocumentField(MetricDetailed)
+	aria_required_parent = EmbeddedDocumentField(MetricDetailed)
+	aria_roles = EmbeddedDocumentField(MetricDetailed)
+	aria_valid_attr_value = EmbeddedDocumentField(MetricDetailed)
+	aria_valid_attr = EmbeddedDocumentField(MetricDetailed)
+	audio_caption = EmbeddedDocumentField(MetricDetailed)
+	button_name = EmbeddedDocumentField(MetricDetailed)
+	bypass = EmbeddedDocumentField(MetricDetailed)
+	color_contrast = EmbeddedDocumentField(MetricDetailed)
+	definition_list = EmbeddedDocumentField(MetricDetailed)
+	dlitem = EmbeddedDocumentField(MetricDetailed)
+	document_title = EmbeddedDocumentField(MetricDetailed)
+	duplicate_id = EmbeddedDocumentField(MetricDetailed)
+	frame_title = EmbeddedDocumentField(MetricDetailed)
+	html_has_lang = EmbeddedDocumentField(MetricDetailed)
+	html_lang_valid = EmbeddedDocumentField(MetricDetailed)
+	image_alt = EmbeddedDocumentField(MetricDetailed)
+	input_image_alt = EmbeddedDocumentField(MetricDetailed)
+	label = EmbeddedDocumentField(MetricDetailed)
+	layout_table = EmbeddedDocumentField(MetricDetailed)
+	link_name = EmbeddedDocumentField(MetricDetailed)
+	list_ = EmbeddedDocumentField(MetricDetailed)
+	listitem = EmbeddedDocumentField(MetricDetailed)
+	meta_refresh = EmbeddedDocumentField(MetricDetailed)
+	meta_viewport = EmbeddedDocumentField(MetricDetailed)
+	object_alt = EmbeddedDocumentField(MetricDetailed)
+	tabindex = EmbeddedDocumentField(MetricDetailed)
+	td_headers_attr = EmbeddedDocumentField(MetricDetailed)
+	th_has_data_cells = EmbeddedDocumentField(MetricDetailed)
+	valid_lang = EmbeddedDocumentField(MetricDetailed)
+	video_caption = EmbeddedDocumentField(MetricDetailed)
+	video_description = EmbeddedDocumentField(MetricDetailed)
+	logical_tab_order = EmbeddedDocumentField(MetricDetailed)
+	focusable_controls = EmbeddedDocumentField(MetricDetailed)
+	interactive_element_affordance = EmbeddedDocumentField(MetricDetailed)
+	managed_focus = EmbeddedDocumentField(MetricDetailed)
+	focus_traps = EmbeddedDocumentField(MetricDetailed)
+	custom_controls_labels = EmbeddedDocumentField(MetricDetailed)
+	custom_controls_roles = EmbeddedDocumentField(MetricDetailed)
+	visual_order_follows_dom = EmbeddedDocumentField(MetricDetailed)
+	offscreen_content_hidden = EmbeddedDocumentField(MetricDetailed)
+	heading_levels = EmbeddedDocumentField(MetricDetailed)
+	use_landmarks = EmbeddedDocumentField(MetricDetailed)
 	
 class BestPracticesAudit(EmbeddedDocument):
 	appcache_manifest = EmbeddedDocumentField(MetricDetailed)
@@ -107,7 +153,7 @@ class PWAAudit(EmbeddedDocument):
 
 class Audit(EmbeddedDocument):
 	performance_audits = EmbeddedDocumentField(PerformanceAudit)
-	# accessibility_audits = EmbeddedDocumentField(AcessibilityAudit)
+	accessibility_audits = EmbeddedDocumentField(AcessibilityAudit)
 	best_practices_audits = EmbeddedDocumentField(BestPracticesAudit)
 	seo_audits = EmbeddedDocumentField(SEOAudit)
 	pwa_audits = EmbeddedDocumentField(PWAAudit)
@@ -122,3 +168,24 @@ class LighthouseData(Document):
 	finalUrl = URLField()
 	runWarnings = ListField(StringField())
 	audits = EmbeddedDocumentField(Audit)
+
+class Bench(EmbeddedDocument):
+	cpu = FloatField(required = True)
+	ram = FloatField(required = True)
+	jvm_heap = FloatField(required =True)
+
+class ServerStats(EmbeddedDocument):
+	author_stats = ListField(EmbeddedDocumentField(Bench))
+	publisher_stats = ListField(EmbeddedDocumentField(Bench))
+	dispatcher_stats = ListField(EmbeddedDocumentField(Bench))
+
+class GatlingData(Document):
+	stats = StringField()
+	scala = StringField()
+	fetchTime = DateTimeField(default=datetime.datetime.utcnow)
+	server_stats = EmbeddedDocumentField(ServerStats)
+	brand = StringField()
+	environment = StringField()
+
+class URLData(Document):
+	urls = ListField(URLField())

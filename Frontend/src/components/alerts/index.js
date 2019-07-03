@@ -16,7 +16,7 @@ class Alert extends Component {
   }
 
   render() {
-    console.log(this.props.history);
+    // console.log(this.props.history);
     if (this.state.isActive) {
       return (
         <div className="alert alert-warning text-center warning" role="alert">

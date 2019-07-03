@@ -8,20 +8,20 @@ import './main.scss';
 const Filters = props => {
   const [globalState, globalActions] = useGlobal();
   const { setPage, setDate, setToDate, setBrand, setEnv, setPagecomp } = globalActions;
-  const { env, brand, page, date, toDate } = globalState;
+  const { phase, brand, page, date, toDate, filterLists } = globalState;
   const { dateRange, options } = props;
-  // console.log(options);
+  console.log(filterLists);
   return (
     <div className="filters text-center">
       <div className="col s6 m3 l2">
         <Datalist
           className="datalistInput"
           placeholder="Env"
-          value={env}
-          listId="env"
-          options={options || []}
+          // value={phase}
+          listId="phase"
+          options={filterLists.phase}
           onChange={value =>
-            options.includes(value) ? setEnv(value) : console.log(options.includes(value))
+            filterLists.phase.includes(value) ? setEnv(value) : console.log(options.includes(value))
           }
         />
       </div>
@@ -29,11 +29,13 @@ const Filters = props => {
         <Datalist
           className="datalistInput"
           placeholder="Brand"
-          value={brand}
+          // value={brand}
           listId="brands"
-          options={options || []}
+          options={filterLists.brand}
           onChange={value =>
-            options.includes(value) ? setBrand(value) : console.log(options.includes(value))
+            filterLists.brand.includes(value)
+              ? setBrand(value)
+              : console.log(options.includes(value))
           }
         />
       </div>
@@ -43,10 +45,12 @@ const Filters = props => {
           className="datalistInput"
           listId="page"
           placeholder="Page"
-          value={page}
-          options={options || []}
+          // value={page}
+          options={filterLists.finalUrl}
           onChange={value =>
-            options.includes(value) ? setPage(value) : console.log(options.includes(value))
+            filterLists.finalUrl.includes(value)
+              ? setPage(value)
+              : console.log(options.includes(value))
           }
         />
       </div>

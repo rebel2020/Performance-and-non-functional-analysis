@@ -91,20 +91,22 @@ const setGraph = (history, name, toUrl, data) => {
 
 const HighStock = props => {
   const [globalState, globalActions] = useGlobal();
-  const { env, brand, page, date, toDate } = globalState;
+  const { phase, brand, page, date, toDate } = globalState;
   const { metric, history, toUrl } = props;
   const [data, setData] = useState({ lighthousedata: [] });
   const [query, setQuery] = useState(<></>);
   const audit = history.location.audit || '';
-  const prevState = previousState({ env, brand, page, date, toDate, audit });
+  const prevState = previousState({ phase, brand, page, date, toDate, audit });
   const onMount = useRef(true);
-  console.log(data, date);
+  // console.log(data, date);
   const variables = {
+    phase,
+    brand,
     finalUrl: page,
     fetchTimestart: date,
     fetchTimeEnd: toDate
   };
-  console.log(variables);
+  // console.log(variables);
   let arr = [];
   if (audit) {
     arr = data.lighthousedata.reverse().map(obj => {
@@ -127,7 +129,7 @@ const HighStock = props => {
       return;
     }
     Highcharts.stockChart('container', graphData);
-    if (!compare(prevState, { env, brand, page, date, toDate, audit })) {
+    if (!compare(prevState, { phase, brand, page, date, toDate, audit })) {
       if (audit)
         setQuery(FetchData(getQuery(`${map[metric]} { ${audit} { score }}`), setData, variables));
       else setQuery(FetchData(getQuery(`${map[metric]} { score }`), setData, variables));
