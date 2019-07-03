@@ -4,14 +4,16 @@ const PerformanceSchema = require('./PerformanceAudit').PerformanceAudit
 const BestPracticeSchema = require('./BestPracticesAudit').BestPracticesAudit
 const SEOSchema = require('./SEOAudit').SEOAudit
 const PWASchema = require('./PWAAudit').PWAAudit
+const AccessibilitySchema = require('./AccessibilityAudit').AccessibilityAudit
 
 const AuditSchema = new Schema({
-    performance_audits : {type:Schema.ObjectId,ref:PerformanceSchema,default:null},
-    best_practices_audits : {type:Schema.ObjectId,ref:BestPracticeSchema,default:null},
-    seo_audits : {type:Schema.ObjectId,ref:SEOSchema,default:null},
-    pwa_audits : {type:Schema.ObjectId,ref:PWASchema,default:null},
-
+    performance_audits : {type:Schema.ObjectId, ref:PerformanceSchema, default:null},
+    best_practices_audits : {type:Schema.ObjectId, ref:BestPracticeSchema, default:null},
+    seo_audits : {type:Schema.ObjectId, ref:SEOSchema, default:null},
+    pwa_audits : {type:Schema.ObjectId, ref:PWASchema, default:null},
+    accessibility_audits: {type:Schema.ObjectId, ref:AccessibilitySchema, default:null}
 });
+
 const Data = mongoose.model('Audit', AuditSchema);
 module.exports={
     Audit:Data
