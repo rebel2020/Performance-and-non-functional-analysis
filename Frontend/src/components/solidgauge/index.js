@@ -75,6 +75,7 @@ const setGraph = (name, value) => {
     series: [
       {
         name: '',
+
         data: [
           {
             color: Highcharts.getOptions().colors[0],
@@ -89,7 +90,7 @@ const setGraph = (name, value) => {
 };
 const SolidGuage = props => {
   const [globalState, globalActions] = useGlobal();
-  const { phase, brand, page, date, toDate } = globalState;
+  const { phase, brand, page, date } = globalState;
   const { name, value, history } = props;
   const graphData = setGraph(name, value);
   useEffect(() => {
