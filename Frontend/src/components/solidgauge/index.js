@@ -14,7 +14,7 @@ const setGraph = (name, value) => {
       type: 'solidgauge',
       height: '100%',
       width: '150',
-      backgroundColor:'#EFEDED'
+      backgroundColor: '#EFEDED'
     },
     credits: {
       enabled: false
@@ -103,7 +103,7 @@ const SolidGuage = props => {
         if (page)
           history.push({
             pathname: `/lighthouse`,
-            search: `audits=${name}&${setSearch({ phase, brand, page, date, toDate })}`,
+            search: `audits=${name}&${setSearch({ phase, brand, page, date, toDate: date })}`,
             metric: name
             // time: new Date(date).getTime().toString()
           });

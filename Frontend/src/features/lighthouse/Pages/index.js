@@ -54,7 +54,11 @@ const Pages = props => {
   // console.log(data);
   const DispPages = pages.map(item => {
     return (
-      <div key={item.fetchTime} className="col s10 m5 l3 pageCard" onClick={e => setPage(item.finalUrl)}>
+      <div
+        key={item.fetchTime}
+        className="col s10 m5 l3 pageCard"
+        onClick={e => setPage(item.finalUrl)}
+      >
         {item.finalUrl}
         <br />
         <br />

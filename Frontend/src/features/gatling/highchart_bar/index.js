@@ -4,7 +4,7 @@ import Highcharts from 'highcharts';
 const options = {
   chart: {
     type: 'column',
-    backgroundColor:'#EFEDED'
+    backgroundColor: '#EFEDED'
   },
   title: {
     text: 'Response Time of Requests'
