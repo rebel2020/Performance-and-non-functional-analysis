@@ -1,31 +1,54 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import useGlobal from 'src/store';
+import previousState from 'src/utilities/previousState';
+import { getTimeRange } from 'src/utilities/timeConversions';
+import compare from 'src/utilities/compareObjects';
+import AuditData from 'src/utilities/parseAuditData';
+import FetchData from 'src/components/graphql/utils';
+import { getAudits } from 'src/components/graphql/Queries';
 import Collapsible from 'src/components/collapsible';
 
 const Audit = props => {
-  const pa = [
-    {
-      title: 'first_contentful_paint',
-      id: 1,
-      weight: 3,
-      score: 0.49,
-      description:
-        'First Contentful Paint marks the time at which the first text or image is painted',
-      numericValue: 4034,
-      link: 'performance'
-    },
-    {
-      title: 'user_timings',
-      id: 2,
-      weight: 0,
-      score: null,
-      description:
-        "Consider instrumenting your app with the User Timing API to measure your app's real-world performance during key user experiences",
-      numericValue: null,
-      link: 'performance'
+  const [globalState, globalActions] = useGlobal();
+  const { phase, brand, page, date } = globalState;
+  const { history } = props;
+  const { metric, time } = history.location;
+  const [query, setQuery] = useState(<></>);
+  const [data, setData] = useState({ lighthousedata: [{ audits: {} }] });
+  const prevState = previousState({ phase, brand, page, date, metric, time });
+  const map = {
+    performance: 'performance',
+    best_practices: 'best_practices',
+    s_e_o: 'seo',
+    p_w_a: 'pwa'
+  };
+  const timeRange = time
+    ? {
+        fetchTimeStart: time,
+        fetchTimeEnd: time
+      }
+    : getTimeRange(date);
+  const variables = {
+    phase,
+    brand,
+    finalUrl: page,
+    ...timeRange
+  };
+  const onMount = useRef(true);
+  useEffect(() => {
+    if (onMount.current) {
+      setQuery(FetchData(getAudits(map[metric]), setData, variables));
+      onMount.current = false;
+      return;
     }
-  ];
-  const DispAudit = pa.map((item, i) => {
-    console.log(item.id);
+    if (!compare(prevState, { phase, brand, page, date, metric, time })) {
+      setQuery(FetchData(getAudits(map[metric]), setData, variables));
+    }
+  });
+  const auditsData = AuditData(data.lighthousedata[0] ? data.lighthousedata[0].audits : {});
+  console.log(data);
+  const DispAudit = auditsData.map(item => {
+    // console.log(item.id);
     return (
       <Collapsible
         {...props}
@@ -40,7 +63,12 @@ const Audit = props => {
       />
     );
   });
-  return DispAudit;
+  return (
+    <>
+      {DispAudit}
+      {query}
+    </>
+  );
 };
 
 export default Audit;

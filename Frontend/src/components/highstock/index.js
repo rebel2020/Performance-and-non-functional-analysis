@@ -14,6 +14,7 @@ import datal from './datal';
 const setGraph = (history, name, toUrl, data) => {
   const [globalState, globalActions] = useGlobal();
   const { page } = globalState;
+  const { audit, metric } = history;
   return {
     chart: {
       zoomType: 'x',
@@ -22,7 +23,7 @@ const setGraph = (history, name, toUrl, data) => {
       // style: {
       //   color: 'white'
       // }
-      // backgroundColor: "#303030"
+      // backgroundColor: '#303030'
     },
 
     rangeSelector: {
@@ -43,7 +44,7 @@ const setGraph = (history, name, toUrl, data) => {
     },
     series: [
       {
-        name: 'AAPL Stock Price',
+        name: formatString(name),
         data,
         type: 'area',
         threshold: null,
@@ -56,9 +57,11 @@ const setGraph = (history, name, toUrl, data) => {
               if (page)
                 history.push({
                   pathname: `/lighthouse/${name}`,
-                  search: `audit=${history.location.audit || name}`,
+                  search: `audits=${metric || name}`,
                   // state: { x: e.point.x, metric: name }
-                  audit: history.location.audit || name
+                  metric: name,
+                  audit: audit || '',
+                  time: new Date(e.point.x).getTime().toString()
                 });
               else alert('select a particular page');
             }
@@ -88,45 +91,49 @@ const setGraph = (history, name, toUrl, data) => {
 
 const HighStock = props => {
   const [globalState, globalActions] = useGlobal();
-  const { env, brand, page, date, toDate } = globalState;
+  const { phase, brand, page, date, toDate } = globalState;
   const { metric, history, toUrl } = props;
   const [data, setData] = useState({ lighthousedata: [] });
   const [query, setQuery] = useState(<></>);
   const audit = history.location.audit || '';
-  const prevState = previousState({ env, brand, page, date, toDate, audit });
+  const prevState = previousState({ phase, brand, page, date, toDate, audit });
   const onMount = useRef(true);
-  console.log(data, date);
+  // console.log(date, toDate);
+  const variables = {
+    phase,
+    brand,
+    finalUrl: page,
+    fetchTimeStart: date.toString(),
+    fetchTimeEnd: toDate.toString()
+  };
+  console.log(variables);
   let arr = [];
-  if (history.location.audit) {
-    arr = data.lighthousedata.map(obj => {
+  if (audit) {
+    arr = data.lighthousedata.reverse().map(obj => {
       return obj.audits[map[metric]]
-        ? [parseInt(obj.fetchTime, 10), obj.audits[map[metric]][history.location.audit].score]
+        ? [parseInt(obj.fetchTime, 10), obj.audits[map[metric]][audit].score * 100]
         : [];
     });
   } else
-    arr = data.lighthousedata.map(obj => [
-      parseInt(obj.fetchTime, 10),
-      obj.audits[map[metric]].score
-    ]);
+    arr = data.lighthousedata
+      .reverse()
+      .map(obj => [parseInt(obj.fetchTime, 10), obj.audits[map[metric]].score * 100]);
   const graphData = setGraph(history, metric, toUrl, arr);
   useEffect(() => {
     if (onMount.current) {
       stock(Highcharts);
-      if (history.location.audit)
-        setQuery(
-          FetchData(getQuery(`${map[metric]} { ${history.location.audit} { score }}`), setData)
-        );
-      else setQuery(FetchData(getQuery(`${map[metric]} { score }`), setData));
+      if (audit)
+        setQuery(FetchData(getQuery(`${map[metric]} { ${audit} { score }}`), setData, variables));
+      else setQuery(FetchData(getQuery(`${map[metric]} { score }`), setData, variables));
       onMount.current = false;
       return;
     }
     Highcharts.stockChart('container', graphData);
-    if (!compare(prevState, { env, brand, page, date, toDate, audit })) {
-      if (history.location.audit)
-        setQuery(
-          FetchData(getQuery(`${map[metric]} { ${history.location.audit} { score }}`), setData)
-        );
-      else setQuery(FetchData(getQuery(`${map[metric]} { score }`), setData));
+    if (!compare(prevState, { phase, brand, page, date, toDate, audit })) {
+      console.log('again');
+      if (audit)
+        setQuery(FetchData(getQuery(`${map[metric]} { ${audit} { score }}`), setData, variables));
+      else setQuery(FetchData(getQuery(`${map[metric]} { score }`), setData, variables));
     }
   });
   return (

@@ -1,16 +1,16 @@
-const TerserPlugin = require("terser-webpack-plugin");
-const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const TerserPlugin = require('terser-webpack-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // const MinifyPlugin = require("babel-minify-webpack-plugin");
 
 module.exports = configDirs => {
-  let prodConfig = Object.assign({}, require("./common")(configDirs));
+  let prodConfig = Object.assign({}, require('./common')(configDirs));
   prodConfig = {
     ...prodConfig,
-    devtool: "source-map",
+    devtool: 'source-map',
     output: {
       ...prodConfig.output,
-      filename: "[name].[contenthash:8].js"
+      filename: '[name].[contenthash:8].js'
     },
     module: {
       ...prodConfig.module,
@@ -22,8 +22,8 @@ module.exports = configDirs => {
             {
               loader: MiniCssExtractPlugin.loader
             },
-            "css-loader",
-            "sass-loader"
+            'css-loader',
+            'sass-loader'
           ]
         }
       ]
@@ -31,38 +31,45 @@ module.exports = configDirs => {
     plugins: [
       ...prodConfig.plugins,
       // new MinifyPlugin(),
-      new MiniCssExtractPlugin({ filename: "[name].css" })
+      new MiniCssExtractPlugin({ filename: '[name].css' })
     ],
     optimization: {
       minimizer: [
-        new TerserPlugin({ parallel: true }),
+        new TerserPlugin({
+          extractComments: true,
+          parallel: true,
+          terserOptions: {
+            extractComments: 'all',
+            compress: {
+              drop_console: true
+            }
+          }
+        }),
         new OptimizeCssAssetsPlugin({
           cssProcessorPluginOptions: {
-            preset: ["default", { discardComments: { removeAll: true } }]
+            preset: ['default', { discardComments: { removeAll: true } }]
           }
         })
       ],
       splitChunks: {
-        chunks: "all",
+        chunks: 'all',
         cacheGroups: {
           vendor: {
             test: /[\\/]node_modules[\\/]/,
             name(module) {
-              const packageName = module.context.match(
-                /[\\/]node_modules[\\/](.*?)([\\/]|$)/
-              )[1];
-              return `npm.${packageName.replace("@", "")}`;
+              const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+              return `npm.${packageName.replace('@', '')}`;
             }
           },
           styles: {
-            name: "styles",
+            name: 'styles',
             test: /\.css$/,
-            chunks: "all",
+            chunks: 'all',
             enforce: true
           }
         }
       },
-      runtimeChunk: "single"
+      runtimeChunk: 'single'
     }
   };
   return prodConfig;
