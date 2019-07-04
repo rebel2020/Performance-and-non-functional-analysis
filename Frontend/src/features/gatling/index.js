@@ -24,15 +24,6 @@ const Gatling = props => {
     <>
       <Sidebar />
       <div className={toggle ? 'main' : 'main-extend'}>{graph}</div>
-
-      {/* <Query query={TEST}>
-        {({ loading, error, data }) => {
-          if (loading) console.log('loading');
-          if (error) console.log(error.message);
-          if (data) console.log(data);
-          return null;
-        }}
-      </Query> */}
     </>
   );
 };
