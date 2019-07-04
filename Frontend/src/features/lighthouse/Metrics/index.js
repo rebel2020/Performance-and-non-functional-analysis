@@ -8,7 +8,7 @@ import 'src/main.scss';
 
 const MetricComponent = props => {
   const { history } = props;
-  const { metric } = history.location;
+  const { metric, average } = history.location;
   console.log(history.location);
   let auditContainer = <></>;
   let pageContaner = <></>;
