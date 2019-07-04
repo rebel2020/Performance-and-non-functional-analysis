@@ -91,7 +91,7 @@ class GatlingDataViewSet(viewsets.ModelViewSet):
             pass
         try:
             newData['scala'] = data['scala']
-            newData['fetchTime'] = datetime.fromtimestamp(int(data['fetchTime'])/1000).strftime('%Y-%m-%d %H:%M:%S.%fZ')[:-7]+str(data['fetchTime']%1000)+"Z"
+            newData['fetchTime'] = datetime.fromtimestamp(int(data['fetchTime'])/1000).strftime('%Y-%m-%d %H:%M:%S.%fZ')#[:-7]+str(data['fetchTime']%1000)+"Z"
             newData['url'] = data['url']
         except:
             pass
