@@ -32,8 +32,51 @@ const resolversPerformance = {
 			return await LighthouseData.find({}).exec();
 		},
 
-		gatlingdata: async() => {
-			return await GatlingData.find({}).exec();
+		gatlingdata: async(root, options) => {
+			const {url, fetchTimeStart, fetchTimeEnd, phase, brand} = options;
+			var timeEnd = fetchTimeEnd;
+			var timeStart = fetchTimeStart;
+
+			for(let prop in options){
+				if(prop === ''){
+					delete prop;
+				}
+			}
+
+			const newOptions = Object.fromEntries(Object.entries(options)
+				.filter(arr => {
+					console.log(arr[0]);
+					return (arr[1] !== "" && arr[0] !== "fetchTimeStart" && arr[0] !== "fetchTimeEnd")  
+				}));
+
+			console.log(newOptions);
+
+			if(timeStart === undefined || timeStart == "")
+			{
+				timeStart = new Date(0000000000000);
+				console.log(timeStart)
+			}
+			else
+			{
+				timeStart = new Date(parseInt(fetchTimeStart));
+				console.log(timeStart)
+			}
+			if(timeEnd === undefined || timeEnd == "")
+			{
+				timeEnd = new Date();
+				console.log(timeEnd);
+			}
+			else
+			{
+				timeEnd = new Date(parseInt(timeEnd));
+				console.log(timeEnd);
+			}
+			return await GatlingData
+			.find({
+				...newOptions,
+				fetchTime: { $lte : timeEnd, $gte: timeStart} 
+			})
+			.sort({fetchTime: -1});
 		},
 
 		lighthousedata: async(root, options) => {
