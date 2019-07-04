@@ -8,6 +8,7 @@ from api.RESTAPI.models import *
 import json
 from .script import fun
 from datetime import datetime
+from .alertScript import get_alerts
 
 class LighthouseDataViewSet(viewsets.ModelViewSet):
     lookup_field = 'id'
@@ -21,9 +22,6 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
                 data=fun(request.data)
             except:
                 raise ValidationError
-#        newData=LighthouseDataSerializer(data=data)
-#        md = MetricDetailed(score=data['audits']['performance_audits']['first_contentful_paint']['score'])
-#        PAData = PerformanceAudit(score=data['audits']['performance_audits']['score'])
         try:
             newData = LighthouseData(environment=data['environment'])
             auditData = Audit(performance_audits=data['audits']['performance_audits'],
@@ -51,18 +49,23 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
         data = LighthouseDataSerializer(queryset,many=True)
         data=json.dumps(data.data)
         return HttpResponse(data)
+    def alert(self,request):
+        url_list = URLData.objects.all()
+        data_list = []
+        alerts = []
+        url_map = []
+        cnt=0
+        for url in url_list[0]['urls']:
+            temp=LighthouseData.objects.filter(requestedUrl =url).order_by('-id')[:2]
+            if len(temp) > 1:
+                data_list.append(temp)
+                get_alerts(temp,url,alerts)
+        return HttpResponse(json.dumps(alerts))
 class GatlingDataViewSet(viewsets.ModelViewSet):
     lookup_field = 'id'
     queryset = GatlingData.objects.all()
     serializer_class = GatlingDataSerializer
     def post(self,request):
-#        newData=URLData()
- #       temp=request.data['value']
-  #      list1=temp.split(",")
-   #     print(temp)
-    #    newData['urls']=list1
-     #   newData.save()
-      #  return HttpResponse("AAAA")
         newData=GatlingData()
         data=request.data
         try:
@@ -84,19 +87,18 @@ class GatlingDataViewSet(viewsets.ModelViewSet):
         except:
             pass
         try:
+            newData['scala'] = data['scala']
+            newData['fetchTime'] = datetime.fromtimestamp(int(data['fetchTime'])).strftime('%Y-%m-%d %H:%M:%S.%f%Z')
             newData['url'] = data['url']
-            newData['fetchTime'] = datetime.strptime(str(data['fetchTime']),"%Y-%m-%dT%H:%M:%S.%fZ")
         except:
             pass
-        try:
-            newData['scala']= data['scala']
-        except:
-            pass
-        try:
-            newData['stats'] = json.dumps(data['stats'])
-            newData.save()
-        except:
-            ValidationError
+  #      try:
+        newData['stats'] = json.dumps(data['stats'])
+        newData['phase'] = data['phase']
+        newData['brand'] = data['brand']
+        newData.save()
+#        except:
+ #           raise ValidationError
         return HttpResponse(request.data)
     def get(self, request):
         lookup_field = 'id'
