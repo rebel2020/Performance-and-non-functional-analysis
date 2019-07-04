@@ -12,8 +12,8 @@ import RadioButtons from '../../../components/radiobuttons/index';
 const MetricComponent = props => {
   // const { metric, history } = props;
   return (
-    <div className="container tile">
-      <Filters dateRange="range" />
+    <div className="container">
+      <Filters date="range" />
 
       {/* <Select options={['a', 'b']} /> */}
 
@@ -22,7 +22,14 @@ const MetricComponent = props => {
           <HighStock {...props} toUrl="/gatling" />
         </div>
         <div className="col m2">
-          <RadioButtons values={[]} />
+          <RadioButtons
+            values={[
+              { value: 'perc_req_success', name: '% Requests Succeeded' },
+              { value: 'num_req', name: 'Number of Requests' },
+              { value: 'avg_req_per_sec', name: 'Average Number of Requests per Second' },
+              { value: 'avg_response_time', name: 'Average Response Time' }
+            ]}
+          />
         </div>
       </div>
       <div className="row">

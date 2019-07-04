@@ -23,7 +23,7 @@ class Alert extends Component {
           <span className="close" data-dismiss="alert" onClick={() => this.hideAlert()}>
             &times;
           </span>
-          <a className="hover_cursor" onClick={() => this.props.history.push('/alerts')}>
+          <a className="hover_cursor" onClick={() => this.props.history.push('/lighthouse/alerts')}>
             You have &nbsp;
             {this.props.numalerts}
             &nbsp;alerts
