@@ -5,6 +5,7 @@ import HighStock from 'src/components/highstock';
 import HighChartBar from '../highchart_bar/index';
 import HighChartPie from '../highchart_pie/index';
 import Filters from '../../Filters/index';
+import StatsComponent from '../Stats_Component/index';
 import 'src/main.scss';
 
 import RadioButtons from '../../../components/radiobuttons/index';
@@ -18,7 +19,7 @@ const MetricComponent = props => {
       {/* <Select options={['a', 'b']} /> */}
 
       <div className="row container">
-        <div className="col m12">
+        <div className="col m10">
           <HighStock {...props} toUrl="/gatling" />
         </div>
         <div className="col m2">
@@ -33,11 +34,14 @@ const MetricComponent = props => {
         </div>
       </div>
       <div className="row">
-        <div className="col m5">
+        <div className="col m4">
           <HighChartBar {...props} />
         </div>
-        <div className="col m5">
+        <div className="col m3">
           <HighChartPie {...props} />
+        </div>
+        <div className="col m4">
+          <StatsComponent {...props} />
         </div>
       </div>
     </div>

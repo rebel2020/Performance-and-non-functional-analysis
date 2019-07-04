@@ -1,5 +1,6 @@
 import React from 'react';
 import AlertCollapsible from '../../../components/alert_collapsible/index';
+import './styles.scss';
 
 const AlertContent = props => {
   const { history } = props;
@@ -18,9 +19,35 @@ const AlertContent = props => {
 
       description: 'Description of the second alert',
       perc: 50
+    },
+    {
+      id: 3,
+      title: 'Alert 3',
+
+      description: 'Description of the 3rd alert',
+      perc: 10
+    },
+    {
+      id: 4,
+      title: 'Alert 4',
+
+      description: 'Description of the 4th alert',
+      perc: 11
+    },
+    {
+      id: 5,
+      title: 'Alert 5',
+
+      description: 'Description of the 5th alert',
+      perc: 56
     }
   ];
+  const numalerts = als.length;
+  let urgent = 0;
   const DispAlerts = als.map((item, i) => {
+    if (item.perc > 20) {
+      urgent++;
+    }
     return (
       <>
         <br />
@@ -35,6 +62,16 @@ const AlertContent = props => {
       </>
     );
   });
-  return <>{DispAlerts}</>;
+  return (
+    <>
+      <div className=" container alertpageheader text-center">
+        <h1> Hello. You have {numalerts} Alerts.</h1>
+      </div>
+      <div className="container alerturgenttext text-center">
+        <h4> There are {urgent} urgent alert(s)</h4>
+      </div>
+      {DispAlerts}
+    </>
+  );
 };
 export default AlertContent;

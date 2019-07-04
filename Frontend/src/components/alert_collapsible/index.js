@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './styles.scss';
 const AlertCollapsible = props => {
   const { k, history, title, desc, perc } = props;
   let alcol;
@@ -13,7 +13,7 @@ const AlertCollapsible = props => {
   return (
     <>
       <div className="row">
-        <div className="collapsible col m11">
+        <div className="collapsible al col m11">
           <input type="checkbox" id={`collapsible-${k}`} />
           <label htmlFor={`collapsible-${k}`} className={alcol}>
             {title}
