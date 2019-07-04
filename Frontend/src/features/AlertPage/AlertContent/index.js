@@ -4,6 +4,15 @@ import './styles.scss';
 
 const AlertContent = props => {
   const { history } = props;
+  function compare(a, b) {
+    if (a.perc > b.perc) {
+      return -1;
+    }
+    if (a.perc < b.perc) {
+      return 1;
+    }
+    return 0;
+  }
 
   const als = [
     {
@@ -43,6 +52,7 @@ const AlertContent = props => {
     }
   ];
   const numalerts = als.length;
+  als.sort(compare);
   let urgent = 0;
   const DispAlerts = als.map((item, i) => {
     if (item.perc > 20) {
@@ -65,10 +75,10 @@ const AlertContent = props => {
   return (
     <>
       <div className=" container alertpageheader text-center">
-        <h1> Hello. You have {numalerts} Alerts.</h1>
+        <h1> Hello. You have{numalerts} Alerts.</h1>
       </div>
       <div className="container alerturgenttext text-center">
-        <h4> There are {urgent} urgent alert(s)</h4>
+        <h4> There are{urgent} urgent alert(s)</h4>
       </div>
       {DispAlerts}
     </>
