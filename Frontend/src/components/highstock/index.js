@@ -19,7 +19,8 @@ const setGraph = (history, name, toUrl, data) => {
     chart: {
       zoomType: 'x',
       spacingLeft: 50,
-      spacingRight: 50
+      spacingRight: 50,
+      backgroundColor:'#EFEDED'
       // style: {
       //   color: 'white'
       // }

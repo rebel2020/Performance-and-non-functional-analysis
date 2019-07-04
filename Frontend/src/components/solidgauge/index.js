@@ -13,7 +13,8 @@ const setGraph = (name, value) => {
     chart: {
       type: 'solidgauge',
       height: '100%',
-      width: '150'
+      width: '150',
+      backgroundColor:'#EFEDED'
     },
     credits: {
       enabled: false

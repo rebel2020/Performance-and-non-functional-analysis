@@ -11,7 +11,24 @@ import 'src/main.scss';
 import RadioButtons from '../../../components/radiobuttons/index';
 
 const MetricComponent = props => {
-  // const { metric, history } = props;
+  const { metric, history } = props;
+
+  let GatlingStats = <></>;
+  if (metric) {
+    GatlingStats = (
+      <div className="row">
+        <div className="col m7">
+          <HighChartBar {...props} />
+        </div>
+        {/* <div className="col m3">
+          <HighChartPie {...props} />
+        </div> */}
+        <div className="col m5">
+          <StatsComponent {...props} />
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="container">
       <Filters date="range" />
@@ -19,10 +36,10 @@ const MetricComponent = props => {
       {/* <Select options={['a', 'b']} /> */}
 
       <div className="row container">
-        <div className="col m10">
+        <div className="col m8">
           <HighStock {...props} toUrl="/gatling" />
         </div>
-        <div className="col m2">
+        <div className="col m3">
           <RadioButtons
             values={[
               { value: 'perc_req_success', name: '% Requests Succeeded' },
@@ -33,17 +50,7 @@ const MetricComponent = props => {
           />
         </div>
       </div>
-      <div className="row">
-        <div className="col m4">
-          <HighChartBar {...props} />
-        </div>
-        <div className="col m3">
-          <HighChartPie {...props} />
-        </div>
-        <div className="col m4">
-          <StatsComponent {...props} />
-        </div>
-      </div>
+      {GatlingStats}
     </div>
   );
 };
