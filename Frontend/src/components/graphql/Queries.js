@@ -110,6 +110,30 @@ const getAudits = value => {
 `;
 };
 
+const getPages = value => {
+  return gql`
+  query Pages($finalUrl:String,$fetchTimeStart:String,$fetchTimeEnd:String,
+    $brand:String,$project:String,$phase:String){
+    lighthousedata(
+      finalUrl:$finalUrl
+      fetchTimeStart:$fetchTimeStart
+      fetchTimeEnd:$fetchTimeEnd
+      brand:$brand
+      project:$project
+      phase:$phase
+    ){
+      fetchTime
+      finalUrl
+      audits {
+        ${value}_audits {
+          score
+        }
+      }
+    }
+  }
+`;
+};
+
 const getQuery = value => {
   return gql`
   query getdetails($finalUrl:String,$fetchTimeStart:String,$fetchTimeEnd:String,
@@ -151,4 +175,4 @@ const GATLING = gql`
   }
 `;
 
-export { AVG_LIGHTHOUSE_SCORES, getQuery, getAudits, GATLING, LIST, AVG_SCORES };
+export { AVG_LIGHTHOUSE_SCORES, getQuery, getAudits, getPages, GATLING, LIST, AVG_SCORES };

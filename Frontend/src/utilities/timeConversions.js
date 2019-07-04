@@ -28,11 +28,11 @@ const getHtmlDate = time => {
 };
 
 const dateOfAverage = obj2 => {
-  console.log(obj2);
+  // console.log(obj2);
   const obj = obj2._id;
   const date = `${obj.year}-${obj.month}-${obj.day}`;
   const time = new Date(date).getTime();
-  console.log(`average ${new Date(date).getTime()}`);
+  // console.log(`average ${new Date(date).getTime()}`);
   return time + 19800000;
 };
 export { getTimeRange, getDate, getHtmlDate, dateOfAverage };

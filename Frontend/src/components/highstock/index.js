@@ -116,7 +116,7 @@ const HighStock = props => {
     fetchTimeStart: date.toString(),
     fetchTimeEnd: toDate.toString()
   };
-  console.log(variables);
+  // console.log(variables);
   let arr = [];
   if (audit) {
     arr = data.lighthousedata.reverse().map(obj => {
@@ -129,7 +129,7 @@ const HighStock = props => {
   //   .reverse()
   //   .map(obj => [parseInt(obj.fetchTime, 10), obj.audits[map[metric]].score * 100]);
   else {
-    console.log(data.average);
+    // console.log(data.average);
     arr = data.average.reverse().map(obj => {
       return [dateOfAverage(obj), obj[averageMap[metric]] * 100];
     });

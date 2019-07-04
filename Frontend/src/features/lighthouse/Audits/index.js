@@ -26,7 +26,7 @@ const Audit = props => {
   const timeRange = time
     ? {
         fetchTimeStart: time,
-        fetchTimeEnd: time
+        fetchTimeEnd: (parseInt(time, 10) + 86400000).toString()
       }
     : getTimeRange(date);
   const variables = {

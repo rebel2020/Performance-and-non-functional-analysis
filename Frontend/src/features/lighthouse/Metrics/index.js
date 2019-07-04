@@ -11,7 +11,7 @@ const MetricComponent = props => {
   const { metric, average } = history.location;
   let auditContainer = <></>;
   let pageContaner = <></>;
-  if (metric) auditContainer = <Audits {...props} />;
+  if (metric && !average) auditContainer = <Audits {...props} />;
   if (average) pageContaner = <Pages {...props} />;
   return (
     <div className="container">
