@@ -15,7 +15,7 @@ const MetricComponent = props => {
   if (average) pageContaner = <Pages {...props} />;
   return (
     <div className="container">
-      <Filters dateRange="range" options={['http://fca-qa1-jeep-sape.test.com/']} />
+      <Filters dateRange="range" history={history} />
       <HighStock {...props} toUrl="/lighthouse" />
       {auditContainer}
       {pageContaner}

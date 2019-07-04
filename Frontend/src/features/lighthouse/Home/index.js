@@ -73,7 +73,7 @@ const HomeComponent = props => {
     <>
       <div className="container">{alertContainer}</div>
       <div className="container ">
-        <Filters dateRange="single" options={['http://fca-qa1-jeep-sape.test.com/']} />
+        <Filters dateRange="single" history={history} />
 
         <div className="flexbox">{flexItems}</div>
         {/* <div>{DispAudit}</div> */}

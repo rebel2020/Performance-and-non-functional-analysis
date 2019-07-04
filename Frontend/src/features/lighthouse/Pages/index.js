@@ -6,6 +6,7 @@ import compare from 'src/utilities/compareObjects';
 import pagesData from 'src/utilities/parsePagesData';
 import FetchData from 'src/components/graphql/utils';
 import { getPages } from 'src/components/graphql/Queries';
+import 'src/main.scss';
 import './main.scss';
 
 const Pages = props => {
@@ -53,16 +54,23 @@ const Pages = props => {
   // console.log(data);
   const DispPages = pages.map(item => {
     return (
-      <div className="card" key={item.fetchTime} onClick={e => setPage(item.finalUrl)}>
-        {item.score * 100}
+      <div key={item.fetchTime} className="col s10 m5 l3 pageCard" onClick={e => setPage(item.finalUrl)}>
+        {item.finalUrl}
+        <br />
+        <br />
+        Time: {item.fetchTime}
+        <br />
+        <br />
+        Score: {item.score * 100}
+        <br />
       </div>
     );
   });
   return (
-    <>
+    <div className="flexbox">
       {DispPages}
       {query}
-    </>
+    </div>
   );
 };
 

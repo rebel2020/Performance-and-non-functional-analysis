@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Datalist from 'src/components/datalist';
 // import SelectList from 'src/components/selectlist';
 import { getDate, getHtmlDate } from 'src/utilities/timeConversions';
+import setSearch from 'src/utilities/search';
 import Input from 'src/components/Input';
 import useGlobal from 'src/store';
 import './main.scss';
@@ -10,7 +11,7 @@ const Filters = props => {
   const [globalState, globalActions] = useGlobal();
   const { setPage, setDate, setToDate, setBrand, setEnv, setPagecomp } = globalActions;
   const { phase, brand, page, date, toDate, filterLists } = globalState;
-  const { dateRange } = props;
+  const { dateRange, history } = props;
   const [values, setValues] = useState({
     phase,
     brand,
@@ -29,7 +30,13 @@ const Filters = props => {
           options={filterLists.phase}
           onChange={value => {
             setValues({ ...values, phase: value });
-            if (filterLists.phase.includes(value)) setEnv(value);
+            if (filterLists.phase.includes(value)) {
+              setEnv(value);
+              history.push({
+                pathname: history.pathname,
+                search: setSearch({ phase: value, brand, page, date, toDate })
+              });
+            }
           }}
         />
       </div>
@@ -42,7 +49,13 @@ const Filters = props => {
           options={filterLists.brand}
           onChange={value => {
             setValues({ ...values, brand: value });
-            if (filterLists.brand.includes(value)) setBrand(value);
+            if (filterLists.brand.includes(value)) {
+              setBrand(value);
+              history.push({
+                pathname: history.pathname,
+                search: setSearch({ phase, brand: value, page, date, toDate })
+              });
+            }
           }}
         />
       </div>
@@ -56,7 +69,13 @@ const Filters = props => {
           options={filterLists.finalUrl}
           onChange={value => {
             setValues({ ...values, page: value });
-            if (filterLists.finalUrl.includes(value)) setPage(value);
+            if (filterLists.finalUrl.includes(value)) {
+              setPage(value);
+              history.push({
+                pathname: history.pathname,
+                search: setSearch({ phase, brand, page: value, date, toDate })
+              });
+            }
           }}
         />
       </div>
@@ -70,6 +89,10 @@ const Filters = props => {
           onChange={value => {
             setValues({ ...values, date: value });
             setDate(value);
+            history.push({
+              pathname: history.pathname,
+              search: setSearch({ phase, brand, page, date: value, toDate })
+            });
           }}
         />
       </div>
@@ -84,6 +107,10 @@ const Filters = props => {
             onChange={value => {
               setValues({ ...values, toDate: value });
               setToDate(value);
+              history.push({
+                pathname: history.pathname,
+                search: setSearch({ phase, brand, page, date, toDate: value })
+              });
             }}
           />
         ) : (
