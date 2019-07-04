@@ -5,7 +5,7 @@ import Highcharts from 'highcharts/highcharts';
 import HighchartsMore from 'highcharts/highcharts-more';
 import Gauge from 'highcharts/modules/solid-gauge';
 import useGlobal from 'src/store';
-import setSearch from 'src/utilities/search';
+
 import formatString from 'src/utilities/formatString';
 
 const setGraph = (name, value) => {
@@ -14,7 +14,7 @@ const setGraph = (name, value) => {
       type: 'solidgauge',
       height: '100%',
       width: '150',
-      backgroundColor:'#EFEDED'
+      backgroundColor: '#EFEDED'
     },
     credits: {
       enabled: false
@@ -75,6 +75,7 @@ const setGraph = (name, value) => {
     series: [
       {
         name: '',
+
         data: [
           {
             color: Highcharts.getOptions().colors[0],
@@ -89,7 +90,7 @@ const setGraph = (name, value) => {
 };
 const SolidGuage = props => {
   const [globalState, globalActions] = useGlobal();
-  const { phase, brand, page, date, toDate } = globalState;
+  const { phase, brand, page, date } = globalState;
   const { name, value, history } = props;
   const graphData = setGraph(name, value);
   useEffect(() => {
@@ -103,7 +104,7 @@ const SolidGuage = props => {
         if (page)
           history.push({
             pathname: `/lighthouse`,
-            search: `audits=${name}&${setSearch({ phase, brand, page, date, toDate })}`,
+            search: `audits=${name}`,
             metric: name
             // time: new Date(date).getTime().toString()
           });
