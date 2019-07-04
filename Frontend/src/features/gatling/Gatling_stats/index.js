@@ -17,13 +17,13 @@ const MetricComponent = props => {
   if (metric) {
     GatlingStats = (
       <div className="row">
-        <div className="col m4">
+        <div className="col m7">
           <HighChartBar {...props} />
         </div>
         {/* <div className="col m3">
           <HighChartPie {...props} />
         </div> */}
-        <div className="col m4">
+        <div className="col m5">
           <StatsComponent {...props} />
         </div>
       </div>
