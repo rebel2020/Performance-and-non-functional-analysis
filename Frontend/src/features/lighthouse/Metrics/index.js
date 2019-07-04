@@ -8,6 +8,7 @@ import 'src/main.scss';
 const MetricComponent = props => {
   const { history } = props;
   const { metric } = history.location;
+  console.log(history.location);
   let auditContainer = <></>;
   if (metric) auditContainer = <Audits {...props} />;
   return (

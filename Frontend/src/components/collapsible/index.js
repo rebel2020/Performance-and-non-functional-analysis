@@ -3,6 +3,7 @@ import formatString from 'src/utilities/formatString';
 
 const Collapsible = props => {
   const { metric, history, k, title, desc, score, weight, nv, link } = props;
+  const sch = Math.round(score * 100);
   // console.log(title);
   return (
     <>
@@ -14,37 +15,22 @@ const Collapsible = props => {
             <div className="row">
               <p className=" col m6">{desc}</p>
               <p className="text-right col m6">
-                Score:
-                {score}
+                Score:&nbsp;
+                {sch}
               </p>
             </div>
             <br />
             <div className="row">
               <p className=" col m6">
-                Weightage:
+                Weightage:&nbsp;
                 {weight}
               </p>
               <p className="text-right col m6">
-                NumericValue:
+                NumericValue:&nbsp;
                 {nv}
               </p>
             </div>
             <br />
-            <div className="row">
-              <button
-                type="button"
-                className="btn--raised left col m2"
-                // onClick={() =>
-                //   history.push({
-                //     pathname: `/lighthouse/${metric}`,
-                //     search: `audits=${title}`,
-                //     audit: title
-                //   })
-                // }
-              >
-                Graph
-              </button>
-            </div>
           </div>
         </div>
       </div>

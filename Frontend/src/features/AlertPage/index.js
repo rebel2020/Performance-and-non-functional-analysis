@@ -11,6 +11,7 @@ const AlertPage = props => {
   const { comp, history } = props;
   const [globalState, globalActions] = useGlobal();
   const { toggle } = globalState;
+  const numalerts = 5;
   const map = {
     // home: <Home />,
     // performance: <MetricComponent history={history} metric={comp} />,
@@ -22,7 +23,7 @@ const AlertPage = props => {
     <>
       <Sidebar />
       <div className={toggle ? 'main' : 'main-extend'}>
-        <AlertContent history={history} />
+        <AlertContent history={history} numalerts={numalerts} />
       </div>
 
       {/* <Query query={TEST}>
