@@ -1,6 +1,7 @@
 import gql from 'graphql-tag';
 import {
   performanceAuditFrag,
+  accessibilityAuditFrag,
   bestPracticeAuditFrag,
   pwaAuditFrag,
   seoAuditFrag
@@ -8,20 +9,36 @@ import {
 
 const mapper = {
   performance: performanceAuditFrag,
+  accessibility: accessibilityAuditFrag,
   best_practices: bestPracticeAuditFrag,
   seo: seoAuditFrag,
   pwa: pwaAuditFrag
 };
 
 const AVG_SCORES = gql`
-  query {
-    average {
+  query average(
+    $finalUrl: String
+    $fetchTimeStart: String
+    $fetchTimeEnd: String
+    $brand: String
+    $project: String
+    $phase: String
+  ) {
+    average(
+      finalUrl: $finalUrl
+      fetchTimeStart: $fetchTimeStart
+      fetchTimeEnd: $fetchTimeEnd
+      brand: $brand
+      project: $project
+      phase: $phase
+    ) {
       _id {
         day
         month
         year
       }
       performanceAverage
+      accessibilityAverage
       seoAverage
       pwaAverage
       bestPracticesAverage
@@ -51,6 +68,9 @@ const AVG_LIGHTHOUSE_SCORES = gql`
         performance_audits {
           score
         }
+        accessibility_audits {
+          score
+        }
         best_practices_audits {
           score
         }
@@ -67,6 +87,7 @@ const AVG_LIGHTHOUSE_SCORES = gql`
 
 const getAudits = value => {
   const val = mapper[value];
+  console.log(val, value);
   return gql`
   query Audits($finalUrl:String,$fetchTimeStart:String,$fetchTimeEnd:String,
     $brand:String,$project:String,$phase:String){

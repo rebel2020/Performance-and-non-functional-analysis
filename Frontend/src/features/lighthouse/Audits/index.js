@@ -18,6 +18,7 @@ const Audit = props => {
   const prevState = previousState({ phase, brand, page, date, metric, time });
   const map = {
     performance: 'performance',
+    accessibility: 'accessibility',
     best_practices: 'best_practices',
     s_e_o: 'seo',
     p_w_a: 'pwa'

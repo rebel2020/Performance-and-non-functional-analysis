@@ -116,7 +116,7 @@ const HighStock = props => {
     fetchTimeStart: date.toString(),
     fetchTimeEnd: toDate.toString()
   };
-  // console.log(variables);
+  console.log(variables);
   let arr = [];
   if (audit) {
     arr = data.lighthousedata.reverse().map(obj => {
