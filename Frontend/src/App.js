@@ -11,6 +11,8 @@ import './material_styles/cards_tiles.scss';
 import './material_styles/collapsible.scss';
 import './material_styles/colors.scss';
 import './material_styles/utility.scss';
+import './material_styles/alerts.scss';
+import './material_styles/form.scss';
 
 const host = 'http://10.150.16.133:3490/graphql';
 

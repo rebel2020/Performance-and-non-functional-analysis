@@ -208,11 +208,27 @@ type AuditsAverage{
 	_id: FetchDate
 }
 
+type Bench{
+	cpu: Float
+	ram: Float
+	jvm_heap: Float
+}
+
+type ServerStats{
+	author_stats: [Bench]
+	publisher_stats: [Bench]
+	dispatcher_stats: [Bench]
+}
+
 type GatlingData{
 	_id: ID
 	stats: String
 	fetchTime: String
 	scala: String
+	url: String
+	server_stats: ServerStats
+	brand: String
+	phase: String
 }
 
 type PerformanceAuditRecommendation{

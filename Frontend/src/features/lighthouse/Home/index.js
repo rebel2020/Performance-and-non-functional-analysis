@@ -28,7 +28,8 @@ const HomeComponent = props => {
     finalUrl: page,
     ...getTimeRange(date)
   };
-  console.log(data);
+  console.log(variables);
+  // console.log(data);
   const prevState = previousState({ phase, brand, page, date });
   const onMount = useRef(true);
   useEffect(() => {
@@ -60,7 +61,7 @@ const HomeComponent = props => {
   let auditContainer = <></>;
   if (metric) auditContainer = <Audits metric={metric} {...props} />;
 
-  const numal = 3;
+  const numal = 5;
   let alertContainer = <></>;
 
   if (numal > 0) {

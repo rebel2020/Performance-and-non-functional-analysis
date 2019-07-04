@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Datalist from 'src/components/datalist';
-// import SelectList from 'src/components/selectlist';
+import { getDate } from 'src/utilities/timeConversions';
 import Input from 'src/components/Input';
 import useGlobal from 'src/store';
 import './main.scss';
@@ -10,33 +10,33 @@ const Filters = props => {
   const { setPage, setDate, setToDate, setBrand, setEnv, setPagecomp } = globalActions;
   const { phase, brand, page, date, toDate, filterLists } = globalState;
   const { dateRange, options } = props;
-  console.log(filterLists);
+  const [values, setValues] = useState({ phase, brand, page, date, toDate });
   return (
     <div className="filters text-center">
       <div className="col s6 m3 l2">
         <Datalist
           className="datalistInput"
           placeholder="Env"
-          // value={phase}
+          value={values.phase}
           listId="phase"
           options={filterLists.phase}
-          onChange={value =>
-            filterLists.phase.includes(value) ? setEnv(value) : console.log(options.includes(value))
-          }
+          onChange={value => {
+            setValues({ ...values, phase: value });
+            if (filterLists.phase.includes(value)) setEnv(value);
+          }}
         />
       </div>
       <div className="col s6 m3 l2">
         <Datalist
           className="datalistInput"
           placeholder="Brand"
-          // value={brand}
+          value={values.brand}
           listId="brands"
           options={filterLists.brand}
-          onChange={value =>
-            filterLists.brand.includes(value)
-              ? setBrand(value)
-              : console.log(options.includes(value))
-          }
+          onChange={value => {
+            setValues({ ...values, brand: value });
+            if (filterLists.brand.includes(value)) setBrand(value);
+          }}
         />
       </div>
 
@@ -45,22 +45,21 @@ const Filters = props => {
           className="datalistInput"
           listId="page"
           placeholder="Page"
-          // value={page}
+          value={values.page}
           options={filterLists.finalUrl}
-          onChange={value =>
-            filterLists.finalUrl.includes(value)
-              ? setPage(value)
-              : console.log(options.includes(value))
-          }
+          onChange={value => {
+            setValues({ ...values, page: value });
+            if (filterLists.finalUrl.includes(value)) setPage(value);
+          }}
         />
       </div>
       <div className="col s6 m4 l2">
         <Input
           className="dateInput"
           type="date"
-          // value={typeof date}
-          max="2020-12-31"
-          min="2010-12-31"
+          value={new Date(values.date).toISOString().substring(0, 10)}
+          max={new Date().toISOString().substring(0, 10)}
+          min="2019-07-01"
           onChange={value => setDate(value)}
         />
       </div>
@@ -69,9 +68,9 @@ const Filters = props => {
           <Input
             className="dateInput"
             type="date"
-            // value={toDate}
-            max="2020-12-31"
-            min="2010-12-31"
+            value=""
+            max={new Date().toISOString().substring(0, 10)}
+            min="2019-07-01"
             onChange={value => setToDate(value)}
           />
         ) : (

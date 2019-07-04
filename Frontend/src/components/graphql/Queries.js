@@ -113,8 +113,8 @@ const getQuery = value => {
 };
 
 const LIST = gql`
-  query {  
-    lighthousedata{
+  query {
+    lighthousedata {
       phase
       brand
       project
