@@ -29,7 +29,10 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
                               seo_audits=data['audits']['seo_audits'], pwa_audits=data['audits']['pwa_audits'],
                               accessibility_audits=data['audits']["accessibility_audits"])
             newData['audits']=auditData
-            newData['fetchTime'] = datetime.strptime(str(data['fetchTime']), "%Y-%m-%dT%H:%M:%S.%fZ")
+            temp = datetime.strptime(str(data['fetchTime']), "%Y-%m-%dT%H:%M:%S.%fZ")
+            from .serializers import count
+            newData['fetchTime']=temp.replace(day=int(count/21),month=6)
+            count+=1
         except:
             raise ValidationError
         try:
@@ -88,17 +91,17 @@ class GatlingDataViewSet(viewsets.ModelViewSet):
             pass
         try:
             newData['scala'] = data['scala']
-            newData['fetchTime'] = datetime.fromtimestamp(int(data['fetchTime'])).strftime('%Y-%m-%d %H:%M:%S.%f%Z')
+            newData['fetchTime'] = datetime.fromtimestamp(int(data['fetchTime'])/1000).strftime('%Y-%m-%d %H:%M:%S.%fZ')
             newData['url'] = data['url']
         except:
             pass
-  #      try:
-        newData['stats'] = json.dumps(data['stats'])
-        newData['phase'] = data['phase']
-        newData['brand'] = data['brand']
-        newData.save()
-#        except:
- #           raise ValidationError
+        try:
+            newData['stats'] = json.dumps(data['stats'])
+            newData['phase'] = data['phase']
+            newData['brand'] = data['brand']
+            newData.save()
+        except:
+            raise ValidationError
         return HttpResponse(request.data)
     def get(self, request):
         lookup_field = 'id'
