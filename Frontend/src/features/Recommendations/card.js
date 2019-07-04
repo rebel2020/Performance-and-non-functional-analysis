@@ -18,9 +18,7 @@ class Cards extends React.Component {
       <>
         <div className="collapsible col s12 m2 l4" style={{ width: '95%' }}>
           <input type="checkbox" id={`collapsible-${this.props.field}`} />
-          <label htmlFor={`collapsible-${this.props.field}`}>
-            <font color="blue">{this.props.field}</font>
-          </label>
+          <label htmlFor={`collapsible-${this.props.field}`}>{this.props.field}</label>
           <div className={`collapsible-${this.props.field}-area`}>
             <p className="text-left col m6">
               <b>ENV :</b>
@@ -39,7 +37,7 @@ class Cards extends React.Component {
             </p>
             <br />
             <p className="text-left col m6">
-              <b>Recoommendation :</b>
+              <b>Recommendation :</b>
               {this.props.value}
             </p>
           </div>
