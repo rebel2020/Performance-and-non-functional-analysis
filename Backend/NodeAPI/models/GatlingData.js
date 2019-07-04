@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const GatlingSchema = new Schema({
 	stats : {type: String, default: null},
-	fetchTime : {type: String, default: null},
+	fetchTime : {type: Date, default: null},
 	url: {type: String, default: null},
 	brand: {type: String, default: null},
 	phase: {type: String, default: null},

@@ -3,8 +3,8 @@ mongoose.Promise = global.Promise;
 
 const url = 'mongodb://localhost:27017/ptdb';
 var options = {
-  server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },
-  replset: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },
+  server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 100000 } },
+  replset: { socketOptions: { keepAlive: 1, connectTimeoutMS: 100000 } },
   useNewUrlParser: true
 };
 mongoose.connect(url, options);
