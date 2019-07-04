@@ -4,6 +4,15 @@ import './styles.scss';
 
 const AlertContent = props => {
   const { history } = props;
+  function compare(a, b) {
+    if (a.perc > b.perc) {
+      return -1;
+    }
+    if (a.perc < b.perc) {
+      return 1;
+    }
+    return 0;
+  }
 
   const als = [
     {
@@ -43,6 +52,7 @@ const AlertContent = props => {
     }
   ];
   const numalerts = als.length;
+  als.sort(compare);
   let urgent = 0;
   const DispAlerts = als.map((item, i) => {
     if (item.perc > 20) {
