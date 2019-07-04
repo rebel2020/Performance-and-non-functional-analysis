@@ -122,18 +122,11 @@ const LIST = gql`
     }
 }
 `
-const GATLING = gql`
-  query {
-    gatlingdata {
-      stats
-    }
-  }
-`;
-
+;
 export {
   AVG_LIGHTHOUSE_SCORES,
   getQuery,
   getAudits,
-  GATLING,
-  LIST
+  LIST,
+  AVG_SCORES
 };
