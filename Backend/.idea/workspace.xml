@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="17a311d9-1a51-4c11-b7e3-9ecf32106366" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/api/RESTAPI/alertScript.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/RESTAPI/alertScript.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/RESTAPI/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/RESTAPI/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/RESTAPI/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/RESTAPI/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,7 +19,7 @@
         <entry file="file://$PROJECT_DIR$/api/RESTAPI/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="410">
-              <caret line="93" column="85" selection-start-line="93" selection-start-column="85" selection-end-line="93" selection-end-column="85" />
+              <caret line="93" selection-start-line="93" selection-end-line="93" />
               <folding>
                 <element signature="e#0#44#0" expanded="true" />
               </folding>
@@ -298,12 +296,12 @@
       <workItem from="1561090530274" duration="15647000" />
       <workItem from="1561450952684" duration="23135000" />
       <workItem from="1561714015111" duration="5835000" />
-      <workItem from="1561964426071" duration="50124000" />
+      <workItem from="1561964426071" duration="50708000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="175035000" />
+    <option name="totallyTimeSpent" value="175619000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
@@ -527,7 +525,7 @@
     <entry file="file://$PROJECT_DIR$/api/RESTAPI/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="410">
-          <caret line="93" column="85" selection-start-line="93" selection-start-column="85" selection-end-line="93" selection-end-column="85" />
+          <caret line="93" selection-start-line="93" selection-end-line="93" />
           <folding>
             <element signature="e#0#44#0" expanded="true" />
           </folding>
