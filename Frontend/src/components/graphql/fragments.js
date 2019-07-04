@@ -125,6 +125,153 @@ const performanceAuditFrag = {
   `
 };
 
+const accessibilityAuditFrag = {
+  audits: gql`
+    fragment accessibilityAudits on AccessibilityAudit {
+      accesskeys {
+        ...metricDetails
+      }
+      aria_allowed_attr {
+        ...metricDetails
+      }
+      aria_required_attr {
+        ...metricDetails
+      }
+      aria_required_children {
+        ...metricDetails
+      }
+      aria_required_parent {
+        ...metricDetails
+      }
+      aria_roles {
+        ...metricDetails
+      }
+      aria_valid_attr_value {
+        ...metricDetails
+      }
+      aria_valid_attr {
+        ...metricDetails
+      }
+      audio_caption {
+        ...metricDetails
+      }
+      button_name {
+        ...metricDetails
+      }
+      bypass {
+        ...metricDetails
+      }
+      color_contrast {
+        ...metricDetails
+      }
+      definition_list {
+        ...metricDetails
+      }
+      dlitem {
+        ...metricDetails
+      }
+      document_title {
+        ...metricDetails
+      }
+      duplicate_id {
+        ...metricDetails
+      }
+      frame_title {
+        ...metricDetails
+      }
+      html_has_lang {
+        ...metricDetails
+      }
+      html_lang_valid {
+        ...metricDetails
+      }
+      image_alt {
+        ...metricDetails
+      }
+      input_image_alt {
+        ...metricDetails
+      }
+      label {
+        ...metricDetails
+      }
+      layout_table {
+        ...metricDetails
+      }
+      link_name {
+        ...metricDetails
+      }
+      list_ {
+        ...metricDetails
+      }
+      listitem {
+        ...metricDetails
+      }
+      meta_refresh {
+        ...metricDetails
+      }
+      meta_viewport {
+        ...metricDetails
+      }
+      object_alt {
+        ...metricDetails
+      }
+      tabindex {
+        ...metricDetails
+      }
+      td_headers_attr {
+        ...metricDetails
+      }
+      th_has_data_cells {
+        ...metricDetails
+      }
+      valid_lang {
+        ...metricDetails
+      }
+      video_caption {
+        ...metricDetails
+      }
+      video_description {
+        ...metricDetails
+      }
+      logical_tab_order {
+        ...metricDetails
+      }
+      focusable_controls {
+        ...metricDetails
+      }
+      interactive_element_affordance {
+        ...metricDetails
+      }
+      managed_focus {
+        ...metricDetails
+      }
+      focus_traps {
+        ...metricDetails
+      }
+      custom_controls_labels {
+        ...metricDetails
+      }
+      custom_controls_roles {
+        ...metricDetails
+      }
+      visual_order_follows_dom {
+        ...metricDetails
+      }
+      offscreen_content_hidden {
+        ...metricDetails
+      }
+      heading_levels {
+        ...metricDetails
+      }
+      use_landmarks {
+        ...metricDetails
+      }
+      score
+    }
+    ${metricDetailFrag.metricDetail}
+  `
+};
+
 const bestPracticeAuditFrag = {
   audits: gql`
     fragment best_practicesAudits on BestPracticesAudit {
@@ -281,4 +428,10 @@ const seoAuditFrag = {
     ${metricDetailFrag.metricDetail}
   `
 };
-export { performanceAuditFrag, bestPracticeAuditFrag, pwaAuditFrag, seoAuditFrag };
+export {
+  performanceAuditFrag,
+  accessibilityAuditFrag,
+  bestPracticeAuditFrag,
+  pwaAuditFrag,
+  seoAuditFrag
+};

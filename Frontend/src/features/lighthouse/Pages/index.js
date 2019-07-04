@@ -3,22 +3,24 @@ import useGlobal from 'src/store';
 import previousState from 'src/utilities/previousState';
 import { getTimeRange } from 'src/utilities/timeConversions';
 import compare from 'src/utilities/compareObjects';
-import AuditData from 'src/utilities/parseAuditData';
+import pagesData from 'src/utilities/parsePagesData';
 import FetchData from 'src/components/graphql/utils';
-import { getAudits } from 'src/components/graphql/Queries';
-import Collapsible from 'src/components/collapsible';
+import { getPages } from 'src/components/graphql/Queries';
+import 'src/main.scss';
+import './main.scss';
 
-const Audit = props => {
+const Pages = props => {
   const [globalState, globalActions] = useGlobal();
+  const { setPage } = globalActions;
   const { phase, brand, page, date } = globalState;
   const { history } = props;
   const { metric, time } = history.location;
   const [query, setQuery] = useState(<></>);
-  const [data, setData] = useState({ lighthousedata: [{ audits: {} }] });
+  const [data, setData] = useState({ lighthousedata: [] });
   const prevState = previousState({ phase, brand, page, date, metric, time });
   const map = {
     performance: 'performance',
-    accessibility: 'accessibility',
+    accessibilty: 'accessibilty',
     best_practices: 'best_practices',
     s_e_o: 'seo',
     p_w_a: 'pwa'
@@ -35,40 +37,41 @@ const Audit = props => {
     finalUrl: page,
     ...timeRange
   };
+  console.log(variables);
   const onMount = useRef(true);
   useEffect(() => {
     if (onMount.current) {
-      setQuery(FetchData(getAudits(map[metric]), setData, variables));
+      setQuery(FetchData(getPages(map[metric]), setData, variables));
+      console.log(getPages(map[metric]));
       onMount.current = false;
       return;
     }
     if (!compare(prevState, { phase, brand, page, date, metric, time })) {
-      setQuery(FetchData(getAudits(map[metric]), setData, variables));
+      setQuery(FetchData(getPages(map[metric]), setData, variables));
     }
   });
-  const auditsData = AuditData(data.lighthousedata[0] ? data.lighthousedata[0].audits : {});
-  console.log(data);
-  const DispAudit = auditsData.map(item => {
-    // console.log(item.id);
+  const pages = pagesData(data.lighthousedata, map[metric]);
+  // console.log(data);
+  const DispPages = pages.map(item => {
     return (
-      <Collapsible
-        {...props}
-        key={item.id}
-        k={item.id}
-        title={item.title}
-        desc={item.description}
-        score={item.score}
-        weight={item.weight}
-        nv={item.numericValue}
-      />
+      <div key={item.fetchTime} className="col s10 m5 l3 pageCard" onClick={e => setPage(item.finalUrl)}>
+        {item.finalUrl}
+        <br />
+        <br />
+        Time: {item.fetchTime}
+        <br />
+        <br />
+        Score: {item.score * 100}
+        <br />
+      </div>
     );
   });
   return (
-    <>
-      {DispAudit}
+    <div className="flexbox">
+      {DispPages}
       {query}
-    </>
+    </div>
   );
 };
 
-export default Audit;
+export default Pages;
