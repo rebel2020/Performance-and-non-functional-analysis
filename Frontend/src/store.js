@@ -9,7 +9,7 @@ const initialState = {
   brand: '',
   page: '',
   date: new Date(getDate(today.getTime(), -1)).getTime(),
-  toDate: '',
+  toDate: new Date(getDate(today.getTime(), 1)).getTime(),
   toggle: false,
   filterLists: {
     brand: [],

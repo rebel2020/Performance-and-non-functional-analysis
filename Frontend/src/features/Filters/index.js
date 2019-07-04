@@ -61,7 +61,10 @@ const Filters = props => {
           value={new Date(values.date).toISOString().substring(0, 10)}
           max={new Date().toISOString().substring(0, 10)}
           min="2019-07-01"
-          onChange={value => setDate(value)}
+          onChange={value => {
+            setValues({ ...values, toDate: value });
+            setDate(value);
+          }}
         />
       </div>
       <div className="col s6 m4 l2">
@@ -69,10 +72,13 @@ const Filters = props => {
           <Input
             className="dateInput"
             type="date"
-            value=""
+            value={new Date(values.toDate).toISOString().substring(0, 10)}
             max={new Date().toISOString().substring(0, 10)}
             min="2019-07-01"
-            onChange={value => setToDate(value)}
+            onChange={value => {
+              setValues({ ...values, toDate: value });
+              setToDate(value);
+            }}
           />
         ) : (
           <></>
