@@ -5,7 +5,7 @@ import Highcharts from 'highcharts/highcharts';
 import HighchartsMore from 'highcharts/highcharts-more';
 import Gauge from 'highcharts/modules/solid-gauge';
 import useGlobal from 'src/store';
-
+import setSearch from 'src/utilities/search';
 import formatString from 'src/utilities/formatString';
 
 const setGraph = (name, value) => {
@@ -104,7 +104,7 @@ const SolidGuage = props => {
         if (page)
           history.push({
             pathname: `/lighthouse`,
-            search: `audits=${name}`,
+            search: `audits=${name}&${setSearch({ phase, brand, page, date, toDate: date })}`,
             metric: name
             // time: new Date(date).getTime().toString()
           });

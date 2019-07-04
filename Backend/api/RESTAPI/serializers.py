@@ -1,6 +1,7 @@
 from rest_framework_mongoengine import serializers
 from api.RESTAPI.models import *
- 
+count = 21
+
 class LighthouseDataSerializer(serializers.DocumentSerializer):
     class Meta:
         model = LighthouseData

@@ -6,10 +6,12 @@ from django.urls import path
 router = routers.DefaultRouter()
 router.register(r'lighthouse', LighthouseDataViewSet)
 router.register(r'gatling', GatlingDataViewSet)
+router.register(r'lighthouse/alert',LighthouseDataViewSet)
 
 urlpatterns = []
 urlpatterns+=[
-    url('lighthouse',LighthouseDataViewSet.as_view({'post':'post','get':'get'})),
+    url(r'^lighthouse$',LighthouseDataViewSet.as_view({'post':'post','get':'get'})),
     url(r'gatling',GatlingDataViewSet.as_view({'post':'post','get':'get'})),
+    url(r'lighthouse/alert',LighthouseDataViewSet.as_view({'get':'alert'})),
               ]
 urlpatterns += router.urls

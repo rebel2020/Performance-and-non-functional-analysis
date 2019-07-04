@@ -1,5 +1,6 @@
 import React from 'react';
 import './styles.scss';
+
 const AlertCollapsible = props => {
   const { k, history, title, desc, perc } = props;
   let alcol;
@@ -21,7 +22,7 @@ const AlertCollapsible = props => {
           <div className={`collapsible-${k}-area`}>
             <div className="row">
               <p className=" col m6">{desc}</p>
-              <p className=" col m6 ">Decrease by: {perc}%</p>
+              <p className=" col m6 ">Decrease by:{perc}%</p>
             </div>
             <br />
 

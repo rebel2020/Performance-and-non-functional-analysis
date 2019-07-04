@@ -6,6 +6,7 @@ import previousState from 'src/utilities/previousState';
 import compare from 'src/utilities/compareObjects';
 import formatString from 'src/utilities/formatString';
 import FetchData from 'src/components/graphql/utils';
+import setSearch from 'src/utilities/search';
 import map, { averageMap } from 'src/utilities/map';
 import { getTimeRange, getDate, dateOfAverage } from 'src/utilities/timeConversions';
 import { AVG_LIGHTHOUSE_SCORES, getQuery, AVG_SCORES } from 'src/components/graphql/Queries';
@@ -13,14 +14,14 @@ import datal from './datal';
 
 const setGraph = (history, name, toUrl, data) => {
   const [globalState, globalActions] = useGlobal();
-  const { page } = globalState;
+  const { phase, brand, page, date, toDate } = globalState;
   const { audit, metric } = history;
   return {
     chart: {
       zoomType: 'x',
       spacingLeft: 50,
       spacingRight: 50,
-      backgroundColor:'#EFEDED'
+      backgroundColor: '#EFEDED'
       // style: {
       //   color: 'white'
       // }
@@ -58,7 +59,13 @@ const setGraph = (history, name, toUrl, data) => {
               if (page)
                 history.push({
                   pathname: `/lighthouse/${name}`,
-                  search: `audits=${metric || name}`,
+                  search: `audits=${metric || name}&${setSearch({
+                    phase,
+                    brand,
+                    page,
+                    date: new Date(e.point.x).getTime(),
+                    toDate: new Date(e.point.x + 86400000).getTime()
+                  })}`,
                   // state: { x: e.point.x, metric: name }
                   metric: name,
                   audit: audit || '',
@@ -67,6 +74,13 @@ const setGraph = (history, name, toUrl, data) => {
               else
                 history.push({
                   pathname: `/lighthouse/${name}`,
+                  search: setSearch({
+                    phase,
+                    brand,
+                    page,
+                    date: new Date(e.point.x).getTime(),
+                    toDate: new Date(e.point.x + 86400000).getTime()
+                  }),
                   // search: `audits=${metric || name}`,
                   // state: { x: e.point.x, metric: name }
                   metric: name,
