@@ -60,7 +60,6 @@ const Audit = props => {
         score={item.score}
         weight={item.weight}
         nv={item.numericValue}
-        link={item.link}
       />
     );
   });

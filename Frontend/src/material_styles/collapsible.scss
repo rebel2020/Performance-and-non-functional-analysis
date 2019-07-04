@@ -23,13 +23,13 @@
 }
 
 label[for*="collapsible-"] { // Label
-	width: 100%;
+	width: 100%; 
 	cursor: pointer;
 	display: flex;
 	position: relative;
 	padding: $space-small*1.5 24px;
 	border-bottom: solid 1px lighten($grey, 30%);
-	color: lighten($black, 15%);
+	
 	border-radius: 3px;
 	&:before, &:after {
 		content: '';
@@ -37,7 +37,7 @@ label[for*="collapsible-"] { // Label
 		right: $space-med;
 		width: 2px;
 		height: 8px;
-		background: $grey;
+		background: $silver;
 		transition: all 0.3s ease;
 	}
 	&:before {
@@ -58,4 +58,5 @@ label[for*="collapsible-"] { // Label
 	will-change: height, transform;
 	transition: all 0.3s ease;
 	padding-left: $space-med;
+	background: #EDEBEB;
 }

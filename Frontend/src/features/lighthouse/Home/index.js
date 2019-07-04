@@ -63,7 +63,7 @@ const HomeComponent = props => {
   let auditContainer = <></>;
   if (metric) auditContainer = <Audits metric={metric} {...props} />;
 
-  const numal = 3;
+  const numal = 5;
   let alertContainer = <></>;
 
   if (numal > 0) {
