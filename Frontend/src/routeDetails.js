@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import Lighthouse from './features/lighthouse';
 import Gatling from './features/gatling';
 import AlertPage from './features/AlertPage';
+import Recommendations from './features/Recommendations';
 
 const ROUTES = [
   {
@@ -47,8 +48,10 @@ const ROUTES = [
   },
   {
     exact: true,
-    path: '/lighthouse/recommendations',
-    main: (history, toggle, setToggle) => <Lighthouse history={history} />
+    path: '/Recommendations',
+    main: (history, toggle, setToggle) => (
+      <Recommendations history={history} comp="Recommendations" />
+    )
   },
   {
     exact: true,

@@ -31,6 +31,21 @@ const AVG_LIGHTHOUSE_SCORES = gql`
     }
   }
 `;
+
+const LIGHTHOUSE_RECOMMENDATIONS = gql`
+  {
+    recommendation {
+      PerformanceAuditRecommendations {
+        first_cpu_idle
+        first_contentful_paint
+        first_meaningful_paint
+        speed_index
+        interactive
+      }
+    }
+  }
+`;
+
 const mapper = {
   performance: performanceAuditFrag,
   best_practices: bestPracticeAuditFrag,
@@ -76,4 +91,4 @@ const getQuery = value => {
   `;
 };
 
-export { AVG_LIGHTHOUSE_SCORES, getQuery, getAudits };
+export { AVG_LIGHTHOUSE_SCORES, getQuery, getAudits, LIGHTHOUSE_RECOMMENDATIONS };
