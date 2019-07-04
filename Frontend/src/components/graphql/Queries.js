@@ -14,20 +14,20 @@ const mapper = {
 };
 
 const AVG_SCORES = gql`
-query {  
-  average{
-    _id
-    {
-      day
-      month
-      year
+  query {
+    average {
+      _id {
+        day
+        month
+        year
+      }
+      performanceAverage
+      seoAverage
+      pwaAverage
+      bestPracticesAverage
     }
-    performanceAverage
-    seoAverage
-    pwaAverage
-    bestPracticesAverage
   }
-} `
+`;
 
 const AVG_LIGHTHOUSE_SCORES = gql`
   query avgLightHouseScores(
@@ -130,4 +130,4 @@ const GATLING = gql`
   }
 `;
 
-export { AVG_LIGHTHOUSE_SCORES, getQuery, getAudits, GATLING, LIST };
+export { AVG_LIGHTHOUSE_SCORES, getQuery, getAudits, GATLING, LIST, AVG_SCORES };

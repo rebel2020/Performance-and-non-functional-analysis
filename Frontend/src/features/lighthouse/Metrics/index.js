@@ -3,18 +3,22 @@ import HighStock from 'src/components/highstock';
 import FetchData from 'src/components/graphql/utils';
 import Filters from '../../Filters';
 import Audits from '../Audits';
+import Pages from '../Pages';
 import 'src/main.scss';
 
 const MetricComponent = props => {
   const { history } = props;
-  const { metric } = history.location;
+  const { metric, average } = history.location;
   let auditContainer = <></>;
+  let pageContaner = <></>;
   if (metric) auditContainer = <Audits {...props} />;
+  if (average) pageContaner = <Pages {...props} />;
   return (
     <div className="container">
       <Filters dateRange="range" options={['http://fca-qa1-jeep-sape.test.com/']} />
       <HighStock {...props} toUrl="/lighthouse" />
       {auditContainer}
+      {pageContaner}
     </div>
   );
 };

@@ -45,18 +45,20 @@ const HomeComponent = props => {
 
   // AuditData(data.lighthousedata[0].audits);
   const obj = data.lighthousedata[0] ? data.lighthousedata[0].audits : {};
-  const flexItems = ['best_practices', 'performance', 'p_w_a', 's_e_o'].map((item, i) => {
-    return (
-      <div key={item}>
-        <SolidGauge
-          name={item}
-          value={Math.round(obj[map[item]] ? obj[map[item]].score * 100 : '')}
-          // value={70}
-          {...props}
-        />
-      </div>
-    );
-  });
+  const flexItems = ['performance', 'accessibility', 'best_practices', 'p_w_a', 's_e_o'].map(
+    (item, i) => {
+      return (
+        <div key={item}>
+          <SolidGauge
+            name={item}
+            value={Math.round(obj[map[item]] ? obj[map[item]].score * 100 : '')}
+            // value={70}
+            {...props}
+          />
+        </div>
+      );
+    }
+  );
 
   let auditContainer = <></>;
   if (metric) auditContainer = <Audits metric={metric} {...props} />;

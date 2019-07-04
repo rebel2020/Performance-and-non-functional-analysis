@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Datalist from 'src/components/datalist';
 // import SelectList from 'src/components/selectlist';
-import { getDate } from 'src/utilities/timeConversions';
+import { getDate, getHtmlDate } from 'src/utilities/timeConversions';
 import Input from 'src/components/Input';
 import useGlobal from 'src/store';
 import './main.scss';
@@ -10,8 +10,14 @@ const Filters = props => {
   const [globalState, globalActions] = useGlobal();
   const { setPage, setDate, setToDate, setBrand, setEnv, setPagecomp } = globalActions;
   const { phase, brand, page, date, toDate, filterLists } = globalState;
-  const { dateRange, options } = props;
-  const [values, setValues] = useState({ phase, brand, page, date, toDate });
+  const { dateRange } = props;
+  const [values, setValues] = useState({
+    phase,
+    brand,
+    page,
+    date: getHtmlDate(date),
+    toDate: getHtmlDate(toDate)
+  });
   return (
     <div className="filters text-center">
       <div className="col s6 m3 l2">
@@ -58,11 +64,11 @@ const Filters = props => {
         <Input
           className="dateInput"
           type="date"
-          value={new Date(values.date).toISOString().substring(0, 10)}
-          max={new Date().toISOString().substring(0, 10)}
+          value={values.date}
+          max={getHtmlDate(new Date().getTime())}
           min="2019-07-01"
           onChange={value => {
-            setValues({ ...values, toDate: value });
+            setValues({ ...values, date: value });
             setDate(value);
           }}
         />
@@ -72,8 +78,8 @@ const Filters = props => {
           <Input
             className="dateInput"
             type="date"
-            value={new Date(values.toDate).toISOString().substring(0, 10)}
-            max={new Date().toISOString().substring(0, 10)}
+            value={values.toDate}
+            max={getHtmlDate(new Date().getTime())}
             min="2019-07-01"
             onChange={value => {
               setValues({ ...values, toDate: value });
