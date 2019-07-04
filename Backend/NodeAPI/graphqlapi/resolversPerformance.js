@@ -33,6 +33,7 @@ const resolversPerformance = {
 		},
 
 		gatlingdata: async(root, options) => {
+			// return await GatlingData.find({}).exec();
 			const {url, fetchTimeStart, fetchTimeEnd, phase, brand} = options;
 			var timeEnd = fetchTimeEnd;
 			var timeStart = fetchTimeStart;
@@ -71,10 +72,12 @@ const resolversPerformance = {
 				timeEnd = new Date(parseInt(timeEnd));
 				console.log(timeEnd);
 			}
+			console.log("time start: "+ timeStart );
+			console.log("time end: "+ timeEnd );
 			return await GatlingData
 			.find({
-				...newOptions,
-				fetchTime: { $lte : timeEnd, $gte: timeStart} 
+				 ...newOptions,
+				 //fetchTime: { $lte : timeEnd, $gte: timeStart} 
 			})
 			.sort({fetchTime: -1});
 		},
