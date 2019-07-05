@@ -15,6 +15,7 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
     queryset = LighthouseData.objects.all()
     serializer_class = LighthouseDataSerializer
     def post(self,request):
+        globalAvg = GlobalAvg.objects.all()
         try:
             data=fun(request.data['value'])
         except:
@@ -29,10 +30,11 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
                               seo_audits=data['audits']['seo_audits'], pwa_audits=data['audits']['pwa_audits'],
                               accessibility_audits=data['audits']["accessibility_audits"])
             newData['audits']=auditData
-            temp = datetime.strptime(str(data['fetchTime']), "%Y-%m-%dT%H:%M:%S.%fZ")
-            from .serializers import count
-            newData['fetchTime']=temp.replace(day=int(count/21),month=6)
-            count+=1
+            newData['fetchTime'] = datetime.strptime(str(data['fetchTime']), "%Y-%m-%dT%H:%M:%S.%fZ")
+#            temp = datetime.strptime(str(data['fetchTime']), "%Y-%m-%dT%H:%M:%S.%fZ")
+ #           from .serializers import count
+  #          newData['fetchTime']=temp.replace(day=int(count/21),month=6)
+   #         count+=1
         except:
             raise ValidationError
         try:
@@ -59,7 +61,7 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
         url_map = []
         cnt=0
         for url in url_list[0]['urls']:
-            temp=LighthouseData.objects.filter(requestedUrl =url).order_by('-id')[:2]
+            temp=LighthouseData.objects.filter(requestedUrl =url).order_by('-id')[:]
             if len(temp) > 1:
                 data_list.append(temp)
                 get_alerts(temp,url,alerts)
