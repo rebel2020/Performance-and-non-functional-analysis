@@ -196,3 +196,7 @@ class GatlingData(Document):
 
 class URLData(Document):
 	urls = ListField(StringField())
+
+class GlobalAvg(Document):
+	avg = DictField()
+	url = StringField()

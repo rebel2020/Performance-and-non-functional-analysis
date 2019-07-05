@@ -7,7 +7,7 @@ const map = {
 };
 const averageMap = {
   performance: 'performanceAverage',
-  accessibility: 'accessibiltyAverage',
+  accessibility: 'accessibilityAverage',
   best_practices: 'bestPracticesAverage',
   p_w_a: 'pwaAverage',
   s_e_o: 'seoAverage'

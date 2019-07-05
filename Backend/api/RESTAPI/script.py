@@ -1,5 +1,5 @@
 import json
-def fun(file):
+def fun(file,globalAvg):
     data = file
     try:
         data = json.loads(data)
@@ -53,7 +53,8 @@ def fun(file):
             except:
                 pass
             try:
-                Audits[Audit]['score'] = data['categories'][weight_dict[Audit]]['score']
+                score = data['categories'][weight_dict[Audit]]['score']
+                Audits[Audit]['score'] = score
             except:
                 pass
     audits['seo_audits']=Audits["SEAudit_list"]

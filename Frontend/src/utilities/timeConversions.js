@@ -29,7 +29,7 @@ const getHtmlDate = time => {
 
 const dateOfAverage = obj2 => {
   // console.log(obj2);
-  const obj = obj2._id;
+  const obj = obj2.fetchDate;
   const date = `${obj.year}-${obj.month}-${obj.day}`;
   const time = new Date(date).getTime();
   // console.log(`average ${new Date(date).getTime()}`);
