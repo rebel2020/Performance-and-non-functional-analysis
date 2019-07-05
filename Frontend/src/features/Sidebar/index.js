@@ -101,7 +101,7 @@ const Sidebar = props => {
           {toggle ? 'Best Practices' : ''}
         </div>
       </Link>
-      <Link className="sidelink" to="/lighthouse/recommendations">
+      <Link className="sidelink" to="/lighthouse/Recommendations">
         <div className="sidelink">
           <div className="txt-center">
             <h2>

@@ -33,7 +33,7 @@ const AlertCollapsible = props => {
                 className="btn--raised left col m4"
                 onClick={() =>
                   history.push({
-                    pathname: `/lighthouse/recommendations`
+                    pathname: `/lighthouse/Recommendations`
                     // search: `recommendation=${title}`,
                     // recommendation: title
                   })
