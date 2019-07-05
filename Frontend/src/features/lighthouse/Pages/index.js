@@ -1,7 +1,10 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useEffect, useRef } from 'react';
 import useGlobal from 'src/store';
 import previousState from 'src/utilities/previousState';
 import { getTimeRange } from 'src/utilities/timeConversions';
+import setSearch from 'src/utilities/search';
 import compare from 'src/utilities/compareObjects';
 import pagesData from 'src/utilities/parsePagesData';
 import FetchData from 'src/components/graphql/utils';
@@ -12,7 +15,7 @@ import './main.scss';
 const Pages = props => {
   const [globalState, globalActions] = useGlobal();
   const { setPage } = globalActions;
-  const { phase, brand, page, date } = globalState;
+  const { phase, brand, page, date, toDate } = globalState;
   const { history } = props;
   const { metric, time } = history.location;
   const [query, setQuery] = useState(<></>);
@@ -50,12 +53,10 @@ const Pages = props => {
     }
   });
   const pages = pagesData(data.lighthousedata, map[metric]);
-  let pagecardcomponent = <></>;
   let bgcol;
   // console.log(data);
   const DispPages = pages.map(item => {
     const roundscore = Math.round(item.score * 100);
-
     if (roundscore <= 12) {
       bgcol = 'bg--pomegranate';
     } else if (roundscore > 12 && roundscore <= 18) {
@@ -67,7 +68,19 @@ const Pages = props => {
       <div
         key={item.fetchTime}
         className={`col s10 m5 l3 pageCard ${bgcol}`}
-        onClick={e => setPage(item.finalUrl)}
+        onClick={() => {
+          setPage(item.finalUrl);
+          history.push({
+            pathname: history.pathname,
+            search: setSearch({
+              phase,
+              brand,
+              page: item.finalUrl,
+              date,
+              toDate
+            })
+          });
+        }}
       >
         {item.finalUrl}
         <br />
