@@ -1,6 +1,7 @@
 import gql from 'graphql-tag';
 import {
   performanceAuditFrag,
+  accessibilityAuditFrag,
   bestPracticeAuditFrag,
   pwaAuditFrag,
   seoAuditFrag
@@ -8,20 +9,36 @@ import {
 
 const mapper = {
   performance: performanceAuditFrag,
+  accessibility: accessibilityAuditFrag,
   best_practices: bestPracticeAuditFrag,
   seo: seoAuditFrag,
   pwa: pwaAuditFrag
 };
 
 const AVG_SCORES = gql`
-  query {
-    average {
-      _id {
+  query average(
+    $finalUrl: String
+    $fetchTimeStart: String
+    $fetchTimeEnd: String
+    $brand: String
+    $project: String
+    $phase: String
+  ) {
+    average(
+      finalUrl: $finalUrl
+      fetchTimeStart: $fetchTimeStart
+      fetchTimeEnd: $fetchTimeEnd
+      brand: $brand
+      project: $project
+      phase: $phase
+    ) {
+      fetchDate {
         day
         month
         year
       }
       performanceAverage
+      accessibilityAverage
       seoAverage
       pwaAverage
       bestPracticesAverage
@@ -49,6 +66,9 @@ const AVG_LIGHTHOUSE_SCORES = gql`
       _id
       audits {
         performance_audits {
+          score
+        }
+        accessibility_audits {
           score
         }
         best_practices_audits {
@@ -80,6 +100,7 @@ const LIGHTHOUSE_RECOMMENDATIONS = gql`
 `;
 const getAudits = value => {
   const val = mapper[value];
+  console.log(val, value);
   return gql`
   query Audits($finalUrl:String,$fetchTimeStart:String,$fetchTimeEnd:String,
     $brand:String,$project:String,$phase:String){
@@ -99,6 +120,30 @@ const getAudits = value => {
     }
   }
   ${val.audits}
+`;
+};
+
+const getPages = value => {
+  return gql`
+  query Pages($finalUrl:String,$fetchTimeStart:String,$fetchTimeEnd:String,
+    $brand:String,$project:String,$phase:String){
+    lighthousedata(
+      finalUrl:$finalUrl
+      fetchTimeStart:$fetchTimeStart
+      fetchTimeEnd:$fetchTimeEnd
+      brand:$brand
+      project:$project
+      phase:$phase
+    ){
+      fetchTime
+      finalUrl
+      audits {
+        ${value}_audits {
+          score
+        }
+      }
+    }
+  }
 `;
 };
 
@@ -143,4 +188,13 @@ const GATLING = gql`
   }
 `;
 
-export { AVG_LIGHTHOUSE_SCORES, getQuery, getAudits, GATLING, LIST, LIGHTHOUSE_RECOMMENDATIONS };
+export {
+  AVG_LIGHTHOUSE_SCORES,
+  getQuery,
+  getAudits,
+  getPages,
+  GATLING,
+  LIST,
+  AVG_SCORES,
+  LIGHTHOUSE_RECOMMENDATIONS
+};

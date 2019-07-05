@@ -205,7 +205,7 @@ type AuditsAverage{
 	pwaAverage: Float
 	bestPracticesAverage: Float
 	accessibilityAverage: Float
-	_id: FetchDate
+	fetchDate: FetchDate
 }
 
 type Bench{
@@ -251,7 +251,8 @@ type RecommendationData{
 
 type Query{
 	allLighthousedata: [LighthouseData]
-	gatlingdata: [GatlingData]
+	gatlingdata(url: String, fetchTimeStart: String, fetchTimeEnd: String
+				, phase: String, brand: String): [GatlingData]
 	lighthousedata(finalUrl: String, fetchTimeStart: String, fetchTimeEnd: String,
 						 project: String, phase: String, brand: String): [LighthouseData]
 	average(finalUrl: String, fetchTimeStart: String, fetchTimeEnd: String,

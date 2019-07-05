@@ -189,8 +189,14 @@ class GatlingData(Document):
 	stats = StringField()
 	scala = StringField()
 	url = StringField()
-	fetchTime = DateTimeField(default=datetime.datetime.utcnow().isoformat())
+	fetchTime = DateTimeField()
 	server_stats = EmbeddedDocumentField(ServerStats)
+	brand = StringField()
+	phase = StringField()
 
 class URLData(Document):
 	urls = ListField(StringField())
+
+class GlobalAvg(Document):
+	avg = DictField()
+	url = StringField()

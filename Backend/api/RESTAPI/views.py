@@ -8,12 +8,14 @@ from api.RESTAPI.models import *
 import json
 from .script import fun
 from datetime import datetime
+from .alertScript import get_alerts
 
 class LighthouseDataViewSet(viewsets.ModelViewSet):
     lookup_field = 'id'
     queryset = LighthouseData.objects.all()
     serializer_class = LighthouseDataSerializer
     def post(self,request):
+        globalAvg = GlobalAvg.objects.all()
         try:
             data=fun(request.data['value'])
         except:
@@ -21,9 +23,6 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
                 data=fun(request.data)
             except:
                 raise ValidationError
-#        newData=LighthouseDataSerializer(data=data)
-#        md = MetricDetailed(score=data['audits']['performance_audits']['first_contentful_paint']['score'])
-#        PAData = PerformanceAudit(score=data['audits']['performance_audits']['score'])
         try:
             newData = LighthouseData(environment=data['environment'])
             auditData = Audit(performance_audits=data['audits']['performance_audits'],
@@ -32,6 +31,10 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
                               accessibility_audits=data['audits']["accessibility_audits"])
             newData['audits']=auditData
             newData['fetchTime'] = datetime.strptime(str(data['fetchTime']), "%Y-%m-%dT%H:%M:%S.%fZ")
+#            temp = datetime.strptime(str(data['fetchTime']), "%Y-%m-%dT%H:%M:%S.%fZ")
+ #           from .serializers import count
+  #          newData['fetchTime']=temp.replace(day=int(count/21),month=6)
+   #         count+=1
         except:
             raise ValidationError
         try:
@@ -51,18 +54,23 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
         data = LighthouseDataSerializer(queryset,many=True)
         data=json.dumps(data.data)
         return HttpResponse(data)
+    def alert(self,request):
+        url_list = URLData.objects.all()
+        data_list = []
+        alerts = []
+        url_map = []
+        cnt=0
+        for url in url_list[0]['urls']:
+            temp=LighthouseData.objects.filter(requestedUrl =url).order_by('-id')[:]
+            if len(temp) > 1:
+                data_list.append(temp)
+                get_alerts(temp,url,alerts)
+        return HttpResponse(json.dumps(alerts))
 class GatlingDataViewSet(viewsets.ModelViewSet):
     lookup_field = 'id'
     queryset = GatlingData.objects.all()
     serializer_class = GatlingDataSerializer
     def post(self,request):
-#        newData=URLData()
- #       temp=request.data['value']
-  #      list1=temp.split(",")
-   #     print(temp)
-    #    newData['urls']=list1
-     #   newData.save()
-      #  return HttpResponse("AAAA")
         newData=GatlingData()
         data=request.data
         try:
@@ -84,19 +92,18 @@ class GatlingDataViewSet(viewsets.ModelViewSet):
         except:
             pass
         try:
+            newData['scala'] = data['scala']
+            newData['fetchTime'] = datetime.fromtimestamp(int(data['fetchTime'])/1000).strftime('%Y-%m-%d %H:%M:%S.%f%Z')#[:-7]+str(data['fetchTime']%1000)+"Z"
             newData['url'] = data['url']
-            newData['fetchTime'] = datetime.strptime(str(data['fetchTime']),"%Y-%m-%dT%H:%M:%S.%fZ")
-        except:
-            pass
-        try:
-            newData['scala']= data['scala']
         except:
             pass
         try:
             newData['stats'] = json.dumps(data['stats'])
+            newData['phase'] = data['phase']
+            newData['brand'] = data['brand']
             newData.save()
         except:
-            ValidationError
+            raise ValidationError
         return HttpResponse(request.data)
     def get(self, request):
         lookup_field = 'id'

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import Datalist from 'src/components/datalist';
 // import SelectList from 'src/components/selectlist';
-import { getDate } from 'src/utilities/timeConversions';
+import { getDate, getHtmlDate } from 'src/utilities/timeConversions';
+import setSearch from 'src/utilities/search';
 import Input from 'src/components/Input';
 import useGlobal from 'src/store';
 import './main.scss';
@@ -10,8 +11,15 @@ const Filters = props => {
   const [globalState, globalActions] = useGlobal();
   const { setPage, setDate, setToDate, setBrand, setEnv, setPagecomp } = globalActions;
   const { phase, brand, page, date, toDate, filterLists } = globalState;
-  const { dateRange, options } = props;
-  const [values, setValues] = useState({ phase, brand, page, date, toDate });
+  const { dateRange, history } = props;
+  console.log(page);
+  const [values, setValues] = useState({
+    phase,
+    brand,
+    page,
+    date: getHtmlDate(date),
+    toDate: getHtmlDate(toDate)
+  });
   return (
     <div className="filters text-center">
       <div className="col s6 m3 l2">
@@ -23,7 +31,13 @@ const Filters = props => {
           options={filterLists.phase}
           onChange={value => {
             setValues({ ...values, phase: value });
-            if (filterLists.phase.includes(value)) setEnv(value);
+            if (filterLists.phase.includes(value)) {
+              setEnv(value);
+              history.push({
+                pathname: history.pathname,
+                search: setSearch({ phase: value, brand, page, date, toDate })
+              });
+            }
           }}
         />
       </div>
@@ -36,7 +50,13 @@ const Filters = props => {
           options={filterLists.brand}
           onChange={value => {
             setValues({ ...values, brand: value });
-            if (filterLists.brand.includes(value)) setBrand(value);
+            if (filterLists.brand.includes(value)) {
+              setBrand(value);
+              history.push({
+                pathname: history.pathname,
+                search: setSearch({ phase, brand: value, page, date, toDate })
+              });
+            }
           }}
         />
       </div>
@@ -50,7 +70,13 @@ const Filters = props => {
           options={filterLists.finalUrl}
           onChange={value => {
             setValues({ ...values, page: value });
-            if (filterLists.finalUrl.includes(value)) setPage(value);
+            if (filterLists.finalUrl.includes(value)) {
+              setPage(value);
+              history.push({
+                pathname: history.pathname,
+                search: setSearch({ phase, brand, page: value, date, toDate })
+              });
+            }
           }}
         />
       </div>
@@ -58,10 +84,17 @@ const Filters = props => {
         <Input
           className="dateInput"
           type="date"
-          value={new Date(values.date).toISOString().substring(0, 10)}
-          max={new Date().toISOString().substring(0, 10)}
+          value={values.date}
+          max={getHtmlDate(new Date().getTime())}
           min="2019-07-01"
-          onChange={value => setDate(value)}
+          onChange={value => {
+            setValues({ ...values, date: value });
+            setDate(value);
+            history.push({
+              pathname: history.pathname,
+              search: setSearch({ phase, brand, page, date: value, toDate })
+            });
+          }}
         />
       </div>
       <div className="col s6 m4 l2">
@@ -69,10 +102,17 @@ const Filters = props => {
           <Input
             className="dateInput"
             type="date"
-            value=""
-            max={new Date().toISOString().substring(0, 10)}
+            value={values.toDate}
+            max={getHtmlDate(new Date().getTime())}
             min="2019-07-01"
-            onChange={value => setToDate(value)}
+            onChange={value => {
+              setValues({ ...values, toDate: value });
+              setToDate(value);
+              history.push({
+                pathname: history.pathname,
+                search: setSearch({ phase, brand, page, date, toDate: value })
+              });
+            }}
           />
         ) : (
           <></>

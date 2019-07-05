@@ -18,6 +18,7 @@ const Audit = props => {
   const prevState = previousState({ phase, brand, page, date, metric, time });
   const map = {
     performance: 'performance',
+    accessibility: 'accessibility',
     best_practices: 'best_practices',
     s_e_o: 'seo',
     p_w_a: 'pwa'
@@ -25,7 +26,7 @@ const Audit = props => {
   const timeRange = time
     ? {
         fetchTimeStart: time,
-        fetchTimeEnd: time
+        fetchTimeEnd: (parseInt(time, 10) + 86400000).toString()
       }
     : getTimeRange(date);
   const variables = {
@@ -46,7 +47,17 @@ const Audit = props => {
     }
   });
   const auditsData = AuditData(data.lighthousedata[0] ? data.lighthousedata[0].audits : {});
+  function comp(a, b) {
+    if (a.score < b.score) {
+      return -1;
+    }
+    if (a.score > b.score) {
+      return 1;
+    }
+    return 0;
+  }
   console.log(data);
+  auditsData.sort(comp);
   const DispAudit = auditsData.map(item => {
     // console.log(item.id);
     return (

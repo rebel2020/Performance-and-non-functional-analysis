@@ -1,6 +1,5 @@
 import json
-import datetime as time
-def fun(file):
+def fun(file,globalAvg):
     data = file
     try:
         data = json.loads(data)
@@ -15,40 +14,7 @@ def fun(file):
     weight_dict["SEAudit_list"] = "seo"
     weight_dict["PWAAudit_list"] = "pwa"
     weight_dict["AAudit_list"] = "accessibility"
-    PAudit_list = ['first-contentful-paint', 'first-meaningful-paint', 'speed-index', 'interactive', 'first-cpu-idle',
-                   'max-potential-fid', 'estimated-input-latency', 'render-blocking-resources',
-                   'uses-responsive-images', 'offscreen-images', 'unminified-css', 'unminified-javascript',
-                   'unused-css-rules', 'uses-optimized-images', 'uses-webp-images', 'uses-text-compression',
-                   'uses-rel-preconnect', 'time-to-first-byte', 'redirects', 'uses-rel-preload',
-                   'efficient-animated-content', 'total-byte-weight', 'uses-long-cache-ttl', 'dom-size', 'user-timings',
-                   'bootup-time', 'mainthread-work-breakdown', 'font-display', 'resource-summary', 'network-requests',
-                   'network-rtt', 'network-server-latency', 'main-thread-tasks', 'diagnostics', 'metrics']
-    BPAudit_list = ['appcache-manifest', 'is-on-https', 'uses-http2', 'uses-passive-event-listeners',
-                    'no-document-write', 'external-anchors-use-rel-noopener', 'geolocation-on-start', 'doctype',
-                    'no-vulnerable-libraries', 'js-libraries', 'notification-on-start', 'deprecations',
-                    'password-inputs-can-be-pasted-into', 'errors-in-console', 'image-aspect-ratio']
-    SEAudit_list = ['viewport', 'document-title', 'meta-description', 'http-status-code', 'link-text', 'is-crawlable',
-                    'robots-txt', 'image-alt', 'hreflang', 'canonical', 'font-size', 'plugins', 'tap-targets']
-    PWAAudit_list = ['load-fast-enough-for-pwa', 'works-offline', 'offline-start-url', 'is-on-https',
-                       'service-worker', 'installable-manifest', 'redirects-http', 'splash-screen', 'themed-omnibox',
-                       'content-width', 'viewport', 'without-javascript', 'apple-touch-icon', 'pwa-cross-browser',
-                       'pwa-page-transitions', 'pwa-each-page-has-url']
-    AAudit_list = ['accesskeys', 'aria-allowed-attr', 'aria-required-attr', 'aria-required-children',
-                     'aria-required-parent', 'aria-roles', 'aria-valid-attr-value', 'aria-valid-attr', 'audio-caption',
-                     'button-name', 'bypass', 'color-contrast', 'definition-list', 'dlitem', 'document-title',
-                     'duplicate-id', 'frame-title', 'html-has-lang', 'html-lang-valid', 'image-alt', 'input-image-alt',
-                     'label', 'layout-table', 'link-name', 'list-', 'listitem', 'meta-refresh', 'meta-viewport',
-                     'object-alt', 'tabindex', 'td-headers-attr', 'th-has-data-cells', 'valid-lang', 'video-caption',
-                     'video-description', 'logical-tab-order', 'focusable-controls', 'interactive-element-affordance',
-                     'managed-focus', 'focus-traps', 'custom-controls-labels', 'custom-controls-roles',
-                     'visual-order-follows-dom', 'offscreen-content-hidden', 'heading-levels', 'use-landmarks']
-
-    Audit_list = dict()
-    Audit_list["PWAAudit_list"] = PWAAudit_list
-    Audit_list["PAudit_list"]=PAudit_list
-    Audit_list["BPAudit_list"]=BPAudit_list
-    Audit_list["SEAudit_list"] = SEAudit_list
-    Audit_list["AAudit_list"] = AAudit_list
+    Audit_list = Initialize()
     for Audit in Audit_list:
         Audits[Audit] = dict()
     for Audit in Audit_list:
@@ -87,7 +53,8 @@ def fun(file):
             except:
                 pass
             try:
-                Audits[Audit]['score'] = data['categories'][weight_dict[Audit]]['score']
+                score = data['categories'][weight_dict[Audit]]['score']
+                Audits[Audit]['score'] = score
             except:
                 pass
     audits['seo_audits']=Audits["SEAudit_list"]
@@ -131,3 +98,38 @@ def fun1(s):
         else:
             temp += s[i]
     return temp
+def Initialize():
+    Audit_list = dict()
+    PAudit_list = ['first-contentful-paint', 'first-meaningful-paint', 'speed-index', 'interactive', 'first-cpu-idle',
+                   'max-potential-fid', 'estimated-input-latency', 'render-blocking-resources',
+                   'uses-responsive-images', 'offscreen-images', 'unminified-css', 'unminified-javascript',
+                   'unused-css-rules', 'uses-optimized-images', 'uses-webp-images', 'uses-text-compression',
+                   'uses-rel-preconnect', 'time-to-first-byte', 'redirects', 'uses-rel-preload',
+                   'efficient-animated-content', 'total-byte-weight', 'uses-long-cache-ttl', 'dom-size', 'user-timings',
+                   'bootup-time', 'mainthread-work-breakdown', 'font-display', 'resource-summary', 'network-requests',
+                   'network-rtt', 'network-server-latency', 'main-thread-tasks', 'diagnostics', 'metrics']
+    BPAudit_list = ['appcache-manifest', 'is-on-https', 'uses-http2', 'uses-passive-event-listeners',
+                    'no-document-write', 'external-anchors-use-rel-noopener', 'geolocation-on-start', 'doctype',
+                    'no-vulnerable-libraries', 'js-libraries', 'notification-on-start', 'deprecations',
+                    'password-inputs-can-be-pasted-into', 'errors-in-console', 'image-aspect-ratio']
+    SEAudit_list = ['viewport', 'document-title', 'meta-description', 'http-status-code', 'link-text', 'is-crawlable',
+                    'robots-txt', 'image-alt', 'hreflang', 'canonical', 'font-size', 'plugins', 'tap-targets']
+    PWAAudit_list = ['load-fast-enough-for-pwa', 'works-offline', 'offline-start-url', 'is-on-https',
+                     'service-worker', 'installable-manifest', 'redirects-http', 'splash-screen', 'themed-omnibox',
+                     'content-width', 'viewport', 'without-javascript', 'apple-touch-icon', 'pwa-cross-browser',
+                     'pwa-page-transitions', 'pwa-each-page-has-url']
+    AAudit_list = ['accesskeys', 'aria-allowed-attr', 'aria-required-attr', 'aria-required-children',
+                   'aria-required-parent', 'aria-roles', 'aria-valid-attr-value', 'aria-valid-attr', 'audio-caption',
+                   'button-name', 'bypass', 'color-contrast', 'definition-list', 'dlitem', 'document-title',
+                   'duplicate-id', 'frame-title', 'html-has-lang', 'html-lang-valid', 'image-alt', 'input-image-alt',
+                   'label', 'layout-table', 'link-name', 'list-', 'listitem', 'meta-refresh', 'meta-viewport',
+                   'object-alt', 'tabindex', 'td-headers-attr', 'th-has-data-cells', 'valid-lang', 'video-caption',
+                   'video-description', 'logical-tab-order', 'focusable-controls', 'interactive-element-affordance',
+                   'managed-focus', 'focus-traps', 'custom-controls-labels', 'custom-controls-roles',
+                   'visual-order-follows-dom', 'offscreen-content-hidden', 'heading-levels', 'use-landmarks']
+    Audit_list["PAudit_list"] = PAudit_list
+    Audit_list["BPAudit_list"]=BPAudit_list
+    Audit_list["SEAudit_list"] = SEAudit_list
+    Audit_list["AAudit_list"] = AAudit_list
+    Audit_list["PWAAudit_list"] = PWAAudit_list
+    return Audit_list
