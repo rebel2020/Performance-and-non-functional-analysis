@@ -32,7 +32,7 @@ const AVG_SCORES = gql`
       project: $project
       phase: $phase
     ) {
-      _id {
+      fetchDate {
         day
         month
         year
