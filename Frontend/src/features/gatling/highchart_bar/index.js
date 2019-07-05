@@ -2,7 +2,6 @@ import React, { useEffect,useState } from 'react';
 import Highcharts from 'highcharts';
 
 const HighChartBar = props => {
-
   const [group1,setGroup1] = useState([[0, 1000]]);  
   const [group2,setGroup2] = useState([[1, 500]]);  
   const [group3,setGroup3] = useState([[2, 250]]);  
@@ -66,9 +65,9 @@ const HighChartBar = props => {
   
   useEffect(() => {
     // console.log(props.group1);
-    Highcharts.chart('barchart', options);
+    Highcharts.chart(props.id, options);
   });
 
-  return <div id="barchart" />;
+  return <div id={props.id} />;
 };
 export default HighChartBar;

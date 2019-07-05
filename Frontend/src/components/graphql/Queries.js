@@ -166,12 +166,36 @@ const LIST = gql`
       finalUrl
     }
 }
-`
-;
+`;
+
+const gatlingLIST = gql`
+query parseList(
+  $finalUrl: String
+  $fetchTimeStart: String
+  $fetchTimeEnd: String
+  $brand: String
+  $phase: String
+){
+  gatlingdata(
+    url: $finalUrl
+    fetchTimeStart: $fetchTimeStart
+    fetchTimeEnd: $fetchTimeEnd
+    brand: $brand
+    phase: $phase
+  )
+  {    
+    url
+    brand
+    phase
+  }
+}
+`;
+
 export {
   AVG_LIGHTHOUSE_SCORES,
   getQuery,
   getAudits,
   LIST,
-  AVG_SCORES
+  AVG_SCORES,
+  gatlingLIST
 };

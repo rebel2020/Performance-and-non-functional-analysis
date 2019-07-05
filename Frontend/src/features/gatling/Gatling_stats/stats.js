@@ -4,12 +4,12 @@ import StatsComponent from '../Stats_Component/index';
 import 'src/main.scss';
 
 const Stats = props => {
-    console.log(props.group4.count);
     return (
     <Fragment>
       <div className="row">
         <div className="col m7">
           <HighChartBar
+            id = {props.id}
            group1 = {[[0, props.group1.count]]}
            group2 = {[[1, props.group2.count]]}
            group3 = {[[2, props.group3.count]]}

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import useGlobal from 'src/store';
 
 import Sidebar from '../Sidebar/index';
-import './main.scss';
+// import './main.scss';
 import MetricComponent from './Gatling_stats/index';
 
 const Gatling = props => {
