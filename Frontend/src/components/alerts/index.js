@@ -25,9 +25,9 @@ class Alert extends Component {
           </span>
           <a className="hover_cursor" onClick={() => this.props.history.push('/lighthouse/alerts')}>
             <h3>
-              You have &nbsp;
+              You have&nbsp;
               {this.props.numalerts}
-              &nbsp;alerts
+              &nbsp;alert(s) pending
             </h3>
           </a>
         </div>
