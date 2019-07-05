@@ -205,7 +205,7 @@ type AuditsAverage{
 	pwaAverage: Float
 	bestPracticesAverage: Float
 	accessibilityAverage: Float
-	_id: FetchDate
+	fetchDate: FetchDate
 }
 
 type Bench{
