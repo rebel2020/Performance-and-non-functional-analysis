@@ -36,7 +36,7 @@ const Sidebar = props => {
           </button>
         </div>
       </div>
-      <Link className="sidelink" to="/lighthouse">
+      <Link {...props} className="sidelink" to="/lighthouse">
         <div className="sidelink">
           <div className="text-center">
             <h2>
@@ -46,7 +46,7 @@ const Sidebar = props => {
           {toggle ? 'Home' : ''}
         </div>
       </Link>
-      <Link className="sidelink" to="/lighthouse/performance">
+      <Link {...props} className="sidelink" to="/lighthouse/performance">
         <div className="sidelink">
           <div className="txt-center">
             <h2>
@@ -56,7 +56,7 @@ const Sidebar = props => {
           {toggle ? 'Performance' : ''}
         </div>
       </Link>
-      <Link className="sidelink" to="/lighthouse/accessibility">
+      <Link {...props} className="sidelink" to="/lighthouse/accessibility">
         <div className="sidelink">
           <div className="txt-center">
             <h2>
@@ -68,7 +68,7 @@ const Sidebar = props => {
         </div>
       </Link>
 
-      <Link className="sidelink" to="/lighthouse/p_w_a">
+      <Link {...props} className="sidelink" to="/lighthouse/p_w_a">
         <div className="sidelink">
           <div className="txt-center">
             <h2>
@@ -79,7 +79,7 @@ const Sidebar = props => {
           {toggle ? 'PWA' : ''}
         </div>
       </Link>
-      <Link className="sidelink" to="/lighthouse/s_e_o">
+      <Link {...props} className="sidelink" to="/lighthouse/s_e_o">
         <div className="sidelink">
           <div className="txt-center">
             <h2>
@@ -90,7 +90,7 @@ const Sidebar = props => {
           {toggle ? 'SEO' : ''}
         </div>
       </Link>
-      <Link className="sidelink" to="/lighthouse/best_practices">
+      <Link {...props} className="sidelink" to="/lighthouse/best_practices">
         <div className="sidelink">
           <div className="txt-center">
             <h2>
@@ -101,7 +101,7 @@ const Sidebar = props => {
           {toggle ? 'Best Practices' : ''}
         </div>
       </Link>
-      <Link className="sidelink" to="/lighthouse/recommendations">
+      <Link {...props} className="sidelink" to="/lighthouse/recommendations">
         <div className="sidelink">
           <div className="txt-center">
             <h2>
@@ -112,7 +112,7 @@ const Sidebar = props => {
           {toggle ? 'Recommendations' : ''}
         </div>
       </Link>
-      <Link className="sidelink" to="/lighthouse/alerts">
+      <Link {...props} className="sidelink" to="/lighthouse/alerts">
         <div className="sidelink">
           <div className="txt-center">
             <h2>
@@ -122,7 +122,7 @@ const Sidebar = props => {
           {toggle ? 'Alerts' : ''}
         </div>
       </Link>
-      <Link className="sidelink" to="/gatling">
+      <Link {...props} className="sidelink" to="/gatling">
         <div className="sidelink">
           <div className="txt-center">
             <h2>
