@@ -37,12 +37,11 @@ const Pages = props => {
     finalUrl: page,
     ...timeRange
   };
-  console.log(variables);
+  // console.log(variables);
   const onMount = useRef(true);
   useEffect(() => {
     if (onMount.current) {
       setQuery(FetchData(getPages(map[metric]), setData, variables));
-      console.log(getPages(map[metric]));
       onMount.current = false;
       return;
     }

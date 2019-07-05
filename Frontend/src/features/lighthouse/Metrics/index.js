@@ -9,7 +9,7 @@ import 'src/main.scss';
 const MetricComponent = props => {
   const { history } = props;
   const { metric, average } = history.location;
-  console.log(history.location);
+  // console.log(history.location);
   let auditContainer = <></>;
   let pageContaner = <></>;
   if (metric && !average) auditContainer = <Audits {...props} />;
