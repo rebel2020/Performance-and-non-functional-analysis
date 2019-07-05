@@ -197,6 +197,17 @@ const resolversPerformance = {
 						pwaAverage: { $avg: "$audits.pwa_audits.score" },
 						accessibilityAverage: { $avg: "$audits.accessibility_audits.score"}
 					}
+				},
+				{
+					$project: {
+						_id: 0,
+						fetchDate: "$_id",
+						performanceAverage: 1,
+						seoAverage: 1,
+						bestPracticesAverage: 1,
+						pwaAverage: 1,
+						accessibilityAverage: 1
+					}
 				}
 				]
 				);
