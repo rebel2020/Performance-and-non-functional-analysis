@@ -10,7 +10,7 @@ const initialState = {
   page: '',
   date: new Date(getDate(today.getTime(), -1)).getTime(),
   toDate: new Date(getDate(today.getTime(), 1)).getTime() - 1,
-  toggle: false,
+  toggle: true,
   filterLists: {
     brand: [],
     phase: [],
