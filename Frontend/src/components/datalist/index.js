@@ -2,12 +2,13 @@ import React from 'react';
 import Input from '../Input';
 
 const Datalist = props => {
-  const { options, listId, className, onChange, placeholder } = props;
+  const { options, listId, value, className, onChange, placeholder } = props;
   return (
     <>
       <Input
         className={`datalistInput ${className}`}
         list={listId}
+        value={value}
         onChange={onChange}
         placeholder={placeholder}
       />

@@ -7,12 +7,13 @@ import 'src/main.scss';
 
 const MetricComponent = props => {
   const { history } = props;
+  const { metric } = history.location;
+  console.log(history.location);
   let auditContainer = <></>;
-  if (history.location.audit)
-    auditContainer = <Audits metric={history.location.audit} {...props} />;
+  if (metric) auditContainer = <Audits {...props} />;
   return (
-    <div className="container tile">
-      <Filters date="range" options={['hello']} />
+    <div className="container">
+      <Filters dateRange="range" options={['http://fca-qa1-jeep-sape.test.com/']} />
       <HighStock {...props} toUrl="/lighthouse" />
       {auditContainer}
     </div>

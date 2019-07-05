@@ -1,15 +1,22 @@
 import React from 'react';
 import useGlobalHook from './utilities/customHook';
-
+import { getDate } from './utilities/timeConversions';
 import * as actions from './actions';
 
+const today = new Date();
 const initialState = {
-  env: '',
+  phase: '',
   brand: '',
   page: '',
-  date: '',
+  date: new Date(getDate(today.getTime(), -1)).getTime(),
   toDate: '',
-  toggle: false
+  toggle: false,
+  filterLists: {
+    brand: [],
+    phase: [],
+    project: [],
+    finalUrl: []
+  }
 };
 
 const useGlobal = useGlobalHook(React, initialState, actions);

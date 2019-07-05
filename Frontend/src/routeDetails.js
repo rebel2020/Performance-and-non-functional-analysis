@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import Lighthouse from './features/lighthouse';
 import Gatling from './features/gatling';
 import AlertPage from './features/AlertPage';
-import Recommendations from './features/Recommendations';
+import Recommendations from './features/lighthouse/Recommendations';
 
 const ROUTES = [
   {
@@ -34,28 +34,28 @@ const ROUTES = [
   {
     exact: true,
     path: '/lighthouse/best_practices',
-    main: (history, toggle, setToggle) => <Lighthouse history={history} comp="bestPractices" />
+    main: (history, toggle, setToggle) => <Lighthouse history={history} comp="best_practices" />
   },
   {
     exact: true,
-    path: '/lighthouse/seo',
-    main: (history, toggle, setToggle) => <Lighthouse history={history} comp="seo" />
+    path: '/lighthouse/s_e_o',
+    main: (history, toggle, setToggle) => <Lighthouse history={history} comp="s_e_o" />
   },
   {
     exact: true,
-    path: '/lighthouse/pwa',
-    main: (history, toggle, setToggle) => <Lighthouse history={history} comp="pwa" />
+    path: '/lighthouse/p_w_a',
+    main: (history, toggle, setToggle) => <Lighthouse history={history} comp="p_w_a" />
   },
   {
     exact: true,
-    path: '/Recommendations',
+    path: '/lighthouse/Recommendations',
     main: (history, toggle, setToggle) => (
       <Recommendations history={history} comp="Recommendations" />
     )
   },
   {
     exact: true,
-    path: '/alerts',
+    path: '/lighthouse/alerts',
     main: (history, toggle, setToggle) => <AlertPage history={history} />
   }
 ];

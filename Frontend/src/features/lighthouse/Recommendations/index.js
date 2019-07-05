@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react';
 import useGlobal from 'src/store';
 import { LIGHTHOUSE_RECOMMENDATIONS } from 'src/components/graphql/Queries';
 import FetchData from 'src/components/graphql/utils';
-// import formatString from 'src/utilities/formatString';
 import Cards from './card';
-import Sidebar from '../Sidebar/index';
+import Sidebar from '../../Sidebar/index';
 import './main.scss';
 
 const Recommendations = props => {

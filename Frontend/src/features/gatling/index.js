@@ -3,7 +3,7 @@ import useGlobal from 'src/store';
 
 import Sidebar from '../Sidebar/index';
 import './main.scss';
-import MetricComponent from './Gatling_Stats/index';
+import MetricComponent from './Gatling_stats/index';
 import { performanceAuditFrag } from '../../components/graphql/fragments';
 
 // import { Query } from 'react-apollo';
@@ -19,21 +19,11 @@ const Gatling = props => {
     // performance: <MetricComponent history={history} metric={comp} />,
     // accessibility: <MetricComponent history={history} metric={comp} />
   };
-  console.log(performanceAuditFrag);
   const graph = map[comp];
   return (
     <>
       <Sidebar />
       <div className={toggle ? 'main' : 'main-extend'}>{graph}</div>
-
-      {/* <Query query={TEST}>
-        {({ loading, error, data }) => {
-          if (loading) console.log('loading');
-          if (error) console.log(error.message);
-          if (data) console.log(data);
-          return null;
-        }}
-      </Query> */}
     </>
   );
 };

@@ -1,17 +1,26 @@
 import './styles.scss';
-import React from 'react';
+import React, { useState } from 'react';
 
 const RadioButtons = props => {
   const setRadio = event => {
     console.log(event.target.value);
   };
+  const [check, setCheck] = useState(0);
   const { values } = props;
-  const radiotxt = values.map((text, value) => {
+  let radiotype = <></>;
+  const radiotxt = values.map((i, item) => {
+    console.log(values[item]);
+
+    if (!item) {
+      radiotype = <input type="radio" name="radio" value={values[0].value} defaultChecked />;
+    } else {
+      radiotype = <input type="radio" name="radio" value={values[item].value} />;
+    }
     return (
       <>
-        <input type="radio" name="graph_option" value={value} />
+        {radiotype}
         &nbsp;
-        {text}
+        {values[item].name}
         <br />
         <br />
       </>

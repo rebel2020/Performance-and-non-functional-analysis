@@ -13,7 +13,8 @@ const setGraph = (name, value) => {
     chart: {
       type: 'solidgauge',
       height: '100%',
-      width: '150'
+      width: '150',
+      backgroundColor:'#EFEDED'
     },
     credits: {
       enabled: false
@@ -88,7 +89,7 @@ const setGraph = (name, value) => {
 };
 const SolidGuage = props => {
   const [globalState, globalActions] = useGlobal();
-  const { env, brand, page, date } = globalState;
+  const { phase, brand, page, date } = globalState;
   const { name, value, history } = props;
   const graphData = setGraph(name, value);
   useEffect(() => {
@@ -104,6 +105,7 @@ const SolidGuage = props => {
             pathname: `/lighthouse`,
             search: `audits=${name}`,
             metric: name
+            // time: new Date(date).getTime().toString()
           });
         else alert('select a particular page');
       }}
