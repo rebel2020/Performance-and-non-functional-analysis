@@ -51,12 +51,23 @@ const Pages = props => {
     }
   });
   const pages = pagesData(data.lighthousedata, map[metric]);
+  let pagecardcomponent = <></>;
+  let bgcol;
   // console.log(data);
   const DispPages = pages.map(item => {
+    const roundscore = Math.round(item.score * 100);
+
+    if (roundscore <= 12) {
+      bgcol = 'bg--pomegranate';
+    } else if (roundscore > 12 && roundscore <= 18) {
+      bgcol = 'bg--dull-orange';
+    } else {
+      bgcol = 'bg--green';
+    }
     return (
       <div
         key={item.fetchTime}
-        className="col s10 m5 l3 pageCard"
+        className={`col s10 m5 l3 pageCard ${bgcol}`}
         onClick={e => setPage(item.finalUrl)}
       >
         {item.finalUrl}
@@ -65,7 +76,7 @@ const Pages = props => {
         Time: {item.fetchTime}
         <br />
         <br />
-        Score: {item.score * 100}
+        Score: {Math.round(item.score * 100)}
         <br />
       </div>
     );

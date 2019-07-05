@@ -78,7 +78,7 @@ const setGraph = (name, value) => {
 
         data: [
           {
-            color: Highcharts.getOptions().colors[0],
+            color: value < 25 ? '#C0392B' : value < 50 ? '#F39C12' : '#4CAF50',
             radius: '112%',
             innerRadius: '88%',
             y: value
