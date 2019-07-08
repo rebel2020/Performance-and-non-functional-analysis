@@ -37,7 +37,7 @@ const MetricComponent = props => {
 
       <div className="row container">
         <div className="col m8">
-          <HighStock {...props} toUrl="/gatling" />
+          <HighStock {...props} id="gatling" toUrl="/gatling" />
         </div>
         <div className="col m3">
           <RadioButtons

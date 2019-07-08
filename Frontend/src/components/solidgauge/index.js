@@ -7,6 +7,7 @@ import Gauge from 'highcharts/modules/solid-gauge';
 import useGlobal from 'src/store';
 import setSearch from 'src/utilities/search';
 import formatString from 'src/utilities/formatString';
+import searchParams from 'src/utilities/searchParams';
 
 const setGraph = (name, value) => {
   return {
@@ -78,7 +79,7 @@ const setGraph = (name, value) => {
 
         data: [
           {
-            color: value < 25 ? '#C0392B' : value < 50 ? '#F39C12' : '#4CAF50',
+            color: value < 25 ? 'Tomato' : value < 50 ? 'Orange' : 'MediumSeaGreen',
             radius: '112%',
             innerRadius: '88%',
             y: value
@@ -90,8 +91,9 @@ const setGraph = (name, value) => {
 };
 const SolidGuage = props => {
   const [globalState, globalActions] = useGlobal();
-  const { phase, brand, page, date } = globalState;
+  // const { phase, brand, page, date } = globalState;
   const { name, value, history } = props;
+  const { phase, brand, page, date, toDate } = searchParams(history.location.search);
   const graphData = setGraph(name, value);
   useEffect(() => {
     HighchartsMore(Highcharts);

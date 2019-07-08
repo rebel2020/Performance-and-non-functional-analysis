@@ -9,14 +9,16 @@ import compare from 'src/utilities/compareObjects';
 import pagesData from 'src/utilities/parsePagesData';
 import FetchData from 'src/components/graphql/utils';
 import { getPages } from 'src/components/graphql/Queries';
+import searchParams from 'src/utilities/searchParams';
 import 'src/main.scss';
 import './main.scss';
 
 const Pages = props => {
   const [globalState, globalActions] = useGlobal();
   const { setPage } = globalActions;
-  const { phase, brand, page, date, toDate } = globalState;
+  // const { phase, brand, page, date, toDate } = globalState;
   const { history } = props;
+  const { phase, brand, page, date, toDate } = searchParams(history.location.search);
   const { metric, time } = history.location;
   const [query, setQuery] = useState(<></>);
   const [data, setData] = useState({ lighthousedata: [] });
@@ -58,11 +60,11 @@ const Pages = props => {
   const DispPages = pages.map(item => {
     const roundscore = Math.round(item.score * 100);
     if (roundscore <= 25) {
-      bgcol = 'bg--pomegranate';
+      bgcol = 'bg--tomato';
     } else if (roundscore > 25 && roundscore <= 75) {
-      bgcol = 'bg--dull-orange';
+      bgcol = 'bg--orange';
     } else {
-      bgcol = 'bg--green';
+      bgcol = 'bg--MediumSeaGreen';
     }
     return (
       <div

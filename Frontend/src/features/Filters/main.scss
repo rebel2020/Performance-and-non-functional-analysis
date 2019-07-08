@@ -6,3 +6,10 @@
     text-align: center;
 }
 
+@media only screen and (max-width: 601px) {
+    .filters{
+        width: 100%;
+        // position: fixed;
+        margin-top: 70px;   
+    }
+}
