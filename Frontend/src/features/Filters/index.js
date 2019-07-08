@@ -3,32 +3,37 @@ import Datalist from 'src/components/datalist';
 // import SelectList from 'src/components/selectlist';
 import { getDate, getHtmlDate } from 'src/utilities/timeConversions';
 import setSearch from 'src/utilities/search';
+import searchParams from 'src/utilities/searchParams';
 import Input from 'src/components/Input';
 import useGlobal from 'src/store';
 import './main.scss';
+import SelectList from '../../components/selectlist';
 
 const Filters = props => {
   const [globalState, globalActions] = useGlobal();
   const { setPage, setDate, setToDate, setBrand, setEnv, setPagecomp } = globalActions;
-  const { phase, brand, page, date, toDate, filterLists } = globalState;
+  // const { phase, brand, page, date, toDate, filterLists } = globalState;
+  const { filterLists } = globalState;
   const { dateRange, history } = props;
-  console.log(page);
+  const { phase, brand, page, date, toDate } = searchParams(history.location.search);
   const [values, setValues] = useState({
-    phase,
-    brand,
-    page,
+    phase: phase || 'All',
+    brand: brand || 'All',
+    page: page || 'All',
     date: getHtmlDate(date),
     toDate: getHtmlDate(toDate)
   });
+  // console.log(values);
   return (
     <div className="filters text-center">
       <div className="col s6 m3 l2">
-        <Datalist
+        <SelectList
           className="datalistInput"
           placeholder="Env"
           value={values.phase}
           listId="phase"
           options={filterLists.phase}
+          // options={['a', 'b', 'c']}
           onChange={value => {
             setValues({ ...values, phase: value });
             if (filterLists.phase.includes(value)) {
@@ -37,12 +42,14 @@ const Filters = props => {
                 pathname: history.pathname,
                 search: setSearch({ phase: value, brand, page, date, toDate })
               });
+            } else {
+              console.log(value);
             }
           }}
         />
       </div>
       <div className="col s6 m3 l2">
-        <Datalist
+        <SelectList
           className="datalistInput"
           placeholder="Brand"
           value={values.brand}
@@ -63,7 +70,7 @@ const Filters = props => {
 
       <div className="col s12 m6 l4">
         <Datalist
-          className="datalistInput"
+          className="pagelistInput"
           listId="page"
           placeholder="Page"
           value={values.page}
@@ -92,7 +99,7 @@ const Filters = props => {
             setDate(value);
             history.push({
               pathname: history.pathname,
-              search: setSearch({ phase, brand, page, date: value, toDate })
+              search: setSearch({ phase, brand, page, date: new Date(value).getTime(), toDate })
             });
           }}
         />
@@ -110,7 +117,7 @@ const Filters = props => {
               setToDate(value);
               history.push({
                 pathname: history.pathname,
-                search: setSearch({ phase, brand, page, date, toDate: value })
+                search: setSearch({ phase, brand, page, date, toDate: new Date(value).getTime() })
               });
             }}
           />

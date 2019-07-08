@@ -8,6 +8,7 @@ import formatString from 'src/utilities/formatString';
 import FetchData from 'src/components/graphql/utils';
 import setSearch from 'src/utilities/search';
 import map, { averageMap } from 'src/utilities/map';
+import searchParams from 'src/utilities/searchParams';
 import { getTimeRange, getDate, dateOfAverage } from 'src/utilities/timeConversions';
 import { AVG_LIGHTHOUSE_SCORES, getQuery, AVG_SCORES } from 'src/components/graphql/Queries';
 import datal from './datal';
@@ -115,8 +116,10 @@ const setGraph = (history, name, toUrl, data) => {
 
 const HighStock = props => {
   const [globalState, globalActions] = useGlobal();
-  const { phase, brand, page, date, toDate } = globalState;
+  // const { phase, brand, page, date, toDate } = globalState;
   const { metric, history, toUrl } = props;
+  const { phase, brand, page, date, toDate } = searchParams(history.location.search);
+
   // const [data, setData] = useState({ lighthousedata: [] });
   const [data, setData] = useState({ average: [] });
   const [query, setQuery] = useState(<></>);
