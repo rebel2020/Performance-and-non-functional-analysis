@@ -32,7 +32,7 @@ const AVG_SCORES = gql`
       project: $project
       phase: $phase
     ) {
-      _id {
+      fetchDate {
         day
         month
         year
@@ -85,6 +85,19 @@ const AVG_LIGHTHOUSE_SCORES = gql`
   }
 `;
 
+const LIGHTHOUSE_RECOMMENDATIONS = gql`
+  {
+    recommendation {
+      PerformanceAuditRecommendations {
+        first_cpu_idle
+        first_contentful_paint
+        first_meaningful_paint
+        speed_index
+        interactive
+      }
+    }
+  }
+`;
 const getAudits = value => {
   const val = mapper[value];
   console.log(val, value);
@@ -168,34 +181,12 @@ const LIST = gql`
 }
 `;
 
-const gatlingLIST = gql`
-query parseList(
-  $finalUrl: String
-  $fetchTimeStart: String
-  $fetchTimeEnd: String
-  $brand: String
-  $phase: String
-){
-  gatlingdata(
-    url: $finalUrl
-    fetchTimeStart: $fetchTimeStart
-    fetchTimeEnd: $fetchTimeEnd
-    brand: $brand
-    phase: $phase
-  )
-  {    
-    url
-    brand
-    phase
-  }
-}
-`;
-
 export {
   AVG_LIGHTHOUSE_SCORES,
   getQuery,
   getAudits,
   LIST,
   AVG_SCORES,
-  gatlingLIST
+  getPages,
+  LIGHTHOUSE_RECOMMENDATIONS
 };

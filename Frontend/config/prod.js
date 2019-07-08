@@ -53,6 +53,7 @@ module.exports = configDirs => {
       ],
       splitChunks: {
         chunks: 'all',
+        maxInitialRequests: 5,
         cacheGroups: {
           vendor: {
             test: /[\\/]node_modules[\\/]/,

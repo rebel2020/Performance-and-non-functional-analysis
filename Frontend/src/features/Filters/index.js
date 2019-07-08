@@ -12,6 +12,7 @@ const Filters = props => {
   const { setPage, setDate, setToDate, setBrand, setEnv, setPagecomp } = globalActions;
   const { phase, brand, page, date, toDate, filterLists } = globalState;
   const { dateRange, history } = props;
+  console.log(page);
   const [values, setValues] = useState({
     phase,
     brand,
