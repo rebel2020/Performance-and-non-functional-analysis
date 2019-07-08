@@ -30,7 +30,7 @@ const AlertCollapsible = props => {
             <div className="row">
               <button
                 type="button"
-                className="btn--raised left col m4"
+                className="btn--raised btn--red left col m4"
                 onClick={() =>
                   history.push({
                     pathname: `/lighthouse/Recommendations`
