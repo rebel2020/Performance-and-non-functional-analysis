@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Link from 'src/components/Link';
 import useGlobal from 'src/store';
@@ -17,12 +17,23 @@ const Sidebar = props => {
   const [mob, setMob] = useState(false);
   const sideClass = toggle ? 'sidenav' : 'sidenav-collapse';
   const mobClass = mob ? 'mobOpen' : 'mobClose';
+  useEffect(() => {
+    const main = document.getElementsByClassName('main')[0];
+    main.addEventListener(
+      'click',
+      e => {
+        console.log(e.target.nodeName);
+        setMob(false);
+      },
+      { capture: true }
+    );
+  }, []);
   const Links = (
     <>
       <Link {...props} className="sidelink" to="/lighthouse">
         <div className="sidelink">
           <div className="text-center">
-            <h2>
+            <h2 className="sidelink">
               <FaHome />
             </h2>
           </div>

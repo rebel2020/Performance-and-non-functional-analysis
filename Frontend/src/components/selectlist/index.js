@@ -9,6 +9,7 @@ const SelectList = props => {
   ));
   return (
     <select
+      defaultValue={value}
       className={className}
       placeholder={placeholder}
       onChange={e =>

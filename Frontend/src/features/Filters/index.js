@@ -15,9 +15,9 @@ const Filters = props => {
   // const { phase, brand, page, date, toDate, filterLists } = globalState;
   const { filterLists } = globalState;
   const { dateRange, history } = props;
-  const { phase, brand, page, date, toDate } = searchParams(history.location.search);
+  const { env, brand, page, date, toDate } = searchParams(history.location.search);
   const [values, setValues] = useState({
-    phase: phase || 'All',
+    phase: env || 'All',
     brand: brand || 'All',
     page: page || 'All',
     date: getHtmlDate(date),
@@ -37,7 +37,7 @@ const Filters = props => {
           onChange={value => {
             setValues({ ...values, phase: value });
             if (filterLists.phase.includes(value)) {
-              setEnv(value);
+              // setEnv(value);
               history.push({
                 pathname: history.pathname,
                 search: setSearch({ phase: value, brand, page, date, toDate })
@@ -58,10 +58,10 @@ const Filters = props => {
           onChange={value => {
             setValues({ ...values, brand: value });
             if (filterLists.brand.includes(value)) {
-              setBrand(value);
+              // setBrand(value);
               history.push({
                 pathname: history.pathname,
-                search: setSearch({ phase, brand: value, page, date, toDate })
+                search: setSearch({ phase: env, brand: value, page, date, toDate })
               });
             }
           }}
@@ -78,10 +78,10 @@ const Filters = props => {
           onChange={value => {
             setValues({ ...values, page: value });
             if (filterLists.finalUrl.includes(value)) {
-              setPage(value);
+              // setPage(value);
               history.push({
                 pathname: history.pathname,
-                search: setSearch({ phase, brand, page: value, date, toDate })
+                search: setSearch({ phase: env, brand, page: value, date, toDate })
               });
             }
           }}
@@ -96,10 +96,16 @@ const Filters = props => {
           min="2019-07-01"
           onChange={value => {
             setValues({ ...values, date: value });
-            setDate(value);
+            // setDate(value);
             history.push({
               pathname: history.pathname,
-              search: setSearch({ phase, brand, page, date: new Date(value).getTime(), toDate })
+              search: setSearch({
+                phase: env,
+                brand,
+                page,
+                date: new Date(value).getTime(),
+                toDate
+              })
             });
           }}
         />
@@ -114,10 +120,16 @@ const Filters = props => {
             min="2019-07-01"
             onChange={value => {
               setValues({ ...values, toDate: value });
-              setToDate(value);
+              // setToDate(value);
               history.push({
                 pathname: history.pathname,
-                search: setSearch({ phase, brand, page, date, toDate: new Date(value).getTime() })
+                search: setSearch({
+                  phase: env,
+                  brand,
+                  page,
+                  date,
+                  toDate: new Date(value).getTime()
+                })
               });
             }}
           />
