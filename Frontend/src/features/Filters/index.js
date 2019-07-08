@@ -35,6 +35,7 @@ const Filters = props => {
               history.push({
                 pathname: history.pathname,
                 search: setSearch({ phase: value, brand, page, date, toDate })
+                
               });
             }
           }}

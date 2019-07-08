@@ -144,8 +144,8 @@ const HighStock = props => {
   //   .reverse()
   //   .map(obj => [parseInt(obj.fetchTime, 10), obj.audits[map[metric]].score * 100]);
   else {
-    // console.log(data.average);
-    arr = data.average.reverse().map(obj => {
+    arr = data.average.map(obj => {
+      // console.log(data)
       return [dateOfAverage(obj), obj[averageMap[metric]] * 100];
     });
   }
