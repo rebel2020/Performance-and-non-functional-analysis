@@ -9,7 +9,7 @@ const RadioButtons = props => {
   const { values } = props;
   let radiotype = <></>;
   const radiotxt = values.map((i, item) => {
-    console.log(values[item]);
+    // console.log(values[item]);
 
     if (!item) {
       radiotype = <input type="radio" name="radio" value={values[0].value} defaultChecked />;

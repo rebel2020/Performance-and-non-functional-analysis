@@ -1,56 +1,47 @@
-import React from 'react';
-// import Select from 'src/components/selectlist';
-import Datalist from 'src/components/datalist';
-import HighStock from 'src/components/highstock';
-import HighChartBar from '../highchart_bar/index';
-import HighChartPie from '../highchart_pie/index';
-import Filters from '../../Filters/index';
-import StatsComponent from '../Stats_Component/index';
+import React,{useState,useEffect} from 'react';
+import Filters from '../Filters/index';
 import 'src/main.scss';
-
-import RadioButtons from '../../../components/radiobuttons/index';
+import { GATLING,LIST } from '../graphql/Queries';
+import FetchData from 'src/components/graphql/utils';
+import {parseGatlingData} from '../utils/parseGatling'
+import {Stats} from './stats';
+import {Graph} from './graph';
+import searchParams from '../../../utilities/searchParams';
 
 const MetricComponent = props => {
   const { metric, history } = props;
+  const [data, setData] = useState();
+  const [query, setQuery] = useState(<></>);
+  const [vals, setVals] = useState({
+    phase:'',
+    brand:"alfa",
+    finalUrl:'',    
+    fetchTimeStart:"1562155200000",
+    fetchTimeEnd:"1562241600000",
+  });
 
+  // let search = searchParams(history.location.search);
+  // if(JSON.stringify(search) !== '{}' && JSON.stringify(vals) !== JSON.stringify(search)){
+  //   setQuery(FetchData(GATLING,setData,search));
+  // }
+
+  useEffect(()=>{
+    setQuery(FetchData(GATLING,setData,vals));
+  },[]);
+
+
+
+  const parsedData = parseGatlingData(data);
   let GatlingStats = <></>;
-  if (metric) {
-    GatlingStats = (
-      <div className="row">
-        <div className="col m7">
-          <HighChartBar {...props} />
-        </div>
-        {/* <div className="col m3">
-          <HighChartPie {...props} />
-        </div> */}
-        <div className="col m5">
-          <StatsComponent {...props} />
-        </div>
-      </div>
-    );
+  if (parsedData) {
+    GatlingStats = parsedData.map((val,i) => <Stats {...val} id={`barchart${i}`} key={i}/>)
   }
   return (
     <div className="container">
-      <Filters history={history} date="range" />
-
-      {/* <Select options={['a', 'b']} /> */}
-
-      <div className="row container">
-        <div className="col m8">
-          <HighStock {...props} toUrl="/gatling" />
-        </div>
-        <div className="col m3">
-          <RadioButtons
-            values={[
-              { value: 'perc_req_success', name: '% Requests Succeeded' },
-              { value: 'num_req', name: 'Number of Requests' },
-              { value: 'avg_req_per_sec', name: 'Average Number of Requests per Second' },
-              { value: 'avg_response_time', name: 'Average Response Time' }
-            ]}
-          />
-        </div>
-      </div>
+      <Filters dateRange="range" history={history} />
+      {/* <Graph {...props}/> */}
       {GatlingStats}
+      {query};
     </div>
   );
 };

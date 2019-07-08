@@ -178,23 +178,15 @@ const LIST = gql`
       project
       finalUrl
     }
-  }
-`;
-const GATLING = gql`
-  query {
-    gatlingdata {
-      stats
-    }
-  }
+}
 `;
 
 export {
   AVG_LIGHTHOUSE_SCORES,
   getQuery,
   getAudits,
-  getPages,
-  GATLING,
   LIST,
   AVG_SCORES,
+  getPages,
   LIGHTHOUSE_RECOMMENDATIONS
 };
