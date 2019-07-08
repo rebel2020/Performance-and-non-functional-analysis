@@ -132,4 +132,4 @@ def Initialize():
     Audit_list["SEAudit_list"] = SEAudit_list
     Audit_list["AAudit_list"] = AAudit_list
     Audit_list["PWAAudit_list"] = PWAAudit_list
-    return Audit_list
+    return Audit_list.copy()
