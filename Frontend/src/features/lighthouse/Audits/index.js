@@ -7,12 +7,14 @@ import AuditData from 'src/utilities/parseAuditData';
 import FetchData from 'src/components/graphql/utils';
 import { getAudits } from 'src/components/graphql/Queries';
 import Collapsible from 'src/components/collapsible';
+import searchParams from 'src/utilities/searchParams';
 
 const Audit = props => {
   const [globalState, globalActions] = useGlobal();
-  const { phase, brand, page, date } = globalState;
+  // const { phase, brand, page, date } = globalState;
   const { history } = props;
   const { metric, time } = history.location;
+  const { phase, brand, page, date, toDate } = searchParams(history.location.search);
   const [query, setQuery] = useState(<></>);
   const [data, setData] = useState({ lighthousedata: [{ audits: {} }] });
   const prevState = previousState({ phase, brand, page, date, metric, time });

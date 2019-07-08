@@ -7,14 +7,16 @@ import compare from 'src/utilities/compareObjects';
 import formatString from 'src/utilities/formatString';
 import FetchData from 'src/components/graphql/utils';
 import setSearch from 'src/utilities/search';
-import map, { averageMap } from 'src/utilities/map';
+import map, { averageMap, metricMap } from 'src/utilities/map';
+import searchParams from 'src/utilities/searchParams';
 import { getTimeRange, getDate, dateOfAverage } from 'src/utilities/timeConversions';
-import { AVG_LIGHTHOUSE_SCORES, getQuery, AVG_SCORES } from 'src/components/graphql/Queries';
+import { getPages, getQuery, AVG_SCORES } from 'src/components/graphql/Queries';
 import datal from './datal';
 
-const setGraph = (history, name, toUrl, data) => {
+const setGraph = (history, name, data) => {
   const [globalState, globalActions] = useGlobal();
-  const { phase, brand, page, date, toDate } = globalState;
+  // const { phase, brand, page, date, toDate } = globalState;
+  const { phase, brand, page, date, toDate } = searchParams(history.location.search);
   const { audit, metric } = history;
   return {
     chart: {
@@ -44,10 +46,46 @@ const setGraph = (history, name, toUrl, data) => {
     credits: {
       enabled: false
     },
+    yAxis: [
+      {
+        opposite: false,
+        lineColor: '#000000',
+        min: 0,
+        max: 100,
+        title: 'Score',
+        plotBands: history.location.average
+          ? [
+              {
+                from: 0,
+                to: 25,
+                color: 'crimson'
+              },
+              {
+                from: 25,
+                to: 75,
+                color: '#FF9800'
+              },
+              {
+                from: 75,
+                to: 100,
+                color: 'mediumseagreen'
+              }
+            ]
+          : []
+      }
+    ],
+    xAxis: {
+      lineColor: '#000000'
+    },
     series: [
       {
         name: formatString(name),
         data,
+        color: '#000000',
+        lineWidth: 1,
+        marker: {
+          enabled: true
+        },
         type: 'area',
         threshold: null,
         tooltip: {
@@ -115,15 +153,14 @@ const setGraph = (history, name, toUrl, data) => {
 
 const HighStock = props => {
   const [globalState, globalActions] = useGlobal();
-  const { phase, brand, page, date, toDate } = globalState;
-  const { metric, history, toUrl } = props;
-  // const [data, setData] = useState({ lighthousedata: [] });
-  const [data, setData] = useState({ average: [] });
+  // const { phase, brand, page, date, toDate } = globalState;
+  const { metric, history, id, average } = props;
+  const { phase, brand, page, date, toDate } = searchParams(history.location.search);
+  const [data, setData] = useState({});
   const [query, setQuery] = useState(<></>);
   const audit = history.location.audit || '';
-  const prevState = previousState({ phase, brand, page, date, toDate, audit });
+  const prevState = previousState({ phase, brand, page, date, toDate, audit, average });
   const onMount = useRef(true);
-  // console.log(date, toDate);
   const variables = {
     phase,
     brand,
@@ -131,7 +168,7 @@ const HighStock = props => {
     fetchTimeStart: date.toString(),
     fetchTimeEnd: toDate.toString()
   };
-  // console.log(variables);
+  console.log(data);
   let arr = [];
   if (audit) {
     arr = data.lighthousedata.reverse().map(obj => {
@@ -139,38 +176,40 @@ const HighStock = props => {
         ? [parseInt(obj.fetchTime, 10), obj.audits[map[metric]][audit].score * 100]
         : [];
     });
-  }
-  // arr = data.lighthousedata
-  //   .reverse()
-  //   .map(obj => [parseInt(obj.fetchTime, 10), obj.audits[map[metric]].score * 100]);
-  else {
+  } else if (average) {
+    if (data.lighthousedata)
+      arr = data.lighthousedata
+        .reverse()
+        .map(obj => [parseInt(obj.fetchTime, 10), obj.audits[map[metric]].score * 100]);
+  } else if (data.average) {
     arr = data.average.map(obj => {
-      console.log(data);
       return [dateOfAverage(obj), obj[averageMap[metric]] * 100];
     });
   }
-  const graphData = setGraph(history, metric, toUrl, arr);
+  const graphData = setGraph(history, metric, arr);
   useEffect(() => {
     if (onMount.current) {
       stock(Highcharts);
       // if (audit)
       //   setQuery(FetchData(getQuery(`${map[metric]} { ${audit} { score }}`), setData, variables));
-      // else setQuery(FetchData(getQuery(`${map[metric]} { score }`), setData, variables));
-      setQuery(FetchData(AVG_SCORES, setData, variables));
+      if (average === true) setQuery(FetchData(getPages(metricMap[metric]), setData, variables));
+      else setQuery(FetchData(AVG_SCORES, setData, variables));
       onMount.current = false;
       return;
     }
-    Highcharts.stockChart('container', graphData);
-    if (!compare(prevState, { phase, brand, page, date, toDate, audit })) {
+    Highcharts.stockChart(id, graphData);
+    if (!compare(prevState, { phase, brand, page, date, toDate, audit, average })) {
       // if (audit)
-      //   setQuery(FetchData(getQuery(`${map[metric]} { ${audit} { score }}`), setData, variables));
-      // else setQuery(FetchData(getQuery(`${map[metric]} { score }`), setData, variables));
-      setQuery(FetchData(AVG_SCORES, setData, variables));
+      //   setQuery(
+      //     FetchData(getQuery(`${metricMap[metric]} { ${audit} { score }}`), setData, variables)
+      //   );
+      if (average) setQuery(FetchData(getPages(metricMap[metric]), setData, variables));
+      else setQuery(FetchData(AVG_SCORES, setData, variables));
     }
   });
   return (
     <>
-      <div id="container" />
+      <div id={id} />
       {query}
     </>
   );

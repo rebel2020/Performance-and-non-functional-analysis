@@ -6,7 +6,7 @@ const Datalist = props => {
   return (
     <>
       <Input
-        className={`datalistInput ${className}`}
+        className={className}
         list={listId}
         value={value}
         onChange={onChange}

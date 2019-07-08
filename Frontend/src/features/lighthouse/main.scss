@@ -12,3 +12,9 @@
     text-align: center
 }
 
+@media only screen and (max-width: 601px) {
+    .main, .main-extend {
+        margin-top: 70px;
+        margin-left: 0px
+    }
+}

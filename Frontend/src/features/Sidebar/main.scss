@@ -1,8 +1,13 @@
-.sidenav {
-  height: 100%;
-  width: 200px;
+.sidebar {
   position: fixed;
   z-index: 1;
+}
+
+
+.sidenav {
+  @extend .sidebar;
+  height: 100%;
+  width: 200px;
   top: 0;
   left: 0;
   background-color: #353232;
@@ -12,10 +17,9 @@
   
 }
 .sidenav-collapse {
+  @extend .sidebar;
   height: 100%;
   width: 80px;
-  position: fixed;
-  z-index: 1;
   top: 0;
   left: 0;
   background-color:#353232;
@@ -23,7 +27,41 @@
   padding-top: 20px;
   transition: 0.5s;
 }
-
+.nav {
+  height: 0;
+}
+.mobClose {
+  display: none
+}
+.mobOpen {
+  height: 0;
+  width: 0;
+}
+@media only screen and (max-width: 601px) {
+  .nav {
+    height: 50px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background-color:#111;
+  }
+  .mobOpen {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0px;
+    left: 0;
+    background-color:#353232;
+    overflow-x: hidden;
+    transition: 0.5s ease;
+  }
+  .sidenav, .sidenav-collapse {
+      display: none
+  }
+}
 .sidelink {
   // width: inherit;
   text-align: center;
