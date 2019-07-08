@@ -8,6 +8,7 @@ import './main.scss';
 
 const Lighthouse = props => {
   const { comp, history } = props;
+  // console.log(history);
   const [globalState, globalActions] = useGlobal();
   const { toggle } = globalState;
   const map = {
@@ -22,7 +23,7 @@ const Lighthouse = props => {
   const graph = map[comp];
   return (
     <>
-      <Sidebar />
+      <Sidebar history={history} />
       <div className={toggle ? 'main' : 'main-extend'}>{graph}</div>
     </>
   );

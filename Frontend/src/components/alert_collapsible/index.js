@@ -6,9 +6,9 @@ const AlertCollapsible = props => {
   let alcol;
 
   if (perc >= 20) {
-    alcol = 'bg--pomegranate color--white';
+    alcol = 'bg--tomato color--white';
   } else {
-    alcol = 'bg--dull-orange color--white';
+    alcol = 'bg--orange color--white';
   }
 
   return (
@@ -33,7 +33,7 @@ const AlertCollapsible = props => {
                 className="btn--raised left col m4"
                 onClick={() =>
                   history.push({
-                    pathname: `/lighthouse/recommendations`
+                    pathname: `/lighthouse/Recommendations`
                     // search: `recommendation=${title}`,
                     // recommendation: title
                   })

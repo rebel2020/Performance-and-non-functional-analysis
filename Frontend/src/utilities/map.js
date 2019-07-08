@@ -7,10 +7,17 @@ const map = {
 };
 const averageMap = {
   performance: 'performanceAverage',
-  accessibility: 'accessibiltyAverage',
+  accessibility: 'accessibilityAverage',
   best_practices: 'bestPracticesAverage',
   p_w_a: 'pwaAverage',
   s_e_o: 'seoAverage'
 };
+const metricMap = {
+  performance: 'performance',
+  accessibilty: 'accessibilty',
+  best_practices: 'best_practices',
+  s_e_o: 'seo',
+  p_w_a: 'pwa'
+};
 export default map;
-export { averageMap };
+export { averageMap, metricMap };

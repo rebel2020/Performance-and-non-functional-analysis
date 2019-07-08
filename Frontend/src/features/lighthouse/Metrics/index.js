@@ -9,7 +9,7 @@ import 'src/main.scss';
 const MetricComponent = props => {
   const { history } = props;
   const { metric, average } = history.location;
-  console.log(history.location);
+  // console.log(history.location);
   let auditContainer = <></>;
   let pageContaner = <></>;
   if (metric && !average) auditContainer = <Audits {...props} />;
@@ -17,7 +17,7 @@ const MetricComponent = props => {
   return (
     <div className="container">
       <Filters dateRange="range" history={history} />
-      <HighStock {...props} toUrl="/lighthouse" />
+      <HighStock {...props} average={average} id="metric" />
       {auditContainer}
       {pageContaner}
     </div>

@@ -1,19 +1,24 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useEffect, useRef } from 'react';
 import useGlobal from 'src/store';
 import previousState from 'src/utilities/previousState';
 import { getTimeRange } from 'src/utilities/timeConversions';
+import setSearch from 'src/utilities/search';
 import compare from 'src/utilities/compareObjects';
 import pagesData from 'src/utilities/parsePagesData';
 import FetchData from 'src/components/graphql/utils';
 import { getPages } from 'src/components/graphql/Queries';
+import searchParams from 'src/utilities/searchParams';
 import 'src/main.scss';
 import './main.scss';
 
 const Pages = props => {
   const [globalState, globalActions] = useGlobal();
   const { setPage } = globalActions;
-  const { phase, brand, page, date } = globalState;
+  // const { phase, brand, page, date, toDate } = globalState;
   const { history } = props;
+  const { phase, brand, page, date, toDate } = searchParams(history.location.search);
   const { metric, time } = history.location;
   const [query, setQuery] = useState(<></>);
   const [data, setData] = useState({ lighthousedata: [] });
@@ -37,12 +42,11 @@ const Pages = props => {
     finalUrl: page,
     ...timeRange
   };
-  console.log(variables);
+  // console.log(variables);
   const onMount = useRef(true);
   useEffect(() => {
     if (onMount.current) {
       setQuery(FetchData(getPages(map[metric]), setData, variables));
-      console.log(getPages(map[metric]));
       onMount.current = false;
       return;
     }
@@ -51,13 +55,34 @@ const Pages = props => {
     }
   });
   const pages = pagesData(data.lighthousedata, map[metric]);
+  let bgcol;
   // console.log(data);
   const DispPages = pages.map(item => {
+    const roundscore = Math.round(item.score * 100);
+    if (roundscore <= 25) {
+      bgcol = 'bg--tomato';
+    } else if (roundscore > 25 && roundscore <= 75) {
+      bgcol = 'bg--orange';
+    } else {
+      bgcol = 'bg--MediumSeaGreen';
+    }
     return (
       <div
         key={item.fetchTime}
-        className="col s10 m5 l3 pageCard"
-        onClick={e => setPage(item.finalUrl)}
+        className={`col s10 m5 l3 pageCard ${bgcol}`}
+        onClick={() => {
+          setPage(item.finalUrl);
+          history.push({
+            pathname: history.pathname,
+            search: setSearch({
+              phase,
+              brand,
+              page: item.finalUrl,
+              date,
+              toDate
+            })
+          });
+        }}
       >
         {item.finalUrl}
         <br />
@@ -65,7 +90,7 @@ const Pages = props => {
         Time: {item.fetchTime}
         <br />
         <br />
-        Score: {item.score * 100}
+        Score: {Math.round(item.score * 100)}
         <br />
       </div>
     );
