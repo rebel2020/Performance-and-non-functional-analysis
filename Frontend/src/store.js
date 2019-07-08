@@ -12,10 +12,10 @@ const initialState = {
   toDate: new Date(getDate(today.getTime(), 1)).getTime() - 1,
   toggle: true,
   filterLists: {
-    brand: [],
-    phase: [],
-    project: [],
-    finalUrl: []
+    brand: ['All'],
+    phase: ['All'],
+    project: ['All'],
+    finalUrl: ['All']
   }
 };
 

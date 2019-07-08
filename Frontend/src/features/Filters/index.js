@@ -7,6 +7,7 @@ import searchParams from 'src/utilities/searchParams';
 import Input from 'src/components/Input';
 import useGlobal from 'src/store';
 import './main.scss';
+import SelectList from '../../components/selectlist';
 
 const Filters = props => {
   const [globalState, globalActions] = useGlobal();
@@ -22,16 +23,17 @@ const Filters = props => {
     date: getHtmlDate(date),
     toDate: getHtmlDate(toDate)
   });
-  console.log(values);
+  // console.log(values);
   return (
     <div className="filters text-center">
       <div className="col s6 m3 l2">
-        <Datalist
+        <SelectList
           className="datalistInput"
           placeholder="Env"
           value={values.phase}
           listId="phase"
           options={filterLists.phase}
+          // options={['a', 'b', 'c']}
           onChange={value => {
             setValues({ ...values, phase: value });
             if (filterLists.phase.includes(value)) {
@@ -40,12 +42,14 @@ const Filters = props => {
                 pathname: history.pathname,
                 search: setSearch({ phase: value, brand, page, date, toDate })
               });
+            } else {
+              console.log(value);
             }
           }}
         />
       </div>
       <div className="col s6 m3 l2">
-        <Datalist
+        <SelectList
           className="datalistInput"
           placeholder="Brand"
           value={values.brand}
@@ -66,7 +70,7 @@ const Filters = props => {
 
       <div className="col s12 m6 l4">
         <Datalist
-          className="datalistInput"
+          className="pagelistInput"
           listId="page"
           placeholder="Page"
           value={values.page}

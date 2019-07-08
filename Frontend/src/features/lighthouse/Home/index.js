@@ -30,7 +30,7 @@ const HomeComponent = props => {
     finalUrl: page,
     ...getTimeRange(date)
   };
-  console.log(variables);
+  // console.log(variables);
   // console.log(data);
   const prevState = previousState({ phase, brand, page, date });
   const onMount = useRef(true);
