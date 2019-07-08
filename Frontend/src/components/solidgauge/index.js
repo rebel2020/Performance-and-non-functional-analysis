@@ -79,7 +79,7 @@ const setGraph = (name, value) => {
 
         data: [
           {
-            color: value < 25 ? '#C0392B' : value < 50 ? '#F39C12' : '#4CAF50',
+            color: value < 25 ? 'Tomato' : value < 50 ? 'Orange' : 'MediumSeaGreen',
             radius: '112%',
             innerRadius: '88%',
             y: value

@@ -5,6 +5,7 @@ import Gatling from './features/gatling';
 import AlertPage from './features/AlertPage';
 import setSearch from './utilities/search';
 import { getDate } from './utilities/timeConversions';
+import Recommendations from './features/lighthouse/Recommendations';
 
 const today = new Date();
 const ROUTES = [
@@ -61,7 +62,7 @@ const ROUTES = [
   {
     exact: true,
     path: '/lighthouse/recommendations',
-    main: history => <Lighthouse history={history} />
+    main: history => <Recommendations history={history} comp="Recommendations" />
   },
   {
     exact: true,

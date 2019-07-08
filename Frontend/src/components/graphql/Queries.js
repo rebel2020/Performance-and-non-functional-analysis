@@ -85,6 +85,19 @@ const AVG_LIGHTHOUSE_SCORES = gql`
   }
 `;
 
+const LIGHTHOUSE_RECOMMENDATIONS = gql`
+  {
+    recommendation {
+      PerformanceAuditRecommendations {
+        first_cpu_idle
+        first_contentful_paint
+        first_meaningful_paint
+        speed_index
+        interactive
+      }
+    }
+  }
+`;
 const getAudits = value => {
   const val = mapper[value];
   console.log(val, value);
@@ -175,4 +188,13 @@ const GATLING = gql`
   }
 `;
 
-export { AVG_LIGHTHOUSE_SCORES, getQuery, getAudits, getPages, GATLING, LIST, AVG_SCORES };
+export {
+  AVG_LIGHTHOUSE_SCORES,
+  getQuery,
+  getAudits,
+  getPages,
+  GATLING,
+  LIST,
+  AVG_SCORES,
+  LIGHTHOUSE_RECOMMENDATIONS
+};
