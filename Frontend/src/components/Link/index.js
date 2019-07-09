@@ -4,6 +4,7 @@ import './main.scss';
 
 const Links = props => {
   const { children, className, to, history } = props;
+
   return (
     <Link className={className} to={{ pathname: to, search: history.location.search }}>
       {children}

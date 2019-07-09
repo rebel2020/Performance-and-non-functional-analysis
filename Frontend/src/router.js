@@ -4,7 +4,7 @@ import previousState from 'src/utilities/previousState';
 import compare from 'src/utilities/compareObjects';
 import ROUTES from './routeDetails';
 import FetchData from './components/graphql/utils';
-import { LIST } from './components/graphql/Queries';
+import { LIST,gatlingLIST } from './components/graphql/Queries';
 import parseFilterData from './utilities/parseList';
 import useGlobal from './store';
 
