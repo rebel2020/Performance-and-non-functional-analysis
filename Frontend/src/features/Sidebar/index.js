@@ -141,7 +141,7 @@ const Sidebar = props => {
         <div className="row">
           <div className="text-center col m12">
             <button
-              className="btn--flat bg--black color--white"
+              className="btn--flat bg--sidedark color--white"
               type="button"
               onClick={() => globalActions.toggle()}
             >

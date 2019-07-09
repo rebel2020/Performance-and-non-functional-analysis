@@ -21,23 +21,23 @@ const setGraph = (history, name, toUrl, data) => {
       zoomType: 'x',
       spacingLeft: 50,
       spacingRight: 50,
-      backgroundColor: '#EFEDED'
-      // style: {
-      //   color: 'white'
-      // }
+      backgroundColor: '#383a3e',
+      style: {
+        color: 'white'
+      }
       // backgroundColor: '#303030'
     },
 
     rangeSelector: {
-      // style: {
-      //   color: 'white'
-      // },
+      style: {
+        color: 'white'
+      },
       selected: 1
     },
 
     title: {
       style: {
-        color: 'black'
+        color: 'white'
       },
       text: formatString(name)
       // text: JSON.stringify(data)

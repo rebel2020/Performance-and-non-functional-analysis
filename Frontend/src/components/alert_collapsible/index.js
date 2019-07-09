@@ -6,10 +6,10 @@ const AlertCollapsible = props => {
   let alcol;
 
   if (perc >= 20) {
-    alcol = 'bg--firebrick color--white';
-    alcol = 'bg--firebrick color--white';
+    alcol = 'bg--iored color--white';
+    
   } else {
-    alcol = 'bg--orange color--white';
+    alcol = 'bg--ioyellow color--white';
   }
 
   return (

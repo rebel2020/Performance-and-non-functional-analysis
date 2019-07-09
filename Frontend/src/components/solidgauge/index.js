@@ -15,7 +15,8 @@ const setGraph = (name, value) => {
       type: 'solidgauge',
       height: '100%',
       width: '150',
-      backgroundColor: '#EFEDED'
+      backgroundColor: '#383a3e',
+      color: '#f5f6f9'
     },
     credits: {
       enabled: false
@@ -23,7 +24,8 @@ const setGraph = (name, value) => {
     title: {
       text: formatString(name),
       style: {
-        fontSize: '12px'
+        fontSize: '12px',
+        color: '#f5f6f9' 
       }
     },
     tooltip: {
@@ -79,7 +81,7 @@ const setGraph = (name, value) => {
 
         data: [
           {
-            color: value < 25 ? 'Crimson' : value < 50 ? 'Orange' : 'MediumSeaGreen',
+            color: value < 25 ? '#f25454' : value < 50 ? '#ffd31a' : '#28e070',
             radius: '112%',
             innerRadius: '88%',
             y: value

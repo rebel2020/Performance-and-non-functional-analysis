@@ -23,23 +23,23 @@ const setGraph = (history, name, data) => {
       zoomType: 'x',
       spacingLeft: 50,
       spacingRight: 50,
-      backgroundColor: '#EFEDED'
-      // style: {
-      //   color: 'white'
-      // }
+      backgroundColor: '#383a3e',
+      style: {
+        color: 'white'
+      }
       // backgroundColor: '#303030'
     },
 
     rangeSelector: {
-      // style: {
-      //   color: 'white'
-      // },
+      style: {
+        color: 'white'
+      },
       selected: 1
     },
 
     title: {
       style: {
-        color: 'black'
+        color: 'white'
       },
       text: formatString(name)
     },
@@ -49,7 +49,7 @@ const setGraph = (history, name, data) => {
     yAxis: [
       {
         opposite: false,
-        lineColor: '#000000',
+        lineColor: '#FFFFFF',
         min: 0,
         max: 100,
         title: 'Score',
@@ -58,30 +58,30 @@ const setGraph = (history, name, data) => {
               {
                 from: 0,
                 to: 25,
-                color: 'FireBrick'
+                color: '#E74C3C'
               },
               {
                 from: 25,
                 to: 75,
-                color: '#FF9800'
+                color: '##F39C12'
               },
               {
                 from: 75,
                 to: 100,
-                color: 'mediumseagreen'
+                color: '#00BC8C'
               }
             ]
           : []
       }
     ],
     xAxis: {
-      lineColor: '#000000'
+      lineColor: '#FFFFFF'
     },
     series: [
       {
         name: formatString(name),
         data,
-        color: '#000000',
+        color: '#FFFFFF',
         lineWidth: 1,
         marker: {
           enabled: true
