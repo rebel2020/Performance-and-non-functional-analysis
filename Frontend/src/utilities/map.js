@@ -14,7 +14,7 @@ const averageMap = {
 };
 const metricMap = {
   performance: 'performance',
-  accessibilty: 'accessibilty',
+  accessibility: 'accessibility',
   best_practices: 'best_practices',
   s_e_o: 'seo',
   p_w_a: 'pwa'
