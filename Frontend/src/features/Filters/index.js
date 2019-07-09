@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Datalist from 'src/components/datalist';
 // import SelectList from 'src/components/selectlist';
 import { getDate, getHtmlDate } from 'src/utilities/timeConversions';
+import compare from 'src/utilities/compareObjects';
+import previousState from 'src/utilities/previousState';
 import setSearch from 'src/utilities/search';
 import searchParams from 'src/utilities/searchParams';
 import Input from 'src/components/Input';
@@ -23,7 +25,18 @@ const Filters = props => {
     date: getHtmlDate(date),
     toDate: getHtmlDate(toDate)
   });
+  const prevState = previousState({ env, brand, page, date, toDate });
   // console.log(values);
+  useEffect(() => {
+    if (!compare(prevState, { env, brand, page, date, toDate }))
+      setValues({
+        phase: env || 'All',
+        brand: brand || 'All',
+        page: page || 'All',
+        date: getHtmlDate(date),
+        toDate: getHtmlDate(toDate)
+      });
+  });
   return (
     <div className="filters text-center">
       <div className="col s6 m3 l2">
@@ -41,7 +54,6 @@ const Filters = props => {
               history.push({
                 pathname: history.pathname,
                 search: setSearch({ phase: value, brand, page, date, toDate })
-                
               });
             } else {
               console.log(value);

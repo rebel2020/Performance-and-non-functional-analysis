@@ -17,6 +17,8 @@ const LighthouseSchema = new Schema({
     phase: {type: String}
 }, {collection: "lighthouse_data"});
 
+LighthouseSchema.index( { fetchTime: 1 } );
+
 const Data = mongoose.model ('Lighthousedata', LighthouseSchema);
 
 module.exports = {

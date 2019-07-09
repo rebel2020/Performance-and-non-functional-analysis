@@ -14,9 +14,8 @@ import { getPages, getQuery, AVG_SCORES } from 'src/components/graphql/Queries';
 import datal from './datal';
 
 const setGraph = (history, name, data) => {
-  const [globalState, globalActions] = useGlobal();
-  // const { phase, brand, page, date, toDate } = globalState;
-  const { phase, brand, page, date, toDate } = searchParams(history.location.search);
+  console.log(data);
+  const { phase, brand, page, date, toDate, audits, pages } = searchParams(history.location.search);
   const { audit, metric } = history;
   return {
     chart: {
@@ -24,19 +23,17 @@ const setGraph = (history, name, data) => {
       spacingLeft: 50,
       spacingRight: 50,
       backgroundColor: '#EFEDED'
-      // style: {
-      //   color: 'white'
-      // }
-      // backgroundColor: '#303030'
     },
-
     rangeSelector: {
-      // style: {
-      //   color: 'white'
-      // },
-      selected: 1
+      selected: 4,
+      inputEnabled: false,
+      buttonTheme: {
+        visibility: 'hidden'
+      },
+      labelStyle: {
+        visibility: 'hidden'
+      }
     },
-
     title: {
       style: {
         color: 'black'
@@ -52,8 +49,10 @@ const setGraph = (history, name, data) => {
         lineColor: '#000000',
         min: 0,
         max: 100,
-        title: 'Score',
-        plotBands: history.location.average
+        title: {
+          text: 'Score'
+        },
+        plotBands: pages
           ? [
               {
                 from: 0,
@@ -75,7 +74,22 @@ const setGraph = (history, name, data) => {
       }
     ],
     xAxis: {
-      lineColor: '#000000'
+      // units: ['day', [1]],
+      categories: data.map(value => value[0]),
+      title: {
+        text: 'Date'
+      },
+      lineColor: '#000000',
+      dateTimeLabelFormats: {
+        day: '%Y-%m-%d'
+      }
+    },
+    plotOptions: {
+      series: {
+        dataLabels: {
+          enabled: true
+        }
+      }
     },
     series: [
       {
@@ -94,7 +108,8 @@ const setGraph = (history, name, data) => {
         point: {
           events: {
             click: e => {
-              if (page)
+              if (audits) console.log('');
+              else if (page)
                 history.push({
                   pathname: `/lighthouse/${name}`,
                   search: `audits=${metric || name}&${setSearch({
@@ -109,16 +124,17 @@ const setGraph = (history, name, data) => {
                   audit: audit || '',
                   time: new Date(e.point.x).getTime().toString()
                 });
+              else if (pages) console.log('');
               else
                 history.push({
                   pathname: `/lighthouse/${name}`,
-                  search: setSearch({
+                  search: `pages=${name}&${setSearch({
                     phase,
                     brand,
                     page,
                     date: new Date(e.point.x).getTime(),
                     toDate: new Date(e.point.x + 86400000).getTime()
-                  }),
+                  })}`,
                   // search: `audits=${metric || name}`,
                   // state: { x: e.point.x, metric: name }
                   metric: name,
@@ -155,11 +171,11 @@ const HighStock = props => {
   const [globalState, globalActions] = useGlobal();
   // const { phase, brand, page, date, toDate } = globalState;
   const { metric, history, id, average } = props;
-  const { phase, brand, page, date, toDate } = searchParams(history.location.search);
+  const { phase, brand, page, date, toDate, pages } = searchParams(history.location.search);
   const [data, setData] = useState({});
   const [query, setQuery] = useState(<></>);
   const audit = history.location.audit || '';
-  const prevState = previousState({ phase, brand, page, date, toDate, audit, average });
+  const prevState = previousState({ phase, brand, page, date, toDate, audit, pages });
   const onMount = useRef(true);
   const variables = {
     phase,
@@ -173,17 +189,23 @@ const HighStock = props => {
   if (audit) {
     arr = data.lighthousedata.reverse().map(obj => {
       return obj.audits[map[metric]]
-        ? [parseInt(obj.fetchTime, 10), obj.audits[map[metric]][audit].score * 100]
+        ? [
+            parseInt(obj.fetchTime, 10),
+            Math.round(obj.audits[map[metric]][audit].score * 10000) / 100
+          ]
         : [];
     });
-  } else if (average) {
+  } else if (pages) {
     if (data.lighthousedata)
       arr = data.lighthousedata
         .reverse()
-        .map(obj => [parseInt(obj.fetchTime, 10), obj.audits[map[metric]].score * 100]);
+        .map(obj => [
+          parseInt(obj.fetchTime, 10),
+          Math.round(obj.audits[map[metric]].score * 10000) / 100
+        ]);
   } else if (data.average) {
-    arr = data.average.map(obj => {
-      return [dateOfAverage(obj), obj[averageMap[metric]] * 100];
+    arr = data.average.reverse().map(obj => {
+      return [dateOfAverage(obj), Math.round(obj[averageMap[metric]] * 10000) / 100];
     });
   }
   const graphData = setGraph(history, metric, arr);
@@ -192,18 +214,18 @@ const HighStock = props => {
       stock(Highcharts);
       // if (audit)
       //   setQuery(FetchData(getQuery(`${map[metric]} { ${audit} { score }}`), setData, variables));
-      if (average === true) setQuery(FetchData(getPages(metricMap[metric]), setData, variables));
+      if (pages) setQuery(FetchData(getPages(metricMap[metric]), setData, variables));
       else setQuery(FetchData(AVG_SCORES, setData, variables));
       onMount.current = false;
       return;
     }
     Highcharts.stockChart(id, graphData);
-    if (!compare(prevState, { phase, brand, page, date, toDate, audit, average })) {
+    if (!compare(prevState, { phase, brand, page, date, toDate, audit, pages })) {
       // if (audit)
       //   setQuery(
       //     FetchData(getQuery(`${metricMap[metric]} { ${audit} { score }}`), setData, variables)
       //   );
-      if (average) setQuery(FetchData(getPages(metricMap[metric]), setData, variables));
+      if (pages) setQuery(FetchData(getPages(metricMap[metric]), setData, variables));
       else setQuery(FetchData(AVG_SCORES, setData, variables));
     }
   });
