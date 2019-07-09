@@ -249,6 +249,10 @@ type RecommendationData{
 	SEOAuditRecommendations: SEOAuditRecommendation
 }
 
+type Alerts{
+    
+}
+
 type Query{
 	allLighthousedata: [LighthouseData]
 	gatlingdata(url: String, fetchTimeStart: String, fetchTimeEnd: String
