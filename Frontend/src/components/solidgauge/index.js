@@ -27,20 +27,21 @@ const setGraph = (name, value) => {
       }
     },
     tooltip: {
-      borderWidth: 0,
-      backgroundColor: 'none',
-      shadow: false,
-      style: {
-        fontSize: '12px'
-      },
-      pointFormat:
-        '{series.name}<br><span style="font-size:1.5em; color: {point.color}; font-weight: bold">{point.y}%</span>',
-      positioner(labelWidth) {
-        return {
-          x: (this.chart.chartWidth - labelWidth) / 2,
-          y: this.chart.plotHeight / 2 + 25
-        };
-      }
+      enabled: false
+      // borderWidth: 0,
+      // backgroundColor: 'none',
+      // shadow: false,
+      // style: {
+      //   fontSize: '12px'
+      // },
+      // pointFormat:
+      //   '{series.name}<br><span style="font-size:1.5em; color: {point.color}; font-weight: bold">{point.y}%</span>',
+      // positioner(labelWidth) {
+      //   return {
+      //     x: (this.chart.chartWidth - labelWidth) / 2,
+      //     y: this.chart.plotHeight / 2 + 25
+      //   };
+      // }
     },
     pane: {
       startAngle: 0,
@@ -66,7 +67,12 @@ const setGraph = (name, value) => {
     plotOptions: {
       solidgauge: {
         dataLabels: {
-          enabled: false
+          borderWidth: 0,
+          format: '{y}%',
+          style: {
+            fontSize: '16px'
+          },
+          verticalAlign: 'middle'
         },
         linecap: 'round',
         stickyTracking: false,
@@ -79,7 +85,7 @@ const setGraph = (name, value) => {
 
         data: [
           {
-            color: value < 25 ? 'Crimson' : value < 50 ? 'Orange' : 'MediumSeaGreen',
+            color: value < 25 ? 'Crimson' : value < 75 ? 'Orange' : 'MediumSeaGreen',
             radius: '112%',
             innerRadius: '88%',
             y: value

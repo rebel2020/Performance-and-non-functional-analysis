@@ -26,7 +26,6 @@ const Sidebar = props => {
     main.addEventListener(
       'click',
       e => {
-        console.log(e.target.nodeName);
         setMob(false);
       },
       { capture: true }

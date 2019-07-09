@@ -8,14 +8,14 @@ const AuditData = data => {
   if (data[auditName]) {
     keys = Object.keys(data[auditName]);
     keys.forEach((value, i) => {
-      audit.push({
-        id: i,
-        title: value,
-        ...data[auditName][value]
-      });
+      if (value !== 'score' && value !== '__typename')
+        audit.push({
+          id: i,
+          title: value,
+          ...data[auditName][value]
+        });
     });
   }
-  // console.log(audit);
   return audit;
 };
 
