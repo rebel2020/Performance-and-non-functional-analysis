@@ -15,7 +15,6 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
     queryset = LighthouseData.objects.all()
     serializer_class = LighthouseDataSerializer
     def post(self,request):
-        globalAvg = GlobalAvg.objects.all()
         try:
             data=fun(request.data['value'])
         except:

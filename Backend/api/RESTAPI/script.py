@@ -1,5 +1,5 @@
 import json
-def fun(file,globalAvg):
+def fun(file):
     data = file
     try:
         data = json.loads(data)
