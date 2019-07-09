@@ -6,6 +6,7 @@ import AlertPage from './features/AlertPage';
 import setSearch from './utilities/search';
 import { getDate } from './utilities/timeConversions';
 import Recommendations from './features/lighthouse/Recommendations';
+import ErrorPage from './features/ErrorPage/index';
 
 const today = new Date();
 const ROUTES = [
@@ -62,12 +63,17 @@ const ROUTES = [
   {
     exact: true,
     path: '/lighthouse/recommendations',
-    main: history => <Recommendations history={history} comp="Recommendations" />
+    main: history => <Recommendations history={history} comp="recommendations" />
   },
   {
     exact: true,
     path: '/lighthouse/alerts',
     main: history => <AlertPage history={history} />
+  },
+  {
+    exact: true,
+    path: '/error',
+    main: history => <ErrorPage history={history} />
   }
 ];
 

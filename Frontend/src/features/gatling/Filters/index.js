@@ -1,56 +1,67 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect,Fragment } from 'react';
 import Datalist from 'src/components/datalist';
-// import SelectList from 'src/components/selectlist';
-import { getDate, getHtmlDate } from 'src/utilities/timeConversions';
-import setSearch from 'src/utilities/search';
-import searchParams from 'src/utilities/searchParams';
+import {setSearch} from '../utils/search';
 import Input from 'src/components/Input';
-import useGlobal from 'src/store';
-import './main.scss';
-import SelectList from '../../components/selectlist';
+import { getDate, getHtmlDate } from 'src/utilities/timeConversions';
+import {LIST } from '../graphql/Queries';
+import {parseFilterData} from '../utils/fetchUrl';
+import 'src/main.scss';
+import FetchData from 'src/components/graphql/utils';
 
 const Filters = props => {
-  const [globalState, globalActions] = useGlobal();
-  const { setPage, setDate, setToDate, setBrand, setEnv, setPagecomp } = globalActions;
-  // const { phase, brand, page, date, toDate, filterLists } = globalState;
-  const { filterLists } = globalState;
-  const { dateRange, history } = props;
-  const { env, brand, page, date, toDate } = searchParams(history.location.search);
-  const [values, setValues] = useState({
-    phase: env || 'All',
-    brand: brand || 'All',
-    page: page || 'All',
-    date: getHtmlDate(date),
-    toDate: getHtmlDate(toDate)
+  const { dateRange, history} = props;
+  const [query, setQuery] = useState(<></>);
+  const [list, setList] = useState();
+  const [filterLists,setFilterList] = useState({
+      phase:[],
+      brand:[],
+      finalUrl:[],
   });
-  // console.log(values);
+
+  const [values, setValues] = useState({
+    phase:"",
+    brand:"",
+    page:"",
+    date: getHtmlDate(new Date().getTime()),
+    toDate: getHtmlDate(new Date().getTime())
+  });
+
+  useEffect(()=>{
+    setQuery(FetchData(LIST,setList));
+  },[]);
+
+  const submitValues = ()=>{
+
+  }
+
+  let newValue = parseFilterData(list);
+  // console.log(newValue);
+  if(JSON.stringify(filterLists) !== JSON.stringify(newValue)){
+    setFilterList(newValue)
+  }
   return (
+    <Fragment>
     <div className="filters text-center">
       <div className="col s6 m3 l2">
-        <SelectList
+        <Datalist
           className="datalistInput"
           placeholder="Env"
           value={values.phase}
           listId="phase"
           options={filterLists.phase}
-          // options={['a', 'b', 'c']}
           onChange={value => {
             setValues({ ...values, phase: value });
             if (filterLists.phase.includes(value)) {
-              // setEnv(value);
               history.push({
                 pathname: history.pathname,
-                search: setSearch({ phase: value, brand, page, date, toDate })
-                
+                search: setSearch({ ...values,phase: value})                
               });
-            } else {
-              console.log(value);
             }
           }}
         />
       </div>
       <div className="col s6 m3 l2">
-        <SelectList
+        <Datalist
           className="datalistInput"
           placeholder="Brand"
           value={values.brand}
@@ -59,10 +70,9 @@ const Filters = props => {
           onChange={value => {
             setValues({ ...values, brand: value });
             if (filterLists.brand.includes(value)) {
-              // setBrand(value);
               history.push({
                 pathname: history.pathname,
-                search: setSearch({ phase: env, brand: value, page, date, toDate })
+                search: setSearch({ ...values, brand: value })
               });
             }
           }}
@@ -71,7 +81,7 @@ const Filters = props => {
 
       <div className="col s12 m6 l4">
         <Datalist
-          className="pagelistInput"
+          className="datalistInput"
           listId="page"
           placeholder="Page"
           value={values.page}
@@ -79,10 +89,9 @@ const Filters = props => {
           onChange={value => {
             setValues({ ...values, page: value });
             if (filterLists.finalUrl.includes(value)) {
-              // setPage(value);
               history.push({
                 pathname: history.pathname,
-                search: setSearch({ phase: env, brand, page: value, date, toDate })
+                search: setSearch({ ...values, page: value })
               });
             }
           }}
@@ -97,16 +106,9 @@ const Filters = props => {
           min="2019-07-01"
           onChange={value => {
             setValues({ ...values, date: value });
-            // setDate(value);
             history.push({
               pathname: history.pathname,
-              search: setSearch({
-                phase: env,
-                brand,
-                page,
-                date: new Date(value).getTime(),
-                toDate
-              })
+              search: setSearch({ ...values, date: value})
             });
           }}
         />
@@ -121,16 +123,9 @@ const Filters = props => {
             min="2019-07-01"
             onChange={value => {
               setValues({ ...values, toDate: value });
-              // setToDate(value);
               history.push({
                 pathname: history.pathname,
-                search: setSearch({
-                  phase: env,
-                  brand,
-                  page,
-                  date,
-                  toDate: new Date(value).getTime()
-                })
+                search: setSearch({ ...values, toDate: value })
               });
             }}
           />
@@ -139,6 +134,8 @@ const Filters = props => {
         )}
       </div>
     </div>
+      {query};
+    </Fragment>
   );
 };
 export default Filters;
