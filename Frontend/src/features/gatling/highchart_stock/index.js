@@ -12,6 +12,7 @@ import { getTimeRange, getDate, dateOfAverage } from 'src/utilities/timeConversi
 import { AVG_LIGHTHOUSE_SCORES, getQuery, AVG_SCORES } from 'src/components/graphql/Queries';
 
 const setGraph = (history, name, toUrl, data) => {
+  console.log(data ? typeof data[0] : '');
   const [globalState, globalActions] = useGlobal();
   const { phase, brand, page, date, toDate } = globalState;
   const { audit, metric } = history;
@@ -39,6 +40,7 @@ const setGraph = (history, name, toUrl, data) => {
         color: 'black'
       },
       text: formatString(name)
+      // text: JSON.stringify(data)
     },
     credits: {
       enabled: false
@@ -46,7 +48,8 @@ const setGraph = (history, name, toUrl, data) => {
     series: [
       {
         name: formatString(name),
-        data,
+        // name: JSON.stringify(data),
+        data: data ? [...data] : [],
         type: 'area',
         threshold: null,
         tooltip: {
@@ -167,7 +170,9 @@ const HighStock = props => {
     //     // else setQuery(FetchData(getQuery(`${map[metric]} { score }`), setData, variables));
     //     setQuery(FetchData(AVG_SCORES, setData, variables));
   }, []);
-
+  useEffect(() => {
+    Highcharts.stockChart('container', graphData);
+  });
   return (
     <>
       <div id="container" />
