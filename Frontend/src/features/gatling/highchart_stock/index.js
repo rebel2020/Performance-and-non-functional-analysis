@@ -10,7 +10,6 @@ import setSearch from 'src/utilities/search';
 import map, { averageMap } from 'src/utilities/map';
 import { getTimeRange, getDate, dateOfAverage } from 'src/utilities/timeConversions';
 import { AVG_LIGHTHOUSE_SCORES, getQuery, AVG_SCORES } from 'src/components/graphql/Queries';
-import datal from './datal';
 
 const setGraph = (history, name, toUrl, data) => {
   const [globalState, globalActions] = useGlobal();
@@ -149,30 +148,30 @@ const HighStock = props => {
   //     return [dateOfAverage(obj), obj[averageMap[metric]] * 100];
   //   });
   // }
-  const {data}=props;
+  const { data } = props;
   const graphData = setGraph(history, metric, toUrl, data);
-  // useEffect(() => {
-  //   if (onMount.current) {
-  //     stock(Highcharts);
-  //     // if (audit)
-  //     //   setQuery(FetchData(getQuery(`${map[metric]} { ${audit} { score }}`), setData, variables));
-  //     // else setQuery(FetchData(getQuery(`${map[metric]} { score }`), setData, variables));
-  //     setQuery(FetchData(AVG_SCORES, setData, variables));
-  //     onMount.current = false;
-  //     return;
-  //   }
+  useEffect(() => {
+    //   if (onMount.current) {
+    stock(Highcharts);
+    //     // if (audit)
+    //     //   setQuery(FetchData(getQuery(`${map[metric]} { ${audit} { score }}`), setData, variables));
+    //     // else setQuery(FetchData(getQuery(`${map[metric]} { score }`), setData, variables));
+    //     setQuery(FetchData(AVG_SCORES, setData, variables));
+    //     onMount.current = false;
+    //     return;
+    //   }
     Highcharts.stockChart('container', graphData);
-  //   if (!compare(prevState, { phase, brand, page, date, toDate, audit })) {
-  //     // if (audit)
-  //     //   setQuery(FetchData(getQuery(`${map[metric]} { ${audit} { score }}`), setData, variables));
-  //     // else setQuery(FetchData(getQuery(`${map[metric]} { score }`), setData, variables));
-  //     setQuery(FetchData(AVG_SCORES, setData, variables));
-  //   }
-   });
+    //   if (!compare(prevState, { phase, brand, page, date, toDate, audit })) {
+    //     // if (audit)
+    //     //   setQuery(FetchData(getQuery(`${map[metric]} { ${audit} { score }}`), setData, variables));
+    //     // else setQuery(FetchData(getQuery(`${map[metric]} { score }`), setData, variables));
+    //     setQuery(FetchData(AVG_SCORES, setData, variables));
+  }, []);
+
   return (
     <>
       <div id="container" />
-      {query}
+      {/* {query} */}
     </>
   );
 };

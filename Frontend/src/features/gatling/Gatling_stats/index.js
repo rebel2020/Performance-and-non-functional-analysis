@@ -40,7 +40,7 @@ const MetricComponent = props => {
       <Filters dateRange="range" history={history} />
       <Graph gatlingstats={parsedData} {...props} />
       {/* {GatlingStats} */}
-      {query};
+      {query}
     </div>
   );
 };

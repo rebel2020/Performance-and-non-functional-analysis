@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import HighStock from 'src/components/highstock';
+import HighStock from '../highchart_stock/index';
 import 'src/main.scss';
 import RadioButtons from '../../../components/radiobuttons/index';
 
