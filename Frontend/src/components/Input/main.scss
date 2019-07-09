@@ -13,6 +13,7 @@
 .dateInput{
     @extend .custom-input;
     padding: 12px 2px;
+    text-align: center
 }
 .pagelistInput{
     @extend .custom-input;
@@ -22,4 +23,17 @@
     .pagelistInput{
         width: 90%;
     }
+}
+input[type=date]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    display: none;
+}
+// input[type=date]::-webkit-calendar-picker-indicator {
+//     -webkit-appearance: none;
+//     display: none;
+// }
+input[type=date]::-webkit-clear-button
+{
+    display: none; /* Hide the button */
+    -webkit-appearance: none; /* turn off default browser styling */
 }

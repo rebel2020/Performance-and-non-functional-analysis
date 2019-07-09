@@ -65,7 +65,7 @@
 .sidelink {
   // width: inherit;
   text-align: center;
-  color: #ffffff;
+  color: #818181;
   padding: 10px;
   text-decoration: none;
   background-color: transparent;
@@ -74,8 +74,18 @@
 .sidelink:hover {
   transform: scale(1.05);
   cursor: pointer;
+  color: #ffffff;
 }
-
+.dropdown {
+  background-color: lightgray;
+  transition: 0.5s ease
+}
+.block {
+  display: block
+}
+.none {
+  display: none
+}
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
