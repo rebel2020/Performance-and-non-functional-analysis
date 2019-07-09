@@ -4,7 +4,7 @@ import 'src/main.scss';
 import { GATLING,LIST } from '../graphql/Queries';
 import FetchData from 'src/components/graphql/utils';
 import {parseGatlingData} from '../utils/parseGatling'
-import {Stats} from './stats';
+import {Stats} from './stats1';
 import {Graph} from './graph';
 import searchParams from '../../../utilities/searchParams';
 
@@ -42,7 +42,8 @@ const MetricComponent = props => {
       <Filters dateRange="range" history={history} />
       {/* <Graph {...props}/> */}
       {/* {GatlingStats} */}
-      {query};
+      {/* {query}; */}
+      <Stats id={0}/>
     </div>
   );
 };
