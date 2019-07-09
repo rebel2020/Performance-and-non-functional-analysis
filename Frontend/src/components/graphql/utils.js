@@ -9,7 +9,7 @@ const FetchData = (QueryData, setData, variables) => {
         if (error) console.log(error.message);
         else if (loading) console.log('loading', loading);
         else {
-          // console.log(data);
+          console.log(data);
           setData(data);
         }
         return null;

@@ -15,7 +15,7 @@ const Gatling = props => {
   const graph = map[comp];
   return (
     <>
-      <Sidebar />
+      <Sidebar history={history} />
       <div className={toggle ? 'main' : 'main-extend'}>{graph}</div>
     </>
   );

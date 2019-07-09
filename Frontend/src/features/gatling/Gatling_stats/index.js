@@ -1,7 +1,7 @@
-import React,{useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Filters from '../Filters/index';
 import 'src/main.scss';
-import { GATLING,LIST } from '../graphql/Queries';
+import { GATLING, LIST } from '../graphql/Queries';
 import FetchData from 'src/components/graphql/utils';
 import {parseGatlingData} from '../utils/parseGatling'
 import {Stats} from './stats1';
@@ -44,20 +44,19 @@ const MetricComponent = props => {
   if (parsedData) {
     console.log(parsedData);
     GatlingStats = parsedData.map((val,i) => <Stats {...val} id={i} key={i}/>)
-    // if(vals.fetchTimeStart !==''){
+    // if(vals.finalUrl ===''){
     //   GatlingStats = parsedData.map((val,i) => <Stats {...val} id={`barchart${i}`} key={i}/>)
     // }
     // else{
-    //   GatlingStats = <Graph gatlinstats = {parsedData}/>
+    //   GatlingStats = <Graph gatlingstats={parsedData} {...props} />
     // }
   }
   return (
     <div className="container">
       <Filters dateRange="range" history={history} />
-      {/* <Graph {...props}/> */}
       {GatlingStats}
       {query};
-      {/* <Stats id={0}/> */}
+      {/* <Graph gatlingstats={parsedData} {...props} /> */}
     </div>
   );
 };

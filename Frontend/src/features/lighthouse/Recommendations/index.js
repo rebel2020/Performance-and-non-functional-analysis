@@ -9,7 +9,7 @@ import './main.scss';
 const Recommendations = props => {
   const [globalState] = useGlobal();
   const { toggle } = globalState;
-
+  const { history } = props;
   const [data, setData] = useState([]);
   const [query, setQuery] = useState();
 
@@ -34,18 +34,17 @@ const Recommendations = props => {
 
   return (
     <>
-      <Sidebar />
+      <Sidebar history={history} />
       <div className={toggle ? 'main' : 'main-extend'}>
-        <center>
-          <br />
-          <u>
-            {' '}
-            <h1>Recommendations </h1>
-          </u>
-          <br />
-          <br />
-          <div>{display}</div>
-        </center>
+        <br/>
+        <div className="text-center">
+          <h1>Recommendations </h1>
+        </div>
+
+        <br />
+        <br />
+        <div>{display}</div>
+
         {query}
       </div>
     </>

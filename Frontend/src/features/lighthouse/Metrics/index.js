@@ -17,7 +17,7 @@ const MetricComponent = props => {
   return (
     <div className="container">
       <Filters dateRange="range" history={history} />
-      <HighStock {...props} toUrl="/lighthouse" />
+      <HighStock {...props} average={average} id="metric" />
       {auditContainer}
       {pageContaner}
     </div>
