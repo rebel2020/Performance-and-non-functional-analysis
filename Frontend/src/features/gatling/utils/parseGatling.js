@@ -8,6 +8,7 @@ import React from 'react';
                 let parsedData = JSON.parse(val.stats);
                 // console.log(parsedData.stats);
                 stats.push({
+                    fetchTime:val.fetchTime,
                     group1:parsedData.stats.group1,
                     group2:parsedData.stats.group2,
                     group3:parsedData.stats.group3,

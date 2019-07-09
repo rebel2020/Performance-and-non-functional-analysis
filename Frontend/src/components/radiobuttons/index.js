@@ -2,8 +2,10 @@ import './styles.scss';
 import React, { useState } from 'react';
 
 const RadioButtons = props => {
+  const { setRV } = props;
+  console.log(props);
   const setRadio = event => {
-    console.log(event.target.value);
+    setRV(event.target.value);
   };
   const [check, setCheck] = useState(0);
   const { values } = props;

@@ -54,42 +54,42 @@ const setGraph = (history, name, toUrl, data) => {
           valueDecimals: 2
         },
         point: {
-          events: {
-            click: e => {
-              if (page)
-                history.push({
-                  pathname: `/lighthouse/${name}`,
-                  search: `audits=${metric || name}&${setSearch({
-                    phase,
-                    brand,
-                    page,
-                    date: new Date(e.point.x).getTime(),
-                    toDate: new Date(e.point.x + 86400000).getTime()
-                  })}`,
-                  // state: { x: e.point.x, metric: name }
-                  metric: name,
-                  audit: audit || '',
-                  time: new Date(e.point.x).getTime().toString()
-                });
-              else
-                history.push({
-                  pathname: `/lighthouse/${name}`,
-                  search: setSearch({
-                    phase,
-                    brand,
-                    page,
-                    date: new Date(e.point.x).getTime(),
-                    toDate: new Date(e.point.x + 86400000).getTime()
-                  }),
-                  // search: `audits=${metric || name}`,
-                  // state: { x: e.point.x, metric: name }
-                  metric: name,
-                  audit: audit || '',
-                  average: true,
-                  time: new Date(e.point.x).getTime().toString()
-                });
-            }
-          }
+          // events: {
+          //   click: e => {
+          //     if (page)
+          //       history.push({
+          //         pathname: `/lighthouse/${name}`,
+          //         search: `audits=${metric || name}&${setSearch({
+          //           phase,
+          //           brand,
+          //           page,
+          //           date: new Date(e.point.x).getTime(),
+          //           toDate: new Date(e.point.x + 86400000).getTime()
+          //         })}`,
+          //         // state: { x: e.point.x, metric: name }
+          //         metric: name,
+          //         audit: audit || '',
+          //         time: new Date(e.point.x).getTime().toString()
+          //       });
+          //     else
+          //       history.push({
+          //         pathname: `/lighthouse/${name}`,
+          //         search: setSearch({
+          //           phase,
+          //           brand,
+          //           page,
+          //           date: new Date(e.point.x).getTime(),
+          //           toDate: new Date(e.point.x + 86400000).getTime()
+          //         }),
+          //         // search: `audits=${metric || name}`,
+          //         // state: { x: e.point.x, metric: name }
+          //         metric: name,
+          //         audit: audit || '',
+          //         average: true,
+          //         time: new Date(e.point.x).getTime().toString()
+          //       });
+          //   }
+          // }
         },
         fillColor: {
           linearGradient: {
@@ -118,56 +118,57 @@ const HighStock = props => {
   const { phase, brand, page, date, toDate } = globalState;
   const { metric, history, toUrl } = props;
   // const [data, setData] = useState({ lighthousedata: [] });
-  const [data, setData] = useState({ average: [] });
-  const [query, setQuery] = useState(<></>);
-  const audit = history.location.audit || '';
-  const prevState = previousState({ phase, brand, page, date, toDate, audit });
-  const onMount = useRef(true);
+  // const [data, setData] = useState({ average: [] });
+  // const [query, setQuery] = useState(<></>);
+  // const audit = history.location.audit || '';
+  // const prevState = previousState({ phase, brand, page, date, toDate, audit });
+  // const onMount = useRef(true);
   // console.log(date, toDate);
-  const variables = {
-    phase,
-    brand,
-    finalUrl: page,
-    fetchTimeStart: date.toString(),
-    fetchTimeEnd: toDate.toString()
-  };
+  // const variables = {
+  //   phase,
+  //   brand,
+  //   finalUrl: page,
+  //   fetchTimeStart: date.toString(),
+  //   fetchTimeEnd: toDate.toString()
+  // };
   // console.log(variables);
-  let arr = [];
-  if (audit) {
-    arr = data.lighthousedata.reverse().map(obj => {
-      return obj.audits[map[metric]]
-        ? [parseInt(obj.fetchTime, 10), obj.audits[map[metric]][audit].score * 100]
-        : [];
-    });
-  }
+  // let arr = [];
+  // if (audit) {
+  //   arr = data.lighthousedata.reverse().map(obj => {
+  //     return obj.audits[map[metric]]
+  //       ? [parseInt(obj.fetchTime, 10), obj.audits[map[metric]][audit].score * 100]
+  //       : [];
+  //   });
+  // }
   // arr = data.lighthousedata
   //   .reverse()
   //   .map(obj => [parseInt(obj.fetchTime, 10), obj.audits[map[metric]].score * 100]);
-  else {
-    // console.log(data.average);
-    arr = data.average.reverse().map(obj => {
-      return [dateOfAverage(obj), obj[averageMap[metric]] * 100];
-    });
-  }
-  const graphData = setGraph(history, metric, toUrl, arr);
-  useEffect(() => {
-    if (onMount.current) {
-      stock(Highcharts);
-      // if (audit)
-      //   setQuery(FetchData(getQuery(`${map[metric]} { ${audit} { score }}`), setData, variables));
-      // else setQuery(FetchData(getQuery(`${map[metric]} { score }`), setData, variables));
-      setQuery(FetchData(AVG_SCORES, setData, variables));
-      onMount.current = false;
-      return;
-    }
+  // else {
+  //   // console.log(data.average);
+  //   arr = data.average.reverse().map(obj => {
+  //     return [dateOfAverage(obj), obj[averageMap[metric]] * 100];
+  //   });
+  // }
+  const {data}=props;
+  const graphData = setGraph(history, metric, toUrl, data);
+  // useEffect(() => {
+  //   if (onMount.current) {
+  //     stock(Highcharts);
+  //     // if (audit)
+  //     //   setQuery(FetchData(getQuery(`${map[metric]} { ${audit} { score }}`), setData, variables));
+  //     // else setQuery(FetchData(getQuery(`${map[metric]} { score }`), setData, variables));
+  //     setQuery(FetchData(AVG_SCORES, setData, variables));
+  //     onMount.current = false;
+  //     return;
+  //   }
     Highcharts.stockChart('container', graphData);
-    if (!compare(prevState, { phase, brand, page, date, toDate, audit })) {
-      // if (audit)
-      //   setQuery(FetchData(getQuery(`${map[metric]} { ${audit} { score }}`), setData, variables));
-      // else setQuery(FetchData(getQuery(`${map[metric]} { score }`), setData, variables));
-      setQuery(FetchData(AVG_SCORES, setData, variables));
-    }
-  });
+  //   if (!compare(prevState, { phase, brand, page, date, toDate, audit })) {
+  //     // if (audit)
+  //     //   setQuery(FetchData(getQuery(`${map[metric]} { ${audit} { score }}`), setData, variables));
+  //     // else setQuery(FetchData(getQuery(`${map[metric]} { score }`), setData, variables));
+  //     setQuery(FetchData(AVG_SCORES, setData, variables));
+  //   }
+   });
   return (
     <>
       <div id="container" />
