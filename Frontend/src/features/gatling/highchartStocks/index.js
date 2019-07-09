@@ -5,6 +5,10 @@ import stock from 'highcharts/modules/stock';
 const HighStock = props => {
   
   const options = {
+    chart: {
+     
+      backgroundColor: '#EFEDED',
+    },
     title: {
         text: props.title   
     },

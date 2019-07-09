@@ -17,13 +17,16 @@ const Filters = props => {
       brand:[],
       finalUrl:[],
   });
-
+  const [dates,setDates] = useState({
+    date:getHtmlDate(new Date().getTime()),
+    toDate:getHtmlDate( Date.now() - 864e5)
+  })
   const [values, setValues] = useState({
     phase:"",
     brand:"",
     page:"",
-    date: getHtmlDate(new Date().getTime()),
-    toDate: getHtmlDate(new Date().getTime())
+    date: Date.now() - 864e5,
+    toDate: new Date().getTime()
   });
 
   useEffect(()=>{
@@ -101,14 +104,15 @@ const Filters = props => {
         <Input
           className="dateInput"
           type="date"
-          value={values.date}
+          value={dates.date}
           max={getHtmlDate(new Date().getTime())}
           min="2019-07-01"
           onChange={value => {
-            setValues({ ...values, date: value });
+            setDates({...dates,date:value})
+            setValues({ ...values, date: (value)?new Date(value).getTime():value });
             history.push({
               pathname: history.pathname,
-              search: setSearch({ ...values, date: value})
+              search: setSearch({ ...values, date: (value)?new Date(value).getTime():value})
             });
           }}
         />
@@ -118,14 +122,15 @@ const Filters = props => {
           <Input
             className="dateInput"
             type="date"
-            value={values.toDate}
+            value={dates.toDate}
             max={getHtmlDate(new Date().getTime())}
             min="2019-07-01"
             onChange={value => {
-              setValues({ ...values, toDate: value });
+              setDates({...dates,toDate:value})
+              setValues({ ...values, toDate: (value)?new Date(value).getTime():value });
               history.push({
                 pathname: history.pathname,
-                search: setSearch({ ...values, toDate: value })
+                search: setSearch({ ...values, toDate: (value)?new Date(value).getTime():value })
               });
             }}
           />

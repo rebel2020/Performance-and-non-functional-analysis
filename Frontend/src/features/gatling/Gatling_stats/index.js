@@ -14,36 +14,50 @@ const MetricComponent = props => {
   const [query, setQuery] = useState(<></>);
   const [vals, setVals] = useState({
     phase:'',
-    brand:'',
-    finalUrl:"http://fca-qa1-jeep-sape.test.com",
-    fetchTimeEnd:"1562332146476",
-    fetchTimeStart:"1562242745597"
+    brand:"alfa",
+    finalUrl:'',    
+    fetchTimeStart: Date.now() - 864e5,
+    fetchTimeEnd: Date.now(),
   });
 
   let search = searchParams(history.location.search);
-  if(JSON.stringify(search) !== '{}' && JSON.stringify(vals) !== JSON.stringify(search)){
-    console.log(sea)
+  if(search.phase == "All"){
+    search.phase = "";
+  }
+  if(search.brand == "All"){
+    search.brand = "";
+  }
+  if(search.finalUrl == "All"){
+    search.finalUrl = "";
+  }
+  // console.log(search,vals);
+  if(JSON.stringify(search) !== "{}" && JSON.stringify(vals) !== JSON.stringify(search)){
+    setVals(search);
     setQuery(FetchData(GATLING,setData,search));
   }
   useEffect(()=>{
     setQuery(FetchData(GATLING,setData,vals));
   },[]);
 
-
-
   const parsedData = parseGatlingData(data);
   let GatlingStats = <></>;
   if (parsedData) {
     console.log(parsedData);
-    GatlingStats = parsedData.map((val,i) => <Stats {...val} id={`barchart${i}`} key={i}/>)
+    GatlingStats = parsedData.map((val,i) => <Stats {...val} id={i} key={i}/>)
+    // if(vals.fetchTimeStart !==''){
+    //   GatlingStats = parsedData.map((val,i) => <Stats {...val} id={`barchart${i}`} key={i}/>)
+    // }
+    // else{
+    //   GatlingStats = <Graph gatlinstats = {parsedData}/>
+    // }
   }
   return (
     <div className="container">
       <Filters dateRange="range" history={history} />
       {/* <Graph {...props}/> */}
-      {/* {GatlingStats} */}
-      {/* {query}; */}
-      <Stats id={0}/>
+      {GatlingStats}
+      {query};
+      {/* <Stats id={0}/> */}
     </div>
   );
 };
