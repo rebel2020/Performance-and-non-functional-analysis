@@ -5,15 +5,16 @@ import RadioButtons from '../../../components/radiobuttons/index';
 
 const Graph = props => {
   const { gatlingstats } = props;
-  let radio_title;
+  let radioTitle;
   console.log(gatlingstats);
   const [radioValue, setRV] = useState('');
-  radio_title = 'Average Response Time';
+  radioTitle = 'Average Response Time';
+
+  const avgrestime = [];
+  const percreqsucc = [];
+  const numreq = [];
+  const avgreqps = [];
   let hscomp = <HighStock data={avgrestime} {...props} toUrl="/gatling" />;
-  let avgrestime = [];
-  let percreqsucc = [];
-  let numreq = [];
-  let avgreqps = [];
 
   if (gatlingstats) {
     const graphdata = gatlingstats.map((i, item) => {
@@ -27,18 +28,18 @@ const Graph = props => {
   if (radioValue !== '') {
     if (radioValue == 'avg_response_time') {
       console.log(avgrestime);
-      radio_title = 'Average Response Time';
+      radioTitle = 'Average Response Time';
       hscomp = <HighStock data={avgrestime} {...props} toUrl="/gatling" />;
     } else if (radioValue == 'perc_req_success') {
       console.log(percreqsucc);
-      radio_title = '% Requests Succeeded';
+      radioTitle = '% Requests Succeeded';
       hscomp = <HighStock data={percreqsucc} {...props} toUrl="/gatling" />;
     } else if (radioValue == 'num_req') {
       console.log(numreq);
-      radio_title = 'Number of Requests';
+      radioTitle = 'Number of Requests';
       hscomp = <HighStock data={numreq} {...props} toUrl="/gatling" />;
     } else if (radioValue == 'avg_req_per_sec') {
-      radio_title = 'Average Number of Requests per Second';
+      radioTitle = 'Average Number of Requests per Second';
       console.log(avgreqps);
       hscomp = <HighStock data={avgreqps} {...props} toUrl="/gatling" />;
     }
@@ -48,8 +49,8 @@ const Graph = props => {
   return (
     <div className="row container">
       <div className="col m8">{hscomp}</div>
-      <div className="col m3">
-        <h3>{radio_title}</h3>
+      <div className="col m4">
+        <h3>{radioTitle}</h3>
         <RadioButtons
           values={[
             { value: 'avg_response_time', name: 'Average Response Time' },

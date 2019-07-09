@@ -58,7 +58,7 @@ const setGraph = (history, name, data) => {
               {
                 from: 0,
                 to: 25,
-                color: 'crimson'
+                color: 'FireBrick'
               },
               {
                 from: 25,

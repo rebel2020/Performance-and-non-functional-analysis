@@ -60,7 +60,7 @@ const Pages = props => {
   const DispPages = pages.map(item => {
     const roundscore = Math.round(item.score * 100);
     if (roundscore <= 25) {
-      bgcol = 'bg--tomato';
+      bgcol = 'bg--firebrick';
     } else if (roundscore > 25 && roundscore <= 75) {
       bgcol = 'bg--orange';
     } else {
