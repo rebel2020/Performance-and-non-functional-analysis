@@ -1,4 +1,5 @@
 import json
+import random
 def fun(file):
     data = file
     try:
@@ -133,3 +134,95 @@ def Initialize():
     Audit_list["AAudit_list"] = AAudit_list
     Audit_list["PWAAudit_list"] = PWAAudit_list
     return Audit_list.copy()
+
+def t_fun(file):
+    data = file
+    try:
+        data = json.loads(data)
+    except:
+        pass
+    newData = dict()
+    audits = dict()
+    Audits=dict()
+    weight_dict=dict()
+    weight_dict["PAudit_list"]="performance"
+    weight_dict["BPAudit_list"] = "best-practices"
+    weight_dict["SEAudit_list"] = "seo"
+    weight_dict["PWAAudit_list"] = "pwa"
+    weight_dict["AAudit_list"] = "accessibility"
+    Audit_list = Initialize()
+    for Audit in Audit_list:
+        Audits[Audit] = dict()
+    for Audit in Audit_list:
+        for temp in Audit_list[Audit]:
+            temp1 = fun1(temp)
+            Audits[Audit][temp1] = dict()
+            try:
+                Audits[Audit][temp1]['score'] = (data['audits'][temp]['score'])*(random.randint(0,30)/100)
+            except:
+                pass
+            try:
+                Audits[Audit][temp1]['scoreDisplayMode'] = data['audits'][temp]['scoreDisplayMode']
+            except:
+                pass
+            try:
+                Audits[Audit][temp1]['numericValue'] = data['audits'][temp]['numericValue']
+            except:
+                pass
+            try:
+                Audits[Audit][temp1]['details'] = json.dumps(data['audits'][temp]['details'])
+            except:
+                pass
+            try:
+                Audits[Audit][temp1]['description'] = data['audits'][temp]['description'].split('.')[0]
+            except:
+                pass
+
+        t_list = []
+        try:
+            t_list = data["categories"][weight_dict[Audit]]["auditRefs"]
+        except:
+            pass
+        for t in t_list:
+            try:
+                Audits[Audit][fun1(t['id'])]['weight'] = t['weight']
+            except:
+                pass
+            try:
+                score = data['categories'][weight_dict[Audit]]['score']*(random.randint(0,30)/100)
+                Audits[Audit]['score'] = score
+            except:
+                pass
+    audits['seo_audits']=Audits["SEAudit_list"]
+    audits["best_practices_audits"]=Audits["BPAudit_list"]
+    audits["performance_audits"]=Audits["PAudit_list"]
+    audits["pwa_audits"]=Audits["PWAAudit_list"]
+    audits["accessibility_audits"] = Audits["AAudit_list"]
+    CData = dict()
+    LighthouseData = dict()
+    LighthouseData['audits'] = audits
+    try:
+        LighthouseData['requestedUrl'] = data['requestedUrl']
+    except:
+        pass
+    try:
+        LighthouseData['finalUrl'] = data['finalUrl']
+    except:
+        pass
+    try:
+        LighthouseData['runWarnings'] = data['runWarnings']
+    except:
+        pass
+    try:
+        LighthouseData['lighthouseVersion'] = data['lighthouseVersion']
+    except:
+        pass
+    try:
+        LighthouseData['environment'] = data['environment']
+    except:
+        pass
+    LighthouseData['fetchTime']=data['fetchTime']
+    LighthouseData['brand'] = data['brand']
+    LighthouseData['phase'] = data['phase']
+    LighthouseData['project'] = data['project']
+    return LighthouseData
