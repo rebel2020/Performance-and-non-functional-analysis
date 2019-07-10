@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { IoIosAlert } from 'react-icons/io';
 import './styles.scss';
 
 class Alert extends Component {
@@ -19,10 +20,11 @@ class Alert extends Component {
     // console.log(this.props.history);
     if (this.state.isActive) {
       return (
-        <div className="alert alert-warning text-center bg--dull-orange" role="alert">
+        <div className="alert alert-warning text-center bg--ioyellow" role="alert">
           <span className="close" data-dismiss="alert" onClick={() => this.hideAlert()}>
             &times;
           </span>
+
           <a className="hover_cursor" onClick={() => this.props.history.push('/lighthouse/alerts')}>
             <h3>
               You have&nbsp;

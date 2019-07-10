@@ -7,47 +7,122 @@ import compare from 'src/utilities/compareObjects';
 import formatString from 'src/utilities/formatString';
 import FetchData from 'src/components/graphql/utils';
 import setSearch from 'src/utilities/search';
-import map, { averageMap } from 'src/utilities/map';
+import map, { averageMap, metricMap } from 'src/utilities/map';
+import searchParams from 'src/utilities/searchParams';
 import { getTimeRange, getDate, dateOfAverage } from 'src/utilities/timeConversions';
-import { AVG_LIGHTHOUSE_SCORES, getQuery, AVG_SCORES } from 'src/components/graphql/Queries';
+import { getPages, getQuery, AVG_SCORES } from 'src/components/graphql/Queries';
 import datal from './datal';
 
-const setGraph = (history, name, toUrl, data) => {
-  const [globalState, globalActions] = useGlobal();
-  const { phase, brand, page, date, toDate } = globalState;
+const setGraph = (history, name, data) => {
+  const { phase, brand, page, date, toDate, audits, pages } = searchParams(history.location.search);
   const { audit, metric } = history;
   return {
     chart: {
       zoomType: 'x',
       spacingLeft: 50,
       spacingRight: 50,
-      backgroundColor: '#EFEDED'
-      // style: {
-      //   color: 'white'
-      // }
+      backgroundColor: '#222222',
+      style: {
+        color: 'white'
+      }
       // backgroundColor: '#303030'
     },
-
     rangeSelector: {
-      // style: {
-      //   color: 'white'
-      // },
-      selected: 1
+      selected: 4,
+      inputEnabled: false,
+      buttonTheme: {
+        visibility: 'hidden'
+      },
+      labelStyle: {
+        visibility: 'hidden'
+      }
     },
-
     title: {
       style: {
-        color: 'black'
+        color: 'white'
       },
       text: formatString(name)
     },
     credits: {
       enabled: false
     },
+    yAxis: [
+      {
+        opposite: false,
+        lineColor: '#FFFFFF',
+        min: 0,
+        max: 100,
+        title: {
+          text: 'Score',
+          style: {
+            color: 'white'
+          }
+        },
+        labels: {
+          style: {
+            color: 'white'
+          }
+        },
+        plotBands: pages
+          ? [
+              {
+                from: 0,
+                to: 25,
+                color: '#E74C3C'
+              },
+              {
+                from: 25,
+                to: 75,
+                color: '#F39C12'
+              },
+              {
+                from: 75,
+                to: 100,
+                color: '#00BC8C'
+              }
+            ]
+          : []
+      }
+    ],
+    xAxis: {
+      lineColor: '#FFFFFF',
+      // units: ['day', [1]],
+      categories: data.map(value => value[0]),
+      title: {
+        text: 'Date',
+        style: {
+          color: 'white'
+        }
+      },
+      labels: {
+        style: {
+          color: 'white'
+        }
+      },
+
+      dateTimeLabelFormats: {
+        day: '%Y-%m-%d'
+      }
+    },
+    plotOptions: {
+      series: {
+        dataLabels: {
+          enabled: true,
+          style: {
+            color: 'white'
+          }
+        }
+      }
+    },
     series: [
       {
         name: formatString(name),
         data,
+        color: '#FFFFFF',
+        lineWidth: 1,
+        marker: {
+          enabled: true
+        },
         type: 'area',
         threshold: null,
         tooltip: {
@@ -56,7 +131,8 @@ const setGraph = (history, name, toUrl, data) => {
         point: {
           events: {
             click: e => {
-              if (page)
+              if (audits) console.log('');
+              else if (page)
                 history.push({
                   pathname: `/lighthouse/${name}`,
                   search: `audits=${metric || name}&${setSearch({
@@ -71,16 +147,17 @@ const setGraph = (history, name, toUrl, data) => {
                   audit: audit || '',
                   time: new Date(e.point.x).getTime().toString()
                 });
+              else if (pages) console.log('');
               else
                 history.push({
                   pathname: `/lighthouse/${name}`,
-                  search: setSearch({
+                  search: `pages=${name}&${setSearch({
                     phase,
                     brand,
                     page,
                     date: new Date(e.point.x).getTime(),
                     toDate: new Date(e.point.x + 86400000).getTime()
-                  }),
+                  })}`,
                   // search: `audits=${metric || name}`,
                   // state: { x: e.point.x, metric: name }
                   metric: name,
@@ -115,15 +192,15 @@ const setGraph = (history, name, toUrl, data) => {
 
 const HighStock = props => {
   const [globalState, globalActions] = useGlobal();
-  const { phase, brand, page, date, toDate } = globalState;
-  const { metric, history, toUrl } = props;
-  // const [data, setData] = useState({ lighthousedata: [] });
-  const [data, setData] = useState({ average: [] });
+  // const { phase, brand, page, date, toDate } = globalState;
+  const { metric, history, id, average } = props;
+  const { phase, brand, page, date, toDate, pages } = searchParams(history.location.search);
+  const [data, setData] = useState({});
   const [query, setQuery] = useState(<></>);
   const audit = history.location.audit || '';
-  const prevState = previousState({ phase, brand, page, date, toDate, audit });
+  const prevState = previousState({ phase, brand, page, date, toDate, audit, pages });
   const onMount = useRef(true);
-  // console.log(date, toDate);
+  // console.log(searchParams(history.location.search));
   const variables = {
     phase,
     brand,
@@ -131,46 +208,54 @@ const HighStock = props => {
     fetchTimeStart: date.toString(),
     fetchTimeEnd: toDate.toString()
   };
-  // console.log(variables);
+  // console.log(data);
   let arr = [];
   if (audit) {
     arr = data.lighthousedata.reverse().map(obj => {
       return obj.audits[map[metric]]
-        ? [parseInt(obj.fetchTime, 10), obj.audits[map[metric]][audit].score * 100]
+        ? [
+            parseInt(obj.fetchTime, 10),
+            Math.round(obj.audits[map[metric]][audit].score * 10000) / 100
+          ]
         : [];
     });
-  }
-  // arr = data.lighthousedata
-  //   .reverse()
-  //   .map(obj => [parseInt(obj.fetchTime, 10), obj.audits[map[metric]].score * 100]);
-  else {
-    arr = data.average.map(obj => {
-      console.log(data);
-      return [dateOfAverage(obj), obj[averageMap[metric]] * 100];
+  } else if (pages) {
+    if (data.lighthousedata)
+      arr = data.lighthousedata
+        .reverse()
+        .map(obj => [
+          parseInt(obj.fetchTime, 10),
+          Math.round(obj.audits[map[metric]].score * 10000) / 100
+        ]);
+  } else if (data.average) {
+    arr = data.average.reverse().map(obj => {
+      return [dateOfAverage(obj), Math.round(obj[averageMap[metric]] * 10000) / 100];
     });
   }
-  const graphData = setGraph(history, metric, toUrl, arr);
+  const graphData = setGraph(history, metric, arr);
   useEffect(() => {
     if (onMount.current) {
       stock(Highcharts);
       // if (audit)
       //   setQuery(FetchData(getQuery(`${map[metric]} { ${audit} { score }}`), setData, variables));
-      // else setQuery(FetchData(getQuery(`${map[metric]} { score }`), setData, variables));
-      setQuery(FetchData(AVG_SCORES, setData, variables));
+      if (pages) setQuery(FetchData(getPages(metricMap[metric]), setData, variables));
+      else setQuery(FetchData(AVG_SCORES, setData, variables));
       onMount.current = false;
       return;
     }
-    Highcharts.stockChart('container', graphData);
-    if (!compare(prevState, { phase, brand, page, date, toDate, audit })) {
+    Highcharts.stockChart(id, graphData);
+    if (!compare(prevState, { phase, brand, page, date, toDate, audit, pages })) {
       // if (audit)
-      //   setQuery(FetchData(getQuery(`${map[metric]} { ${audit} { score }}`), setData, variables));
-      // else setQuery(FetchData(getQuery(`${map[metric]} { score }`), setData, variables));
-      setQuery(FetchData(AVG_SCORES, setData, variables));
+      //   setQuery(
+      //     FetchData(getQuery(`${metricMap[metric]} { ${audit} { score }}`), setData, variables)
+      //   );
+      if (pages) setQuery(FetchData(getPages(metricMap[metric]), setData, variables));
+      else setQuery(FetchData(AVG_SCORES, setData, variables));
     }
   });
   return (
     <>
-      <div id="container" />
+      <div id={id} />
       {query}
     </>
   );

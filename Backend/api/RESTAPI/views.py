@@ -6,7 +6,7 @@ from rest_framework_mongoengine import viewsets as viewsets
 from api.RESTAPI.serializers import LighthouseDataSerializer,GatlingDataSerializer,MetricDetailedSerializer
 from api.RESTAPI.models import *
 import json
-from .script import fun
+from .script import fun,t_fun
 from datetime import datetime
 from .alertScript import get_alerts
 
@@ -15,12 +15,11 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
     queryset = LighthouseData.objects.all()
     serializer_class = LighthouseDataSerializer
     def post(self,request):
-        globalAvg = GlobalAvg.objects.all()
         try:
-            data=fun(request.data['value'])
+            data=t_fun(request.data['value'])
         except:
             try:
-                data=fun(request.data)
+                data=t_fun(request.data)
             except:
                 raise ValidationError
         try:
@@ -30,11 +29,10 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
                               seo_audits=data['audits']['seo_audits'], pwa_audits=data['audits']['pwa_audits'],
                               accessibility_audits=data['audits']["accessibility_audits"])
             newData['audits']=auditData
-            newData['fetchTime'] = datetime.strptime(str(data['fetchTime']), "%Y-%m-%dT%H:%M:%S.%fZ")
-#            temp = datetime.strptime(str(data['fetchTime']), "%Y-%m-%dT%H:%M:%S.%fZ")
- #           from .serializers import count
-  #          newData['fetchTime']=temp.replace(day=int(count/21),month=6)
-   #         count+=1
+#            newData['fetchTime'] = datetime.strptime(str(data['fetchTime']), "%Y-%m-%dT%H:%M:%S.%fZ")
+            temp = datetime.strptime(str(data['fetchTime']), "%Y-%m-%dT%H:%M:%S.%fZ")
+            count=6
+            newData['fetchTime']=temp.replace(day=int(count),month=6)
         except:
             raise ValidationError
         try:
@@ -63,7 +61,6 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
         for url in url_list[0]['urls']:
             temp=LighthouseData.objects.filter(requestedUrl =url).order_by('-id')[:]
             if len(temp) > 1:
-                data_list.append(temp)
                 get_alerts(temp,url,alerts)
         return HttpResponse(json.dumps(alerts))
 class GatlingDataViewSet(viewsets.ModelViewSet):

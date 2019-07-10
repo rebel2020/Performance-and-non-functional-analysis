@@ -198,22 +198,14 @@ const LIST = gql`
     }
   }
 `;
-const GATLING = gql`
-  query {
-    gatlingdata {
-      stats
-    }
-  }
-`;
 
 export {
   AVG_LIGHTHOUSE_SCORES,
   getQuery,
   getAudits,
-  getPages,
-  GATLING,
   LIST,
   AVG_SCORES,
   LIGHTHOUSE_RECOMMENDATIONS,
-  lighthouse_Audit_Score
+  lighthouse_Audit_Score,
+  getPages
 };

@@ -9,25 +9,21 @@ import compare from 'src/utilities/compareObjects';
 import pagesData from 'src/utilities/parsePagesData';
 import FetchData from 'src/components/graphql/utils';
 import { getPages } from 'src/components/graphql/Queries';
+import searchParams from 'src/utilities/searchParams';
+import { metricMap } from 'src/utilities/map';
 import 'src/main.scss';
 import './main.scss';
 
 const Pages = props => {
   const [globalState, globalActions] = useGlobal();
   const { setPage } = globalActions;
-  const { phase, brand, page, date, toDate } = globalState;
+  // const { phase, brand, page, date, toDate } = globalState;
   const { history } = props;
+  const { phase, brand, page, date, toDate, pages } = searchParams(history.location.search);
   const { metric, time } = history.location;
   const [query, setQuery] = useState(<></>);
   const [data, setData] = useState({ lighthousedata: [] });
-  const prevState = previousState({ phase, brand, page, date, metric, time });
-  const map = {
-    performance: 'performance',
-    accessibilty: 'accessibilty',
-    best_practices: 'best_practices',
-    s_e_o: 'seo',
-    p_w_a: 'pwa'
-  };
+  const prevState = previousState({ phase, brand, page, date, pages, time });
   const timeRange = time
     ? {
         fetchTimeStart: time,
@@ -44,30 +40,22 @@ const Pages = props => {
   const onMount = useRef(true);
   useEffect(() => {
     if (onMount.current) {
-      setQuery(FetchData(getPages(map[metric]), setData, variables));
+      setQuery(FetchData(getPages(metricMap[pages]), setData, variables));
       onMount.current = false;
       return;
     }
-    if (!compare(prevState, { phase, brand, page, date, metric, time })) {
-      setQuery(FetchData(getPages(map[metric]), setData, variables));
+    if (!compare(prevState, { phase, brand, page, date, pages, time })) {
+      setQuery(FetchData(getPages(metricMap[pages]), setData, variables));
     }
   });
-  const pages = pagesData(data.lighthousedata, map[metric]);
+  const pagesArr = pagesData(data.lighthousedata, metricMap[pages]);
   let bgcol;
   // console.log(data);
-  const DispPages = pages.map(item => {
-    const roundscore = Math.round(item.score * 100);
-    if (roundscore <= 25) {
-      bgcol = 'bg--pomegranate';
-    } else if (roundscore > 25 && roundscore <= 75) {
-      bgcol = 'bg--dull-orange';
-    } else {
-      bgcol = 'bg--green';
-    }
+  const DispPages = pagesArr.map(item => {
     return (
       <div
-        key={item.fetchTime}
-        className={`col s10 m5 l3 pageCard ${bgcol}`}
+        key={item.finalUrl}
+        className="col s10 m5 l3 pageCard"
         onClick={() => {
           setPage(item.finalUrl);
           history.push({
@@ -76,8 +64,8 @@ const Pages = props => {
               phase,
               brand,
               page: item.finalUrl,
-              date,
-              toDate
+              date: date - 604800000,
+              toDate: (parseInt(date, 10) + 604800000).toString()
             })
           });
         }}
@@ -85,10 +73,26 @@ const Pages = props => {
         {item.finalUrl}
         <br />
         <br />
-        Time: {item.fetchTime}
+        {/* Time: {item.scores.map(i=>i.time)}
         <br />
         <br />
-        Score: {Math.round(item.score * 100)}
+        Score: {Math.round(item.scores.map(i=>i.score * 100))} */}
+        {item.scores.map(i => {
+          const roundscore = Math.round(i.score * 100);
+          if (roundscore <= 25) {
+            bgcol = 'bg--iored';
+          } else if (roundscore > 25 && roundscore <= 75) {
+            bgcol = 'bg--ioyellow';
+          } else {
+            bgcol = 'bg--iogreen';
+          }
+          return (
+            <pre>
+              {`${i.time}:  `}
+              <div className={`score ${bgcol}`}>{Math.round(i.score * 100)}</div>
+            </pre>
+          );
+        })}
         <br />
       </div>
     );

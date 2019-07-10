@@ -9,7 +9,7 @@ import Sidebar from '../../Sidebar/index';
 const Recommendations = props => {
   const [globalState] = useGlobal();
   const { toggle } = globalState;
-
+  const { history } = props;
   const [data, setData] = useState([]);
   const [query, setQuery] = useState();
 
@@ -88,8 +88,9 @@ const Recommendations = props => {
 
   return (
     <>
-      <Sidebar />
+      <Sidebar history={history} />
       <div className={toggle ? 'main' : 'main-extend'}>
+<<<<<<< HEAD
         <center>
           <br />
           <u>
@@ -139,6 +140,17 @@ const Recommendations = props => {
             <div className="collapsible-5-area">{/* <div>{display_progressive}</div> */}</div>
           </div>
         </center>
+=======
+        <br/>
+        <div className="text-center">
+          <h1>Recommendations </h1>
+        </div>
+
+        <br />
+        <br />
+        <div>{display}</div>
+
+>>>>>>> 1e48df3e2c98e20e9e85708cd849049a5cdd3e57
         {query}
         {/* {query1} */}
       </div>

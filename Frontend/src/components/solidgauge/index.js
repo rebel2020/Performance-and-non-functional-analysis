@@ -7,6 +7,7 @@ import Gauge from 'highcharts/modules/solid-gauge';
 import useGlobal from 'src/store';
 import setSearch from 'src/utilities/search';
 import formatString from 'src/utilities/formatString';
+import searchParams from 'src/utilities/searchParams';
 
 const setGraph = (name, value) => {
   return {
@@ -14,7 +15,8 @@ const setGraph = (name, value) => {
       type: 'solidgauge',
       height: '100%',
       width: '150',
-      backgroundColor: '#EFEDED'
+      backgroundColor: '#222222',
+      color: '#f5f6f9'
     },
     credits: {
       enabled: false
@@ -22,24 +24,26 @@ const setGraph = (name, value) => {
     title: {
       text: formatString(name),
       style: {
-        fontSize: '12px'
+        fontSize: '12px',
+        color: '#f5f6f9'
       }
     },
     tooltip: {
-      borderWidth: 0,
-      backgroundColor: 'none',
-      shadow: false,
-      style: {
-        fontSize: '12px'
-      },
-      pointFormat:
-        '{series.name}<br><span style="font-size:1.5em; color: {point.color}; font-weight: bold">{point.y}%</span>',
-      positioner(labelWidth) {
-        return {
-          x: (this.chart.chartWidth - labelWidth) / 2,
-          y: this.chart.plotHeight / 2 + 25
-        };
-      }
+      enabled: false
+      // borderWidth: 0,
+      // backgroundColor: 'none',
+      // shadow: false,
+      // style: {
+      //   fontSize: '12px'
+      // },
+      // pointFormat:
+      //   '{series.name}<br><span style="font-size:1.5em; color: {point.color}; font-weight: bold">{point.y}%</span>',
+      // positioner(labelWidth) {
+      //   return {
+      //     x: (this.chart.chartWidth - labelWidth) / 2,
+      //     y: this.chart.plotHeight / 2 + 25
+      //   };
+      // }
     },
     pane: {
       startAngle: 0,
@@ -50,7 +54,7 @@ const setGraph = (name, value) => {
           outerRadius: '112%',
           innerRadius: '88%',
           backgroundColor: Highcharts.Color(Highcharts.getOptions().colors[0])
-            .setOpacity(0.3)
+            .setOpacity(0.1)
             .get(),
           borderWidth: 0
         }
@@ -65,7 +69,13 @@ const setGraph = (name, value) => {
     plotOptions: {
       solidgauge: {
         dataLabels: {
-          enabled: false
+          borderWidth: 0,
+          format: '{y}%',
+          style: {
+            fontSize: '16px',
+            color: 'white'
+          },
+          verticalAlign: 'middle'
         },
         linecap: 'round',
         stickyTracking: false,
@@ -78,7 +88,7 @@ const setGraph = (name, value) => {
 
         data: [
           {
-            color: value < 25 ? '#C0392B' : value < 50 ? '#F39C12' : '#4CAF50',
+            color: value < 25 ? '#E74C3C' : value < 75 ? ' #F39C12' : '#00BC8C',
             radius: '112%',
             innerRadius: '88%',
             y: value
@@ -90,8 +100,9 @@ const setGraph = (name, value) => {
 };
 const SolidGuage = props => {
   const [globalState, globalActions] = useGlobal();
-  const { phase, brand, page, date } = globalState;
+  // const { phase, brand, page, date } = globalState;
   const { name, value, history } = props;
+  const { phase, brand, page, date, toDate } = searchParams(history.location.search);
   const graphData = setGraph(name, value);
   useEffect(() => {
     HighchartsMore(Highcharts);
@@ -101,14 +112,18 @@ const SolidGuage = props => {
   return (
     <div
       onClick={e => {
-        if (page)
-          history.push({
-            pathname: `/lighthouse`,
-            search: `audits=${name}&${setSearch({ phase, brand, page, date, toDate: date })}`,
-            metric: name
-            // time: new Date(date).getTime().toString()
-          });
-        else alert('select a particular page');
+        // if (page)
+        //   history.push({
+        //     pathname: `/lighthouse`,
+        //     search: `audits=${name}&${setSearch({ phase, brand, page, date, toDate: date })}`,
+        //     metric: name
+        //     // time: new Date(date).getTime().toString()
+        //   });
+        // else
+        history.push({
+          pathname: `/lighthouse/${name}`,
+          search: setSearch({ phase, brand, page, date, toDate: date })
+        });
       }}
       id={name}
     />

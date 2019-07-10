@@ -6,9 +6,9 @@ const AlertCollapsible = props => {
   let alcol;
 
   if (perc >= 20) {
-    alcol = 'bg--pomegranate color--white';
+    alcol = 'border-red bg--sidedark color--white';
   } else {
-    alcol = 'bg--dull-orange color--white';
+    alcol = 'border-yellow bg--sidedark color--white';
   }
 
   return (
@@ -19,10 +19,10 @@ const AlertCollapsible = props => {
           <label htmlFor={`collapsible-${k}`} className={alcol}>
             {title}
           </label>
-          <div className={`collapsible-${k}-area`}>
+          <div className={`colar collapsible-${k}-area`}>
             <div className="row">
               <p className=" col m6">{desc}</p>
-              <p className=" col m6 ">Decrease by:{perc}%</p>
+              <p className=" col m6 ">Decrease by: {perc}%</p>
             </div>
             <br />
 
@@ -30,7 +30,7 @@ const AlertCollapsible = props => {
             <div className="row">
               <button
                 type="button"
-                className="btn--raised left col m4"
+                className="btn--raised btn--red left col m4"
                 onClick={() =>
                   history.push({
                     pathname: `/lighthouse/Recommendations`

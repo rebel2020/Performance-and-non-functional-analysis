@@ -1,56 +1,102 @@
-import React from 'react';
-// import Select from 'src/components/selectlist';
-import Datalist from 'src/components/datalist';
-import HighStock from 'src/components/highstock';
-import HighChartBar from '../highchart_bar/index';
-import HighChartPie from '../highchart_pie/index';
-import Filters from '../../Filters/index';
-import StatsComponent from '../Stats_Component/index';
+import React, { useState, useEffect } from 'react';
+import Filters from '../Filters/index';
 import 'src/main.scss';
-
-import RadioButtons from '../../../components/radiobuttons/index';
+import { GATLING } from '../graphql/Queries';
+import FetchData from 'src/components/graphql/utils';
+import {parseGatlingData} from '../utils/parseGatling'
+import {Stats} from './stats1';
+import {Graph} from './graph';
+import searchParams from '../../../utilities/searchParams';
+import { setSearch } from '../utils/search';
 
 const MetricComponent = props => {
   const { metric, history } = props;
+  const [data, setData] = useState();
+  const [query, setQuery] = useState(<></>);
+  const [vals, setVals] = useState({
+    phase:'',
+    brand:"alfa",
+    finalUrl:'',    
+    fetchTimeStart: Date.now() - 864e5,
+    fetchTimeEnd: Date.now(),
+  });
+  let urls = [];
+  let Data = [];
+  let summedData = {
+    dispatcher_stats:"",
+    publisher_stats:"",
+    group1:{
+      count:0
+    },
+    group2:{
+      count:0
+    },
+    group3:{
+      count:0
+    },
+    group4:{
+      count:0
+    },
+    numberOfRequests:{
+       ok:0,
+       ko:0,
+       total:0 
+    }
+  }
 
+  let search = searchParams(history.location.search);
+  if(search.phase == "All"){
+    search.phase = "";
+  }
+  if(search.brand == "All"){
+    search.brand = "";
+  }
+  if(search.finalUrl == "All"){
+    search.finalUrl = "";
+  }
+
+  if(JSON.stringify(search) !== "{}" && JSON.stringify(vals) !== JSON.stringify(search)){
+    setVals(search);
+    setQuery(FetchData(GATLING,setData,search));
+  }
+  useEffect(()=>{
+    setQuery(FetchData(GATLING,setData,vals));
+  },[]);
+
+  const parsedData = parseGatlingData(data);
   let GatlingStats = <></>;
-  if (metric) {
-    GatlingStats = (
-      <div className="row">
-        <div className="col m7">
-          <HighChartBar {...props} />
-        </div>
-        {/* <div className="col m3">
-          <HighChartPie {...props} />
-        </div> */}
-        <div className="col m5">
-          <StatsComponent {...props} />
-        </div>
-      </div>
-    );
+  if (parsedData) {
+    if(!vals.finalUrl || vals.finalUrl === ""){
+      parsedData.map((val) => {
+        summedData.group1.count += val.group1.count;
+        summedData.group2.count += val.group2.count;
+        summedData.group3.count += val.group3.count;
+        summedData.group4.count += val.group4.count;
+        summedData.numberOfRequests.ok += val.numberOfRequests.ok;
+        summedData.numberOfRequests.ko += val.numberOfRequests.ko;
+        summedData.numberOfRequests.total += val.numberOfRequests.total;
+      })
+      summedData.dispatcher_stats = parsedData[0].dispatcher_stats;
+      summedData.publisher_stats = parsedData[0].publisher_stats;
+      GatlingStats = <Stats history={history} {...summedData} {...vals}/>
+
+      parsedData.forEach((val) => {
+        if (urls.indexOf(val.url) === -1){
+             urls.push(val.url);
+             Data.push(val);
+          }
+      })
+      console.log(Data);
+    }
+    else{
+      GatlingStats = <Graph gatlingstats={parsedData} {...props} />
+    }
   }
   return (
     <div className="container">
-      <Filters date="range" />
-
-      {/* <Select options={['a', 'b']} /> */}
-
-      <div className="row container">
-        <div className="col m8">
-          <HighStock {...props} toUrl="/gatling" />
-        </div>
-        <div className="col m3">
-          <RadioButtons
-            values={[
-              { value: 'perc_req_success', name: '% Requests Succeeded' },
-              { value: 'num_req', name: 'Number of Requests' },
-              { value: 'avg_req_per_sec', name: 'Average Number of Requests per Second' },
-              { value: 'avg_response_time', name: 'Average Response Time' }
-            ]}
-          />
-        </div>
-      </div>
-      {GatlingStats}
+      <Filters dateRange="range" history={history} />
+      {GatlingStats};
+      {query};
     </div>
   );
 };

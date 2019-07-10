@@ -11,15 +11,17 @@ import SolidGauge from 'src/components/solidgauge';
 import Collapsible from 'src/components/collapsible';
 import AuditData from 'src/utilities/parseAuditData';
 import Alert from 'src/components/alerts/index';
+import searchParams from 'src/utilities/searchParams';
 import Filters from '../../Filters';
 import Audits from '../Audits';
 import './main.scss';
 
 const HomeComponent = props => {
   const [globalState, globalActions] = useGlobal();
-  const { phase, brand, page, date } = globalState;
+  // const { phase, brand, page, date } = globalState;
   const { history } = props;
   const { metric } = history.location;
+  const { phase, brand, page, date, toDate } = searchParams(history.location.search);
   const [data, setData] = useState({ lighthousedata: [{ audits: {} }] });
   const [query, setQuery] = useState(<></>);
   const variables = {
@@ -28,7 +30,7 @@ const HomeComponent = props => {
     finalUrl: page,
     ...getTimeRange(date)
   };
-  console.log(variables);
+  // console.log(variables);
   // console.log(data);
   const prevState = previousState({ phase, brand, page, date });
   const onMount = useRef(true);
@@ -71,14 +73,17 @@ const HomeComponent = props => {
   }
   return (
     <>
-      <div className="container">{alertContainer}</div>
+      <div className="text-center">{alertContainer}</div>
       <div className="container ">
         <Filters dateRange="single" history={history} />
-
-        <div className="flexbox">{flexItems}</div>
-        {/* <div>{DispAudit}</div> */}
-        {auditContainer}
-        {query}
+        <div className="customcontainer">
+          <div className="customcard">
+            <div className="flexbox">{flexItems}</div>
+            {/* <div>{DispAudit}</div> */}
+            {auditContainer}
+            {query}
+          </div>
+        </div>
       </div>
     </>
   );
