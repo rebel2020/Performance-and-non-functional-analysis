@@ -8,8 +8,20 @@ import searchParams from '../../../utilities/searchParams';
 const Stats = props => {
     const {phase,brand} = props;
     const {history} = props;
-    const updateUrl = (url) => {
-      // console.log
+    let check = <></>
+    if(props.meanResponseTime){
+        check = <Fragment> <div className="row meannumreqrow">
+        <div className="col m3 meannumreqtext">Mean Response Time</div>
+        <div className="col m3">{props.meanResponseTime.ok}</div>
+        <div className="col m3">{props.meanResponseTime.ko}</div>
+        <div className="col m3">{props.meanResponseTime.total}</div>
+      </div>
+      <div className="row meanrest">
+        <div className="col m3 meannumreqtext">Mean Number of Requests Per Second</div>
+        <div className="col m3">{parseInt(props.meanNumberOfRequestsPerSecond.ok)}</div>
+        <div className="col m3">{parseInt(props.meanNumberOfRequestsPerSecond.ko)}</div>
+        <div className="col m3">{parseInt(props.meanNumberOfRequestsPerSecond.total)}</div>
+      </div> </Fragment>  
     }
     return (
     <Fragment>
@@ -46,18 +58,7 @@ const Stats = props => {
             <div className="col m3">{props.numberOfRequests.total}</div>
           </div>
           <br />
-          {/* <div className="row meannumreqrow">
-            <div className="col m3 meannumreqtext">Mean Response Time</div>
-            <div className="col m3">{props.meanResponseTime.ok}</div>
-            <div className="col m3">{props.meanResponseTime.ko}</div>
-            <div className="col m3">{props.meanResponseTime.total}</div>
-          </div>
-          <div className="row meanrest">
-            <div className="col m3 meannumreqtext">Mean Number of Requests Per Second</div>
-            <div className="col m3">{parseInt(props.meanNumberOfRequestsPerSecond.ok)}</div>
-            <div className="col m3">{parseInt(props.meanNumberOfRequestsPerSecond.ko)}</div>
-            <div className="col m3">{parseInt(props.meanNumberOfRequestsPerSecond.total)}</div>
-          </div> */}
+          {check}
         </div>
         <div className="col m6">
           <HighChartBar
