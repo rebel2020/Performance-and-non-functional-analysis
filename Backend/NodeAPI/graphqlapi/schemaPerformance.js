@@ -251,7 +251,7 @@ type RecommendationData{
 
 type Alert{
     name: String
-    class: String
+    alertClass: String
     scoreDiff: Float
     category: String
     fetchUrl: String

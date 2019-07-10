@@ -31,7 +31,7 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
             newData['audits']=auditData
 #            newData['fetchTime'] = datetime.strptime(str(data['fetchTime']), "%Y-%m-%dT%H:%M:%S.%fZ")
             temp = datetime.strptime(str(data['fetchTime']), "%Y-%m-%dT%H:%M:%S.%fZ")
-            count=6
+            count=7
             newData['fetchTime']=temp.replace(day=int(count),month=6)
         except:
             raise ValidationError
@@ -61,7 +61,14 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
         for url in url_list[0]['urls']:
             temp=LighthouseData.objects.filter(requestedUrl =url).order_by('-id')[:]
             if len(temp) > 1:
-                get_alerts(temp,url,alerts)
+                newAlertData=get_alerts(temp,url)
+                alerts.append(newAlertData)
+                try:
+                    newAlert = Alerts(alert=newAlertData)
+                    print(newAlertData)
+                    newAlert.save()
+                except:
+                    pass
         return HttpResponse(json.dumps(alerts))
 class GatlingDataViewSet(viewsets.ModelViewSet):
     lookup_field = 'id'
