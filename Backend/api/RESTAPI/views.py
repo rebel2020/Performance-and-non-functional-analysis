@@ -16,10 +16,10 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
     serializer_class = LighthouseDataSerializer
     def post(self,request):
         try:
-            data=fun(request.data['value'])
+            data=t_fun(request.data['value'])
         except:
             try:
-                data=fun(request.data)
+                data=t_fun(request.data)
             except:
                 raise ValidationError
         try:
@@ -31,8 +31,8 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
             newData['audits']=auditData
 #            newData['fetchTime'] = datetime.strptime(str(data['fetchTime']), "%Y-%m-%dT%H:%M:%S.%fZ")
             temp = datetime.strptime(str(data['fetchTime']), "%Y-%m-%dT%H:%M:%S.%fZ")
-            count=12
-            newData['fetchTime']=temp.replace(day=int(count),month=6)
+            count=5
+            newData['fetchTime']=temp.replace(day=int(count),month=7)
         except:
             raise ValidationError
         try:
