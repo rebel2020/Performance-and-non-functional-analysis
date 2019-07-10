@@ -249,6 +249,18 @@ type RecommendationData{
 	SEOAuditRecommendations: SEOAuditRecommendation
 }
 
+type Alert{
+    name: String
+    class: String
+    scoreDiff: Float
+    category: String
+    fetchUrl: String
+}
+
+type Alerts{
+    alert: [Alert]
+}
+
 type Query{
 	allLighthousedata: [LighthouseData]
 	gatlingdata(url: String, fetchTimeStart: String, fetchTimeEnd: String
@@ -257,7 +269,9 @@ type Query{
 						 project: String, phase: String, brand: String): [LighthouseData]
 	average(finalUrl: String, fetchTimeStart: String, fetchTimeEnd: String,
 						 project: String, phase: String, brand: String): [AuditsAverage],
-	recommendation: RecommendationData
+	recommendation: RecommendationData,
+	alerts: [Alerts]
+	
 }
 `;
 
