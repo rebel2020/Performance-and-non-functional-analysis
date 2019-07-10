@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="17a311d9-1a51-4c11-b7e3-9ecf32106366" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/NodeAPI/models/Alert.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NodeAPI/models/Alerts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NodeAPI/graphqlapi/resolversPerformance.js" beforeDir="false" afterPath="$PROJECT_DIR$/NodeAPI/graphqlapi/resolversPerformance.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NodeAPI/graphqlapi/schemaPerformance.js" beforeDir="false" afterPath="$PROJECT_DIR$/NodeAPI/graphqlapi/schemaPerformance.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/RESTAPI/alertScript.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/RESTAPI/alertScript.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/RESTAPI/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/RESTAPI/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/RESTAPI/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/RESTAPI/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -46,7 +40,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/api/RESTAPI/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="139">
+            <state relative-caret-position="88">
               <caret line="33" column="19" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="19" />
               <folding>
                 <element signature="e#0#44#0" expanded="true" />
@@ -359,12 +353,12 @@
       <workItem from="1562741190873" duration="1790000" />
       <workItem from="1562743011220" duration="1279000" />
       <workItem from="1562744908326" duration="885000" />
-      <workItem from="1562747626803" duration="26000" />
+      <workItem from="1562747626803" duration="711000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="223789000" />
+    <option name="totallyTimeSpent" value="224474000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
@@ -615,7 +609,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/api/RESTAPI/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
+        <state relative-caret-position="88">
           <caret line="33" column="19" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="19" />
           <folding>
             <element signature="e#0#44#0" expanded="true" />

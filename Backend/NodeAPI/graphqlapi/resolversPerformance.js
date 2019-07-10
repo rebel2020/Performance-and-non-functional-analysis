@@ -222,7 +222,6 @@ const resolversPerformance = {
 		},
 
 		alerts: async() =>{
-		console.log(defaultAlertData);
 			return await Alerts.find({}).exec();
 		// 	Request.get("http://10.150.229.236:8080/lighthouse/alert", (error, response, body) => {
 		// 	    if(error) {
