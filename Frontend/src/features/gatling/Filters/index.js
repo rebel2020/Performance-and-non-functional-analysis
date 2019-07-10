@@ -18,8 +18,8 @@ const Filters = props => {
     finalUrl: []
   });
   const [dates,setDates] = useState({
-    date:getHtmlDate(new Date().getTime()),
-    toDate:getHtmlDate( Date.now() - 864e5)
+    date:getHtmlDate(Date.now() - 864e5),
+    toDate:getHtmlDate(new Date().getTime())
   })
   const [values, setValues] = useState({
     phase:"",
@@ -32,8 +32,6 @@ const Filters = props => {
   useEffect(() => {
     setQuery(FetchData(LIST, setList));
   }, []);
-
-  const submitValues = () => {};
 
   let newValue = parseFilterData(list);
   // console.log(newValue);
@@ -115,23 +113,23 @@ const Filters = props => {
           }}
         />
       </div>
-        <div className="col s6 m4 l2">
-          {dateRange === 'range' ? (
-            <Input
-              className="dateInput"
-              type="date"
-              value={values.toDate}
-              max={getHtmlDate(new Date().getTime())}
-              min="2019-07-01"
-              onChange={value => {
-                setValues({ ...values, toDate: value });
-                history.push({
-                  pathname: history.pathname,
-                  search: setSearch({ ...values, toDate: value })
-                });
-              }}
-            />
-          ) : (
+      <div className="col s6 m4 l2">
+        {dateRange === 'range' ? (
+          <Input
+            className="dateInput"
+            type="date"
+            value={dates.toDate}
+            max={getHtmlDate(new Date().getTime())}
+            min="2019-07-01"
+            onChange={value => {
+              setDates({...dates,toDate:value})
+              setValues({ ...values, toDate: (value)?new Date(value).getTime():value });
+              history.push({
+                pathname: history.pathname,
+                search: setSearch({ ...values, toDate: (value)?new Date(value).getTime():value })
+              });
+            }}
+          />) : (
             <></>
           )}
         </div>

@@ -5,7 +5,6 @@ import HighStock from '../highchartStocks'
 import 'src/main.scss';
 
 const Stats = props => {
-    console.log(props);
     return (
     <Fragment>
         <div className="row">    
