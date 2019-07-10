@@ -112,18 +112,18 @@ const SolidGuage = props => {
   return (
     <div
       onClick={e => {
-        if (page)
-          history.push({
-            pathname: `/lighthouse`,
-            search: `audits=${name}&${setSearch({ phase, brand, page, date, toDate: date })}`,
-            metric: name
-            // time: new Date(date).getTime().toString()
-          });
-        else
-          history.push({
-            pathname: `/lighthouse/${name}`,
-            search: setSearch({ phase, brand, page, date, toDate: date })
-          });
+        // if (page)
+        //   history.push({
+        //     pathname: `/lighthouse`,
+        //     search: `audits=${name}&${setSearch({ phase, brand, page, date, toDate: date })}`,
+        //     metric: name
+        //     // time: new Date(date).getTime().toString()
+        //   });
+        // else
+        history.push({
+          pathname: `/lighthouse/${name}`,
+          search: setSearch({ phase, brand, page, date, toDate: date })
+        });
       }}
       id={name}
     />
