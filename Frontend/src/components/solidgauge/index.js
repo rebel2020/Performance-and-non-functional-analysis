@@ -119,7 +119,11 @@ const SolidGuage = props => {
             metric: name
             // time: new Date(date).getTime().toString()
           });
-        else alert('select a particular page');
+        else
+          history.push({
+            pathname: `/lighthouse/${name}`,
+            search: setSearch({ phase, brand, page, date, toDate: date })
+          });
       }}
       id={name}
     />
