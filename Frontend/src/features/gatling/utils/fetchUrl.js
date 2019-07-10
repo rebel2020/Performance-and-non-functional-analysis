@@ -7,9 +7,9 @@ const parseFilterData = Data => {
     finalUrl: []
 };
   if(Data){
-    let Url = [];
-    let Brand = [];
-    let Phase = [];
+    let Url = ['All'];
+    let Brand = ['All'];
+    let Phase = ['All'];
     Data.gatlingdata.forEach((val) => {
       if (Url.indexOf(val.url.trim()) === -1) Url.push(val.url);
       if (Brand.indexOf(val.brand.trim()) === -1) Brand.push(val.brand);
