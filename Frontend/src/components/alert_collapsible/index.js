@@ -22,7 +22,7 @@ const AlertCollapsible = props => {
           <div className={`colar collapsible-${k}-area`}>
             <div className="row">
               <p className=" col m6">{desc}</p>
-              <p className=" col m6 ">Decrease by: {perc}%</p>
+              <p className=" col m6 ">{`Decrease by:${perc}%`}</p>
             </div>
             <br />
 

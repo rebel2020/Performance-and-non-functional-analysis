@@ -1,18 +1,5 @@
-import React from 'react';
-import { dateFormat } from 'highcharts';
-
 const pagesData = (data, metric) => {
-  if (!data) return;
-  // const arr = data.map(obj => {
-  //   return {
-  //     scores: [{ score: obj.audits[`${metric}_audits`].score, time: obj.fetchTime }],
-  //     finalUrl: obj.finalUrl
-  //   };
-  // });
-  // const set = Array.from(new Set(arr.map(a => a.finalUrl))).map(finalUrl => {
-  //   return arr.find(a => a.finalUrl === finalUrl);
-  // });
-  //   .sort((a, b) => (a.score > b.score ? 1 : b.score > a.score ? -1 : 0));
+  if (!data) return [];
   const set = Array.from(new Set(data.map(obj => obj.finalUrl)));
   const arr = set.map(url => {
     const scores = [];
@@ -34,7 +21,6 @@ const pagesData = (data, metric) => {
     });
     return { finalUrl: url, scores };
   });
-  // console.log(arr);
   return arr;
 };
 
