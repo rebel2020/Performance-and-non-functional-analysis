@@ -7,7 +7,7 @@
 			transform: scaleY(1);
 			height: auto;
 			padding: $space-small*1.5 $space-med;
-			margin-bottom: $space-med;
+			
 		}
 		+ label {
 			&:before {
@@ -38,7 +38,7 @@ label[for*="collapsible-"] { // Label
 		right: $space-med;
 		width: 2px;
 		height: 8px;
-		background: #1E2023;
+		background: #FFFFFF;
 		transition: all 0.3s ease;
 	}
 	&:before {
