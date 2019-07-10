@@ -8,7 +8,7 @@ import useGlobal from 'src/store';
 import { FaHome, FaTruckLoading, FaUniversalAccess, FaSearch } from 'react-icons/fa';
 import { MdCompareArrows, MdTrendingUp, MdAddAlert } from 'react-icons/md';
 import { GoGraph } from 'react-icons/go';
-import { IoIosArrowForward, IoIosArrowBack, IoIosMenu, IoMdArrowDropdown } from 'react-icons/io';
+import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 
 import { TiMessages, TiStarOutline } from 'react-icons/ti';
 import { GiLighthouse } from 'react-icons/gi';
