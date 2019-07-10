@@ -106,7 +106,7 @@ const Filters = props => {
           type="date"
           value={values.date}
           max={getHtmlDate(new Date().getTime())}
-          min="2019-07-01"
+          min="2019-06-01"
           onChange={value => {
             setValues({ ...values, date: value });
             // setDate(value);
@@ -130,7 +130,7 @@ const Filters = props => {
             type="date"
             value={values.toDate}
             max={getHtmlDate(new Date().getTime())}
-            min="2019-07-01"
+            min="2019-06-01"
             onChange={value => {
               setValues({ ...values, toDate: value });
               // setToDate(value);
