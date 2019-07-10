@@ -21,7 +21,7 @@ const setGraph = (history, name, data) => {
       zoomType: 'x',
       spacingLeft: 50,
       spacingRight: 50,
-      backgroundColor: '#383a3e',
+      backgroundColor: '#222222',
       style: {
         color: 'white'
       }

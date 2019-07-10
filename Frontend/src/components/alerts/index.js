@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { IoIosAlert } from 'react-icons/io';
 import './styles.scss';
 
 class Alert extends Component {
@@ -23,6 +24,7 @@ class Alert extends Component {
           <span className="close" data-dismiss="alert" onClick={() => this.hideAlert()}>
             &times;
           </span>
+
           <a className="hover_cursor" onClick={() => this.props.history.push('/lighthouse/alerts')}>
             <h3>
               You have&nbsp;

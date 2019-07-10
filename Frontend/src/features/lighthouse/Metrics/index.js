@@ -19,7 +19,11 @@ const MetricComponent = props => {
   return (
     <div className="container">
       <Filters dateRange="range" history={history} />
-      <HighStock {...props} pages={pages} id="metric" />
+      <div className="customcontainer">
+        <div className="customcard">
+          <HighStock {...props} pages={pages} id="metric" />
+        </div>
+      </div>
       {auditContainer}
       {pageContaner}
     </div>
