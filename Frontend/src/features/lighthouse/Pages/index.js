@@ -52,18 +52,10 @@ const Pages = props => {
   let bgcol;
   // console.log(data);
   const DispPages = pagesArr.map(item => {
-    const roundscore = Math.round(item.score * 100);
-    // if (roundscore <= 25) {
-    //   bgcol = 'bg--iored';
-    // } else if (roundscore > 25 && roundscore <= 75) {
-    //   bgcol = 'bg--ioyellow';
-    // } else {
-    //   bgcol = 'bg--iogreen';
-    // }
     return (
       <div
-        key={item.fetchTime}
-        className={`col s10 m5 l3 pageCard ${bgcol}`}
+        key={item.finalUrl}
+        className="col s10 m5 l3 pageCard"
         onClick={() => {
           setPage(item.finalUrl);
           history.push({
@@ -72,8 +64,8 @@ const Pages = props => {
               phase,
               brand,
               page: item.finalUrl,
-              date: item.fetchTime - 604800000,
-              toDate: (parseInt(item.fetchTime, 10) + 604800000).toString()
+              date: date - 604800000,
+              toDate: (parseInt(date, 10) + 604800000).toString()
             })
           });
         }}
@@ -81,10 +73,26 @@ const Pages = props => {
         {item.finalUrl}
         <br />
         <br />
-        Time: {item.fetchTime}
+        {/* Time: {item.scores.map(i=>i.time)}
         <br />
         <br />
-        Score: {Math.round(item.score * 100)}
+        Score: {Math.round(item.scores.map(i=>i.score * 100))} */}
+        {item.scores.map(i => {
+          const roundscore = Math.round(i.score * 100);
+          if (roundscore <= 25) {
+            bgcol = 'bg--iored';
+          } else if (roundscore > 25 && roundscore <= 75) {
+            bgcol = 'bg--ioyellow';
+          } else {
+            bgcol = 'bg--iogreen';
+          }
+          return (
+            <pre>
+              {`${i.time}:  `}
+              <div className={`score ${bgcol}`}>{Math.round(i.score * 100)}</div>
+            </pre>
+          );
+        })}
         <br />
       </div>
     );
