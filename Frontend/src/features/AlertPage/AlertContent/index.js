@@ -3,6 +3,10 @@ import AlertCollapsible from '../../../components/alert_collapsible/index';
 import './styles.scss';
 import ALERTS from '../graphql/Queries';
 import FetchData from '../../../components/graphql/utils';
+import formatString from '../../../utilities/formatString';
+import { parse } from 'url';
+
+
 
 const AlertContent = props => {
   const { history } = props;
@@ -23,10 +27,11 @@ const AlertContent = props => {
   let numalerts = 0;
   let DispAlerts = <></>;
   let urgent = 0;
-console.log(data);
+  console.log(data);
   if (data) {
-    console.log(data.alert);
-    const parsedata = data.alert;
+    console.log(data.alerts);
+    const parsedata = data.alerts[0].alert;
+    console.log(parsedata);
 
     // const als = [
     //   {
@@ -67,21 +72,23 @@ console.log(data);
     // ];
     numalerts = parsedata.length;
     parsedata.sort(compare);
-    
+
     DispAlerts = parsedata.map((item, i) => {
+      let formatName = formatString(item.name);
       if (item.scoreDiff > 20) {
         urgent++;
       }
+      let roundScore = Math.round(item.scoreDiff);
       return (
         <>
           <br />
           <AlertCollapsible
             {...props}
-            k={item}
+            k={i}
             key={i}
-            title={item.name}
-            desc={item.fetchUrl}
-            perc={item.scoreDiff}
+            title={item.fetchUrl}
+            desc={formatName}
+            perc={roundScore}
           />
         </>
       );
