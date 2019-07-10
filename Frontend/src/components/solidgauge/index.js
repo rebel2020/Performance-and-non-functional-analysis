@@ -15,7 +15,8 @@ const setGraph = (name, value) => {
       type: 'solidgauge',
       height: '100%',
       width: '150',
-      backgroundColor: '#EFEDED'
+      backgroundColor: '#383a3e',
+      color: '#f5f6f9'
     },
     credits: {
       enabled: false
@@ -23,24 +24,26 @@ const setGraph = (name, value) => {
     title: {
       text: formatString(name),
       style: {
-        fontSize: '12px'
+        fontSize: '12px',
+        color: '#f5f6f9'
       }
     },
     tooltip: {
-      borderWidth: 0,
-      backgroundColor: 'none',
-      shadow: false,
-      style: {
-        fontSize: '12px'
-      },
-      pointFormat:
-        '{series.name}<br><span style="font-size:1.5em; color: {point.color}; font-weight: bold">{point.y}%</span>',
-      positioner(labelWidth) {
-        return {
-          x: (this.chart.chartWidth - labelWidth) / 2,
-          y: this.chart.plotHeight / 2 + 25
-        };
-      }
+      enabled: false
+      // borderWidth: 0,
+      // backgroundColor: 'none',
+      // shadow: false,
+      // style: {
+      //   fontSize: '12px'
+      // },
+      // pointFormat:
+      //   '{series.name}<br><span style="font-size:1.5em; color: {point.color}; font-weight: bold">{point.y}%</span>',
+      // positioner(labelWidth) {
+      //   return {
+      //     x: (this.chart.chartWidth - labelWidth) / 2,
+      //     y: this.chart.plotHeight / 2 + 25
+      //   };
+      // }
     },
     pane: {
       startAngle: 0,
@@ -51,7 +54,7 @@ const setGraph = (name, value) => {
           outerRadius: '112%',
           innerRadius: '88%',
           backgroundColor: Highcharts.Color(Highcharts.getOptions().colors[0])
-            .setOpacity(0.3)
+            .setOpacity(0.1)
             .get(),
           borderWidth: 0
         }
@@ -66,7 +69,13 @@ const setGraph = (name, value) => {
     plotOptions: {
       solidgauge: {
         dataLabels: {
-          enabled: false
+          borderWidth: 0,
+          format: '{y}%',
+          style: {
+            fontSize: '16px',
+            color: 'white'
+          },
+          verticalAlign: 'middle'
         },
         linecap: 'round',
         stickyTracking: false,
@@ -79,7 +88,7 @@ const setGraph = (name, value) => {
 
         data: [
           {
-            color: value < 25 ? 'Crimson' : value < 50 ? 'Orange' : 'MediumSeaGreen',
+            color: value < 25 ? '#E74C3C' : value < 75 ? ' #F39C12' : '#00BC8C',
             radius: '112%',
             innerRadius: '88%',
             y: value

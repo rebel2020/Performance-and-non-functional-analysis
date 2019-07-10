@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import HighStock from '../highchart_stock/index';
 import 'src/main.scss';
 import RadioButtons from '../../../components/radiobuttons/index';
+import './styles.scss';
 
 const Graph = props => {
   const { gatlingstats } = props;
@@ -45,7 +46,7 @@ const Graph = props => {
 
   console.log(fetchTime);
   return (
-    <div className="row container">
+    <div className="row container radiocomp">
       <div className="col m8">{hscomp}</div>
       <div className="col m4">
         <h3>{radioTitle}</h3>

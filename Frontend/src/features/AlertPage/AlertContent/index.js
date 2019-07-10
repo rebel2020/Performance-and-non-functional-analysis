@@ -74,11 +74,11 @@ const AlertContent = props => {
   });
   return (
     <>
-      <div className=" container alertpageheader text-center">
+      <div className="alertpageheader text-center">
         <h1> Hello. You have {numalerts} Alerts.</h1>
       </div>
-      <div className="container alerturgenttext text-center">
-        <h4> There are {urgent} urgent alert(s)</h4>
+      <div  className="text-center">
+        <h4 className="alerturgenttext"> There are {urgent} urgent alert(s)</h4>
       </div>
       {DispAlerts}
     </>

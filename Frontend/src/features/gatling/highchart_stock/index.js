@@ -9,16 +9,23 @@ const setGraph = (history, name,  data, setfetchTime) => {
       zoomType: 'x',
       spacingLeft: 50,
       spacingRight: 50,
-      backgroundColor: '#EFEDED'
+      backgroundColor: '#383a3e',
+      style: {
+        color: 'white'
+      }
+      // backgroundColor: '#303030'
     },
 
     rangeSelector: {
+      style: {
+        color: 'white'
+      },
       selected: 1
     },
 
     title: {
       style: {
-        color: 'black'
+        color: 'white'
       },
       text: formatString(name)
     },
@@ -37,39 +44,7 @@ const setGraph = (history, name,  data, setfetchTime) => {
         point: {
           events: {
             click: e => {
-              setfetchTime(new Date(e.point.x).getTime())
-              // if (page)
-              //   history.push({
-              //     pathname: `/lighthouse/${name}`,
-              //     search: `audits=${metric || name}&${setSearch({
-              //       phase,
-              //       brand,
-              //       page,
-              //       date: new Date(e.point.x).getTime(),
-              //       toDate: new Date(e.point.x + 86400000).getTime()
-              //     })}`,
-              //     // state: { x: e.point.x, metric: name }
-              //     metric: name,
-              //     audit: audit || '',
-              //     time: new Date(e.point.x).getTime().toString()
-              //   });
-              // else
-              //   history.push({
-              //     pathname: `/lighthouse/${name}`,
-              //     search: setSearch({
-              //       phase,
-              //       brand,
-              //       page,
-              //       date: new Date(e.point.x).getTime(),
-              //       toDate: new Date(e.point.x + 86400000).getTime()
-              //     }),
-              //     // search: `audits=${metric || name}`,
-              //     // state: { x: e.point.x, metric: name }
-              //     metric: name,
-              //     audit: audit || '',
-              //     average: true,
-              //     time: new Date(e.point.x).getTime().toString()
-              //   });
+              setfetchTime(new Date(e.point.x).getTime());
             }
           }
         },

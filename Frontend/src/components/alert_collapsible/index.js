@@ -6,10 +6,10 @@ const AlertCollapsible = props => {
   let alcol;
 
   if (perc >= 20) {
-    alcol = 'bg--firebrick color--white';
-    alcol = 'bg--firebrick color--white';
+    alcol = 'bg--iored color--white';
+    
   } else {
-    alcol = 'bg--orange color--white';
+    alcol = 'bg--ioyellow color--white';
   }
 
   return (
@@ -20,10 +20,10 @@ const AlertCollapsible = props => {
           <label htmlFor={`collapsible-${k}`} className={alcol}>
             {title}
           </label>
-          <div className={`collapsible-${k}-area`}>
+          <div className={`colar collapsible-${k}-area`}>
             <div className="row">
               <p className=" col m6">{desc}</p>
-              <p className=" col m6 ">Decrease by:{perc}%</p>
+              <p className=" col m6 ">Decrease by: {perc}%</p>
             </div>
             <br />
 

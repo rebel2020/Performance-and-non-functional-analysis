@@ -115,7 +115,8 @@ const resolversPerformance = {
 				timeEnd = new Date(parseInt(timeEnd));
 				console.log(timeEnd);
 			}
-			console.log("timeEndyopyoy: " + timeEnd)
+			console.log("timeEndyopyoy: " + timeEnd);
+
 			return await LighthouseData
 			.find({
 				...newOptions,

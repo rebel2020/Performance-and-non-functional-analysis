@@ -1,13 +1,17 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable react/jsx-one-expression-per-line */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import React, { useState, useEffect, useRef } from 'react';
 
 import Link from 'src/components/Link';
 import useGlobal from 'src/store';
 import { FaHome, FaTruckLoading, FaUniversalAccess, FaSearch } from 'react-icons/fa';
 import { MdCompareArrows, MdTrendingUp, MdAddAlert } from 'react-icons/md';
 import { GoGraph } from 'react-icons/go';
-import { IoIosArrowForward, IoIosArrowBack, IoIosMenu } from 'react-icons/io';
+import { IoIosArrowForward, IoIosArrowBack, IoIosMenu, IoMdArrowDropdown } from 'react-icons/io';
 
 import { TiMessages, TiStarOutline } from 'react-icons/ti';
+import { GiLighthouse } from 'react-icons/gi';
 
 import './main.scss';
 
@@ -15,6 +19,7 @@ const Sidebar = props => {
   const [globalState, globalActions] = useGlobal();
   const { toggle } = globalState;
   const [mob, setMob] = useState(false);
+  const [display, setDisplay] = useState('none');
   const sideClass = toggle ? 'sidenav' : 'sidenav-collapse';
   const mobClass = mob ? 'mobOpen' : 'mobClose';
   useEffect(() => {
@@ -22,7 +27,6 @@ const Sidebar = props => {
     main.addEventListener(
       'click',
       e => {
-        console.log(e.target.nodeName);
         setMob(false);
       },
       { capture: true }
@@ -40,72 +44,88 @@ const Sidebar = props => {
           {toggle ? 'Home' : ''}
         </div>
       </Link>
-      <Link {...props} className="sidelink" to="/lighthouse/performance">
+      <div
+        className="sidelink"
+        onClick={() => {
+          if (display === 'block') setDisplay('none');
+          else setDisplay('block');
+        }}
+      >
+        <pre>
+          <GiLighthouse />
+          {/* <IoMdArrowDropdown /> */}
+        </pre>
+        {toggle ? 'Lighthouse' : ''}
+      </div>
+      <div className={`dropdown ${display}`}>
+        <Link {...props} className="sidelink" to="/lighthouse/performance">
+          <div className="sidelink">
+            <div className="txt-center">
+              <h2>
+                <GoGraph />
+              </h2>
+            </div>
+            {toggle ? 'Performance' : ''}
+          </div>
+        </Link>
+        <Link {...props} className="sidelink" to="/lighthouse/accessibility">
+          <div className="sidelink">
+            <div className="txt-center">
+              <h2>
+                <FaUniversalAccess />
+              </h2>
+            </div>
+
+            {toggle ? 'Accessibility' : ''}
+          </div>
+        </Link>
+
+        <Link {...props} className="sidelink" to="/lighthouse/p_w_a">
+          <div className="sidelink">
+            <div className="txt-center">
+              <h2>
+                <MdTrendingUp />
+              </h2>
+            </div>
+
+            {toggle ? 'PWA' : ''}
+          </div>
+        </Link>
+        <Link {...props} className="sidelink" to="/lighthouse/s_e_o">
+          <div className="sidelink">
+            <div className="txt-center">
+              <h2>
+                <FaSearch />
+              </h2>
+            </div>
+
+            {toggle ? 'SEO' : ''}
+          </div>
+        </Link>
+        <Link {...props} className="sidelink" to="/lighthouse/best_practices">
+          <div className="sidelink">
+            <div className="txt-center">
+              <h2>
+                <TiStarOutline />
+              </h2>
+            </div>
+
+            {toggle ? 'Best Practices' : ''}
+          </div>
+        </Link>
+      </div>
+      <Link {...props} className="sidelink" to="/gatling">
         <div className="sidelink">
           <div className="txt-center">
             <h2>
-              <GoGraph />
-            </h2>
-          </div>
-          {toggle ? 'Performance' : ''}
-        </div>
-      </Link>
-      <Link {...props} className="sidelink" to="/lighthouse/accessibility">
-        <div className="sidelink">
-          <div className="txt-center">
-            <h2>
-              <FaUniversalAccess />
+              <FaTruckLoading />
             </h2>
           </div>
 
-          {toggle ? 'Accessibility' : ''}
+          {toggle ? 'Gatling' : ''}
         </div>
       </Link>
 
-      <Link {...props} className="sidelink" to="/lighthouse/p_w_a">
-        <div className="sidelink">
-          <div className="txt-center">
-            <h2>
-              <MdTrendingUp />
-            </h2>
-          </div>
-
-          {toggle ? 'PWA' : ''}
-        </div>
-      </Link>
-      <Link {...props} className="sidelink" to="/lighthouse/s_e_o">
-        <div className="sidelink">
-          <div className="txt-center">
-            <h2>
-              <FaSearch />
-            </h2>
-          </div>
-
-          {toggle ? 'SEO' : ''}
-        </div>
-      </Link>
-      <Link {...props} className="sidelink" to="/lighthouse/best_practices">
-        <div className="sidelink">
-          <div className="txt-center">
-            <h2>
-              <TiStarOutline />
-            </h2>
-          </div>
-
-          {toggle ? 'Best Practices' : ''}
-        </div>
-      </Link>
-      <Link {...props} className="sidelink" to="/lighthouse/recommendations">
-        <div className="sidelink">
-          <div className="txt-center">
-            <h2>
-              <TiMessages />
-            </h2>
-          </div>
-
-          {toggle ? 'Recommendations' : ''}
-        </div>
-      </Link>
       <Link {...props} className="sidelink" to="/lighthouse/alerts">
         <div className="sidelink">
           <div className="txt-center">
@@ -116,15 +136,16 @@ const Sidebar = props => {
           {toggle ? 'Alerts' : ''}
         </div>
       </Link>
-      <Link {...props} className="sidelink" to="/gatling">
+
+      <Link {...props} className="sidelink" to="/lighthouse/recommendations">
         <div className="sidelink">
           <div className="txt-center">
             <h2>
-              <FaTruckLoading />
+              <TiMessages />
             </h2>
           </div>
 
-          {toggle ? 'Gatling' : ''}
+          {toggle ? 'Recommendations' : ''}
         </div>
       </Link>
     </>
@@ -141,7 +162,7 @@ const Sidebar = props => {
         <div className="row">
           <div className="text-center col m12">
             <button
-              className="btn--flat bg--black color--white"
+              className="btn--flat bg--sidedark color--white"
               type="button"
               onClick={() => globalActions.toggle()}
             >

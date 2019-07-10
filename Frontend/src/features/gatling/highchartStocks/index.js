@@ -3,53 +3,82 @@ import Highcharts from 'highcharts/highcharts';
 import stock from 'highcharts/modules/stock';
 
 const HighStock = props => {
-  
   const options = {
     chart: {
-     
-      backgroundColor: '#EFEDED',
+      backgroundColor: '#383a3e'
     },
     title: {
-        text: props.title   
+      text: props.title,
+      style: {
+        color: 'white'
+      }
     },
-    subtitle : {
-        text: 'Server Stats'
+
+    subtitle: {
+      text: 'Server Stats',
+      style: { color: 'white' }
     },
-    xAxis : {
-        categories: ['Start','RampUp','Peek']
+    credits: {
+      enabled: false
     },
-    yAxis : {
-        title: {
-            text: 'Utilization'
-        },
-        plotLines: [{
-                value: 0,
-                width: 1,
-                color: '#808080'
-        }]
+    xAxis: {
+      categories: ['Start', 'RampUp', 'Peek'],
+      labels: {
+        style: {
+          color: 'white'
+        }
+      }
+    },
+    yAxis: {
+      title: {
+        text: 'Utilization',
+        style: {
+          color: 'white'
+        }
+      },
+      labels: {
+        style: {
+          color: 'white'
+        }
+      },
+      plotLines: [
+        {
+          value: 0,
+          width: 1,
+          color: '#808080'
+        }
+      ]
     },
     // tooltip: {
     //     valueSuffix: '\xB0C'
     // },
-    legend : {
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'middle',
-        borderWidth: 0
+    legend: {
+      layout: 'vertical',
+      align: 'right',
+      verticalAlign: 'middle',
+      borderWidth: 0,
+      itemStyle: {
+        color: 'white'
+      }
     },
-    series :  [{
+    series: [
+      {
         name: 'CPU',
-        data: props.cpu
-    },
-    {
+        data: props.cpu,
+        color: '#00BC8C'
+      },
+      {
         name: 'RAM',
-        data: props.ram
-    }, 
-    {
+        data: props.ram,
+        color: '#3498DB'
+      },
+      {
         name: 'JVM',
-        data: props.jvm
-    }]
-  }  
+        data: props.jvm,
+        color: '#F39C12'
+      }
+    ]
+  };
 
   useEffect(() => {
     stock(Highcharts);
