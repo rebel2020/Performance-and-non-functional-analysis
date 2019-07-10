@@ -2,27 +2,12 @@ import React, { useEffect,useState } from 'react';
 import Highcharts from 'highcharts';
 
 const HighChartBar = props => {
-  const [group1,setGroup1] = useState([[0, 1000]]);  
-  const [group2,setGroup2] = useState([[1, 500]]);  
-  const [group3,setGroup3] = useState([[2, 250]]);  
-  const [group4,setGroup4] = useState([[3, 125]]);  
-
-  if(props.group1.toString() !== group1.toString()){
-    setGroup1(props.group1);
-  }
-  if(props.group2.toString() !== group2.toString()){
-    setGroup2(props.group2);
-  }
-  if(props.group3.toString() !== group3.toString()){
-    setGroup3(props.group3);
-  }
-  if(props.group4.toString() !== group4.toString()){
-    setGroup4(props.group4);
-  }
+  const {group1,group2,group3,group4} = props;
 
   const options = {
     chart: {
-      type: 'column'
+      type: 'column',
+      backgroundColor: '#EFEDED',
     },
     title: {
       text: 'Response Time of Requests'
