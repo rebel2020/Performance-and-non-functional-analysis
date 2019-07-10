@@ -76,11 +76,14 @@ const HomeComponent = props => {
       <div className="text-center">{alertContainer}</div>
       <div className="container ">
         <Filters dateRange="single" history={history} />
-
-        <div className="flexbox">{flexItems}</div>
-        {/* <div>{DispAudit}</div> */}
-        {auditContainer}
-        {query}
+        <div className="customcontainer">
+          <div className="customcard">
+            <div className="flexbox">{flexItems}</div>
+            {/* <div>{DispAudit}</div> */}
+            {auditContainer}
+            {query}
+          </div>
+        </div>
       </div>
     </>
   );
