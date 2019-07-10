@@ -53,13 +53,13 @@ const Pages = props => {
   // console.log(data);
   const DispPages = pagesArr.map(item => {
     const roundscore = Math.round(item.score * 100);
-    if (roundscore <= 25) {
-      bgcol = 'bg--iored';
-    } else if (roundscore > 25 && roundscore <= 75) {
-      bgcol = 'bg--ioyellow';
-    } else {
-      bgcol = 'bg--iogreen';
-    }
+    // if (roundscore <= 25) {
+    //   bgcol = 'bg--iored';
+    // } else if (roundscore > 25 && roundscore <= 75) {
+    //   bgcol = 'bg--ioyellow';
+    // } else {
+    //   bgcol = 'bg--iogreen';
+    // }
     return (
       <div
         key={item.fetchTime}
