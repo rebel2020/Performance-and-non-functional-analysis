@@ -127,8 +127,9 @@ def getTrendMetric(data_list,alerts):
             x_mean = mean(interval_list)
             divider = mean(interval_list) ** 2 - mean(interval_list ** 2)
             if divider != 0 and y_mean > 0:
-                slope = ((x_mean*y_mean-mean(score_list*interval_list))/divider)/y_mean
-                if slope < -0.1:
+                slope = ((x_mean*y_mean-mean(score_list*interval_list))/divider)#/y_mean
+#                print(slope)
+                if slope < -0.02:
                     slope_list[metric]=slope
                     temp = dict()
                     temp['fetchUrl'] = url
@@ -160,8 +161,8 @@ def getTrendAudit(data_list,alerts):
             y_mean = mean(score_list)
             divider = x_mean ** 2 - mean(interval_list ** 2)
             if divider != 0 and y_mean != 0:
-                slope = ((x_mean * y_mean - mean(score_list * interval_list)) / divider) / y_mean
-                if slope < -0.1:
+                slope = ((x_mean * y_mean - mean(score_list * interval_list)) / divider) #/ y_mean
+                if slope < -0.02:
                     slope_list[audit] = slope
                     temp = dict()
                     temp['fetchUrl'] = url
