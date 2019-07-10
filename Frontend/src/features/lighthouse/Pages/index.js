@@ -10,6 +10,7 @@ import pagesData from 'src/utilities/parsePagesData';
 import FetchData from 'src/components/graphql/utils';
 import { getPages } from 'src/components/graphql/Queries';
 import searchParams from 'src/utilities/searchParams';
+import { metricMap } from 'src/utilities/map';
 import 'src/main.scss';
 import './main.scss';
 
@@ -18,18 +19,11 @@ const Pages = props => {
   const { setPage } = globalActions;
   // const { phase, brand, page, date, toDate } = globalState;
   const { history } = props;
-  const { phase, brand, page, date, toDate } = searchParams(history.location.search);
+  const { phase, brand, page, date, toDate, pages } = searchParams(history.location.search);
   const { metric, time } = history.location;
   const [query, setQuery] = useState(<></>);
   const [data, setData] = useState({ lighthousedata: [] });
-  const prevState = previousState({ phase, brand, page, date, metric, time });
-  const map = {
-    performance: 'performance',
-    accessibilty: 'accessibilty',
-    best_practices: 'best_practices',
-    s_e_o: 'seo',
-    p_w_a: 'pwa'
-  };
+  const prevState = previousState({ phase, brand, page, date, pages, time });
   const timeRange = time
     ? {
         fetchTimeStart: time,
@@ -46,18 +40,18 @@ const Pages = props => {
   const onMount = useRef(true);
   useEffect(() => {
     if (onMount.current) {
-      setQuery(FetchData(getPages(map[metric]), setData, variables));
+      setQuery(FetchData(getPages(metricMap[pages]), setData, variables));
       onMount.current = false;
       return;
     }
-    if (!compare(prevState, { phase, brand, page, date, metric, time })) {
-      setQuery(FetchData(getPages(map[metric]), setData, variables));
+    if (!compare(prevState, { phase, brand, page, date, pages, time })) {
+      setQuery(FetchData(getPages(metricMap[pages]), setData, variables));
     }
   });
-  const pages = pagesData(data.lighthousedata, map[metric]);
+  const pagesArr = pagesData(data.lighthousedata, metricMap[pages]);
   let bgcol;
   // console.log(data);
-  const DispPages = pages.map(item => {
+  const DispPages = pagesArr.map(item => {
     const roundscore = Math.round(item.score * 100);
     if (roundscore <= 25) {
       bgcol = 'bg--iored';
@@ -78,8 +72,8 @@ const Pages = props => {
               phase,
               brand,
               page: item.finalUrl,
-              date,
-              toDate
+              date: item.fetchTime - 604800000,
+              toDate: (parseInt(item.fetchTime, 10) + 604800000).toString()
             })
           });
         }}
