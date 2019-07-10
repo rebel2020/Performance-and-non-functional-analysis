@@ -223,13 +223,6 @@ const resolversPerformance = {
 
 		alerts: async() =>{
 			return await Alerts.find({}).exec();
-		// 	Request.get("http://10.150.229.236:8080/lighthouse/alert", (error, response, body) => {
-		// 	    if(error) {
-		//         return console.dir(error);
-    	// }
-	    // console.dir(JSON.parse(body));
-		// 	    return JSON.parse(body);
-
 		},
 	}
 }
