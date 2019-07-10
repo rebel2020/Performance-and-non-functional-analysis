@@ -54,11 +54,11 @@ const Pages = props => {
   const DispPages = pagesArr.map(item => {
     const roundscore = Math.round(item.score * 100);
     if (roundscore <= 25) {
-      bgcol = 'bg--tomato';
+      bgcol = 'bg--iored';
     } else if (roundscore > 25 && roundscore <= 75) {
-      bgcol = 'bg--orange';
+      bgcol = 'bg--ioyellow';
     } else {
-      bgcol = 'bg--MediumSeaGreen';
+      bgcol = 'bg--iogreen';
     }
     return (
       <div

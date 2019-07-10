@@ -16,15 +16,12 @@ class Cards extends React.Component {
   render() {
     return (
       <>
-        <div className="collapsible col s12 m2 l4" style={{ width: '95%' }}>
+        <div className="collapsible col s11 m11 collbord">
           <input type="checkbox" id={`collapsible-${this.props.field}`} />
 
-          <label htmlFor={`collapsible-${this.props.field}`}>
-            {' '}
-            <font color="blue">{this.props.field}</font>
-          </label>
+          <label htmlFor={`collapsible-${this.props.field}`}> {this.props.field}</label>
 
-          <div className={`collapsible-${this.props.field}-area`}>
+          <div className={`collbase collapsible-${this.props.field}-area`}>
             <p className="text-left col s11">
               <b>ENV :</b>
             </p>

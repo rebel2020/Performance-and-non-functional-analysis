@@ -24,7 +24,7 @@ const Collapsible = props => {
             <div className={`col s1 right ${sccol}`}>{sch}</div>
           </label>
 
-          <div className={`collbase collapsible-${k}-area`}>
+          <div className={`collbase collapsible-${k}-area`}> 
             <div className="row">
               <p className=" col m6">{desc}</p>
               <p className="text-right col s6">
