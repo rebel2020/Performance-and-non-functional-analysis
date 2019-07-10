@@ -7,46 +7,44 @@ import './styles.scss';
 const Graph = props => {
   const { gatlingstats } = props;
   let radioTitle;
-  console.log(gatlingstats);
   const [radioValue, setRV] = useState('');
+
+  const [fetchTime,setfetchTime] = useState('');
+
   radioTitle = 'Average Response Time';
 
   const avgrestime = [];
   const percreqsucc = [];
   const numreq = [];
   const avgreqps = [];
-  let hscomp = <HighStock data={avgrestime} {...props} toUrl="/gatling" />;
+  let hscomp = <HighStock name={radioTitle} data={avgrestime} setfetchTime={setfetchTime} {...props}  />;
 
   if (gatlingstats) {
     const graphdata = gatlingstats.map((i, item) => {
-      avgrestime[item] = [i.fetchTime, gatlingstats[item].meanResponseTime.total];
-      percreqsucc[item] = [i.fetchTime, gatlingstats[item].numberOfRequests.ok];
-      numreq[item] = [i.fetchTime, gatlingstats[item].numberOfRequests.total];
-      avgreqps[item] = [i.fetchTime, gatlingstats[item].meanNumberOfRequestsPerSecond.total];
+      avgrestime[item] = [parseInt(i.fetchTime), i.meanResponseTime.total];
+      percreqsucc[item] = [parseInt(i.fetchTime), i.numberOfRequests.ok];
+      numreq[item] = [parseInt(i.fetchTime), i.numberOfRequests.total];
+      avgreqps[item] = [parseInt(i.fetchTime), i.meanNumberOfRequestsPerSecond.total];
     });
   }
 
   if (radioValue !== '') {
     if (radioValue == 'avg_response_time') {
-      console.log(avgrestime);
       radioTitle = 'Average Response Time';
-      hscomp = <HighStock data={avgrestime} {...props} toUrl="/gatling" />;
+      hscomp = <HighStock name={radioTitle} data={avgrestime} setfetchTime={setfetchTime} {...props}  />;
     } else if (radioValue == 'perc_req_success') {
-      console.log(percreqsucc);
       radioTitle = '% Requests Succeeded';
-      hscomp = <HighStock data={percreqsucc} {...props} toUrl="/gatling" />;
+      hscomp = <HighStock name={radioTitle} data={percreqsucc} setfetchTime={setfetchTime} {...props}  />;
     } else if (radioValue == 'num_req') {
-      console.log(numreq);
       radioTitle = 'Number of Requests';
-      hscomp = <HighStock data={numreq} {...props} toUrl="/gatling" />;
+      hscomp = <HighStock name={radioTitle} data={numreq} setfetchTime={setfetchTime} {...props}/>;
     } else if (radioValue == 'avg_req_per_sec') {
       radioTitle = 'Average Number of Requests per Second';
-      console.log(avgreqps);
-      hscomp = <HighStock data={avgreqps} {...props} toUrl="/gatling" />;
+      hscomp = <HighStock name={radioTitle} data={avgreqps} setfetchTime={setfetchTime} {...props}  />;
     }
   }
 
-  console.log(radioValue);
+  console.log(fetchTime);
   return (
     <div className="row container radiocomp">
       <div className="col m8">{hscomp}</div>

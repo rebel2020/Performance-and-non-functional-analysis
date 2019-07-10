@@ -15,7 +15,7 @@ const setGraph = (name, value) => {
       type: 'solidgauge',
       height: '100%',
       width: '150',
-      backgroundColor: '#383a3e',
+      backgroundColor: '#222222',
       color: '#f5f6f9'
     },
     credits: {
@@ -112,14 +112,18 @@ const SolidGuage = props => {
   return (
     <div
       onClick={e => {
-        if (page)
-          history.push({
-            pathname: `/lighthouse`,
-            search: `audits=${name}&${setSearch({ phase, brand, page, date, toDate: date })}`,
-            metric: name
-            // time: new Date(date).getTime().toString()
-          });
-        else alert('select a particular page');
+        // if (page)
+        //   history.push({
+        //     pathname: `/lighthouse`,
+        //     search: `audits=${name}&${setSearch({ phase, brand, page, date, toDate: date })}`,
+        //     metric: name
+        //     // time: new Date(date).getTime().toString()
+        //   });
+        // else
+        history.push({
+          pathname: `/lighthouse/${name}`,
+          search: setSearch({ phase, brand, page, date, toDate: date })
+        });
       }}
       id={name}
     />
