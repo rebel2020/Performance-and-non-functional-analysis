@@ -140,6 +140,7 @@ const getPages = value => {
       audits {
         ${value}_audits {
           score
+          weight
         }
       }
     }
@@ -169,6 +170,23 @@ const getQuery = value => {
   }
   `;
 };
+const lighthouse_Audit_Score = value => {
+  return gql`
+    {
+      lighthousedata{
+        audits{
+          performance_audits{
+            ${value}{
+              score
+              weight
+            }
+          }
+        }
+      }
+     
+    }
+    `;
+};
 
 const LIST = gql`
   query {
@@ -196,5 +214,6 @@ export {
   GATLING,
   LIST,
   AVG_SCORES,
-  LIGHTHOUSE_RECOMMENDATIONS
+  LIGHTHOUSE_RECOMMENDATIONS,
+  lighthouse_Audit_Score
 };

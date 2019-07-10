@@ -1,5 +1,5 @@
 import React from 'react';
-import './main.scss';
+// import './main.scss';
 
 class Cards extends React.Component {
   constructor() {
@@ -8,8 +8,6 @@ class Cards extends React.Component {
   }
 
   render() {
-    const { value } = this.props;
-    const recommendationList = value.split(/\d*\./).filter(val => !!val.trim());
     return (
       <div className="a">
         <div className="collapsible col m11">
@@ -33,11 +31,7 @@ class Cards extends React.Component {
             <br />
             <p className="text-left col s11">
               <font color="green">Recommendation :</font>
-              <ul>
-                {recommendationList.map((val, idx) => (
-                  <li key={val}>{val}</li>
-                ))}
-              </ul>
+              <p>{this.props.value}</p>
             </p>
           </div>
         </div>

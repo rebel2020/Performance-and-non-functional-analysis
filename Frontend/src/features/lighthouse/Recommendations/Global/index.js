@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import useGlobal from 'src/store';
 import { LIGHTHOUSE_RECOMMENDATIONS, lighthouse_Audit_Score } from 'src/components/graphql/Queries';
 import FetchData from 'src/components/graphql/utils';
-import Cards from './card';
-import Sidebar from '../../Sidebar/index';
+import Cards from './global_collapsible';
+// import Sidebar from '../../Sidebar/index';
 // import './main.scss';
 
 const Recommendations = props => {
@@ -88,26 +88,25 @@ const Recommendations = props => {
 
   return (
     <>
-      <Sidebar />
+      {/* <Sidebar /> */}
       <div className={toggle ? 'main' : 'main-extend'}>
         <center>
           <br />
           <u>
             {' '}
-            <h1>Recommendations </h1>
+            <h1>Global Recommendations </h1>
           </u>
           <br />
           <br />
-          <div className="collapsible col m11">
+          <div className="collapsible  col m11 Performance">
             <input type="checkbox" id="collapsible-1" />
             <label htmlFor="collapsible-1">Performance</label>
-
             <div className="collapsible-1-area">
               <div>{display_performance}</div>
             </div>
           </div>
 
-          <div className="collapsible  col m11">
+          <div className="collapsible  col m11 Accessibility">
             <input type="checkbox" id="collapsible-2" />
 
             <label htmlFor="collapsible-2">Accessibility</label>
@@ -115,7 +114,7 @@ const Recommendations = props => {
             <div className="collapsible-2-area">{/* <div>{display_accessibility}</div> */}</div>
           </div>
 
-          <div className="collapsible  col m11">
+          <div className="collapsible  col m11 Best Practices">
             <input type="checkbox" id="collapsible-3" />
 
             <label htmlFor="collapsible-3">Best Practices</label>
@@ -123,7 +122,7 @@ const Recommendations = props => {
             <div className="collapsible-3-area">{/* <div>{display_best_practice}</div> */}</div>
           </div>
 
-          <div className="collapsible  col m11">
+          <div className="collapsible  col m11 SEO">
             <input type="checkbox" id="collapsible-4" />
 
             <label htmlFor="collapsible-4">SEO</label>
@@ -131,7 +130,7 @@ const Recommendations = props => {
             <div className="collapsible-4-area">{/* <div>{display_SEO}</div> */}</div>
           </div>
 
-          <div className="collapsible  col m11">
+          <div className="collapsible  col m11 Best Practices">
             <input type="checkbox" id="collapsible-5" />
 
             <label htmlFor="collapsible-5">Progressive Web App</label>
