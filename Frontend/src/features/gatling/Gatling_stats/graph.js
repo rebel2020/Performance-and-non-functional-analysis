@@ -49,7 +49,7 @@ const Graph = props => {
     <div className="row container radiocomp">
       <div className="col m8">{hscomp}</div>
       <div className="col m4">
-        <h3>{radioTitle}</h3>
+        <h3>Metrics</h3>
         <RadioButtons
           values={[
             { value: 'avg_response_time', name: 'Average Response Time' },

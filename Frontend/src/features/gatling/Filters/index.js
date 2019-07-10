@@ -10,6 +10,7 @@ import 'src/main.scss';
 import FetchData from 'src/components/graphql/utils';
 
 const Filters = props => {
+  console.log(props.finalUrl);
   const { dateRange, history } = props;
   const [query, setQuery] = useState(<></>);
   const [list, setList] = useState();
@@ -39,7 +40,9 @@ const Filters = props => {
       search: setSearch({ ...values })
     });
   }, []);
-
+  if(props.finalUrl !== values.page){
+    setValues({...values,page:props.finalUrl})
+  }
   let newValue = parseFilterData(list);
   if (JSON.stringify(filterLists) !== JSON.stringify(newValue)) {
     setFilterList(newValue);
