@@ -54,7 +54,15 @@ const setGraph = (history, name, data) => {
         min: 0,
         max: 100,
         title: {
-          text: 'Score'
+          text: 'Score',
+          style: {
+            color: 'white'
+          }
+        },
+        labels: {
+          style: {
+            color: 'white'
+          }
         },
         plotBands: pages
           ? [
@@ -82,7 +90,15 @@ const setGraph = (history, name, data) => {
       // units: ['day', [1]],
       categories: data.map(value => value[0]),
       title: {
-        text: 'Date'
+        text: 'Date',
+        style: {
+          color: 'white'
+        }
+      },
+      labels: {
+        style: {
+          color: 'white'
+        }
       },
 
       dateTimeLabelFormats: {
@@ -92,7 +108,10 @@ const setGraph = (history, name, data) => {
     plotOptions: {
       series: {
         dataLabels: {
-          enabled: true
+          enabled: true,
+          style: {
+            color: 'white'
+          }
         }
       }
     },
