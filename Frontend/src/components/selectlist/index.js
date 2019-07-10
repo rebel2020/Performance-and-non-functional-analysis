@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const SelectList = props => {
   const { options, label, className, listId, value, onChange, placeholder } = props;
@@ -7,6 +7,16 @@ const SelectList = props => {
       {item}
     </option>
   ));
+  // useEffect(() => {
+  //   const selects = document.getElementsByClassName(className);
+  //   console.log(selects);
+  //   for (const select of selects) {
+  //     select.addEventListener('mouseover', e => {
+  //       console.log(select);
+  //       select.click();
+  //     });
+  //   }
+  // }, []);
   return (
     <select
       defaultValue={value}

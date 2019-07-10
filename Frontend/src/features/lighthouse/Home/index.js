@@ -73,7 +73,7 @@ const HomeComponent = props => {
   }
   return (
     <>
-      <div className="container">{alertContainer}</div>
+      <div className="text-center">{alertContainer}</div>
       <div className="container ">
         <Filters dateRange="single" history={history} />
 

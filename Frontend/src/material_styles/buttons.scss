@@ -15,7 +15,7 @@
 	will-change: background-size, background-image;
 	padding: $space-small $space-med;
 	display: inline-block;
-	font-family: Roboto;
+	
 	border: 0;
 	&:after {
 		position: absolute;
@@ -94,7 +94,7 @@
 .btn--red {
 	@include btn-gradient($alizarin);
 	&:hover {
-		background-color: lighten($alizarin, 5%);
+		background-color: #f25454;
 	}
 }
 

@@ -62,6 +62,7 @@ query GatlingData(
   ){
     stats
     fetchTime
+    url
     server_stats{
       dispatcher_stats{
         cpu
