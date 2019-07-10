@@ -107,7 +107,7 @@ const Filters = props => {
                 phase: env,
                 brand,
                 page,
-                date: new Date(value).getTime(),
+                date: new Date(value).getTime() - 19800000,
                 toDate
               })
             });
@@ -131,7 +131,7 @@ const Filters = props => {
                   brand,
                   page,
                   date,
-                  toDate: new Date(value).getTime()
+                  toDate: new Date(value).getTime() + 66600000 - 1
                 })
               });
             }}
