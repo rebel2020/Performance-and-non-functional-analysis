@@ -6,5 +6,15 @@
     color: white;
     
     cursor: pointer;
+    background-color: #222222;
   
+}
+.score {
+    display: inline-block;
+    width: 30px;
+    height: 20px;
+    // background-color: red;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 12px
 }

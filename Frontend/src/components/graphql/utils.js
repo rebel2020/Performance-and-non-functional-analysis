@@ -2,7 +2,7 @@ import { Query } from 'react-apollo';
 import React from 'react';
 
 const FetchData = (QueryData, setData, variables) => {
-  // console.log(variables);
+  console.log(variables);
   return (
     <Query query={QueryData} variables={variables}>
       {({ loading, error, data }) => {
