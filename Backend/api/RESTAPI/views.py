@@ -59,13 +59,12 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
         url_map = []
         cnt=0
         for url in url_list[0]['urls']:
-            temp=LighthouseData.objects.filter(requestedUrl =url).order_by('-id')[:]
+            temp=LighthouseData.objects.filter(requestedUrl =url).order_by('-id')[:14]
             if len(temp) > 1:
                 newAlertData=get_alerts(temp,url)
                 alerts.append(newAlertData)
                 try:
                     newAlert = Alerts(alert=newAlertData)
-                    print(newAlertData)
                     newAlert.save()
                 except:
                     pass
