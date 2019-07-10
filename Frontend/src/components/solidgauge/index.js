@@ -15,7 +15,7 @@ const setGraph = (name, value) => {
       type: 'solidgauge',
       height: '100%',
       width: '150',
-      backgroundColor: '#383a3e',
+      backgroundColor: '#222222',
       color: '#f5f6f9'
     },
     credits: {
@@ -119,7 +119,11 @@ const SolidGuage = props => {
             metric: name
             // time: new Date(date).getTime().toString()
           });
-        else alert('select a particular page');
+        else
+          history.push({
+            pathname: `/lighthouse/${name}`,
+            search: setSearch({ phase, brand, page, date, toDate: date })
+          });
       }}
       id={name}
     />
