@@ -63,7 +63,7 @@ const setGraph = (history, name, data) => {
               {
                 from: 25,
                 to: 75,
-                color: '##F39C12'
+                color: '#F39C12'
               },
               {
                 from: 75,

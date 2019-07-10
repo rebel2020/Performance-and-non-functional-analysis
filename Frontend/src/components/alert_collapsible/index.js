@@ -20,10 +20,10 @@ const AlertCollapsible = props => {
           <label htmlFor={`collapsible-${k}`} className={alcol}>
             {title}
           </label>
-          <div className={`collapsible-${k}-area`}>
+          <div className={`colar collapsible-${k}-area`}>
             <div className="row">
               <p className=" col m6">{desc}</p>
-              <p className=" col m6 ">Decrease by:{perc}%</p>
+              <p className=" col m6 ">Decrease by: {perc}%</p>
             </div>
             <br />
 
