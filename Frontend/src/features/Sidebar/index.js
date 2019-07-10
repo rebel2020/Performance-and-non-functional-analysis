@@ -45,71 +45,78 @@ const Sidebar = props => {
       </Link>
       <div
         className="sidelink"
-        onClick={() => {
-          if (display === 'block') setDisplay('none');
-          else setDisplay('block');
+        onMouseEnter={() => {
+          setDisplay('block');
         }}
+        onMouseLeave={() => {
+          setDisplay('none');
+        }}
+        // onClick={() => {
+        //   if (display === 'block') setDisplay('none');
+        //   else setDisplay('block');
+        // }}
       >
         <pre>
           Lighthouse <IoMdArrowDropdown />
         </pre>
-      </div>
-      <div className={`dropdown ${display}`}>
-        <Link {...props} className="sidelink" to="/lighthouse/performance">
-          <div className="sidelink">
-            <div className="txt-center">
-              <h2>
-                <GoGraph />
-              </h2>
-            </div>
-            {toggle ? 'Performance' : ''}
-          </div>
-        </Link>
-        <Link {...props} className="sidelink" to="/lighthouse/accessibility">
-          <div className="sidelink">
-            <div className="txt-center">
-              <h2>
-                <FaUniversalAccess />
-              </h2>
-            </div>
 
-            {toggle ? 'Accessibility' : ''}
-          </div>
-        </Link>
-
-        <Link {...props} className="sidelink" to="/lighthouse/p_w_a">
-          <div className="sidelink">
-            <div className="txt-center">
-              <h2>
-                <MdTrendingUp />
-              </h2>
+        <div className={`dropdown ${display}`}>
+          <Link {...props} className="sidelink" to="/lighthouse/performance">
+            <div className="sidelink">
+              <div className="txt-center">
+                <h2>
+                  <GoGraph />
+                </h2>
+              </div>
+              {toggle ? 'Performance' : ''}
             </div>
+          </Link>
+          <Link {...props} className="sidelink" to="/lighthouse/accessibility">
+            <div className="sidelink">
+              <div className="txt-center">
+                <h2>
+                  <FaUniversalAccess />
+                </h2>
+              </div>
 
-            {toggle ? 'PWA' : ''}
-          </div>
-        </Link>
-        <Link {...props} className="sidelink" to="/lighthouse/s_e_o">
-          <div className="sidelink">
-            <div className="txt-center">
-              <h2>
-                <FaSearch />
-              </h2>
+              {toggle ? 'Accessibility' : ''}
             </div>
+          </Link>
 
-            {toggle ? 'SEO' : ''}
-          </div>
-        </Link>
-        <Link {...props} className="sidelink" to="/lighthouse/best_practices">
-          <div className="sidelink">
-            <div className="txt-center">
-              <h2>
-                <TiStarOutline />
-              </h2>
+          <Link {...props} className="sidelink" to="/lighthouse/p_w_a">
+            <div className="sidelink">
+              <div className="txt-center">
+                <h2>
+                  <MdTrendingUp />
+                </h2>
+              </div>
+
+              {toggle ? 'PWA' : ''}
             </div>
+          </Link>
+          <Link {...props} className="sidelink" to="/lighthouse/s_e_o">
+            <div className="sidelink">
+              <div className="txt-center">
+                <h2>
+                  <FaSearch />
+                </h2>
+              </div>
 
-            {toggle ? 'Best Practices' : ''}
-          </div>
-        </Link>
+              {toggle ? 'SEO' : ''}
+            </div>
+          </Link>
+          <Link {...props} className="sidelink" to="/lighthouse/best_practices">
+            <div className="sidelink">
+              <div className="txt-center">
+                <h2>
+                  <TiStarOutline />
+                </h2>
+              </div>
+
+              {toggle ? 'Best Practices' : ''}
+            </div>
+          </Link>
+        </div>
       </div>
       <Link {...props} className="sidelink" to="/gatling">
         <div className="sidelink">

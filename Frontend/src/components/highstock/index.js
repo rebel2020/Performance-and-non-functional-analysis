@@ -14,7 +14,6 @@ import { getPages, getQuery, AVG_SCORES } from 'src/components/graphql/Queries';
 import datal from './datal';
 
 const setGraph = (history, name, data) => {
-  console.log(data);
   const { phase, brand, page, date, toDate, audits, pages } = searchParams(history.location.search);
   const { audit, metric } = history;
   return {
@@ -177,6 +176,7 @@ const HighStock = props => {
   const audit = history.location.audit || '';
   const prevState = previousState({ phase, brand, page, date, toDate, audit, pages });
   const onMount = useRef(true);
+  // console.log(searchParams(history.location.search));
   const variables = {
     phase,
     brand,
@@ -184,7 +184,7 @@ const HighStock = props => {
     fetchTimeStart: date.toString(),
     fetchTimeEnd: toDate.toString()
   };
-  console.log(data);
+  // console.log(data);
   let arr = [];
   if (audit) {
     arr = data.lighthousedata.reverse().map(obj => {
