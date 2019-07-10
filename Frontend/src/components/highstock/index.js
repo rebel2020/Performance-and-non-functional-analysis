@@ -22,7 +22,11 @@ const setGraph = (history, name, data) => {
       zoomType: 'x',
       spacingLeft: 50,
       spacingRight: 50,
-      backgroundColor: '#EFEDED'
+      backgroundColor: '#383a3e',
+      style: {
+        color: 'white'
+      }
+      // backgroundColor: '#303030'
     },
     rangeSelector: {
       selected: 4,
@@ -36,7 +40,7 @@ const setGraph = (history, name, data) => {
     },
     title: {
       style: {
-        color: 'black'
+        color: 'white'
       },
       text: formatString(name)
     },
@@ -46,7 +50,7 @@ const setGraph = (history, name, data) => {
     yAxis: [
       {
         opposite: false,
-        lineColor: '#000000',
+        lineColor: '#FFFFFF',
         min: 0,
         max: 100,
         title: {
@@ -57,29 +61,30 @@ const setGraph = (history, name, data) => {
               {
                 from: 0,
                 to: 25,
-                color: 'crimson'
+                color: '#E74C3C'
               },
               {
                 from: 25,
                 to: 75,
-                color: '#FF9800'
+                color: '#F39C12'
               },
               {
                 from: 75,
                 to: 100,
-                color: 'mediumseagreen'
+                color: '#00BC8C'
               }
             ]
           : []
       }
     ],
     xAxis: {
+      lineColor: '#FFFFFF',
       // units: ['day', [1]],
       categories: data.map(value => value[0]),
       title: {
         text: 'Date'
       },
-      lineColor: '#000000',
+
       dateTimeLabelFormats: {
         day: '%Y-%m-%d'
       }
@@ -95,7 +100,7 @@ const setGraph = (history, name, data) => {
       {
         name: formatString(name),
         data,
-        color: '#000000',
+        color: '#FFFFFF',
         lineWidth: 1,
         marker: {
           enabled: true

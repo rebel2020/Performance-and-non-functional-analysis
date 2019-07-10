@@ -24,14 +24,20 @@ const Stats = props => {
           />
         </div>
         <div className="col m5">
-          {/* <HighChartPie/> */}
-          <HighChartBar
+          {/* <HighChartPie
+              id = {props.id}
+              group1 = {props.group1.count}
+              group2 = {props.group2.count}
+              group3 = {props.group3.count}
+              group4 = {props.group4.count}
+          /> */}
+          {/* <HighChartBar
               id = {props.id}
             group1 = {[[0, props.group1.count]]}
             group2 = {[[1, props.group2.count]]}
             group3 = {[[2, props.group3.count]]}
             group4 = {[[3, props.group4.count]]}
-            />
+            /> */}
             
         </div>
       </div>

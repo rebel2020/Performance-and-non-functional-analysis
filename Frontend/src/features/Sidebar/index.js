@@ -11,6 +11,7 @@ import { GoGraph } from 'react-icons/go';
 import { IoIosArrowForward, IoIosArrowBack, IoIosMenu, IoMdArrowDropdown } from 'react-icons/io';
 
 import { TiMessages, TiStarOutline } from 'react-icons/ti';
+import { GiLighthouse } from 'react-icons/gi';
 
 import './main.scss';
 
@@ -51,8 +52,10 @@ const Sidebar = props => {
         }}
       >
         <pre>
-          Lighthouse <IoMdArrowDropdown />
+          <GiLighthouse />
+          {/* <IoMdArrowDropdown /> */}
         </pre>
+        {toggle ? 'Lighthouse' : ''}
       </div>
       <div className={`dropdown ${display}`}>
         <Link {...props} className="sidelink" to="/lighthouse/performance">
@@ -159,7 +162,7 @@ const Sidebar = props => {
         <div className="row">
           <div className="text-center col m12">
             <button
-              className="btn--flat bg--customgrey color--white"
+              className="btn--flat bg--sidedark color--white"
               type="button"
               onClick={() => globalActions.toggle()}
             >
