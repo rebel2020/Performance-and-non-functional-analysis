@@ -10,11 +10,13 @@ import {Stats} from './stats1';
 import {Graph} from './graph';
 import searchParams from '../../../utilities/searchParams';
 import { setSearch } from '../utils/search';
+import './styles.scss';
 
 const MetricComponent = props => {
   const { metric, history } = props;
   const [data, setData] = useState();
   const [query, setQuery] = useState(<></>);
+  const [fetchTime,setfetchTime] = useState('');
   const [vals, setVals] = useState({
     phase:'',
     brand:"alfa",
@@ -56,7 +58,6 @@ const MetricComponent = props => {
   if(search.finalUrl == "All"){
     search.finalUrl = "";
   }
-  // console.log(vals);
   if(JSON.stringify(search) !== "{}" && JSON.stringify(vals) !== JSON.stringify(search)){
     setVals(search);
     setQuery(FetchData(GATLING,setData,search));
@@ -68,6 +69,7 @@ const MetricComponent = props => {
   const parsedData = parseGatlingData(data);
   let displayCards = <></>
   let GatlingStats = <></>;
+  let st = <></>
   if (parsedData) {
     if(!vals.finalUrl || vals.finalUrl === ""){
       parsedData.map((val) => {
@@ -96,9 +98,8 @@ const MetricComponent = props => {
                     search:setSearch({ ...vals, finalUrl: val.url })
                   })
                 }
-              }
-          > 
-            <div className="row"> 
+              }> 
+           <div className="row"> 
               <div className="col m1"></div>
               {val.url} 
            </div>
@@ -119,10 +120,29 @@ const MetricComponent = props => {
            </div>
           <br /> 
        </div> )
+      st = <></>
     }
     else{
-      GatlingStats = <Graph gatlingstats={parsedData} {...props} />
-      displayCards = <></>
+      GatlingStats = <>
+          <div className="row"> 
+          <div className="col m1">
+          </div>
+          <div className="col m3 urltext">
+              URL
+          </div>
+          <div className="col m7 statscard">
+            {parsedData[0].url}
+          </div>
+          <div className="col m1">
+          </div>            
+          </div>
+          <Graph setfetchTime={setfetchTime} gatlingstats={parsedData} {...props} />
+        </>
+      if(fetchTime){
+        let renderCard = parsedData.find((val)=> { return val.fetchTime == fetchTime});
+        st = <Stats history={history} {...renderCard} {...vals}/>
+        displayCards = <></>
+      }
     }
   }
   return (
@@ -130,6 +150,7 @@ const MetricComponent = props => {
       <Filters dateRange="range" history={history} finalUrl={vals.finalUrl}/>
       {GatlingStats}
       {query}
+      {st}
       <div className="flexbox">
         {displayCards}
       </div>

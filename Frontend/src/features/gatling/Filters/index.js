@@ -10,7 +10,6 @@ import 'src/main.scss';
 import FetchData from 'src/components/graphql/utils';
 
 const Filters = props => {
-  console.log(props.finalUrl);
   const { dateRange, history } = props;
   const [query, setQuery] = useState(<></>);
   const [list, setList] = useState();
