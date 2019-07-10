@@ -5,10 +5,11 @@ const ALERTS = gql`
     alerts {
       alert {
         name
-        class
+
         scoreDiff
         category
         fetchUrl
+        alertClass
       }
     }
   }
