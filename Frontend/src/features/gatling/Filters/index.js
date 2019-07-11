@@ -1,9 +1,9 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import Datalist from 'src/components/datalist';
 import SelectList from 'src/components/selectlist';
-import { setSearch } from '../utils/search';
 import Input from 'src/components/Input';
 import { getDate, getHtmlDate } from 'src/utilities/timeConversions';
+import { setSearch } from '../utils/search';
 import { LIST } from '../graphql/Queries';
 import { parseFilterData } from '../utils/fetchUrl';
 import 'src/main.scss';
@@ -18,16 +18,16 @@ const Filters = props => {
     brand: [],
     finalUrl: []
   });
-  const [dates,setDates] = useState({
-    date:getHtmlDate(Date.now() - 864e5),
-    toDate:getHtmlDate(new Date().getTime())
-  })
+  const [dates, setDates] = useState({
+    date: getHtmlDate(Date.now() - 864e5),
+    toDate: getHtmlDate(new Date().getTime())
+  });
   const [values, setValues] = useState({
-    phase:"",
-    brand:"",
-    page:"",
-    track:"",
-    type:"",
+    phase: '',
+    brand: '',
+    page: '',
+    track: '',
+    type: '',
     date: Date.now() - 864e5,
     toDate: new Date().getTime()
   });
@@ -39,7 +39,9 @@ const Filters = props => {
       search: setSearch({ ...values })
     });
   }, []);
-
+  if(props.finalUrl !== values.page){
+    setValues({...values,page:props.finalUrl})
+  }
   let newValue = parseFilterData(list);
   if (JSON.stringify(filterLists) !== JSON.stringify(newValue)) {
     setFilterList(newValue);
@@ -70,8 +72,8 @@ const Filters = props => {
             className="datalistInput"
             listId="Track"
             placeholder="Track"
-            value={""}
-            options={["SDP","CR","Fleat"]}
+            value=""
+            options={['SDP', 'CR', 'Fleet']}
             onChange={value => {
               setValues({ ...values, track: value });
               // if (filterLists.finalUrl.includes(value)) {
@@ -83,7 +85,7 @@ const Filters = props => {
             }}
           />
         </div>
-        <div className="col s6 m3 l2">
+        {/* <div className="col s6 m3 l2">
           <SelectList
             className="datalistInput"
             placeholder="Brand"
@@ -100,14 +102,14 @@ const Filters = props => {
               }
             }}
           />
-        </div>      
+        </div> */}
         <div className="col s6 m3 l2">
           <SelectList
             className="datalistInput"
             listId="page"
             placeholder="Page"
-            value={""}
-            options={["Prod","Comp"]}
+            value=""
+            options={['Prod', 'Comp']}
             onChange={value => {
               setValues({ ...values, type: value });
               // if (filterLists.finalUrl.includes(value)) {
@@ -127,11 +129,11 @@ const Filters = props => {
             max={getHtmlDate(new Date().getTime())}
             min="2019-07-01"
             onChange={value => {
-              setDates({...dates,date:value})
-              setValues({ ...values, date: (value)?new Date(value).getTime():value });
+              setDates({ ...dates, date: value });
+              setValues({ ...values, date: value ? new Date(value).getTime() : value });
               history.push({
                 pathname: history.pathname,
-                search: setSearch({ ...values, date: (value)?new Date(value).getTime():value})
+                search: setSearch({ ...values, date: value ? new Date(value).getTime() : value })
               });
             }}
           />
@@ -145,17 +147,21 @@ const Filters = props => {
               max={getHtmlDate(new Date().getTime())}
               min="2019-07-01"
               onChange={value => {
-                setDates({...dates,toDate:value})
-                setValues({ ...values, toDate: (value)?new Date(value).getTime():value });
+                setDates({ ...dates, toDate: value });
+                setValues({ ...values, toDate: value ? new Date(value).getTime() : value });
                 history.push({
                   pathname: history.pathname,
-                  search: setSearch({ ...values, toDate: (value)?new Date(value).getTime():value })
+                  search: setSearch({
+                    ...values,
+                    toDate: value ? new Date(value).getTime() : value
+                  })
                 });
               }}
-            />) : (
-              <></>
-            )}
-          </div>
+            />
+          ) : (
+            <></>
+          )}
+        </div>
       </div>
       {query}
     </Fragment>

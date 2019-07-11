@@ -231,7 +231,7 @@ type GatlingData{
 	phase: String
 }
 
-type PerformanceAuditRecommendation{
+type PerformanceAuditRecommendationDescription{
 	first_contentful_paint: String
 	first_meaningful_paint: String
 	speed_index: String
@@ -239,19 +239,19 @@ type PerformanceAuditRecommendation{
 	first_cpu_idle: String
 }
 
-type SEOAuditRecommendation{
+type SEOAuditRecommendationDescription{
 	abc: String
 	ijk: String
 }
 
-type RecommendationData{
-	PerformanceAuditRecommendations: PerformanceAuditRecommendation
-	SEOAuditRecommendations: SEOAuditRecommendation
+type RecommendationDataDescription{
+	PerformanceAuditRecommendations: PerformanceAuditRecommendationDescription
+	SEOAuditRecommendations: SEOAuditRecommendationDescription
 }
 
 type Alert{
     name: String
-    class: String
+    alertClass: String
     scoreDiff: Float
     category: String
     fetchUrl: String
@@ -261,6 +261,23 @@ type Alerts{
     alert: [Alert]
 }
 
+type Rec{
+	average_score: Float
+	weight: Float
+	name: String
+}
+
+type RData{
+	audit : String
+}
+
+type Recommendations
+{
+    _id: ID
+   recommend: [RData],
+}
+
+
 type Query{
 	allLighthousedata: [LighthouseData]
 	gatlingdata(url: String, fetchTimeStart: String, fetchTimeEnd: String
@@ -269,7 +286,8 @@ type Query{
 						 project: String, phase: String, brand: String): [LighthouseData]
 	average(finalUrl: String, fetchTimeStart: String, fetchTimeEnd: String,
 						 project: String, phase: String, brand: String): [AuditsAverage],
-	recommendation: RecommendationData,
+	recommendation: [Recommendations],
+	recommendationDescription: RecommendationDataDescription,
 	alerts: [Alerts]
 	
 }

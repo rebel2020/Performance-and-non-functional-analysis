@@ -7,6 +7,7 @@ const metricDetailFrag = {
       score
       description
       numericValue
+      scoreDisplayMode
     }
   `
 };

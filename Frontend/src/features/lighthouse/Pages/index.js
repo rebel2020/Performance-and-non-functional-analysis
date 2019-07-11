@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useEffect, useRef } from 'react';
-import useGlobal from 'src/store';
 import previousState from 'src/utilities/previousState';
 import { getTimeRange } from 'src/utilities/timeConversions';
 import setSearch from 'src/utilities/search';
@@ -10,17 +9,14 @@ import pagesData from 'src/utilities/parsePagesData';
 import FetchData from 'src/components/graphql/utils';
 import { getPages } from 'src/components/graphql/Queries';
 import searchParams from 'src/utilities/searchParams';
-import { metricMap } from 'src/utilities/map';
+import { metricMap, pagesMap } from 'src/utilities/map';
 import 'src/main.scss';
 import './main.scss';
 
 const Pages = props => {
-  const [globalState, globalActions] = useGlobal();
-  const { setPage } = globalActions;
-  // const { phase, brand, page, date, toDate } = globalState;
   const { history } = props;
   const { phase, brand, page, date, toDate, pages } = searchParams(history.location.search);
-  const { metric, time } = history.location;
+  const { time } = history.location;
   const [query, setQuery] = useState(<></>);
   const [data, setData] = useState({ lighthousedata: [] });
   const prevState = previousState({ phase, brand, page, date, pages, time });
@@ -50,14 +46,12 @@ const Pages = props => {
   });
   const pagesArr = pagesData(data.lighthousedata, metricMap[pages]);
   let bgcol;
-  // console.log(data);
   const DispPages = pagesArr.map(item => {
     return (
       <div
         key={item.finalUrl}
         className="col s10 m5 l3 pageCard"
         onClick={() => {
-          setPage(item.finalUrl);
           history.push({
             pathname: history.pathname,
             search: setSearch({
@@ -70,13 +64,9 @@ const Pages = props => {
           });
         }}
       >
-        {item.finalUrl}
+        {pagesMap[item.finalUrl]}
         <br />
         <br />
-        {/* Time: {item.scores.map(i=>i.time)}
-        <br />
-        <br />
-        Score: {Math.round(item.scores.map(i=>i.score * 100))} */}
         {item.scores.map(i => {
           const roundscore = Math.round(i.score * 100);
           if (roundscore <= 25) {

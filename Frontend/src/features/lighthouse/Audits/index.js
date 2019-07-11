@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import useGlobal from 'src/store';
 import previousState from 'src/utilities/previousState';
 import { getTimeRange } from 'src/utilities/timeConversions';
 import compare from 'src/utilities/compareObjects';
@@ -11,11 +10,9 @@ import searchParams from 'src/utilities/searchParams';
 import { metricMap } from 'src/utilities//map';
 
 const Audit = props => {
-  const [globalState, globalActions] = useGlobal();
-  // const { phase, brand, page, date } = globalState;
   const { history } = props;
-  const { metric, time } = history.location;
-  const { phase, brand, page, date, toDate, audits } = searchParams(history.location.search);
+  const { time } = history.location;
+  const { phase, brand, page, date, audits } = searchParams(history.location.search);
   const [query, setQuery] = useState(<></>);
   const [data, setData] = useState({ lighthousedata: [{ audits: {} }] });
   const prevState = previousState({ phase, brand, page, date, audits, time });
@@ -55,7 +52,6 @@ const Audit = props => {
   console.log(data);
   auditsData.sort(comp);
   const DispAudit = auditsData.map(item => {
-    // console.log(item.id);
     return (
       <Collapsible
         {...props}

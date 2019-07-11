@@ -60,7 +60,7 @@ const HighChartPie = props => {
       }
     ]
   };
-  
+
   useEffect(() => {
     Highcharts.chart(props.id, options);
   });

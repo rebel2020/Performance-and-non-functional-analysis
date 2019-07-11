@@ -9,6 +9,7 @@ import json
 from .script import fun,t_fun
 from datetime import datetime
 from .alertScript import get_alerts
+from .recommend_script import get_recommendations
 
 class LighthouseDataViewSet(viewsets.ModelViewSet):
     lookup_field = 'id'
@@ -31,8 +32,8 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
             newData['audits']=auditData
 #            newData['fetchTime'] = datetime.strptime(str(data['fetchTime']), "%Y-%m-%dT%H:%M:%S.%fZ")
             temp = datetime.strptime(str(data['fetchTime']), "%Y-%m-%dT%H:%M:%S.%fZ")
-            count=6
-            newData['fetchTime']=temp.replace(day=int(count),month=6)
+            count=5
+            newData['fetchTime']=temp.replace(day=int(count),month=7)
         except:
             raise ValidationError
         try:
@@ -48,7 +49,7 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
         return HttpResponse(request.data)
     def get(self, request):
         lookup_field = 'id'
-        queryset = LighthouseData.objects.all()
+        queryset = LighthouseData.objects.all().order_by('-fetchTime')[:5]
         data = LighthouseDataSerializer(queryset,many=True)
         data=json.dumps(data.data)
         return HttpResponse(data)
@@ -59,10 +60,35 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
         url_map = []
         cnt=0
         for url in url_list[0]['urls']:
-            temp=LighthouseData.objects.filter(requestedUrl =url).order_by('-id')[:]
+            temp=LighthouseData.objects.filter(requestedUrl =url).order_by('-id')[:14]
             if len(temp) > 1:
-                get_alerts(temp,url,alerts)
+                newAlertData=get_alerts(temp,url)
+                alerts.append(newAlertData)
+                if len(newAlertData) > 0:
+                    try:
+                        newAlert = Alerts(alert=newAlertData)#,fetchUrl=url)
+                        newAlert.save()
+                    except:
+                        pass
         return HttpResponse(json.dumps(alerts))
+
+    def recommendations(self, request):
+        url_list = URLData.objects.all()
+        recommendations = []
+        url_map = []
+        for url in url_list[0]['urls']:
+            temp = LighthouseData.objects.filter(requestedUrl=url).order_by('-id')[:]
+            if len(temp) >= 1:
+                newRecommendation=get_recommendations(temp, url)
+                recommendations.append(newRecommendation)
+                try:
+
+                    newRecommendation = Recommended_Data(recommend=newRecommendation['recommended_data'])
+                    newRecommendation.save()
+                except:
+                    pass
+        return HttpResponse(json.dumps(recommendations))
+
 class GatlingDataViewSet(viewsets.ModelViewSet):
     lookup_field = 'id'
     queryset = GatlingData.objects.all()

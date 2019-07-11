@@ -7,7 +7,7 @@ const ErrorPage = props => {
       <div className="innerdiv text-centre">
         <img src="error_img.png" className="innerdiv" alt="error_image" align="left" />
         <h1>Error</h1>
-        <br/>
+        <br />
         <h4>Error message here</h4>
       </div>
     </>
