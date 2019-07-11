@@ -31,7 +31,7 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
             newData['audits']=auditData
 #            newData['fetchTime'] = datetime.strptime(str(data['fetchTime']), "%Y-%m-%dT%H:%M:%S.%fZ")
             temp = datetime.strptime(str(data['fetchTime']), "%Y-%m-%dT%H:%M:%S.%fZ")
-            count=7
+            count=8
             newData['fetchTime']=temp.replace(day=int(count),month=7)
         except:
             raise ValidationError
@@ -48,7 +48,7 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
         return HttpResponse(request.data)
     def get(self, request):
         lookup_field = 'id'
-        queryset = LighthouseData.objects.all().order_by('fetchTime')[:5]
+        queryset = LighthouseData.objects.all().order_by('-fetchTime')[:5]
         data = LighthouseDataSerializer(queryset,many=True)
         data=json.dumps(data.data)
         return HttpResponse(data)
