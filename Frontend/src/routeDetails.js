@@ -18,7 +18,7 @@ const ROUTES = [
         to={{
           pathname: '/lighthouse',
           search: setSearch({
-            date: new Date(getDate(today.getTime(), -1)).getTime(),
+            date: new Date(getDate(today.getTime(), -2)).getTime(),
             toDate: new Date(getDate(today.getTime(), 1)).getTime() - 1
           })
         }}
