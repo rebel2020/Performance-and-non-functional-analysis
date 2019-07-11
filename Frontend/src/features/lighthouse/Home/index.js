@@ -1,15 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import useGlobal from 'src/store';
 import previousState from 'src/utilities/previousState';
-import { getTimeRange } from 'src/utilities/timeConversions';
+import { getTimeRange, getDate } from 'src/utilities/timeConversions';
 import compare from 'src/utilities/compareObjects';
-import map from 'src/utilities/map';
-// import { AuditData } from 'src/utilities/parseAuditData';
+import { averageMap } from 'src/utilities/map';
 import FetchData from 'src/components/graphql/utils';
-import { AVG_LIGHTHOUSE_SCORES, getAudits } from 'src/components/graphql/Queries';
+import { AVG_SCORES } from 'src/components/graphql/Queries';
 import SolidGauge from 'src/components/solidgauge';
-import Collapsible from 'src/components/collapsible';
-import AuditData from 'src/utilities/parseAuditData';
 import Alert from 'src/components/alerts/index';
 import searchParams from 'src/utilities/searchParams';
 import ALERTS from '../../AlertPage/graphql/Queries';
@@ -19,12 +15,10 @@ import Audits from '../Audits';
 import './main.scss';
 
 const HomeComponent = props => {
-  const [globalState, globalActions] = useGlobal();
-  // const { phase, brand, page, date } = globalState;
   const { history } = props;
   const { metric } = history.location;
-  const { phase, brand, page, date, toDate } = searchParams(history.location.search);
-  const [data, setData] = useState({ lighthousedata: [{ audits: {} }] });
+  const { phase, brand, page, date } = searchParams(history.location.search);
+  const [data, setData] = useState({ average: [] });
   const [alertData, setAlertData] = useState();
   const [query, setQuery] = useState(<></>);
   const [alertQuery, setAlertQuery] = useState(<></>);
@@ -56,24 +50,22 @@ const HomeComponent = props => {
   const onMount = useRef(true);
   useEffect(() => {
     if (onMount.current) {
-      setQuery(FetchData(AVG_LIGHTHOUSE_SCORES, setData, variables));
+      setQuery(FetchData(AVG_SCORES, setData, variables));
       onMount.current = false;
       return;
     }
     if (!compare(prevState, { phase, brand, page, date })) {
-      setQuery(FetchData(AVG_LIGHTHOUSE_SCORES, setData, variables));
+      setQuery(FetchData(AVG_SCORES, setData, variables));
     }
   });
-
-  // AuditData(data.lighthousedata[0].audits);
-  const obj = data.lighthousedata[0] ? data.lighthousedata[0].audits : {};
+  const obj = data.average[0] ? data.average[0] : {};
   const flexItems = ['performance', 'accessibility', 'best_practices', 'p_w_a', 's_e_o'].map(
     (item, i) => {
       return (
         <div key={item}>
           <SolidGauge
             name={item}
-            value={Math.round(obj[map[item]] ? obj[map[item]].score * 100 : '')}
+            value={Math.round(obj[averageMap[item]] ? obj[averageMap[item]] * 10000 : '') / 100}
             // value={70}
             {...props}
           />
@@ -85,6 +77,47 @@ const HomeComponent = props => {
   let auditContainer = <></>;
   if (metric) auditContainer = <Audits metric={metric} {...props} />;
 
+  let message = '';
+  if (!page && !brand && !phase)
+    message = `\nNote:\n\nThe displayed data are the average metric scores of all the pages on ${getDate(
+      date,
+      0
+    )}.`;
+  else if (!page && !brand)
+    message = `\nNote:\n\nThe displayed data are the average metric scores of all the pages in ${phase} environment on ${getDate(
+      date,
+      0
+    )}.`;
+  else if (!page && !phase)
+    message = `\nNote:\n\nThe displayed data are the average metric scores of all the pages of ${brand} brand in all environments on ${getDate(
+      date,
+      0
+    )}.`;
+  else if (!phase && !brand)
+    message = `\nNote:\n\nThe displayed data are the average metric scores of ${page} in all environments on ${getDate(
+      date,
+      0
+    )}.`;
+  else if (!phase)
+    message = `\nNote:\n\nThe displayed data are the average metric scores of ${page} in all environments on ${getDate(
+      date,
+      0
+    )}.`;
+  else if (!brand)
+    message = `\nNote:\n\nThe displayed data are the average metric scores of ${page} in ${phase} environment on ${getDate(
+      date,
+      0
+    )}.`;
+  else if (!page)
+    message = `\nNote:\n\nThe displayed data are the average metric scores of all the pages of ${brand} in ${phase} environment on ${getDate(
+      date,
+      0
+    )}.`;
+  else
+    message = `\nNote:\n\nThe displayed data are the average metric scores of ${page} in ${phase} environment on ${getDate(
+      date,
+      0
+    )}.`;
   return (
     <>
       {alertQuery}
@@ -94,9 +127,9 @@ const HomeComponent = props => {
         <div className="customcontainer">
           <div className="customcard">
             <div className="flexbox">{flexItems}</div>
-            {/* <div>{DispAudit}</div> */}
             {auditContainer}
             {query}
+            <div className="note">{message}</div>
           </div>
         </div>
       </div>

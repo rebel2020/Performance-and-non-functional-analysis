@@ -1,9 +1,9 @@
-import React, {  useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Highcharts from 'highcharts/highcharts';
 import stock from 'highcharts/modules/stock';
 import formatString from 'src/utilities/formatString';
 
-const setGraph = (history, name,  data, setfetchTime) => {
+const setGraph = (history, name, data, setfetchTime) => {
   return {
     chart: {
       zoomType: 'x',
@@ -71,7 +71,7 @@ const setGraph = (history, name,  data, setfetchTime) => {
 };
 
 const HighStock = props => {
-  const { name, history, data, setfetchTime} = props;
+  const { name, history, data, setfetchTime } = props;
   const graphData = setGraph(history, name, data, setfetchTime);
   useEffect(() => {
     stock(Highcharts);

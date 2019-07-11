@@ -178,7 +178,7 @@ const LIST = gql`
       project
       finalUrl
     }
-}
+  }
 `;
 
 export {

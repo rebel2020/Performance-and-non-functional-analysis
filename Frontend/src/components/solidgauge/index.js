@@ -4,10 +4,10 @@ import React, { useEffect } from 'react';
 import Highcharts from 'highcharts/highcharts';
 import HighchartsMore from 'highcharts/highcharts-more';
 import Gauge from 'highcharts/modules/solid-gauge';
-import useGlobal from 'src/store';
 import setSearch from 'src/utilities/search';
 import formatString from 'src/utilities/formatString';
 import searchParams from 'src/utilities/searchParams';
+import getDefaultDateRange from 'src/utilities/getDefaultDateRange';
 
 const setGraph = (name, value) => {
   return {
@@ -30,27 +30,12 @@ const setGraph = (name, value) => {
     },
     tooltip: {
       enabled: false
-      // borderWidth: 0,
-      // backgroundColor: 'none',
-      // shadow: false,
-      // style: {
-      //   fontSize: '12px'
-      // },
-      // pointFormat:
-      //   '{series.name}<br><span style="font-size:1.5em; color: {point.color}; font-weight: bold">{point.y}%</span>',
-      // positioner(labelWidth) {
-      //   return {
-      //     x: (this.chart.chartWidth - labelWidth) / 2,
-      //     y: this.chart.plotHeight / 2 + 25
-      //   };
-      // }
     },
     pane: {
       startAngle: 0,
       endAngle: 360,
       background: [
         {
-          // Track for Move
           outerRadius: '112%',
           innerRadius: '88%',
           backgroundColor: Highcharts.Color(Highcharts.getOptions().colors[0])
@@ -99,8 +84,6 @@ const setGraph = (name, value) => {
   };
 };
 const SolidGuage = props => {
-  const [globalState, globalActions] = useGlobal();
-  // const { phase, brand, page, date } = globalState;
   const { name, value, history } = props;
   const { phase, brand, page, date, toDate } = searchParams(history.location.search);
   const graphData = setGraph(name, value);
@@ -122,7 +105,7 @@ const SolidGuage = props => {
         // else
         history.push({
           pathname: `/lighthouse/${name}`,
-          search: setSearch({ phase, brand, page, date, toDate: date })
+          search: setSearch({ phase, brand, page, ...getDefaultDateRange() })
         });
       }}
       id={name}

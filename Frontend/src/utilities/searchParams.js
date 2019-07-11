@@ -9,6 +9,7 @@ const searchParams = path => {
     const value = values[1];
     search[field] = value;
   });
+  search.phase = search.env;
   const today = new Date();
   if (!search.date) search.date = new Date(getDate(today.getTime(), -1)).getTime();
   if (!search.toDate) search.toDate = new Date(getDate(today.getTime(), 1)).getTime() - 1;

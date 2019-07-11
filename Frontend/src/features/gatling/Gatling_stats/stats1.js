@@ -6,18 +6,18 @@ import './styles.scss';
 import searchParams from '../../../utilities/searchParams';
 
 const Stats = props => {
-    const {phase,brand} = props;
-    const {history} = props;
-    const updateUrl = (url) => {
-      // console.log
-    }
-    return (
+  const { phase, brand } = props;
+  const { history } = props;
+  const updateUrl = url => {
+    // console.log
+  };
+  return (
     <Fragment>
       <div className="row">
         <div className="col m6 statscard text-center">
           <div className="row urlrow">
             <div className="col m6">
-              <span className="urltext">Env :</span> {phase?phase:"All"}
+              <span className="urltext">Env :</span> {phase || 'All'}
             </div>
             <div className="col m6">
               <span className="urltext">Track :</span> SDP
@@ -25,7 +25,7 @@ const Stats = props => {
           </div>
           <div className="row urlrow">
             <div className="col m6">
-              <span className="urltext">Brand :</span> {brand?brand:"All"}
+              <span className="urltext">Brand :</span> {brand || 'All'}
             </div>
             <div className="col m6">
               <span className="urltext">Type :</span> Prod
@@ -61,7 +61,7 @@ const Stats = props => {
         </div>
         <div className="col m6">
           <HighChartBar
-            id={`bar`}
+            id="bar"
             group1={[[0, props.group1.count]]}
             group2={[[1, props.group2.count]]}
             group3={[[2, props.group3.count]]}
@@ -72,8 +72,8 @@ const Stats = props => {
       <div className="row">
         <div className="col m6 ">
           <HighStock
-            id={`publisher`}
-            title={'Publisher stats'}
+            id="publisher"
+            title="Publisher stats"
             cpu={[
               props.dispatcher_stats[0].cpu,
               props.dispatcher_stats[1].cpu,
@@ -84,16 +84,12 @@ const Stats = props => {
               props.dispatcher_stats[1].ram,
               props.dispatcher_stats[2].ram
             ]}
-            // jvm={[
-            //     props.dispatcher_stats[0].jvm_heap,
-            //     props.dispatcher_stats[1].jvm_heap,
-            //     props.dispatcher_stats[2].jvm_heap,]}
           />
         </div>
         <div className="col m6">
           <HighStock
-            id={`dispatcher`}
-            title={'Dispatcher stats'}
+            id="dispatcher"
+            title="Dispatcher stats"
             cpu={[
               props.publisher_stats[0].cpu,
               props.publisher_stats[1].cpu,
@@ -104,9 +100,6 @@ const Stats = props => {
               props.publisher_stats[1].ram,
               props.publisher_stats[2].ram
             ]}
-            // jvm={[props.publisher_stats[0].jvm_heap,
-            //       props.publisher_stats[1].jvm_heap,
-            //       props.publisher_stats[2].jvm_heap,]}
           />
         </div>
       </div>

@@ -22,11 +22,14 @@ const AlertCollapsible = props => {
           <div className={`colar collapsible-${k}-area`}>
             <div className="row">
               <p className=" col m6">{desc}</p>
-              <p className=" col m6 ">Average Drop in Score: {perc}%</p>
+              <p className=" col m6 ">Average Drop in Score:{perc}%</p>
             </div>
             <br />
             <div className="row">
-              <p className=" col m6">Metric: {category}</p>
+              <p className=" col m6">
+                Metric:
+                {category}
+              </p>
             </div>
 
             <br />
