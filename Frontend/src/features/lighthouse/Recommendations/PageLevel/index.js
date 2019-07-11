@@ -6,39 +6,33 @@ import Collapse from './page_collapsible';
 // import Sidebar from '../../Sidebar/index';
 // import './main.scss';
 
-const Recommendations = props => {
-  const [globalState] = useGlobal();
-  const { toggle } = globalState;
-
-  const [data, setData] = useState([]);
-  const [query, setQuery] = useState();
-
-  useEffect(() => {
-    setQuery(FetchData(LIGHTHOUSE_RECOMMENDATIONS, setData));
-  }, []);
-
-  const rec = data.recommendation ? data.recommendation.PerformanceAuditRecommendations : {};
-  const arr = Object.keys(rec);
-  // console.log(arr);
-  const display = arr.map(field => <Collapse key={field} url={field} />);
+const RecommendationsPage = props => {
+  // const [globalState] = useGlobal();
+  // const { toggle } = globalState;
 
   return (
     <>
       {/* <Sidebar /> */}
-      <div className={toggle ? 'main' : 'main-extend'}>
-        <center>
-          <br />
-          <u>
+      {/* <div className={toggle ? 'main' : 'main-extend'}> */}
+      <center>
+        <br />
+        <u>
+          {' '}
+          <font color="white">
             {' '}
             <h1>Page Level Recommendations</h1>
-          </u>
-          <br />
-          <br />
-          {/* <div>{display}</div> */}
-        </center>
-        {/* {query} */}
-      </div>
+          </font>
+        </u>
+        <br />
+        <br />
+        <div>
+          {' '}
+          <Collapse />
+        </div>
+      </center>
+      {/* {query} */}
+      {/* </div> */}
     </>
   );
 };
-export default Recommendations;
+export default RecommendationsPage;

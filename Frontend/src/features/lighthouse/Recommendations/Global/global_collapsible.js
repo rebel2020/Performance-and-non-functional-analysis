@@ -8,6 +8,8 @@ class Cards extends React.Component {
   }
 
   render() {
+    const { value } = this.props;
+    const recommendationList = value.split(/\d*\./).filter(val => !!val.trim());
     return (
       <div className="a">
         <div className="collapsible col m11">
@@ -15,23 +17,29 @@ class Cards extends React.Component {
 
           <label htmlFor={`collapsible-${this.props.field}`}>
             {' '}
-            <font color="blue">{this.props.field}</font>
+            <font>{this.props.field}</font>
           </label>
 
           <div className={`collapsible-${this.props.field}-area`}>
             <p className="text-left col s11">
               <font color="green">Score :</font>
-              {this.props.score}
+              <font color="white">{this.props.score}</font>
             </p>
             <br />
             <p className="text-left col s11">
               <font color="green">Weight :</font>
-              {this.props.weight}
+              <font color="white">{this.props.weight}</font>
             </p>
             <br />
             <p className="text-left col s11">
               <font color="green">Recommendation :</font>
-              <p>{this.props.value}</p>
+              <font color="white">
+                <ul>
+                  {recommendationList.map((val, idx) => (
+                    <li key={val}>{val}</li>
+                  ))}
+                </ul>
+              </font>
             </p>
           </div>
         </div>

@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import useGlobal from 'src/store';
 import { LIGHTHOUSE_RECOMMENDATIONS, lighthouse_Audit_Score } from 'src/components/graphql/Queries';
 import FetchData from 'src/components/graphql/utils';
+// import Sidebar from '../../../Sidebar/index';
 import Cards from './global_collapsible';
-// import Sidebar from '../../Sidebar/index';
-// import './main.scss';
+import './main.scss';
 
 const Recommendations = props => {
   const [globalState] = useGlobal();
@@ -23,12 +23,14 @@ const Recommendations = props => {
       .map(s => s.charAt(0).toUpperCase() + s.substring(1))
       .join(' ');
   }
-
+  console.log(data);
   useEffect(() => {
     setQuery(FetchData(LIGHTHOUSE_RECOMMENDATIONS, setData));
   }, []);
 
-  const rec = data.recommendation ? data.recommendation.PerformanceAuditRecommendations : {};
+  const rec = data.recommendationDescription
+    ? data.recommendationDescription.PerformanceAuditRecommendations
+    : {};
   const arr1 = Object.keys(rec);
   const arr2 = Object.keys(rec);
   const arr3 = Object.keys(rec);
@@ -37,13 +39,7 @@ const Recommendations = props => {
   console.log(arr1);
 
   const display_performance = arr1.map(field => (
-    <Cards
-      key={field}
-      field={formatString(field)}
-      value={rec[field]}
-      // score={sc[0]}
-      // weight={sc[1]}
-    />
+    <Cards key={field} field={formatString(field)} value={rec[field]} score={0.34} weight={3} />
   ));
 
   const display_accessibility = arr2.map(field => (
@@ -88,59 +84,59 @@ const Recommendations = props => {
 
   return (
     <>
-      {/* <Sidebar /> */}
-      <div className={toggle ? 'main' : 'main-extend'}>
-        <center>
-          <br />
-          <u>
+      <center>
+        <br />
+        <u>
+          {' '}
+          <font color="White">
             {' '}
             <h1>Global Recommendations </h1>
-          </u>
-          <br />
-          <br />
-          <div className="collapsible  col m11 Performance">
-            <input type="checkbox" id="collapsible-1" />
-            <label htmlFor="collapsible-1">Performance</label>
-            <div className="collapsible-1-area">
-              <div>{display_performance}</div>
-            </div>
+          </font>
+        </u>
+        <br />
+        <br />
+        <div className="collapsible  col m11 Performance">
+          <input type="checkbox" id="collapsible-1" />
+          <label htmlFor="collapsible-1">Performance</label>
+          <div className="collapsible-1-area">
+            <div>{display_performance}</div>
           </div>
+        </div>
 
-          <div className="collapsible  col m11 Accessibility">
-            <input type="checkbox" id="collapsible-2" />
+        <div className="collapsible  col m11 Accessibility">
+          <input type="checkbox" id="collapsible-2" />
 
-            <label htmlFor="collapsible-2">Accessibility</label>
+          <label htmlFor="collapsible-2">Accessibility</label>
 
-            <div className="collapsible-2-area">{/* <div>{display_accessibility}</div> */}</div>
-          </div>
+          <div className="collapsible-2-area">{/* <div>{display_accessibility}</div> */}</div>
+        </div>
 
-          <div className="collapsible  col m11 Best Practices">
-            <input type="checkbox" id="collapsible-3" />
+        <div className="collapsible  col m11 Best Practices">
+          <input type="checkbox" id="collapsible-3" />
 
-            <label htmlFor="collapsible-3">Best Practices</label>
+          <label htmlFor="collapsible-3">Best Practices</label>
 
-            <div className="collapsible-3-area">{/* <div>{display_best_practice}</div> */}</div>
-          </div>
+          <div className="collapsible-3-area">{/* <div>{display_best_practice}</div> */}</div>
+        </div>
 
-          <div className="collapsible  col m11 SEO">
-            <input type="checkbox" id="collapsible-4" />
+        <div className="collapsible  col m11 SEO">
+          <input type="checkbox" id="collapsible-4" />
 
-            <label htmlFor="collapsible-4">SEO</label>
+          <label htmlFor="collapsible-4">SEO</label>
 
-            <div className="collapsible-4-area">{/* <div>{display_SEO}</div> */}</div>
-          </div>
+          <div className="collapsible-4-area">{/* <div>{display_SEO}</div> */}</div>
+        </div>
 
-          <div className="collapsible  col m11 Best Practices">
-            <input type="checkbox" id="collapsible-5" />
+        <div className="collapsible  col m11 Best Practices">
+          <input type="checkbox" id="collapsible-5" />
 
-            <label htmlFor="collapsible-5">Progressive Web App</label>
+          <label htmlFor="collapsible-5">Progressive Web App</label>
 
-            <div className="collapsible-5-area">{/* <div>{display_progressive}</div> */}</div>
-          </div>
-        </center>
-        {query}
-        {/* {query1} */}
-      </div>
+          <div className="collapsible-5-area">{/* <div>{display_progressive}</div> */}</div>
+        </div>
+      </center>
+      {query}
+      {/* {query1} */}
     </>
   );
 };

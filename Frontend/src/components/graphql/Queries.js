@@ -87,13 +87,12 @@ const AVG_LIGHTHOUSE_SCORES = gql`
 
 const LIGHTHOUSE_RECOMMENDATIONS = gql`
   {
-    recommendation {
+    recommendationDescription {
       PerformanceAuditRecommendations {
         first_cpu_idle
         first_contentful_paint
         first_meaningful_paint
         speed_index
-        interactive
       }
     }
   }
