@@ -211,3 +211,16 @@ class Alert(EmbeddedDocument):
 
 class Alerts(Document):
 	alert = ListField(EmbeddedDocumentField(Alert))
+
+class rec_list(EmbeddedDocument):
+	name = StringField()
+	average_score = FloatField()
+	weight = FloatField()
+
+class Recommendation(EmbeddedDocument):
+	audit = StringField()
+	recommendations = ListField(EmbeddedDocumentField(rec_list))
+	fetchURL = StringField()
+
+class Recommended_Data(Document):
+	recommend = ListField(EmbeddedDocumentField(Recommendation))

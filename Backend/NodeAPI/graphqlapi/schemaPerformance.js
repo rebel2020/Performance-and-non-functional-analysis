@@ -261,6 +261,24 @@ type Alerts{
     alert: [Alert]
 }
 
+type Rec{
+	average_score: Float
+	weight: Float
+	name: String
+}
+
+type RData{
+	audit : String
+	recommendations : [Rec]
+}
+
+type Recommendations
+{
+    _id: ID
+   recommend: [RData],
+}
+
+
 type Query{
 	allLighthousedata: [LighthouseData]
 	gatlingdata(url: String, fetchTimeStart: String, fetchTimeEnd: String
@@ -269,7 +287,7 @@ type Query{
 						 project: String, phase: String, brand: String): [LighthouseData]
 	average(finalUrl: String, fetchTimeStart: String, fetchTimeEnd: String,
 						 project: String, phase: String, brand: String): [AuditsAverage],
-	recommendation: RecommendationData,
+	recommendation: [Recommendations],
 	alerts: [Alerts]
 	
 }
