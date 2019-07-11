@@ -64,11 +64,13 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
             if len(temp) > 1:
                 newAlertData=get_alerts(temp,url)
                 alerts.append(newAlertData)
-                try:
-                    newAlert = Alerts(alert=newAlertData)
-                    newAlert.save()
-                except:
-                    pass
+                print(len(newAlertData))
+                if len(newAlertData) > 0:
+                    try:
+                        newAlert = Alerts(alert=newAlertData,fetchUrl=url)
+                        newAlert.save()
+                    except:
+                        pass
         return HttpResponse(json.dumps(alerts))
 
     def recommendations(self, request):

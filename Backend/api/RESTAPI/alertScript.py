@@ -91,7 +91,7 @@ def getAvgAlerts(referenceAvg,threeDayAvg,alerts):
             metric=metric
             if threeDayAvg[metric] < 0.9*referenceAvg[metric]:
                 temp = dict()
-                temp['fetchUrl'] = url
+#                temp['fetchUrl'] = url
                 temp['name'] = metric
                 temp['category'] = catDict[audit]
                 temp['scoreDiff'] = ((referenceAvg[metric]-threeDayAvg[metric])/referenceAvg[metric])*100
@@ -132,7 +132,7 @@ def getTrendMetric(data_list,alerts):
                 if slope < -0.05:
                     slope_list[metric]=slope
                     temp = dict()
-                    temp['fetchUrl'] = url
+#                    temp['fetchUrl'] = url
                     temp['name'] = metric
                     temp['category'] = catDict[metricToAudit[metric]]
                     temp['scoreDiff'] = -slope * 100
@@ -165,7 +165,7 @@ def getTrendAudit(data_list,alerts):
                 if slope < -0.05:
                     slope_list[audit] = slope
                     temp = dict()
-                    temp['fetchUrl'] = url
+#                    temp['fetchUrl'] = url
                     temp['name'] = audit
                     temp['category'] = audit
                     temp['scoreDiff'] = -slope * 100
