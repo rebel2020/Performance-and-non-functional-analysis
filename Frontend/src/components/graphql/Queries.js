@@ -93,6 +93,7 @@ const LIGHTHOUSE_RECOMMENDATIONS = gql`
         first_contentful_paint
         first_meaningful_paint
         speed_index
+        interactive
       }
     }
   }
@@ -139,7 +140,6 @@ const getPages = value => {
       audits {
         ${value}_audits {
           score
-          weight
         }
       }
     }
