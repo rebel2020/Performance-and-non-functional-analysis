@@ -15,6 +15,7 @@ const parseFilterData = Data => {
     project: Project,
     finalUrl: FinalUrl
   };
+  console.log(filterList.finalUrl);
   return filterList;
 };
 
