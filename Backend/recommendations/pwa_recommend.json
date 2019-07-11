@@ -1,0 +1,33 @@
+{
+	"Performance-Web-AppRecommendations": {
+		"load_fast_enough_for_pwa": "1. To speed up time-to-visually-complete, only load the resources you need in order to display the page, \n2. Check 'https://developers.google.com/web/fundamentals/performance/critical-rendering-path/' and 'https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/' for more info", 
+
+		"works_offline": "1. Add a service worker to your app, \n2. Use the service worker to cache files locally, \n3. When offline, use the service worker as a network proxy to return the locally cached version of the file, \n4. To learn how to add a service worker into an existing app, see 'https://codelabs.developers.google.com/codelabs/offline/#0",
+
+		"offline_start_url": "1. Define a start_url property in your manifest.json file,\n 2. Ensure that your service worker properly caches a resource that matches the value of start_url, \n 3. To learn the basics of adding apps to homescreens, see 'https://codelabs.developers.google.com/codelabs/add-to-home-screen/#0",
+
+		"is_on_https": "1. Migrate your site to HTTPS, \n2. If your page is already running on HTTPS but you're failing this audit, then you may have problems with mixed content. Mixed content is when a secure site requests an unprotected (HTTP) resource",
+		
+		"service_worker": "1. Registering a service worker involves only a few lines of code, but the only reason you'd use a service worker is to implement one of the progressive web app features out of 'Offline', 'Push notifications' and 'Add to homescreen, \n 3. See 'https://developers.google.com/web/fundamentals/primers/service-workers/' to learn more",
+		
+		"installable_manifest": "1. Add a 192-pixel icon to your Web App Manifest, \n 2. For a hands-on, step-by-step guide on adding A2HS support in an existing application, check out 'https://codelabs.developers.google.com/codelabs/add-to-home-screen/#0' ", 
+		
+		"redirects_http": "1. Use canonical links in the head of your HTML to help search engines figure out the best way to get to the page, \n 2. Configure your server to redirect HTTP traffic to HTTPS. See your server's documentation to figure out the best way to do this",
+		
+		"splash_screen": "1. Check if the name property is set to the name of your PWA, \n 2. Check if the background_color property is set to a valid CSS color value, \n 3. Check if the icons array specifies an icon that is at least 512px by 512px, \n 4. Check if the icon exists and is a PNG",
+		
+		"themed_omnibox": "1. Add a theme-color meta tag to the HTML of every page you want to brand, \n 2. Add the theme_color property to your Web App Manifest", 
+		
+		"content_width": "1. See 'https://developers.google.com/web/fundamentals/design-and-ux/responsive/' to learn more, \n 2. You can ignore this audit if your site does not need to be optimized for mobile screens and the content width of your page is intentionally smaller or larger than the viewport width",
+		
+		"viewport": "1. Add a viewport <meta> tag in the <head> of your HTML, \n 2. The width=device-width key-value pair sets the width of the viewport to the width of the device. The initial-scale=1 key-value pair sets the initial zoom level when visiting the page, \n 3. Check out 'https://developers.google.com/web/fundamentals/design-and-ux/responsive/#set-the-viewport' and 'https://developers.google.com/web/fundamentals/design-and-ux/responsive/#set-the-viewport' to learn more",
+		
+		"without_javascript": "1. Pages should be layered so that basic content and page functionality only require HTML, \n 2. See 'https://www.smashingmagazine.com/2009/04/progressive-enhancement-what-it-is-and-how-to-use-it/', And How To Use It for an example of this approach, \n 3. Use inline critical path CSS in the document <head> for absolutely critical page styles. See 'https://developers.google.com/web/fundamentals/performance/critical-rendering-path/' for more on this approach ",
+		
+		"pwa_cross_browser":" 1. Fix issues that occur when running the app cross-browser",
+				
+		"pwa_page_transitions": "1. If using a single-page-app (client rendered), transition the user to the next page immediately and show a skeleton screen and use any content such as title or thumbnail already available while content loads",
+
+		"pwa_each_page_has_url": "1. If building a single-page app, make sure the client-side router can re-construct app state from a given URL",	
+	}
+}
