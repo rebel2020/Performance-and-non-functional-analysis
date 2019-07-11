@@ -12,6 +12,8 @@ import Collapsible from 'src/components/collapsible';
 import AuditData from 'src/utilities/parseAuditData';
 import Alert from 'src/components/alerts/index';
 import searchParams from 'src/utilities/searchParams';
+import ALERTS from '../../AlertPage/graphql/Queries';
+
 import Filters from '../../Filters';
 import Audits from '../Audits';
 import './main.scss';
@@ -23,15 +25,33 @@ const HomeComponent = props => {
   const { metric } = history.location;
   const { phase, brand, page, date, toDate } = searchParams(history.location.search);
   const [data, setData] = useState({ lighthousedata: [{ audits: {} }] });
+  const [alertData, setAlertData] = useState();
   const [query, setQuery] = useState(<></>);
+  const [alertQuery, setAlertQuery] = useState(<></>);
   const variables = {
     phase,
     brand,
     finalUrl: page,
     ...getTimeRange(date)
   };
+  useEffect(() => {
+    setAlertQuery(FetchData(ALERTS, setAlertData));
+  }, []);
+  let numalerts = 0;
   // console.log(variables);
   // console.log(data);
+  let alertContainer = <></>;
+  console.log(alertData);
+  if (alertData) {
+    console.log(alertData);
+    const parsedata = alertData.alerts[0].alert;
+
+    numalerts = parsedata.length;
+
+    if (numalerts > 0) {
+      alertContainer = <Alert history={history} numalerts={numalerts} {...props} />;
+    }
+  }
   const prevState = previousState({ phase, brand, page, date });
   const onMount = useRef(true);
   useEffect(() => {
@@ -65,14 +85,9 @@ const HomeComponent = props => {
   let auditContainer = <></>;
   if (metric) auditContainer = <Audits metric={metric} {...props} />;
 
-  const numal = 5;
-  let alertContainer = <></>;
-
-  if (numal > 0) {
-    alertContainer = <Alert history={history} numalerts={numal} {...props} />;
-  }
   return (
     <>
+      {alertQuery}
       <div className="text-center">{alertContainer}</div>
       <div className="container ">
         <Filters dateRange="single" history={history} />

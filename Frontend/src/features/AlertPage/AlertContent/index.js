@@ -6,8 +6,6 @@ import FetchData from '../../../components/graphql/utils';
 import formatString from '../../../utilities/formatString';
 import { parse } from 'url';
 
-
-
 const AlertContent = props => {
   const { history } = props;
   const [data, setData] = useState();
@@ -88,6 +86,7 @@ const AlertContent = props => {
             key={i}
             title={item.fetchUrl}
             desc={formatName}
+            category={item.category}
             perc={roundScore}
           />
         </>
