@@ -3,9 +3,13 @@ import useGlobal from 'src/store';
 import Sidebar from '../Sidebar/index';
 import Home from './Home';
 import MetricComponent from './Metrics';
+import Recommendations from './Recommendations/Global/index';
+import RecommendationsPage from './Recommendations/PageLevel/index';
+// import Compare from './Compare';
 import './main.scss';
 
 const Lighthouse = props => {
+  // console.log(comp);
   const { comp, history } = props;
   const [globalState] = useGlobal();
   const { toggle } = globalState;
@@ -15,7 +19,10 @@ const Lighthouse = props => {
     accessibility: <MetricComponent history={history} metric={comp} />,
     best_practices: <MetricComponent history={history} metric={comp} />,
     p_w_a: <MetricComponent history={history} metric={comp} />,
-    s_e_o: <MetricComponent history={history} metric={comp} />
+    s_e_o: <MetricComponent history={history} metric={comp} />,
+    recommendations: <Recommendations />,
+    recommendationsPage: <RecommendationsPage />
+    // compare: <Compare />
   };
   const graph = map[comp];
   return (
