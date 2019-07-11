@@ -14,7 +14,9 @@ const Graph = props => {
   const percreqsucc = [];
   const numreq = [];
   const avgreqps = [];
-  let hscomp = <HighStock name={radioTitle} data={avgrestime} setfetchTime={setfetchTime} {...props}  />;
+  let hscomp = (
+    <HighStock name={radioTitle} data={avgrestime} setfetchTime={setfetchTime} {...props} />
+  );
 
   if (gatlingstats) {
     const graphdata = gatlingstats.map((i, item) => {
@@ -28,16 +30,22 @@ const Graph = props => {
   if (radioValue !== '') {
     if (radioValue == 'avg_response_time') {
       radioTitle = 'Average Response Time';
-      hscomp = <HighStock name={radioTitle} data={avgrestime} setfetchTime={setfetchTime} {...props}  />;
+      hscomp = (
+        <HighStock name={radioTitle} data={avgrestime} setfetchTime={setfetchTime} {...props} />
+      );
     } else if (radioValue == 'perc_req_success') {
       radioTitle = '% Requests Succeeded';
-      hscomp = <HighStock name={radioTitle} data={percreqsucc} setfetchTime={setfetchTime} {...props}  />;
+      hscomp = (
+        <HighStock name={radioTitle} data={percreqsucc} setfetchTime={setfetchTime} {...props} />
+      );
     } else if (radioValue == 'num_req') {
       radioTitle = 'Number of Requests';
-      hscomp = <HighStock name={radioTitle} data={numreq} setfetchTime={setfetchTime} {...props}/>;
+      hscomp = <HighStock name={radioTitle} data={numreq} setfetchTime={setfetchTime} {...props} />;
     } else if (radioValue == 'avg_req_per_sec') {
       radioTitle = 'Average Number of Requests per Second';
-      hscomp = <HighStock name={radioTitle} data={avgreqps} setfetchTime={setfetchTime} {...props}  />;
+      hscomp = (
+        <HighStock name={radioTitle} data={avgreqps} setfetchTime={setfetchTime} {...props} />
+      );
     }
   }
   return (

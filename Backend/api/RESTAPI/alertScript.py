@@ -91,7 +91,7 @@ def getAvgAlerts(referenceAvg,threeDayAvg,alerts):
             metric=metric
             if threeDayAvg[metric] < 0.9*referenceAvg[metric]:
                 temp = dict()
-                temp['fetchUrl'] = url
+#                temp['fetchUrl'] = url
                 temp['name'] = metric
                 temp['category'] = catDict[audit]
                 temp['scoreDiff'] = ((referenceAvg[metric]-threeDayAvg[metric])/referenceAvg[metric])*100
@@ -127,12 +127,12 @@ def getTrendMetric(data_list,alerts):
             x_mean = mean(interval_list)
             divider = mean(interval_list) ** 2 - mean(interval_list ** 2)
             if divider != 0 and y_mean > 0:
-                slope = ((x_mean*y_mean-mean(score_list*interval_list))/divider)#/y_mean
+                slope = ((x_mean*y_mean-mean(score_list*interval_list))/divider)/y_mean
 #                print(slope)
-                if slope < -0.02:
+                if slope < -0.05:
                     slope_list[metric]=slope
                     temp = dict()
-                    temp['fetchUrl'] = url
+#                    temp['fetchUrl'] = url
                     temp['name'] = metric
                     temp['category'] = catDict[metricToAudit[metric]]
                     temp['scoreDiff'] = -slope * 100
@@ -161,11 +161,11 @@ def getTrendAudit(data_list,alerts):
             y_mean = mean(score_list)
             divider = x_mean ** 2 - mean(interval_list ** 2)
             if divider != 0 and y_mean != 0:
-                slope = ((x_mean * y_mean - mean(score_list * interval_list)) / divider) #/ y_mean
-                if slope < -0.02:
+                slope = ((x_mean * y_mean - mean(score_list * interval_list)) / divider) / y_mean
+                if slope < -0.05:
                     slope_list[audit] = slope
                     temp = dict()
-                    temp['fetchUrl'] = url
+#                    temp['fetchUrl'] = url
                     temp['name'] = audit
                     temp['category'] = audit
                     temp['scoreDiff'] = -slope * 100
