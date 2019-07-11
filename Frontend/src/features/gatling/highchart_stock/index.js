@@ -71,7 +71,10 @@ const setGraph = (history, name, data, setfetchTime) => {
 };
 
 const HighStock = props => {
-  const { name, history, data, setfetchTime } = props;
+  const { name, history, data, setfetchTime} = props;
+  // let d = data.sort((a,b)=>{
+  //   console.log(a,b);
+  // })
   const graphData = setGraph(history, name, data, setfetchTime);
   useEffect(() => {
     stock(Highcharts);

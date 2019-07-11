@@ -39,8 +39,10 @@ const Filters = props => {
       search: setSearch({ ...values })
     });
   }, []);
-
-  const newValue = parseFilterData(list);
+  if(props.finalUrl !== values.page){
+    setValues({...values,page:props.finalUrl})
+  }
+  let newValue = parseFilterData(list);
   if (JSON.stringify(filterLists) !== JSON.stringify(newValue)) {
     setFilterList(newValue);
   }
@@ -71,7 +73,7 @@ const Filters = props => {
             listId="Track"
             placeholder="Track"
             value=""
-            options={['SDP', 'CR', 'Fleat']}
+            options={['SDP', 'CR', 'Fleet']}
             onChange={value => {
               setValues({ ...values, track: value });
               // if (filterLists.finalUrl.includes(value)) {
@@ -83,7 +85,7 @@ const Filters = props => {
             }}
           />
         </div>
-        <div className="col s6 m3 l2">
+        {/* <div className="col s6 m3 l2">
           <SelectList
             className="datalistInput"
             placeholder="Brand"
@@ -100,7 +102,7 @@ const Filters = props => {
               }
             }}
           />
-        </div>
+        </div> */}
         <div className="col s6 m3 l2">
           <SelectList
             className="datalistInput"

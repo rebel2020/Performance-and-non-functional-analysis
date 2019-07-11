@@ -7,6 +7,7 @@ const parseGatlingData = data => {
     data.gatlingdata.forEach(val => {
       const parsedData = JSON.parse(val.stats);
       stats.push({
+        brand:val.brand,
         url: val.url,
         fetchTime: val.fetchTime,
         group1: parsedData.stats.group1,
