@@ -1,5 +1,3 @@
-import React from 'react';
-
 const setSearch = values => {
   const { phase, brand, page, date, toDate } = values;
   let str = '';
