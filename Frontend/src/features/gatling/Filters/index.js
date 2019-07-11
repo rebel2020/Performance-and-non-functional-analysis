@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import Datalist from 'src/components/datalist';
+import SelectList from 'src/components/selectlist';
 import { setSearch } from '../utils/search';
 import Input from 'src/components/Input';
 import { getDate, getHtmlDate } from 'src/utilities/timeConversions';
@@ -18,25 +19,30 @@ const Filters = props => {
     finalUrl: []
   });
   const [dates,setDates] = useState({
-    date:getHtmlDate(new Date().getTime()),
-    toDate:getHtmlDate( Date.now() - 864e5)
+    date:getHtmlDate(Date.now() - 864e5),
+    toDate:getHtmlDate(new Date().getTime())
   })
   const [values, setValues] = useState({
     phase:"",
     brand:"",
     page:"",
+    track:"",
+    type:"",
     date: Date.now() - 864e5,
     toDate: new Date().getTime()
   });
 
   useEffect(() => {
     setQuery(FetchData(LIST, setList));
+    history.push({
+      pathname: history.pathname,
+      search: setSearch({ ...values })
+    });
   }, []);
-
-  const submitValues = () => {};
-
+  if(props.finalUrl !== values.page){
+    setValues({...values,page:props.finalUrl})
+  }
   let newValue = parseFilterData(list);
-  // console.log(newValue);
   if (JSON.stringify(filterLists) !== JSON.stringify(newValue)) {
     setFilterList(newValue);
   }
@@ -44,7 +50,7 @@ const Filters = props => {
     <Fragment>
       <div className="filters text-center">
         <div className="col s6 m3 l2">
-          <Datalist
+          <SelectList
             className="datalistInput"
             placeholder="Env"
             value={values.phase}
@@ -62,7 +68,25 @@ const Filters = props => {
           />
         </div>
         <div className="col s6 m3 l2">
-          <Datalist
+          <SelectList
+            className="datalistInput"
+            listId="Track"
+            placeholder="Track"
+            value={""}
+            options={["SDP","CR","Fleat"]}
+            onChange={value => {
+              setValues({ ...values, track: value });
+              // if (filterLists.finalUrl.includes(value)) {
+              //   history.push({
+              //     pathname: history.pathname,
+              //     search: setSearch({ ...values, page: value })
+              //   });
+              // }
+            }}
+          />
+        </div>
+        <div className="col s6 m3 l2">
+          <SelectList
             className="datalistInput"
             placeholder="Brand"
             value={values.brand}
@@ -78,63 +102,62 @@ const Filters = props => {
               }
             }}
           />
+        </div>      
+        <div className="col s6 m3 l2">
+          <SelectList
+            className="datalistInput"
+            listId="page"
+            placeholder="Page"
+            value={""}
+            options={["Prod","Comp"]}
+            onChange={value => {
+              setValues({ ...values, type: value });
+              // if (filterLists.finalUrl.includes(value)) {
+              //   history.push({
+              //     pathname: history.pathname,
+              //     search: setSearch({ ...values, page: value })
+              //   });
+              // }
+            }}
+          />
         </div>
-
-      <div className="col s12 m6 l4">
-        <Datalist
-          className="datalistInput"
-          listId="page"
-          placeholder="Page"
-          value={values.page}
-          options={filterLists.finalUrl}
-          onChange={value => {
-            setValues({ ...values, page: value });
-            if (filterLists.finalUrl.includes(value)) {
+        <div className="col s6 m4 l2">
+          <Input
+            className="dateInput"
+            type="date"
+            value={dates.date}
+            max={getHtmlDate(new Date().getTime())}
+            min="2019-07-01"
+            onChange={value => {
+              setDates({...dates,date:value})
+              setValues({ ...values, date: (value)?new Date(value).getTime():value });
               history.push({
                 pathname: history.pathname,
-                search: setSearch({ ...values, page: value })
+                search: setSearch({ ...values, date: (value)?new Date(value).getTime():value})
               });
-            }
-          }}
-        />
-      </div>
-      <div className="col s6 m4 l2">
-        <Input
-          className="dateInput"
-          type="date"
-          value={dates.date}
-          max={getHtmlDate(new Date().getTime())}
-          min="2019-07-01"
-          onChange={value => {
-            setDates({...dates,date:value})
-            setValues({ ...values, date: (value)?new Date(value).getTime():value });
-            history.push({
-              pathname: history.pathname,
-              search: setSearch({ ...values, date: (value)?new Date(value).getTime():value})
-            });
-          }}
-        />
-      </div>
+            }}
+          />
+        </div>
         <div className="col s6 m4 l2">
           {dateRange === 'range' ? (
             <Input
               className="dateInput"
               type="date"
-              value={values.toDate}
+              value={dates.toDate}
               max={getHtmlDate(new Date().getTime())}
               min="2019-07-01"
               onChange={value => {
-                setValues({ ...values, toDate: value });
+                setDates({...dates,toDate:value})
+                setValues({ ...values, toDate: (value)?new Date(value).getTime():value });
                 history.push({
                   pathname: history.pathname,
-                  search: setSearch({ ...values, toDate: value })
+                  search: setSearch({ ...values, toDate: (value)?new Date(value).getTime():value })
                 });
               }}
-            />
-          ) : (
-            <></>
-          )}
-        </div>
+            />) : (
+              <></>
+            )}
+          </div>
       </div>
       {query}
     </Fragment>

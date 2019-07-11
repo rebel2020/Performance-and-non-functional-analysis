@@ -158,7 +158,7 @@ def t_fun(file):
             temp1 = fun1(temp)
             Audits[Audit][temp1] = dict()
             try:
-                Audits[Audit][temp1]['score'] = (data['audits'][temp]['score'])*(random.randint(0,10)/100)
+                Audits[Audit][temp1]['score'] = (data['audits'][temp]['score'])+(data['audits'][temp]['score'])*(random.randint(-10,10)/100)
             except:
                 pass
             try:
@@ -189,7 +189,7 @@ def t_fun(file):
             except:
                 pass
             try:
-                score = data['categories'][weight_dict[Audit]]['score']*(random.randint(0,10)/100)
+                score =data['categories'][weight_dict[Audit]]['score']+ data['categories'][weight_dict[Audit]]['score']*(random.randint(-10,10)/100)
                 Audits[Audit]['score'] = score
             except:
                 pass
