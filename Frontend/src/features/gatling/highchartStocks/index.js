@@ -72,11 +72,11 @@ const HighStock = props => {
         data: props.ram,
         color: '#3498DB'
       },
-      {
-        name: 'JVM',
-        data: props.jvm,
-        color: '#F39C12'
-      }
+      // {
+      //   name: 'JVM',
+      //   data: props.jvm,
+      //   color: '#F39C12'
+      // }
     ]
   };
 

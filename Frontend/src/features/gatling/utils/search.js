@@ -11,4 +11,4 @@ const setSearch = values => {
   return str;
 };
 
-export {setSearch};
+export { setSearch };

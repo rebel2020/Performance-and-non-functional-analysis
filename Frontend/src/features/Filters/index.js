@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Datalist from 'src/components/datalist';
-// import SelectList from 'src/components/selectlist';
-import { getDate, getHtmlDate } from 'src/utilities/timeConversions';
+import { getHtmlDate } from 'src/utilities/timeConversions';
 import compare from 'src/utilities/compareObjects';
 import previousState from 'src/utilities/previousState';
 import setSearch from 'src/utilities/search';
@@ -12,9 +11,7 @@ import './main.scss';
 import SelectList from '../../components/selectlist';
 
 const Filters = props => {
-  const [globalState, globalActions] = useGlobal();
-  const { setPage, setDate, setToDate, setBrand, setEnv, setPagecomp } = globalActions;
-  // const { phase, brand, page, date, toDate, filterLists } = globalState;
+  const [globalState] = useGlobal();
   const { filterLists } = globalState;
   const { dateRange, history } = props;
   const { env, brand, page, date, toDate } = searchParams(history.location.search);
@@ -26,7 +23,6 @@ const Filters = props => {
     toDate: getHtmlDate(toDate)
   });
   const prevState = previousState({ env, brand, page, date, toDate });
-  // console.log(values);
   useEffect(() => {
     if (!compare(prevState, { env, brand, page, date, toDate }))
       setValues({
@@ -40,17 +36,16 @@ const Filters = props => {
   return (
     <div className="filters text-center">
       <div className="col s6 m3 l2">
+        <div className="color--white">Env</div>
         <SelectList
           className="datalistInput"
           placeholder="Env"
           value={values.phase}
           listId="phase"
           options={filterLists.phase}
-          // options={['a', 'b', 'c']}
           onChange={value => {
             setValues({ ...values, phase: value });
             if (filterLists.phase.includes(value)) {
-              // setEnv(value);
               history.push({
                 pathname: history.pathname,
                 search: setSearch({ phase: value, brand, page, date, toDate })
@@ -62,6 +57,7 @@ const Filters = props => {
         />
       </div>
       <div className="col s6 m3 l2">
+        <div className="color--white">Brand</div>
         <SelectList
           className="datalistInput"
           placeholder="Brand"
@@ -71,7 +67,6 @@ const Filters = props => {
           onChange={value => {
             setValues({ ...values, brand: value });
             if (filterLists.brand.includes(value)) {
-              // setBrand(value);
               history.push({
                 pathname: history.pathname,
                 search: setSearch({ phase: env, brand: value, page, date, toDate })
@@ -82,6 +77,7 @@ const Filters = props => {
       </div>
 
       <div className="col s12 m6 l4">
+        <div className="color--white">Page</div>
         <Datalist
           className="pagelistInput"
           listId="page"
@@ -91,7 +87,6 @@ const Filters = props => {
           onChange={value => {
             setValues({ ...values, page: value });
             if (filterLists.finalUrl.includes(value)) {
-              // setPage(value);
               history.push({
                 pathname: history.pathname,
                 search: setSearch({ phase: env, brand, page: value, date, toDate })
@@ -101,6 +96,7 @@ const Filters = props => {
         />
       </div>
       <div className="col s6 m4 l2">
+        <div className="color--white">{dateRange === 'range' ? 'From' : 'Date'}</div>
         <Input
           className="dateInput"
           type="date"
@@ -109,14 +105,13 @@ const Filters = props => {
           min="2019-06-01"
           onChange={value => {
             setValues({ ...values, date: value });
-            // setDate(value);
             history.push({
               pathname: history.pathname,
               search: setSearch({
                 phase: env,
                 brand,
                 page,
-                date: new Date(value).getTime(),
+                date: new Date(value).getTime() - 19800000,
                 toDate
               })
             });
@@ -125,27 +120,29 @@ const Filters = props => {
       </div>
       <div className="col s6 m4 l2">
         {dateRange === 'range' ? (
-          <Input
-            className="dateInput"
-            type="date"
-            value={values.toDate}
-            max={getHtmlDate(new Date().getTime())}
-            min="2019-06-01"
-            onChange={value => {
-              setValues({ ...values, toDate: value });
-              // setToDate(value);
-              history.push({
-                pathname: history.pathname,
-                search: setSearch({
-                  phase: env,
-                  brand,
-                  page,
-                  date,
-                  toDate: new Date(value).getTime()
-                })
-              });
-            }}
-          />
+          <>
+            <div className="color--white">To</div>
+            <Input
+              className="dateInput"
+              type="date"
+              value={values.toDate}
+              max={getHtmlDate(new Date().getTime())}
+              min="2019-06-01"
+              onChange={value => {
+                setValues({ ...values, toDate: value });
+                history.push({
+                  pathname: history.pathname,
+                  search: setSearch({
+                    phase: env,
+                    brand,
+                    page,
+                    date,
+                    toDate: new Date(value).getTime() + 66600000 - 1
+                  })
+                });
+              }}
+            />
+          </>
         ) : (
           <></>
         )}
@@ -153,4 +150,5 @@ const Filters = props => {
     </div>
   );
 };
+
 export default Filters;
