@@ -32,7 +32,7 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
             newData['audits']=auditData
 #            newData['fetchTime'] = datetime.strptime(str(data['fetchTime']), "%Y-%m-%dT%H:%M:%S.%fZ")
             temp = datetime.strptime(str(data['fetchTime']), "%Y-%m-%dT%H:%M:%S.%fZ")
-            count=6
+            count=7
             newData['fetchTime']=temp.replace(day=int(count),month=7)
         except:
             raise ValidationError
@@ -60,7 +60,7 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
         url_map = []
         cnt=0
         for url in url_list[0]['urls']:
-            temp=LighthouseData.objects.filter(requestedUrl =url).order_by('-id')[:14]
+            temp=LighthouseData.objects.filter(requestedUrl =url).order_by('-fetchTime')[:14]
             if len(temp) > 1:
                 newAlertData=get_alerts(temp,url)
                 alerts.append(newAlertData)
