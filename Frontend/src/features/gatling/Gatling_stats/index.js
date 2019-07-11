@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Filters from '../Filters/index';
 import 'src/main.scss';
+import './main.scss';
+
 import { GATLING } from '../graphql/Queries';
 import FetchData from 'src/components/graphql/utils';
 import {parseGatlingData} from '../utils/parseGatling'
@@ -8,11 +10,13 @@ import {Stats} from './stats1';
 import {Graph} from './graph';
 import searchParams from '../../../utilities/searchParams';
 import { setSearch } from '../utils/search';
+import './styles.scss';
 
 const MetricComponent = props => {
   const { metric, history } = props;
   const [data, setData] = useState();
   const [query, setQuery] = useState(<></>);
+  const [fetchTime,setfetchTime] = useState('');
   const [vals, setVals] = useState({
     phase:'',
     brand:"alfa",
@@ -54,7 +58,6 @@ const MetricComponent = props => {
   if(search.finalUrl == "All"){
     search.finalUrl = "";
   }
-
   if(JSON.stringify(search) !== "{}" && JSON.stringify(vals) !== JSON.stringify(search)){
     setVals(search);
     setQuery(FetchData(GATLING,setData,search));
@@ -64,7 +67,9 @@ const MetricComponent = props => {
   },[]);
 
   const parsedData = parseGatlingData(data);
+  let displayCards = <></>
   let GatlingStats = <></>;
+  let st = <></>
   if (parsedData) {
     if(!vals.finalUrl || vals.finalUrl === ""){
       parsedData.map((val) => {
@@ -83,20 +88,72 @@ const MetricComponent = props => {
       parsedData.forEach((val) => {
         if (urls.indexOf(val.url) === -1){
              urls.push(val.url);
-             Data.push(val);
+             Data.push(val);     
           }
       })
-      console.log(Data);
+      displayCards = Data.map((val,i)=> <div className="col s10 m5 l3 pageCard" key={val.url}
+              onClick = {
+                ()=>{
+                  history.push({
+                    search:setSearch({ ...vals, finalUrl: val.url })
+                  })
+                }
+              }> 
+           <div className="row"> 
+              <div className="col m1"></div>
+              {val.url} 
+           </div>
+           <div className="row"> 
+              <div className="col m1"></div>
+              <div className="col m8"> Mean Response Time: </div>
+              <div className="col m3"> {val.meanResponseTime.total} </div>
+           </div>
+           <div className="row"> 
+              <div className="col m1"></div>
+              <div className="col m8"> Number of Requests: </div>
+              <div className="col m3"> {val.numberOfRequests.total} </div>
+           </div>
+           <div className="row"> 
+              <div className="col m1"></div>
+              <div className="col m8"> Mean No Requests/Second: </div>
+              <div className="col m3"> {parseInt(val.meanNumberOfRequestsPerSecond.total)} </div>
+           </div>
+          <br /> 
+       </div> )
+      st = <></>
     }
     else{
-      GatlingStats = <Graph gatlingstats={parsedData} {...props} />
+      GatlingStats = <>
+          <div className="row"> 
+          <div className="col m1">
+          </div>
+          <div className="col m3 urltext">
+              URL
+          </div>
+          <div className="col m7 statscard">
+            {parsedData[0].url}
+          </div>
+          <div className="col m1">
+          </div>            
+          </div>
+          <Graph setfetchTime={setfetchTime} gatlingstats={parsedData} {...props} />
+        </>
+      if(fetchTime){
+        let renderCard = parsedData.find((val)=> { return val.fetchTime == fetchTime});
+        st = <Stats history={history} {...renderCard} {...vals}/>
+        displayCards = <></>
+      }
     }
   }
   return (
     <div className="container">
-      <Filters dateRange="range" history={history} />
-      {GatlingStats};
-      {query};
+      <Filters dateRange="range" history={history} finalUrl={vals.finalUrl}/>
+      {GatlingStats}
+      {query}
+      {st}
+      <div className="flexbox">
+        {displayCards}
+      </div>
     </div>
   );
 };

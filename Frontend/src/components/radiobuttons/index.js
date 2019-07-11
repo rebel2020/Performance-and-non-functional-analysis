@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 
 const RadioButtons = props => {
   const { setRV } = props;
-  console.log(props);
   const setRadio = event => {
     setRV(event.target.value);
   };

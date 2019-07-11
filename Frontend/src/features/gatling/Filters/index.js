@@ -39,7 +39,9 @@ const Filters = props => {
       search: setSearch({ ...values })
     });
   }, []);
-
+  if(props.finalUrl !== values.page){
+    setValues({...values,page:props.finalUrl})
+  }
   let newValue = parseFilterData(list);
   if (JSON.stringify(filterLists) !== JSON.stringify(newValue)) {
     setFilterList(newValue);

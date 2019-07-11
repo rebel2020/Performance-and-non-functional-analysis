@@ -5,14 +5,11 @@ import RadioButtons from '../../../components/radiobuttons/index';
 import './styles.scss';
 
 const Graph = props => {
-  const { gatlingstats } = props;
+  const { gatlingstats,setfetchTime } = props;
+
   let radioTitle;
   const [radioValue, setRV] = useState('');
-
-  const [fetchTime,setfetchTime] = useState('');
-
   radioTitle = 'Average Response Time';
-
   const avgrestime = [];
   const percreqsucc = [];
   const numreq = [];
@@ -43,13 +40,11 @@ const Graph = props => {
       hscomp = <HighStock name={radioTitle} data={avgreqps} setfetchTime={setfetchTime} {...props}  />;
     }
   }
-
-  console.log(fetchTime);
   return (
     <div className="row container radiocomp">
       <div className="col m8">{hscomp}</div>
       <div className="col m4">
-        <h3>{radioTitle}</h3>
+        <h3>Metrics</h3>
         <RadioButtons
           values={[
             { value: 'avg_response_time', name: 'Average Response Time' },
