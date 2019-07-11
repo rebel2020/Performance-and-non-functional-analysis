@@ -23,7 +23,7 @@ const AlertContent = props => {
   let numalerts = 0;
   let DispAlerts = <></>;
   let urgent = 0;
-console.log(data);
+  console.log(data);
   if (data) {
     console.log(data.alert);
     const parsedata = data.alert;
@@ -67,7 +67,7 @@ console.log(data);
     // ];
     numalerts = parsedata.length;
     parsedata.sort(compare);
-    
+
     DispAlerts = parsedata.map((item, i) => {
       if (item.scoreDiff > 20) {
         urgent++;
@@ -90,10 +90,10 @@ console.log(data);
   return (
     <>
       <div className="alertpageheader text-center">
-        <h1> Hello. You have {numalerts} Alerts.</h1>
+        <h1> Hello. You have{numalerts} Alerts.</h1>
       </div>
       <div className="text-center">
-        <h4 className="alerturgenttext"> There are {urgent} urgent alert(s)</h4>
+        <h4 className="alerturgenttext"> There are{urgent} urgent alert(s)</h4>
       </div>
       {DispAlerts}
       {query}

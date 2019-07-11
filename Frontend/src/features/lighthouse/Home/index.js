@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import previousState from 'src/utilities/previousState';
-import { getTimeRange } from 'src/utilities/timeConversions';
+import { getTimeRange, getDate } from 'src/utilities/timeConversions';
 import compare from 'src/utilities/compareObjects';
 import { averageMap } from 'src/utilities/map';
 import FetchData from 'src/components/graphql/utils';
@@ -65,9 +65,45 @@ const HomeComponent = props => {
 
   let message = '';
   if (!page && !brand && !phase)
-    message =
-      '\nNote:\n\nThe displayed data are the average metric scores of all the pages on the selected Date';
-
+    message = `\nNote:\n\nThe displayed data are the average metric scores of all the pages on ${getDate(
+      date,
+      0
+    )}.`;
+  else if (!page && !brand)
+    message = `\nNote:\n\nThe displayed data are the average metric scores of all the pages in ${phase} environment on ${getDate(
+      date,
+      0
+    )}.`;
+  else if (!page && !phase)
+    message = `\nNote:\n\nThe displayed data are the average metric scores of all the pages of ${brand} brand in all environments on ${getDate(
+      date,
+      0
+    )}.`;
+  else if (!phase && !brand)
+    message = `\nNote:\n\nThe displayed data are the average metric scores of ${page} in all environments on ${getDate(
+      date,
+      0
+    )}.`;
+  else if (!phase)
+    message = `\nNote:\n\nThe displayed data are the average metric scores of ${page} in all environments on ${getDate(
+      date,
+      0
+    )}.`;
+  else if (!brand)
+    message = `\nNote:\n\nThe displayed data are the average metric scores of ${page} in ${phase} environment on ${getDate(
+      date,
+      0
+    )}.`;
+  else if (!page)
+    message = `\nNote:\n\nThe displayed data are the average metric scores of all the pages of ${brand} in ${phase} environment on ${getDate(
+      date,
+      0
+    )}.`;
+  else
+    message = `\nNote:\n\nThe displayed data are the average metric scores of ${page} in ${phase} environment on ${getDate(
+      date,
+      0
+    )}.`;
   return (
     <>
       <div className="text-center">{alertContainer}</div>
