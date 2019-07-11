@@ -9,6 +9,7 @@ import json
 from .script import fun,t_fun
 from datetime import datetime
 from .alertScript import get_alerts
+from .recommend_script import get_recommendations
 
 class LighthouseDataViewSet(viewsets.ModelViewSet):
     lookup_field = 'id'
@@ -69,6 +70,24 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
                 except:
                     pass
         return HttpResponse(json.dumps(alerts))
+
+    def recommendations(self, request):
+        url_list = URLData.objects.all()
+        recommendations = []
+        url_map = []
+        for url in url_list[0]['urls']:
+            temp = LighthouseData.objects.filter(requestedUrl=url).order_by('-id')[:]
+            if len(temp) >= 1:
+                newRecommendation=get_recommendations(temp, url)
+                recommendations.append(newRecommendation)
+                try:
+
+                    newRecommendation = Recommended_Data(recommend=newRecommendation['recommended_data'])
+                    newRecommendation.save()
+                except:
+                    pass
+        return HttpResponse(json.dumps(recommendations))
+
 class GatlingDataViewSet(viewsets.ModelViewSet):
     lookup_field = 'id'
     queryset = GatlingData.objects.all()

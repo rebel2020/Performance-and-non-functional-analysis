@@ -1,0 +1,30 @@
+{
+	"SEORecommendations": {
+		"viewport": "1. Add a viewport <meta> tag in the <head> of your HTML, \n 2. The width=device-width key-value pair sets the width of the viewport to the width of the device. The initial-scale=1 key-value pair sets the initial zoom level when visiting the page, \n 3. Check out 'https://developers.google.com/web/fundamentals/design-and-ux/responsive/#set-the-viewport' and 'https://developers.google.com/web/fundamentals/design-and-ux/responsive/#set-the-viewport' to learn more",
+
+		"document_title": "1. Make sure that every page has a title, \n 2. Make title descriptive and concise. Avoid vague descriptions like Home. \n 3. Avoid keyword stuffing. It's not helpful to users, and search engines may mark the page as spam,\n 4. Avoid repeated or boilerplate titles, \n 5. It's OK to brand your titles, but do it concisely",
+
+		"meta_description": "1. Add a description tag to the <head> of each of your pages,\n 2. Make sure that every page has a description, \n 3. Use different descriptions for different pages, \n 4. Include clearly-tagged facts in the descriptions. The descriptions don't have to be in sentence format. They can contain structured data, \n 5. Use quality descriptions. High-quality descriptions can be displayed in Google's search results, and can go a long way to improving your search traffic",
+
+		"http_status_code": "1. When a page is requested, ensure that your server returns a 2XX or 3XX HTTP status code. Search engines may not properly index pages with 4XX or 5XX status codes",
+		
+		"link_text": "1. Stay on topic. Don't use text that has no relation to the page's content, \n 2. Don't use the page's URL as the link description, unless you have a good reason to do so, such as referencing a site's new address, \n 3. Keep descriptions concise. Aim for a few words or a short phrase, \n 4. Format links so that they're easy to spot, \n 5. Pay attention to your internal links, too. Improving the quality of internal links can help users and Google navigate your site easier",
+		
+		"is_crawlable": "1. Use real anchors instead of click listeners. crawlers should be able to discover links,\n 2. Use real urls instead of ajax/#!/ urls (deprecated: https://developers.google.com/webmasters/ajax-crawling/docs/getting-started), \n 3. Use <link rel='canonical'>, \n 4. Use native elements where possible (<button> instead of <div class='button'>). Possibly more a11y, \n 5. Polyfill older features",
+		
+		"robots_txt": "1. Put a User-agent directive before your Allow or Disallow directive, \n 2. Start your Allow or Disallow directive with one of these characters, or leave it empty, \n 3. The directive name listed in the Content column is not part of the robots.txt specification, \n 4. The sitemap URL should begin with http, https, or ftp",
+		
+		"image_alt": "1. Add an alt attribute to img elements, \n 2.  The value of the alt attribute should be text describing the content of the image. If an image is not informative, if it's purely a decorative element, you can tell a screen reader to ignore it using an empty alt="" attribute, \n 3. When writing a description for each image, keep in mind that this is all the information that visually-impaired users have to go by, so try to make it as useful as possible for them. You don't need to explain every detail of the image, instead consider the context in which the image is being used, and try to convey the gist of the scene as efficiently as possible",
+		
+		"hreflang": "1. Define an hreflang link for each language version of a URL, \n 2. FTell search engines that these pages are equivalent by adding link elements to the head of your HTML or by adding Link headers to your HTTP response, \n 3. The hreflang value must always specify a language code. The language code must follow ISO 639-1 format. The hreflang value can also include an optional regional code. For example, en-ie is for English speakers in Ireland, whereas es-ie is for Spanish speakers in Ireland. The region code must follow ISO 3166-1 alpha-2 format",
+		
+		"canonical": "1. Add a canonical link element to the head element of your HTML, \n 2. Make sure that the canonical URL is valid, \n 3. Use secure HTTPS canonical URLs over HTTP ones as much as possible. Make sure that the page is completely secure and doesn't have any mixed content errors, \n 4. Make sure that the canonical URL is valid, \n 5. If you use hreflang links to serve different versions of a page depending on a user's language or country, make sure that the canonical URL points to the proper page for that respective language or country, \n 6. Don't point the canonical URL to a different domain. Yahoo and Bing don't allow this, \n 7. Don't point pages to the site's root page, unless their content is the same. This may be valid in some cases, such as for AMP or mobile page variations, but nonetheless Lighthouse treats this scenario as a failure",
+		
+		"font_size": "1. Aim to have a font size of at least 12px on at least 60% of the text on your pages, \n 2. Text is illegible because of a missing viewport config, \n 3. See 'https://developers.google.com/web/tools/lighthouse/audits/has-viewport-meta-tag' to learn more",
+		
+		"plugins": "1. Remove the plugins and convert your content to HTML as Search engines can't index plugin content",
+		
+		"tap_targets":" 1. Increase the size of the failing tap targets. Tap targets that are 48 pixels wide and 48 pixels tall never fail, \n 2. Increase the spacing between tap targets, using properties such as padding or margin. There should be at least 8 pixels of space between tap targets. In practice Lighthouse provides some leniency on the size, so tap targets as small as 40 pixels by 40 pixels usually pass"
+				
+	}
+}

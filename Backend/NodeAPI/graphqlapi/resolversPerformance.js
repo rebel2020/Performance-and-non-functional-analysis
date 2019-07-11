@@ -7,30 +7,118 @@ const GatlingData = require('../models/GatlingData').GatlingData;
 var Request = require("request");
 const Alerts = require('../models/Alerts').Alerts
 const Alert = require("../models/Alert").Alert
+const RecommendationData = require("../models/RecommendationData").RecommendationData
 
-const defaultRecommendationData = 
-{
-	"PerformanceAuditRecommendations": {
-		"first_contentful_paint": "1. Use in-line styles for above the fold content, \n2. Use an automated tool like penthouse and Apache’s mod_pagespeed to keep your site sustainably scalable,\n 3. Reduce the scope and complexity of style calculations,\n4. If a style isn’t being used, remove it via Chrome Dev Tool’s built-in Code Coverage functionality",
-
-		"first_meaningful_paint": "1. Load the resources needed for your above-the-fold content before you load scripts necessary for offscreen elements, \n2. Ditch the fancy fonts or include a fallback font",
-
-		"speed_index": "1. Minimize main-thread work,\n2. educe JavaScript execution time,\n3. Minimize Critical Requests Depth,\n 4. Eliminate Render-Blocking Resources,\n 5. Defer offscreen images",
-
-		"interactive": "1. Defer or remove unnecessary JavaScript work that occurs during page load,\n2. Optimize JavaScript Bootup,\n3. Reduce JavaScript Payloads with Tree Shaking,\n4. Reduce JavaScript Payloads with Code Splitting",
-		"first_cpu_idle": "1. Minimize the number of required resources that must be downloaded and executed before a page can load, \n2. Reduce the size of required resources"
-
-	},
-
-	"SEOAuditRecommendations": {
-		"abc": "xyz",
-		"ijk": "mln"
-	}
-};
+const randomData = [{
+    "recommend" : [ 
+        {
+            "audit" : "Performance_Audit",
+            "recommendations" : [ 
+                {
+                    "name" : "speed_index",
+                    "average_score" : 0.06,
+                    "weight" : 4.0
+                }, 
+                {
+                    "name" : "interactive",
+                    "average_score" : 0.03,
+                    "weight" : 5.0
+                }
+            ]
+        }, 
+        {
+            "audit" : "Best_Practices_Audit",
+            "recommendations" : [ 
+                {
+                    "name" : "is_on_https",
+                    "average_score" : 0.0,
+                    "weight" : 1.0
+                }, 
+                {
+                    "name" : "uses_http2",
+                    "average_score" : 0.0,
+                    "weight" : 1.0
+                }, 
+                {
+                    "name" : "no_document_write",
+                    "average_score" : 0.0,
+                    "weight" : 1.0
+                }, 
+                {
+                    "name" : "external_anchors_use_rel_noopener",
+                    "average_score" : 0.0,
+                    "weight" : 1.0
+                }, 
+                {
+                    "name" : "no_vulnerable_libraries",
+                    "average_score" : 0.0,
+                    "weight" : 1.0
+                }, 
+                {
+                    "name" : "errors_in_console",
+                    "average_score" : 0.0,
+                    "weight" : 1.0
+                }
+            ]
+        }, 
+        {
+            "audit" : "Search_Engine_Optimization_Audit",
+            "recommendations" : [ 
+                {
+                    "name" : "link_text",
+                    "average_score" : 0.0,
+                    "weight" : 1.0
+                }, 
+                {
+                    "name" : "is_crawlable",
+                    "average_score" : 0.0,
+                    "weight" : 1.0
+                }, 
+                {
+                    "name" : "image_alt",
+                    "average_score" : 0.0,
+                    "weight" : 1.0
+                }, 
+                {
+                    "name" : "canonical",
+                    "average_score" : 0.0,
+                    "weight" : 1.0
+                }
+            ]
+        }, 
+        {
+            "audit" : "Accessibility_Audit",
+            "recommendations" : [ 
+                {
+                    "name" : "meta_viewport",
+                    "average_score" : 0.0,
+                    "weight" : 10.0
+                }
+            ]
+        }, 
+        {
+            "audit" : "Performance_Web_App_Audit",
+            "recommendations" : [ 
+                {
+                    "name" : "load_fast_enough_for_pwa",
+                    "average_score" : 0.0,
+                    "weight" : 7.0
+                }, 
+                {
+                    "name" : "works_offline",
+                    "average_score" : 0.0,
+                    "weight" : 5.0
+                }
+            ]
+        }
+    ]
+}];
 
 const resolversPerformance = {
 	Query: {
 		allLighthousedata: async () => {
+		//console.log(await LighthouseData.find({}).exec());
+		console.log(await RecommendationData.find({}).exec());
 			return await LighthouseData.find({}).exec();
 		},
 
@@ -144,6 +232,8 @@ const resolversPerformance = {
 
 		average: async (root, options) => {
 
+			console.log(await LighthouseData.find({}).exec());
+
 			const  { finalUrl, fetchTimeStart, fetchTimeEnd, project, phase, brand } = options;
 			var timeEnd = fetchTimeEnd;
 			var timeStart = fetchTimeStart;
@@ -217,8 +307,9 @@ const resolversPerformance = {
 
 		},
 
-		recommendation: async() => {
-			return defaultRecommendationData;
+		recommendation: async() =>{
+		    console.log(await RecommendationData.find().exec());
+			return randomData;
 		},
 
 		alerts: async() =>{
