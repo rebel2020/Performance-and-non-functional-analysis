@@ -33,7 +33,20 @@ const ROUTES = [
   {
     exact: true,
     path: '/lighthouse',
-    main: history => <Lighthouse history={history} comp="home" />
+    main: history => (
+      // (
+      //   <Redirect
+      //     to={{
+      //       pathname: '/lighthouse',
+      //       search: setSearch({
+      //         date: new Date(getDate(today.getTime(), -1)).getTime(),
+      //         toDate: new Date(getDate(today.getTime(), 1)).getTime() - 1
+      //       })
+      //     }}
+      //   />
+      // )
+      <Lighthouse history={history} comp="home" />
+    )
   },
   {
     exact: true,

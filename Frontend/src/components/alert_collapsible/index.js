@@ -2,7 +2,7 @@ import React from 'react';
 import './styles.scss';
 
 const AlertCollapsible = props => {
-  const { k, history, title, desc, perc } = props;
+  const { k, history, title, desc, category, perc } = props;
   let alcol;
 
   if (perc >= 20) {
@@ -22,9 +22,15 @@ const AlertCollapsible = props => {
           <div className={`colar collapsible-${k}-area`}>
             <div className="row">
               <p className=" col m6">{desc}</p>
-              <p className=" col m6 ">Decrease by: {perc}%</p>
+              <p className=" col m6 ">Average Drop in Score:{perc}%</p>
             </div>
             <br />
+            <div className="row">
+              <p className=" col m6">
+                Metric:
+                {category}
+              </p>
+            </div>
 
             <br />
             <div className="row">
