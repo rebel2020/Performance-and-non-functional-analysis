@@ -36,8 +36,8 @@ const Recommendations = props => {
     <>
       <Sidebar history={history} />
       <div className={toggle ? 'main' : 'main-extend'}>
-        <br />
-        <div className="text-center">
+        <br/>
+        <div className="text-center headtext">
           <h1>Recommendations </h1>
         </div>
 
