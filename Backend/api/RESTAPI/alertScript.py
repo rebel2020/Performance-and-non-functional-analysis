@@ -48,7 +48,7 @@ def get_alerts(data_list,t_url):
     globalAvg = getAvg(data_list)
     lastWeekAvg = getAvg(data_list[:7])
     lastToLastWeekAvg = getAvg(data_list[7:14])
-#    four_ten_datAvg = getAvg(data_list[3:10])
+    
     getTrendMetric(data_list[:7],alerts)
     getTrendAudit(data_list[:7],alerts)
     getAvgAlerts(globalAvg,lastWeekAvg,alerts)
@@ -83,20 +83,20 @@ def Initialize1() :
     PADict['PWAAudit_list'] = "pwa_audits"
     return PADict
 
-def getAvgAlerts(referenceAvg,threeDayAvg,alerts):
+def getAvgAlerts(referenceAvg,currentAvg,alerts):
     t_alert = dict()
     t_alert['alert'] = []
     for audit in Audit_list:
         for metric in Audit_list[audit]:
             metric=metric
-            if threeDayAvg[metric] < 0.9*referenceAvg[metric]:
+            if currentAvg[metric] < 0.9*referenceAvg[metric]:
                 temp = dict()
                 temp['fetchUrl'] = url
                 temp['name'] = metric
                 temp['category'] = catDict[audit]
-                temp['scoreDiff'] = ((referenceAvg[metric]-threeDayAvg[metric])/referenceAvg[metric])*100
+                temp['scoreDiff'] = ((referenceAvg[metric]-currentAvg[metric])/referenceAvg[metric])*100
                 if len(referenceAvg) > 7:
-                    temp['alertClass'] = 'globalAverage'
+                    temp['alertClass'] = 'belowTrademark'
                 else:
                     temp['alertClass'] = 'LastWeekAverage'
                 t_alert['alert'].append(temp)

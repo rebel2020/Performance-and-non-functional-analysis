@@ -19,10 +19,10 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
     serializer_class = LighthouseDataSerializer
     def post(self,request):
         try:
-            data=t_fun(request.data['value'])
+            data=fun(request.data['value'])
         except:
             try:
-                data=t_fun(request.data)
+                data=fun(request.data)
             except:
                 raise ValidationError
         try:
@@ -32,10 +32,10 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
                               seo_audits=data['audits']['seo_audits'], pwa_audits=data['audits']['pwa_audits'],
                               accessibility_audits=data['audits']["accessibility_audits"])
             newData['audits']=auditData
-#            newData['fetchTime'] = datetime.strptime(str(data['fetchTime']), "%Y-%m-%dT%H:%M:%S.%fZ")
-            temp = datetime.strptime(str(data['fetchTime']), "%Y-%m-%dT%H:%M:%S.%fZ")
-            count=14
-            newData['fetchTime']=temp.replace(day=int(count),month=6)
+            newData['fetchTime'] = datetime.strptime(str(data['fetchTime']), "%Y-%m-%dT%H:%M:%S.%fZ")
+#            temp = datetime.strptime(str(data['fetchTime']), "%Y-%m-%dT%H:%M:%S.%fZ")
+ #           count=14
+  #          newData['fetchTime']=temp.replace(day=int(count),month=6)
         except:
             raise ValidationError
         try:
