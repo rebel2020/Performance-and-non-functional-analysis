@@ -20,8 +20,8 @@ const Collapsible = props => {
         <div className="collapsible collbord col s11">
           <input type="checkbox" id={`collapsible-${k}`} />
           <label htmlFor={`collapsible-${k}`}>
-            <div className="col s11">{formatString(title)}</div>
-            <div className={`col s1 right ${sccol}`}>{sch}</div>
+            <div className="col s10">{formatString(title)}</div>
+            <div className={`col s1  ${sccol}`}>{sch}</div>
           </label>
 
           <div className={`collbase collapsible-${k}-area`}>
