@@ -365,20 +365,22 @@ type Alerts{
 	fetchUrl: String
 }
 
-type Rec{
+type RecommendationsMetrics{
 	average_score: Float
 	weight: Float
 	name: String
 }
 
-type RData{
+type RecommendationData{
 	audit : String
+	recommendations: [RecommendationsMetrics]
 }
 
 type Recommendations
 {
     _id: ID
-   recommend: [RData],
+    fetchURL: String
+    recommend: [RecommendationData]
 }
 
 
