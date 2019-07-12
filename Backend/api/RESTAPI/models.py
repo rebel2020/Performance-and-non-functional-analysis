@@ -221,7 +221,8 @@ class rec_list(EmbeddedDocument):
 class Recommendation(EmbeddedDocument):
 	audit = StringField()
 	recommendations = ListField(EmbeddedDocumentField(rec_list))
-	fetchURL = StringField()
+	
 
 class Recommended_Data(Document):
+	fetchURL = StringField()
 	recommend = ListField(EmbeddedDocumentField(Recommendation))

@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 
 const RecommendationSchema = new Schema({
+  fetchURL: {type: String, default: null},
   recommend: [{type:Object, default: null}],
 },{collection: "recommended_data"});
 
