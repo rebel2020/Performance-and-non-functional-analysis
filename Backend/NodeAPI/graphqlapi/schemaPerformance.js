@@ -231,7 +231,7 @@ type GatlingData{
 	phase: String
 }
 
-type PerformanceAuditRecommendation{
+type PerformanceAuditRecommendationDescription{
 	first_contentful_paint: String
 	first_meaningful_paint: String
 	speed_index: String
@@ -239,14 +239,14 @@ type PerformanceAuditRecommendation{
 	first_cpu_idle: String
 }
 
-type SEOAuditRecommendation{
+type SEOAuditRecommendationDescription{
 	abc: String
 	ijk: String
 }
 
-type RecommendationData{
-	PerformanceAuditRecommendations: PerformanceAuditRecommendation
-	SEOAuditRecommendations: SEOAuditRecommendation
+type RecommendationDataDescription{
+	PerformanceAuditRecommendations: PerformanceAuditRecommendationDescription
+	SEOAuditRecommendations: SEOAuditRecommendationDescription
 }
 
 type Alert{
@@ -269,7 +269,6 @@ type Rec{
 
 type RData{
 	audit : String
-	recommendations : [Rec]
 }
 
 type Recommendations
@@ -288,6 +287,7 @@ type Query{
 	average(finalUrl: String, fetchTimeStart: String, fetchTimeEnd: String,
 						 project: String, phase: String, brand: String): [AuditsAverage],
 	recommendation: [Recommendations],
+	recommendationDescription: RecommendationDataDescription,
 	alerts: [Alerts]
 	
 }

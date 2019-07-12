@@ -8,7 +8,7 @@ import useGlobal from 'src/store';
 import { FaHome, FaTruckLoading, FaUniversalAccess, FaSearch } from 'react-icons/fa';
 import { MdCompareArrows, MdTrendingUp, MdAddAlert } from 'react-icons/md';
 import { GoGraph } from 'react-icons/go';
-import { IoIosArrowForward, IoIosArrowBack, IoIosMenu, IoMdArrowDropdown } from 'react-icons/io';
+import { IoIosArrowForward, IoIosArrowBack, IoIosMenu } from 'react-icons/io';
 
 import { TiMessages, TiStarOutline } from 'react-icons/ti';
 import { GiLighthouse } from 'react-icons/gi';
@@ -20,6 +20,7 @@ const Sidebar = props => {
   const { toggle } = globalState;
   const [mob, setMob] = useState(false);
   const [display, setDisplay] = useState('none');
+  const [recomm, setRecomm] = useState('none');
   const sideClass = toggle ? 'sidenav' : 'sidenav-collapse';
   const mobClass = mob ? 'mobOpen' : 'mobClose';
   useEffect(() => {
@@ -144,17 +145,35 @@ const Sidebar = props => {
         </div>
       </Link>
 
-      <Link {...props} className="sidelink" to="/lighthouse/recommendations">
-        <div className="sidelink">
-          <div className="txt-center">
-            <h2>
-              <TiMessages />
-            </h2>
-          </div>
+      <div
+        className="sidelink"
+        onMouseEnter={() => {
+          setRecomm('block');
+        }}
+        onMouseLeave={() => {
+          setRecomm('none');
+        }}
+        // onClick={() => {
+        //   if (display === 'block') setDisplay('none');
+        //   else setDisplay('block');
+        // }}
+      >
+        <pre>
+          <TiMessages />
+          {/* <IoMdArrowDropdown /> */}
+        </pre>
+        {toggle ? 'Recommendations' : ''}
 
-          {toggle ? 'Recommendations' : ''}
+        <div className={`dropdown ${recomm}`}>
+          <Link {...props} className="sidelink" to="/lighthouse/globalRecommendations">
+            <div className="sidelink">{toggle ? 'Global' : ''}</div>
+          </Link>
+
+          <Link {...props} className="sidelink" to="/lighthouse/pageLevelRecommendations">
+            <div className="sidelink">{toggle ? 'PageLevel' : ''}</div>
+          </Link>
         </div>
-      </Link>
+      </div>
     </>
   );
   return (
