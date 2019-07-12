@@ -84,7 +84,7 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
                 recommendations.append(newRecommendation)
                 try:
 
-                    newRecommendation = Recommended_Data(recommend=newRecommendation['recommended_data'])
+                    newRecommendation = Recommended_Data(recommend=newRecommendation['recommended_data'], fetchURL=url)
                     newRecommendation.save()
                 except:
                     pass
