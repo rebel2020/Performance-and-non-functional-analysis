@@ -103,7 +103,7 @@ def check_weight(data_list, url):
                # params
                 params_list = dict()
                 if(PAList[metric]['weight'] >= thresh_weight):
-                    if(PAList[metric]['score'] < 0.15):
+                    if(PAList[metric]['score'] is not None and PAList[metric]['score'] < 0.25):
                         params_list["average_score"] = avgVal[metric]
                         params_list["weight"] = PAList[metric]['weight']
                         params_list['name'] = metric

@@ -223,6 +223,6 @@ class Recommendation(EmbeddedDocument):
 	recommendations = ListField(EmbeddedDocumentField(rec_list))
 	
 
-class Recommended_Data(Document):
+class RecommendedData(Document):
 	fetchURL = StringField()
 	recommend = ListField(EmbeddedDocumentField(Recommendation))
