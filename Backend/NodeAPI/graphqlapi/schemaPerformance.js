@@ -253,12 +253,13 @@ type Alert{
     name: String
     alertClass: String
     scoreDiff: Float
-    category: String
-    fetchUrl: String
+	category: String
+	fetchUrl: String
 }
 
 type Alerts{
-    alert: [Alert]
+	alert: [Alert]
+	fetchUrl: String
 }
 
 type Rec{

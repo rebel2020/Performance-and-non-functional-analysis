@@ -210,7 +210,7 @@ class Alert(EmbeddedDocument):
 	fetchUrl= StringField()
 
 class Alerts(Document):
-#	fetchUrl= StringField()
+	fetchUrl= StringField()
 	alert = ListField(EmbeddedDocumentField(Alert))
 
 class rec_list(EmbeddedDocument):
