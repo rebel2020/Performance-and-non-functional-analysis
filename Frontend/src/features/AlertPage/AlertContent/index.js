@@ -74,8 +74,10 @@ const AlertContent = props => {
       {/* <div className="text-center">
         <h4 className="alerturgenttext">{`There are ${urgentData} urgent alert(s)`}</h4>
       </div> */}
-      {DispAlerts}
-      {query}
+      <div className="customcontainer">
+        {DispAlerts}
+        {query}
+      </div>
     </>
   );
 };

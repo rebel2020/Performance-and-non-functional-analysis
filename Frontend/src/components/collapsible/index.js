@@ -21,7 +21,7 @@ const Collapsible = props => {
           <input type="checkbox" id={`collapsible-${k}`} />
           <label htmlFor={`collapsible-${k}`}>
             <div className="col s10 m11">{formatString(title)}</div>
-            <div className={`col s1 right ${sccol}`}>{sch}</div>
+            <div className={`col s1  ${sccol}`}>{sch}</div>
           </label>
 
           <div className={`collbase collapsible-${k}-area`}>

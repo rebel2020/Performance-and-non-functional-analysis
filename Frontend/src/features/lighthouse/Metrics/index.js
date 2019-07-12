@@ -14,16 +14,18 @@ const MetricComponent = props => {
   if (audits) auditContainer = <Audits {...props} />;
   if (pages) pageContaner = <Pages {...props} />;
   return (
-    <div className="container">
+    <>
       <Filters dateRange="range" history={history} />
       <div className="customcontainer">
         <div className="customcard">
           <HighStock {...props} pages={pages} id="metric" />
         </div>
       </div>
-      {auditContainer}
-      {pageContaner}
-    </div>
+      <div className="customcontainer">
+        {auditContainer}
+        {pageContaner}
+      </div>
+    </>
   );
 };
 

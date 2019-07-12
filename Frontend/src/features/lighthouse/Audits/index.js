@@ -67,8 +67,10 @@ const Audit = props => {
   });
   return (
     <>
-      {DispAudit}
-      {query}
+      <div className="customcontainer">
+        {DispAudit}
+        {query}
+      </div>
     </>
   );
 };

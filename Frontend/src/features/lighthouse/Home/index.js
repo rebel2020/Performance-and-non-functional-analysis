@@ -35,12 +35,13 @@ const HomeComponent = props => {
   // console.log(variables);
   // console.log(data);
   let alertContainer = <></>;
-  console.log(alertData);
-  if (alertData) {
-    console.log(alertData);
-    const parsedata = alertData.alerts[0].alert;
 
-    numalerts = parsedata.length;
+  if (alertData) {
+    const parsedata = alertData.alerts;
+
+    parsedata.map((item, i) => {
+      numalerts = numalerts + item.alert.length;
+    });
 
     if (numalerts > 0) {
       alertContainer = <Alert history={history} numalerts={numalerts} {...props} />;
