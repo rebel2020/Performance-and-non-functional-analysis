@@ -87,7 +87,7 @@ const AVG_LIGHTHOUSE_SCORES = gql`
 
 const LIGHTHOUSE_RECOMMENDATIONS = gql`
   {
-    recommendation {
+    recommendationDescription {
       PerformanceAuditRecommendations {
         first_cpu_idle
         first_contentful_paint
@@ -169,6 +169,23 @@ const getQuery = value => {
   }
   `;
 };
+const lighthouse_Audit_Score = value => {
+  return gql`
+    {
+      lighthousedata{
+        audits{
+          performance_audits{
+            ${value}{
+              score
+              weight
+            }
+          }
+        }
+      }
+     
+    }
+    `;
+};
 
 const LIST = gql`
   query {
@@ -187,6 +204,7 @@ export {
   getAudits,
   LIST,
   AVG_SCORES,
-  getPages,
-  LIGHTHOUSE_RECOMMENDATIONS
+  LIGHTHOUSE_RECOMMENDATIONS,
+  lighthouse_Audit_Score,
+  getPages
 };

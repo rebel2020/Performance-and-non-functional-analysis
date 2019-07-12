@@ -5,7 +5,6 @@ import Gatling from './features/gatling';
 import AlertPage from './features/AlertPage';
 import setSearch from './utilities/search';
 import { getDate } from './utilities/timeConversions';
-import Recommendations from './features/lighthouse/Recommendations';
 import ErrorPage from './features/ErrorPage/index';
 
 const today = new Date();
@@ -18,7 +17,7 @@ const ROUTES = [
         to={{
           pathname: '/lighthouse',
           search: setSearch({
-            date: new Date(getDate(today.getTime(), -2)).getTime(),
+            date: new Date(getDate(today.getTime(), -1)).getTime(),
             toDate: new Date(getDate(today.getTime(), 1)).getTime() - 1
           })
         }}
@@ -75,8 +74,13 @@ const ROUTES = [
   },
   {
     exact: true,
-    path: '/lighthouse/recommendations',
-    main: history => <Recommendations history={history} comp="recommendations" />
+    path: '/lighthouse/globalRecommendations',
+    main: history => <Lighthouse history={history} comp="recommendations" />
+  },
+  {
+    exact: true,
+    path: '/lighthouse/pageLevelRecommendations',
+    main: history => <Lighthouse history={history} comp="recommendationsPage" />
   },
   {
     exact: true,
