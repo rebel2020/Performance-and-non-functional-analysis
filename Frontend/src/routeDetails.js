@@ -17,7 +17,7 @@ const ROUTES = [
         to={{
           pathname: '/lighthouse',
           search: setSearch({
-            date: new Date(getDate(today.getTime(), -2)).getTime(),
+            date: new Date(getDate(today.getTime(), -1)).getTime(),
             toDate: new Date(getDate(today.getTime(), 1)).getTime() - 1
           })
         }}
@@ -74,12 +74,12 @@ const ROUTES = [
   },
   {
     exact: true,
-    path: '/lighthouse/Recommendations/Global',
+    path: '/lighthouse/globalRecommendations',
     main: history => <Lighthouse history={history} comp="recommendations" />
   },
   {
     exact: true,
-    path: '/lighthouse/Recommendations/PageLevel',
+    path: '/lighthouse/pageLevelRecommendations',
     main: history => <Lighthouse history={history} comp="recommendationsPage" />
   },
   {

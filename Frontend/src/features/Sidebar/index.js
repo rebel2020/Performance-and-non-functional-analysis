@@ -165,11 +165,11 @@ const Sidebar = props => {
         {toggle ? 'Recommendations' : ''}
 
         <div className={`dropdown ${recomm}`}>
-          <Link {...props} className="sidelink" to="/lighthouse/Recommendations/Global">
+          <Link {...props} className="sidelink" to="/lighthouse/globalRecommendations">
             <div className="sidelink">{toggle ? 'Global' : ''}</div>
           </Link>
 
-          <Link {...props} className="sidelink" to="/lighthouse/Recommendations/PageLevel">
+          <Link {...props} className="sidelink" to="/lighthouse/pageLevelRecommendations">
             <div className="sidelink">{toggle ? 'PageLevel' : ''}</div>
           </Link>
         </div>

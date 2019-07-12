@@ -1,5 +1,4 @@
 import React from 'react';
-import { Card, CardText, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
 import formatString from 'src/utilities/formatString';
 import './main.scss';
 
