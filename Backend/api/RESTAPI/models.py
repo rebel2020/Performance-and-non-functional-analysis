@@ -210,7 +210,7 @@ class Alert(EmbeddedDocument):
 	fetchUrl= StringField()
 
 class Alerts(Document):
-#	fetchUrl= StringField()
+	fetchUrl= StringField()
 	alert = ListField(EmbeddedDocumentField(Alert))
 
 class rec_list(EmbeddedDocument):
@@ -221,7 +221,8 @@ class rec_list(EmbeddedDocument):
 class Recommendation(EmbeddedDocument):
 	audit = StringField()
 	recommendations = ListField(EmbeddedDocumentField(rec_list))
-	fetchURL = StringField()
+	
 
-class Recommended_Data(Document):
+class RecommendedData(Document):
+	fetchURL = StringField()
 	recommend = ListField(EmbeddedDocumentField(Recommendation))
