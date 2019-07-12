@@ -189,7 +189,9 @@ const setGraph = (history, name, data) => {
     ]
   };
 };
-
+const getDays = a => {
+  return a.year * 365 + a.month * 30 + a.day;
+};
 const HighStock = props => {
   const [globalState, globalActions] = useGlobal();
   // const { phase, brand, page, date, toDate } = globalState;
@@ -228,10 +230,16 @@ const HighStock = props => {
           Math.round(obj.audits[map[metric]].score * 10000) / 100
         ]);
   } else if (data.average) {
-    arr = data.average.reverse().map(obj => {
+    data.average.sort((a, b) => {
+      if (getDays(a.fetchDate) < getDays(b.fetchDate)) return -1;
+      if (getDays(a.fetchDate) > getDays(b.fetchDate)) return 1;
+      return 0;
+    });
+    arr = data.average.map(obj => {
       return [dateOfAverage(obj), Math.round(obj[averageMap[metric]] * 10000) / 100];
     });
   }
+  console.log(data);
   const graphData = setGraph(history, metric, arr);
   useEffect(() => {
     if (onMount.current) {
