@@ -10,6 +10,8 @@ from .script import fun,t_fun
 from datetime import datetime
 from .alertScript import get_alerts
 from .recommend_script import get_recommendations
+from apscheduler.schedulers.background import BackgroundScheduler
+scheduler = BackgroundScheduler()
 
 class LighthouseDataViewSet(viewsets.ModelViewSet):
     lookup_field = 'id'
@@ -32,8 +34,8 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
             newData['audits']=auditData
 #            newData['fetchTime'] = datetime.strptime(str(data['fetchTime']), "%Y-%m-%dT%H:%M:%S.%fZ")
             temp = datetime.strptime(str(data['fetchTime']), "%Y-%m-%dT%H:%M:%S.%fZ")
-            count=12
-            newData['fetchTime']=temp.replace(day=int(count),month=7)
+            count=13
+            newData['fetchTime']=temp.replace(day=int(count),month=6)
         except:
             raise ValidationError
         try:
@@ -53,7 +55,7 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
         data = LighthouseDataSerializer(queryset,many=True)
         data=json.dumps(data.data)
         return HttpResponse(data)
-    def alert(self,request):
+    def alert():
         url_list = URLData.objects.all()
         data_list = []
         alerts = []
@@ -75,7 +77,6 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
                     except:
                         pass
         return HttpResponse(json.dumps(alerts))
-
     def recommendations(self, request):
         url_list = URLData.objects.all()
         recommendations = []
@@ -91,7 +92,6 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
                 except:
                     pass
         return HttpResponse(json.dumps(recommendations))
-
 class GatlingDataViewSet(viewsets.ModelViewSet):
     lookup_field = 'id'
     queryset = GatlingData.objects.all()
@@ -137,3 +137,11 @@ class GatlingDataViewSet(viewsets.ModelViewSet):
         data = GatlingDataSerializer(queryset,many=True)
         data=json.dumps(data.data)
         return HttpResponse(data)
+def start_job():
+#        global job
+    job = scheduler.add_job(LighthouseDataViewSet.alert, 'interval', hours = 6)
+    try:
+        scheduler.start()
+    except:
+        pass
+start_job()
