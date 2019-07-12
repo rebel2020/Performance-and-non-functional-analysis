@@ -207,6 +207,7 @@ class Alert(EmbeddedDocument):
 	alertClass= StringField()
 	scoreDiff= FloatField()
 	category= StringField()
+	fetchUrl= StringField()
 
 class Alerts(Document):
 	fetchUrl= StringField()

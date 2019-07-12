@@ -72,11 +72,11 @@ const AlertContent = props => {
     parsedata.sort(compare);
 
     DispAlerts = parsedata.map((item, i) => {
-      let formatName = formatString(item.name);
+      const formatName = formatString(item.name);
       if (item.scoreDiff > 20) {
         urgent++;
       }
-      let roundScore = Math.round(item.scoreDiff);
+      const roundScore = Math.round(item.scoreDiff);
       return (
         <>
           <br />

@@ -32,7 +32,7 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
             newData['audits']=auditData
 #            newData['fetchTime'] = datetime.strptime(str(data['fetchTime']), "%Y-%m-%dT%H:%M:%S.%fZ")
             temp = datetime.strptime(str(data['fetchTime']), "%Y-%m-%dT%H:%M:%S.%fZ")
-            count=8
+            count=12
             newData['fetchTime']=temp.replace(day=int(count),month=7)
         except:
             raise ValidationError
@@ -60,13 +60,16 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
         url_map = []
         cnt=0
         for url in url_list[0]['urls']:
-            temp=LighthouseData.objects.filter(requestedUrl =url).order_by('-id')[:14]
+            temp=LighthouseData.objects.filter(requestedUrl =url).order_by('-fetchTime')[:14]
             if len(temp) > 1:
                 newAlertData=get_alerts(temp,url)
                 alerts.append(newAlertData)
-                print(len(newAlertData))
                 if len(newAlertData) > 0:
                     try:
+                        try:
+                            Alerts.objects(fetchUrl = url).delete()
+                        except:
+                            pass
                         newAlert = Alerts(alert=newAlertData,fetchUrl=url)
                         newAlert.save()
                     except:
@@ -83,7 +86,6 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
                 newRecommendation=get_recommendations(temp, url)
                 recommendations.append(newRecommendation)
                 try:
-
                     newRecommendation = Recommended_Data(recommend=newRecommendation['recommended_data'], fetchURL=url)
                     newRecommendation.save()
                 except:
