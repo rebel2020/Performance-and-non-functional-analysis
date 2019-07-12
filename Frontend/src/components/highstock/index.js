@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Highcharts from 'highcharts/highcharts';
+import Highcharts, { Pointer } from 'highcharts/highcharts';
 import stock from 'highcharts/modules/stock';
 import useGlobal from 'src/store';
 import previousState from 'src/utilities/previousState';
@@ -16,6 +16,7 @@ import datal from './datal';
 const setGraph = (history, name, data) => {
   const { phase, brand, page, date, toDate, audits, pages } = searchParams(history.location.search);
   const { audit, metric } = history;
+  const title = page ? `${formatString(name)} - ${page}` : formatString(name);
   return {
     chart: {
       zoomType: 'x',
@@ -41,7 +42,7 @@ const setGraph = (history, name, data) => {
       style: {
         color: 'white'
       },
-      text: formatString(name)
+      text: title
     },
     credits: {
       enabled: false
@@ -128,6 +129,7 @@ const setGraph = (history, name, data) => {
         tooltip: {
           valueDecimals: 2
         },
+        cursor: 'pointer',
         point: {
           events: {
             click: e => {

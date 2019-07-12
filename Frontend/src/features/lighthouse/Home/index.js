@@ -78,12 +78,15 @@ const HomeComponent = props => {
   if (metric) auditContainer = <Audits metric={metric} {...props} />;
 
   let message = <></>;
-  let datetxt = <span className="greentxt">{getDate(date, 0)}</span>;
-  let phasetxt = <span className="redtxt">{phase}</span>;
-  let pagetxt = <span className="yellowtxt">{page}</span>;
-  let brandtxt = <span className="bluetxt">{brand}</span>;
+  const datetxt = <span className="greentxt">{getDate(date, 0)}</span>;
+  const phasetxt = <span className="redtxt">{phase}</span>;
+  const pagetxt = <span className="yellowtxt">{page}</span>;
+  const brandtxt = <span className="bluetxt">{brand}</span>;
   if (!page && !brand && !phase) {
-    message = <div>The Average Metric Scores of All the Pages on {datetxt}.</div>;
+    message = <div>
+      The Average Metric Scores of All the Pages on
+      {datetxt}.
+      </div>;
   } else if (!page && !brand) {
     message = (
       <div>
