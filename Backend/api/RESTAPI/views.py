@@ -95,7 +95,7 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
     def recommendations(self, request):
         url_list = URLData.objects.all()
         recommendations = []
-        url_map = []
+        url_map=[]
         for url in url_list[0]['urls']:
             temp = LighthouseData.objects.filter(requestedUrl=url).order_by('-id')[:]
             if len(temp) >= 1:
