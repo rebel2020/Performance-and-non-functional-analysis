@@ -9,7 +9,8 @@ class Cards extends React.Component {
 
   render() {
     const { value } = this.props;
-    const recommendationList = value.split(/\d*\./).filter(val => !!val.trim());
+
+    const recommendationList = value.split('\n').map(item => item.slice(3));
     return (
       <>
         <div className="row">
@@ -21,15 +22,6 @@ class Cards extends React.Component {
 
             <div className={`colar collapsible-${this.props.field}-area`}>
               <div>
-                {/* <p className="text-left col s11">
-                  <font color="green">Avg. Score : </font>
-                  {this.props.score}
-                </p>
-                <br />
-                <p className="text-left col s11">
-                  <font color="green">Weight : </font>
-                  {this.props.weight}
-                </p> */}
                 <br />
                 <p className="text-left col s11">
                   <font color="green">Recommendations : </font>
