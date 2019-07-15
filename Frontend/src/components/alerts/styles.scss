@@ -7,6 +7,12 @@
     border-radius: 3px;
     padding: 10px;
     
+  transition: background-color 0.5s;
+    
+  }
+
+  .alert:hover{
+    background-color: #F39C12;
   }
   .hover_cursor{
     cursor: pointer;
