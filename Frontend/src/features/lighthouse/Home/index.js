@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-// import ReactDOM from 'react-dom';
 import previousState from 'src/utilities/previousState';
 import { getTimeRange, getDate } from 'src/utilities/timeConversions';
 import compare from 'src/utilities/compareObjects';
@@ -23,7 +22,6 @@ const HomeComponent = props => {
   const [alertData, setAlertData] = useState();
   const [query, setQuery] = useState(<></>);
   const [alertQuery, setAlertQuery] = useState(<></>);
-  const C4 = useRef('C4');
   const variables = {
     phase,
     brand,
@@ -33,16 +31,6 @@ const HomeComponent = props => {
   useEffect(() => {
     setAlertQuery(FetchData(ALERTS, setAlertData));
   }, []);
-  useEffect(() => {
-    const hash = history.location.hash.replace('#', '');
-    if (hash) {
-      const node = document.getElementsByName(hash)[0];
-      console.log(node);
-      if (node) {
-        node.scrollIntoView({ block: 'start', behavior: 'smooth' });
-      }
-    }
-  });
   let numalerts = 0;
   let alertContainer = <></>;
 
@@ -103,8 +91,7 @@ const HomeComponent = props => {
         {auditContainer}
         {query}
         <div className="customcontainer text-center">
-          {' '}
-          <div name="C4" className="customnotecard text-center">
+          <div className="customnotecard text-center">
             <div className="note">{message}</div>
           </div>
         </div>

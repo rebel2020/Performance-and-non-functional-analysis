@@ -1,6 +1,6 @@
 import React from 'react';
 import formatString from 'src/utilities/formatString';
-import { AuditMap, mapAuditRecommendations } from 'src/utilities/map';
+import { AuditMap, mapAuditRecommendations, pagesMap } from 'src/utilities/map';
 import Cards from './card';
 
 const Collapse = props => {
@@ -31,10 +31,10 @@ const Collapse = props => {
     <>
       <br />
       <div className="row ">
-        <div className="collapsible al col m11 bg--sidedark">
+        <div name={pagesMap[url]} className="collapsible al col m11 bg--sidedark">
           <input type="checkbox" id={`collapsible-${url}`} />
           <label className="color--white" htmlFor={`collapsible-${url}`}>
-            {url}
+            {formatString(pagesMap[url])}
           </label>
           <div className={`collapsible-${url}-area`}>{audits}</div>
         </div>

@@ -6,19 +6,24 @@ import Collapse from './page_collapsible';
 const RecommendationsPage = props => {
   const [data, setData] = useState([]);
   const [query, setQuery] = useState();
-
+  const { history } = props;
   useEffect(() => {
     setQuery(FetchData(RECOMMENDATION_URL, setData));
   }, []);
-
+  useEffect(() => {
+    const hash = history.location.hash.replace('#', '');
+    if (hash) {
+      const node = document.getElementsByName(hash)[0];
+      console.log(hash, node);
+      if (node) {
+        node.scrollIntoView({ block: 'start', behavior: 'smooth' });
+      }
+    }
+  });
   const rec = data.recommendation ? data.recommendation : [];
-  // const arr = Object.keys(rec);
-
   const display = rec.map(field => (
     <Collapse key={field.fetchURL} url={field.fetchURL} recommend={field.recommend} />
   ));
-  // console.log(data);
-
   return (
     <>
       <div className="alertpageheader text-center">
