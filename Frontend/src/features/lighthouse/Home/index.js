@@ -83,9 +83,11 @@ const HomeComponent = props => {
       <div className="text-center">{alertContainer}</div>
       <div className="container ">
         <Filters dateRange="single" history={history} />
-
-        <div className="flexbox">{flexItems}</div>
-
+        <div className="customcontainer">
+          <div className="customnotecard ">
+            <div className="flexbox">{flexItems}</div>
+          </div>
+        </div>
         {auditContainer}
         {query}
         <div className="customcontainer text-center">
@@ -96,5 +98,5 @@ const HomeComponent = props => {
       </div>
     </>
   );
-};
+}; 
 export default HomeComponent;
