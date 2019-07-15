@@ -6,10 +6,15 @@ import FetchData from '../../../components/graphql/utils';
 import formatString from '../../../utilities/formatString';
 import { parse } from 'url';
 
+// let urgentData = 0;
+// const setUrgentData = i => {
+//   urgentData = urgentData + i;
+// }
 const AlertContent = props => {
   const { history } = props;
   const [data, setData] = useState();
   const [query, setQuery] = useState(<></>);
+  // const [urgentData, setUrgentData] = useState();
   function compare(a, b) {
     if (a.scoreDiff > b.scoreDiff) {
       return -1;
@@ -24,70 +29,38 @@ const AlertContent = props => {
   }, []);
   let numalerts = 0;
   let DispAlerts = <></>;
-  let urgent = 0;
+  // let urgent = 0;
   console.log(data);
   if (data) {
     console.log(data.alerts);
-    const parsedata = data.alerts[0].alert;
+    const parsedata = data.alerts;
     console.log(parsedata);
-
-    // const als = [
-    //   {
-    //     id: 1,
-    //     title: 'Alert 1',
-
-    //     description: 'Description of the first alert',
-    //     perc: 15
-    //   },
-    //   {
-    //     id: 2,
-    //     title: 'Alert 2',
-
-    //     description: 'Description of the second alert',
-    //     perc: 50
-    //   },
-    //   {
-    //     id: 3,
-    //     title: 'Alert 3',
-
-    //     description: 'Description of the 3rd alert',
-    //     perc: 10
-    //   },
-    //   {
-    //     id: 4,
-    //     title: 'Alert 4',
-
-    //     description: 'Description of the 4th alert',
-    //     perc: 11
-    //   },
-    //   {
-    //     id: 5,
-    //     title: 'Alert 5',
-
-    //     description: 'Description of the 5th alert',
-    //     perc: 56
-    //   }
-    // ];
-    numalerts = parsedata.length;
-    parsedata.sort(compare);
-
+    // numalerts = parsedata.length;
+    // parsedata.sort(compare);
+    // let desclist = [];
+    // for (var i in parsedata) {
+    //   desclist[i] = parsedata[i].name;
+    // }
+    // console.log(desclist);
     DispAlerts = parsedata.map((item, i) => {
-      let formatName = formatString(item.name);
-      if (item.scoreDiff > 20) {
-        urgent++;
-      }
-      let roundScore = Math.round(item.scoreDiff);
+      numalerts = numalerts + item.alert.length;
+
+      // const formatName = formatString(item.name);
+      // if (item.alert[item].scoreDiff > 20.0) {
+      //   urgent++;
+      // }
+      // const roundScore = Math.round(item.scoreDiff);
       return (
         <>
           <br />
           <AlertCollapsible
             {...props}
+            // urgentData={urgentData}
+            // setUrgentData={setUrgentData}
             k={i}
             key={i}
-            title={item.fetchUrl}
-            desc={formatName}
-            category={item.category}
-            perc={roundScore}
+            title={item.alert[0].fetchUrl}
+            desc={item.alert}
           />
         </>
       );
@@ -96,13 +69,15 @@ const AlertContent = props => {
   return (
     <>
       <div className="alertpageheader text-center">
-        <h1> Hello. You have{numalerts} Alerts.</h1>
+        <h1>{`Hello. You have ${numalerts} Alerts.`}</h1>
       </div>
-      <div className="text-center">
-        <h4 className="alerturgenttext"> There are{urgent} urgent alert(s)</h4>
+      {/* <div className="text-center">
+        <h4 className="alerturgenttext">{`There are ${urgentData} urgent alert(s)`}</h4>
+      </div> */}
+      <div className="customcontainer">
+        {DispAlerts}
+        {query}
       </div>
-      {DispAlerts}
-      {query}
     </>
   );
 };

@@ -27,13 +27,14 @@ Audit_list["BPAudit_list"]=BPAudit_list
 Audit_list["SEAudit_list"] = SEAudit_list
 Audit_list["AAudit_list"] = AAudit_list
 Audit_list["PWAAudit_list"] = PWAAudit_list
-def get_alerts(data_list,t_url,alerts):
+def get_alerts(data_list,t_url):
     global PADict
     global catDict
     global Audit_list
     global catDict
     global url
     global metricToAudit
+    alerts  =[]
     metricToAudit = getMetricToAudit()
     url = t_url
     catDict= dict()
@@ -47,11 +48,11 @@ def get_alerts(data_list,t_url,alerts):
     globalAvg = getAvg(data_list)
     lastWeekAvg = getAvg(data_list[:7])
     lastToLastWeekAvg = getAvg(data_list[7:14])
-#    four_ten_datAvg = getAvg(data_list[3:10])
+
     getTrendMetric(data_list[:7],alerts)
     getTrendAudit(data_list[:7],alerts)
-    getAvgAlerts(globalAvg,lastWeekAvg,alerts)
-    getAvgAlerts(lastToLastWeekAvg,lastWeekAvg,alerts)
+    getAvgAlerts(globalAvg,lastWeekAvg,alerts,0)
+    getAvgAlerts(lastToLastWeekAvg,lastWeekAvg,alerts,1)
     return alerts
 def getAvg(data_list):
     avgVal = dict()
@@ -82,25 +83,27 @@ def Initialize1() :
     PADict['PWAAudit_list'] = "pwa_audits"
     return PADict
 
-def getAvgAlerts(referenceAvg,threeDayAvg,alerts):
+#flag 0 for global and 1 for last_to_last_week 
+def getAvgAlerts(referenceAvg,currentAvg,alerts,flag):               
     t_alert = dict()
     t_alert['alert'] = []
     for audit in Audit_list:
         for metric in Audit_list[audit]:
             metric=metric
-            if threeDayAvg[metric] < 0.9*referenceAvg[metric]:
+            if currentAvg[metric] < 0.9*referenceAvg[metric]:
                 temp = dict()
                 temp['fetchUrl'] = url
                 temp['name'] = metric
                 temp['category'] = catDict[audit]
-                temp['scoreDiff'] = ((referenceAvg[metric]-threeDayAvg[metric])/referenceAvg[metric])*100
-                if len(referenceAvg) > 7:
-                    temp['class'] = 'globalAverage'
+                temp['scoreDiff'] = ((referenceAvg[metric]-currentAvg[metric])/referenceAvg[metric])*100
+                if flag==0:
+                    temp['alertClass'] = 'belowTrademark'
                 else:
-                    temp['class'] = 'LastWeekAverage'
+                    temp['alertClass'] = 'LastToLastWeekComparison'
                 t_alert['alert'].append(temp)
-    if len(t_alert['alert']) > 0:
-        alerts.append(t_alert)
+                alerts.append(temp)
+#    if len(t_alert['alert']) > 0:
+ #       alerts.append(t_alert)
 
 def getTrendMetric(data_list,alerts):
     t_slope_list = dict()
@@ -126,6 +129,7 @@ def getTrendMetric(data_list,alerts):
             divider = mean(interval_list) ** 2 - mean(interval_list ** 2)
             if divider != 0 and y_mean > 0:
                 slope = ((x_mean*y_mean-mean(score_list*interval_list))/divider)/y_mean
+#                print(slope)
                 if slope < -0.05:
                     slope_list[metric]=slope
                     temp = dict()
@@ -133,13 +137,13 @@ def getTrendMetric(data_list,alerts):
                     temp['name'] = metric
                     temp['category'] = catDict[metricToAudit[metric]]
                     temp['scoreDiff'] = -slope * 100
-                    temp['class'] = 'trend'
+                    temp['alertClass'] = 'trend'
                     t_alert['alert'].append(temp)
+                    alerts.append(temp)
         except:
             pass
-    if len(t_alert['alert'])>0:
-        alerts.append(t_alert)
-#    print(slope_list)
+#    if len(t_alert['alert'])>0:
+ #       alerts.append(t_alert)
     return slope_list
 def getTrendAudit(data_list,alerts):
     slope_list = dict()
@@ -153,13 +157,10 @@ def getTrendAudit(data_list,alerts):
     for audit in slope_list:
         interval_list = np.arange(1,len(slope_list[audit])+1,dtype=np.float64)
         score_list = np.array(slope_list[audit],dtype=np.float64)
-        print(interval_list,audit)
-        print(score_list)
         try:
             x_mean = mean(interval_list)
             y_mean = mean(score_list)
             divider = x_mean ** 2 - mean(interval_list ** 2)
-            print(divider,y_mean)
             if divider != 0 and y_mean != 0:
                 slope = ((x_mean * y_mean - mean(score_list * interval_list)) / divider) / y_mean
                 if slope < -0.05:
@@ -169,13 +170,13 @@ def getTrendAudit(data_list,alerts):
                     temp['name'] = audit
                     temp['category'] = audit
                     temp['scoreDiff'] = -slope * 100
-                    temp['class'] = 'trend'
+                    temp['alertClass'] = 'trend'
                     t_alert['alert'].append(temp)
+                    alerts.append(temp)
         except:
             pass
-    if len(t_alert['alert']) > 0:
-        alerts.append(t_alert)
-    print(t_alert)
+#    if len(t_alert['alert']) > 0:
+ #       alerts.append(t_alert)
     return alerts
 def getAudit_list(Audit_list,data_list):
     tAudit_list = dict()

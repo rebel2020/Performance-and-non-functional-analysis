@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Highcharts from 'highcharts/highcharts';
+import Highcharts, { Pointer } from 'highcharts/highcharts';
 import stock from 'highcharts/modules/stock';
 import useGlobal from 'src/store';
 import previousState from 'src/utilities/previousState';
@@ -16,6 +16,7 @@ import datal from './datal';
 const setGraph = (history, name, data) => {
   const { phase, brand, page, date, toDate, audits, pages } = searchParams(history.location.search);
   const { audit, metric } = history;
+  const title = page ? `${formatString(name)} - ${page}` : formatString(name);
   return {
     chart: {
       zoomType: 'x',
@@ -41,7 +42,7 @@ const setGraph = (history, name, data) => {
       style: {
         color: 'white'
       },
-      text: formatString(name)
+      text: title
     },
     credits: {
       enabled: false
@@ -128,6 +129,7 @@ const setGraph = (history, name, data) => {
         tooltip: {
           valueDecimals: 2
         },
+        cursor: 'pointer',
         point: {
           events: {
             click: e => {
@@ -189,7 +191,9 @@ const setGraph = (history, name, data) => {
     ]
   };
 };
-
+const getDays = a => {
+  return a.year * 365 + a.month * 30 + a.day;
+};
 const HighStock = props => {
   const [globalState, globalActions] = useGlobal();
   // const { phase, brand, page, date, toDate } = globalState;
@@ -228,10 +232,16 @@ const HighStock = props => {
           Math.round(obj.audits[map[metric]].score * 10000) / 100
         ]);
   } else if (data.average) {
-    arr = data.average.reverse().map(obj => {
+    data.average.sort((a, b) => {
+      if (getDays(a.fetchDate) < getDays(b.fetchDate)) return -1;
+      if (getDays(a.fetchDate) > getDays(b.fetchDate)) return 1;
+      return 0;
+    });
+    arr = data.average.map(obj => {
       return [dateOfAverage(obj), Math.round(obj[averageMap[metric]] * 10000) / 100];
     });
   }
+  console.log(data);
   const graphData = setGraph(history, metric, arr);
   useEffect(() => {
     if (onMount.current) {

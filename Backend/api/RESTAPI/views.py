@@ -9,6 +9,9 @@ import json
 from .script import fun,t_fun
 from datetime import datetime
 from .alertScript import get_alerts
+from .recommend_script import get_recommendations
+from apscheduler.schedulers.background import BackgroundScheduler
+scheduler = BackgroundScheduler()
 
 class LighthouseDataViewSet(viewsets.ModelViewSet):
     lookup_field = 'id'
@@ -16,10 +19,10 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
     serializer_class = LighthouseDataSerializer
     def post(self,request):
         try:
-            data=t_fun(request.data['value'])
+            data=fun(request.data['value'])
         except:
             try:
-                data=t_fun(request.data)
+                data=fun(request.data)
             except:
                 raise ValidationError
         try:
@@ -29,10 +32,10 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
                               seo_audits=data['audits']['seo_audits'], pwa_audits=data['audits']['pwa_audits'],
                               accessibility_audits=data['audits']["accessibility_audits"])
             newData['audits']=auditData
-#            newData['fetchTime'] = datetime.strptime(str(data['fetchTime']), "%Y-%m-%dT%H:%M:%S.%fZ")
-            temp = datetime.strptime(str(data['fetchTime']), "%Y-%m-%dT%H:%M:%S.%fZ")
-            count=6
-            newData['fetchTime']=temp.replace(day=int(count),month=6)
+            newData['fetchTime'] = datetime.strptime(str(data['fetchTime']), "%Y-%m-%dT%H:%M:%S.%fZ")
+#            temp = datetime.strptime(str(data['fetchTime']), "%Y-%m-%dT%H:%M:%S.%fZ")
+ #           count=14
+  #          newData['fetchTime']=temp.replace(day=int(count),month=6)
         except:
             raise ValidationError
         try:
@@ -48,21 +51,62 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
         return HttpResponse(request.data)
     def get(self, request):
         lookup_field = 'id'
-        queryset = LighthouseData.objects.all()
+        queryset = LighthouseData.objects.all().order_by('-fetchTime')[:5]
         data = LighthouseDataSerializer(queryset,many=True)
         data=json.dumps(data.data)
         return HttpResponse(data)
     def alert(self,request):
         url_list = URLData.objects.all()
-        data_list = []
         alerts = []
-        url_map = []
-        cnt=0
+        try:
+            Alerts.objects.all().delete()
+        except:
+            pass
         for url in url_list[0]['urls']:
-            temp=LighthouseData.objects.filter(requestedUrl =url).order_by('-id')[:]
+            temp=LighthouseData.objects.filter(requestedUrl =url).order_by('-fetchTime')[:14]
             if len(temp) > 1:
-                get_alerts(temp,url,alerts)
+                newAlertData=get_alerts(temp,url)
+                if len(newAlertData) > 0:
+                    try:
+                        newAlert = Alerts(alert=newAlertData,fetchUrl=url)
+                        newAlert.save()
+                        alerts.append(newAlertData)
+                    except:
+                        pass
         return HttpResponse(json.dumps(alerts))
+    def alert_by_schedule():
+        url_list = URLData.objects.all()
+        try:
+            Alerts.objects.all().delete()
+        except:
+            pass
+        for url in url_list[0]['urls']:
+            temp=LighthouseData.objects.filter(requestedUrl =url).order_by('-fetchTime')[:14]
+            if len(temp) > 1:
+                newAlertData=get_alerts(temp,url)
+                if len(newAlertData) > 0:
+                    try:
+                        newAlert = Alerts(alert=newAlertData,fetchUrl=url)
+                        newAlert.save()
+                    except:
+                        pass
+        print("Scheduled alert triggered at",datetime.utcnow())
+        return "Alerts updated!!!"
+    def recommendations(self, request):
+        url_list = URLData.objects.all()
+        recommendations = []
+        url_map = []
+        for url in url_list[0]['urls']:
+            temp = LighthouseData.objects.filter(requestedUrl=url).order_by('-id')[:]
+            if len(temp) >= 1:
+                newRecommendation=get_recommendations(temp, url)
+                recommendations.append(newRecommendation)
+                try:
+                    newRecommendation = RecommendedData(recommend=newRecommendation['recommended_data'], fetchURL=url)
+                    newRecommendation.save()
+                except:
+                    pass
+        return HttpResponse(json.dumps(recommendations))
 class GatlingDataViewSet(viewsets.ModelViewSet):
     lookup_field = 'id'
     queryset = GatlingData.objects.all()
@@ -108,3 +152,10 @@ class GatlingDataViewSet(viewsets.ModelViewSet):
         data = GatlingDataSerializer(queryset,many=True)
         data=json.dumps(data.data)
         return HttpResponse(data)
+def start_job():
+    scheduler.add_job(LighthouseDataViewSet.alert_by_schedule, 'interval', hours = 6)
+    try:
+        scheduler.start()
+    except:
+        pass
+start_job()

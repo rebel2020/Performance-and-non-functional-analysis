@@ -1,9 +1,50 @@
-.al{
-    margin:0px 0px 0px 10px;
-    border-radius: 5px;
-   
+.al {
+  margin: 0px 0px 0px 10px;
+  border-radius: 5px;
 }
 
-.colar{
+.colar {
+  color: white;
+}
+
+.score {
+  display: inline-block;
+  width: 50px;
+  height: 20px;
+  // background-color: red;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 12px;
+  border: 1px solid #383a3e;
+}
+
+.redtxt {
     color: white;
+  background-color: #e74c3c;
+  display: inline-block;
+  width: 30px;
+  height: 20px;
+  // background-color: red;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 12px;
+  border: 1px solid #383A3E;
+}
+.yellowtxt {
+    color: white;
+  background-color: #f39c12;
+  display: inline-block;
+  width: 30px;
+  height: 20px;
+  // background-color: red;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 12px;
+  border: 1px solid #383A3E;
+  margin-left: 15px;
+}
+
+.descline {
+  border-bottom: 1px solid white;
+  padding: 2px;
 }

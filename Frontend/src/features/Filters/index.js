@@ -36,6 +36,7 @@ const Filters = props => {
   return (
     <div className="filters text-center">
       <div className="col s6 m3 l2">
+        <div className="color--white">Env</div>
         <SelectList
           className="datalistInput"
           placeholder="Env"
@@ -56,6 +57,7 @@ const Filters = props => {
         />
       </div>
       <div className="col s6 m3 l2">
+        <div className="color--white">Brand</div>
         <SelectList
           className="datalistInput"
           placeholder="Brand"
@@ -75,6 +77,7 @@ const Filters = props => {
       </div>
 
       <div className="col s12 m6 l4">
+        <div className="color--white">Page</div>
         <Datalist
           className="pagelistInput"
           listId="page"
@@ -93,6 +96,7 @@ const Filters = props => {
         />
       </div>
       <div className="col s6 m4 l2">
+        <div className="color--white">{dateRange === 'range' ? 'From' : 'Date'}</div>
         <Input
           className="dateInput"
           type="date"
@@ -116,26 +120,29 @@ const Filters = props => {
       </div>
       <div className="col s6 m4 l2">
         {dateRange === 'range' ? (
-          <Input
-            className="dateInput"
-            type="date"
-            value={values.toDate}
-            max={getHtmlDate(new Date().getTime())}
-            min="2019-06-01"
-            onChange={value => {
-              setValues({ ...values, toDate: value });
-              history.push({
-                pathname: history.pathname,
-                search: setSearch({
-                  phase: env,
-                  brand,
-                  page,
-                  date,
-                  toDate: new Date(value).getTime() + 66600000 - 1
-                })
-              });
-            }}
-          />
+          <>
+            <div className="color--white">To</div>
+            <Input
+              className="dateInput"
+              type="date"
+              value={values.toDate}
+              max={getHtmlDate(new Date().getTime())}
+              min="2019-06-01"
+              onChange={value => {
+                setValues({ ...values, toDate: value });
+                history.push({
+                  pathname: history.pathname,
+                  search: setSearch({
+                    phase: env,
+                    brand,
+                    page,
+                    date,
+                    toDate: new Date(value).getTime() + 66600000 - 1
+                  })
+                });
+              }}
+            />
+          </>
         ) : (
           <></>
         )}

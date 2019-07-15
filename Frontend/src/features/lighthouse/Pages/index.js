@@ -9,7 +9,7 @@ import pagesData from 'src/utilities/parsePagesData';
 import FetchData from 'src/components/graphql/utils';
 import { getPages } from 'src/components/graphql/Queries';
 import searchParams from 'src/utilities/searchParams';
-import { metricMap } from 'src/utilities/map';
+import { metricMap, pagesMap } from 'src/utilities/map';
 import 'src/main.scss';
 import './main.scss';
 
@@ -64,7 +64,7 @@ const Pages = props => {
           });
         }}
       >
-        {item.finalUrl}
+        {pagesMap[item.finalUrl]}
         <br />
         <br />
         {item.scores.map(i => {

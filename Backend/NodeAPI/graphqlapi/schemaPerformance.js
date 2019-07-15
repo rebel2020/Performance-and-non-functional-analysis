@@ -231,7 +231,7 @@ type GatlingData{
 	phase: String
 }
 
-type PerformanceAuditRecommendation{
+type PerformanceAuditRecommendationDescription{
 	first_contentful_paint: String
 	first_meaningful_paint: String
 	speed_index: String
@@ -239,27 +239,150 @@ type PerformanceAuditRecommendation{
 	first_cpu_idle: String
 }
 
-type SEOAuditRecommendation{
-	abc: String
-	ijk: String
+type SEOAuditRecommendationDescription{
+	viewport: String
+  	document_title: String
+ 	meta_description: String
+  	http_status_code: String
+  	link_text: String
+  	is_crawlable: String
+  	robots_txt: String
+  	image_alt: String
+  	hreflang: String
+  	canonical: String
+  	font_size: String
+  	plugins: String
+  	tap_targets: String
 }
 
-type RecommendationData{
-	PerformanceAuditRecommendations: PerformanceAuditRecommendation
-	SEOAuditRecommendations: SEOAuditRecommendation
+type PWAAuditDescription{
+	load_fast_enough_for_pwa: String
+  	works_offline: String
+  	offline_start_url: String
+  	is_on_https: String
+  	service_worker: String
+  	installable_manifest: String
+  	redirects_http: String
+  	splash_screen: String
+  	themed_omnibox: String
+  	content_width: String
+  	viewport: String
+  	without_javascript: String
+  	apple_touch_icon: String
+  	pwa_cross_browser: String
+  	pwa_page_transitions: String
+  	pwa_each_page_has_url: String
+
+}
+
+type BestPracticesAuditDescription{
+	appcache_manifest: String
+  	is_on_https: String
+  	uses_http2: String
+  	uses_passive_event_listeners: String
+ 	no_document_write: String
+  	external_anchors_use_rel_noopener: String
+  	geolocation_on_start: String
+  	doctype: String
+  	no_vulnerable_libraries: String
+  	js_libraries: String
+  	notification_on_start: String
+  	deprecations: String
+  	password_inputs_can_be_pasted_into: String
+  	errors_in_console: String
+  	image_aspect_ratio: String
+}
+
+type AccessibilityAuditDescription{
+	accesskeys: String
+  	aria_allowed_attr: String
+  	aria_required_attr: String
+  	aria_required_children: String
+  	aria_required_parent: String
+  	aria_roles: String
+  	aria_valid_attr_value: String
+  	aria_valid_attr: String
+  	audio_caption: String
+  	button_name: String
+  	bypass: String
+  	color_contrast: String
+  	definition_list: String
+  	dlitem: String
+  	document_title: String
+  	duplicate_id: String
+  	frame_title: String
+  	html_has_lang: String
+  	html_lang_valid: String
+  	image_alt: String
+  	input_image_alt: String
+  	label: String
+  	layout_table: String
+  	link_name: String
+ 	list_: String
+  	listitem: String
+  	meta_refresh: String
+  	meta_viewport: String
+  	object_alt: String
+  	tabindex: String
+  	td_headers_attr: String
+  	th_has_data_cells: String
+  	valid_lang: String
+  	video_caption: String
+  	video_description: String
+  	logical_tab_order: String
+  	focusable_controls: String
+  	interactive_element_affordance: String
+  	managed_focus: String
+  	focus_traps: String
+  	custom_controls_labels: String
+  	custom_controls_roles: String
+  	visual_order_follows_dom: String
+  	offscreen_content_hidden: String
+  	heading_levels: String
+  	use_landmarks: String
+
+}
+
+type RecommendationDataDescription{
+	PerformanceAuditRecommendations: PerformanceAuditRecommendationDescription
+	SEOAuditRecommendations: SEOAuditRecommendationDescription
+	PWAAuditRecommendations: PWAAuditDescription
+	BPAAuditRecommendations: BestPracticesAuditDescription
+	AccessibilityAuditRecommendations: AccessibilityAuditDescription
+
 }
 
 type Alert{
     name: String
-    class: String
+    alertClass: String
     scoreDiff: Float
-    category: String
-    fetchUrl: String
+	category: String
+	fetchUrl: String
 }
 
 type Alerts{
-    alert: [Alert]
+	alert: [Alert]
+	fetchUrl: String
 }
+
+type RecommendationsMetrics{
+	average_score: Float
+	weight: Float
+	name: String
+}
+
+type RecommendationData{
+	audit : String
+	recommendations: [RecommendationsMetrics]
+}
+
+type Recommendations
+{
+    _id: ID
+    fetchURL: String
+    recommend: [RecommendationData]
+}
+
 
 type Query{
 	allLighthousedata: [LighthouseData]
@@ -269,7 +392,8 @@ type Query{
 						 project: String, phase: String, brand: String): [LighthouseData]
 	average(finalUrl: String, fetchTimeStart: String, fetchTimeEnd: String,
 						 project: String, phase: String, brand: String): [AuditsAverage],
-	recommendation: RecommendationData,
+	recommendation: [Recommendations],
+	recommendationDescription: RecommendationDataDescription,
 	alerts: [Alerts]
 	
 }

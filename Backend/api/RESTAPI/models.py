@@ -200,3 +200,29 @@ class URLData(Document):
 class GlobalAvg(Document):
 	avg = DictField()
 	url = StringField()
+
+
+class Alert(EmbeddedDocument):
+	name= StringField()
+	alertClass= StringField()
+	scoreDiff= FloatField()
+	category= StringField()
+	fetchUrl= StringField()
+
+class Alerts(Document):
+	fetchUrl= StringField()
+	alert = ListField(EmbeddedDocumentField(Alert))
+
+class rec_list(EmbeddedDocument):
+	name = StringField()
+	average_score = FloatField()
+	weight = FloatField()
+
+class Recommendation(EmbeddedDocument):
+	audit = StringField()
+	recommendations = ListField(EmbeddedDocumentField(rec_list))
+	
+
+class RecommendedData(Document):
+	fetchURL = StringField()
+	recommend = ListField(EmbeddedDocumentField(Recommendation))

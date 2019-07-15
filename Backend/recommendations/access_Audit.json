@@ -1,0 +1,43 @@
+{
+	"AccessibilityRecommendations": {
+		"aria-allowed-attr": "1. Note the role and aria-* attributes of the element, \n2. Go to 'https://www.w3.org/TR/wai-aria/#role_definitions, \n 3.'Check the aria-* attributes of the element against the Required States and Properties or Supported States and Properties lists. Any attribute that is not in one of these two lists is invalid, \n 4. To fix the invalid combo, you can either remove the invalid attributes from the element, or change the role of the element to one that supports the attributes",
+
+		"aria-required-attr": "1.Note the role and aria-* attributes of the element., \n2. Go to 'https://www.w3.org/TR/wai-aria/#role_definitions', \n 3. Check the aria-* attributes of the element against the Required States and Properties list, \n 4. Add any attributes that are missing",
+
+		"aria-required-children": "1. To check for required child roles refer 'https://www.w3.org/TR/wai-aria-1.1/#role_definitions', \n 2. Link to the parent role from the specification, and check the required child roles. Make sure to include a child role for that parent role ",
+
+		"aria-required-parent": "1. To check for required parent roles refer 'https://www.w3.org/TR/wai-aria-1.1/#role_definitions', \n 2. Link to the children roles from the specifications, and check the required parent roles. Make sure to include a parent role for that child role ",
+		
+		"aria-roles": "1. Note the role and aria-* attributes of the element., \n2. Go to 'https://www.w3.org/TR/wai-aria/#role_definitions', \n 3. Check the aria-* attributes of the element against the Required States and Properties list, \n 4. Add any attributes that are missing",
+		
+		"aria-valid-attr-value": "1. Note the aria-* attributes of the element,\n 2. Go to 'https://www.w3.org/TR/wai-aria/#role_definitions', \n 3. For each aria-* attribute of the element, go the page for that attribute, \n 4. Make the value of the element's attribute match one of the supported values listed in Value", 
+		
+		"aria-valid-attr": "1. Note the role and aria-* attributes of the element, \n 2. Go to 'https://www.w3.org/TR/wai-aria/#role_definitions', \n 3. Go to the page for this element's role, \n 4. Check the actual attributes on the element against the supported attributes, as listed in Required States and Properties and Supported States and Properties",
+		
+		"button-name": "1. For <button> elements and elements with role='button', set the inner text of the element, set the aria-label attribute, set the aria-labelledby attribute to an element with text that is visible to screen readers. In other words, the element you point to should not have display: none in its CSS or have aria-hidden="true" in its HTML, \n 2. For <input type='button'> elements, set the value attribute, set the aria-label attribute, set the aria-labelledby attribute, \n 3. For <input type='submit'> and <input type='reset'>, set the value attribute, or omit it. Browsers assign default values of 'submit' or 'reset' when value is omitted, set the aria-label attribute, set the aria-labelledby attribute ",
+		
+		"bypass": "", 
+		
+		"color-contrast": "1. Provide sufficient contrast for background and foreground colors, \n 2. Text that is too close in luminance (brightness) to the background can be hard to read, especially for people with low vision, but all users can benefit from sufficient contrast. Ensure color contrast of at least 4.5:1 for small text or 3:1 for large text. Large text is defined as 18pt or 14pt bold ",
+		
+		"document-title": "1. Make sure that every page has a title, \n 2. Make title descriptive and concise. Avoid vague descriptions like Home. \n 3. Avoid keyword stuffing. It's not helpful to users, and search engines may mark the page as spam,\n 4. Avoid repeated or boilerplate titles, \n 5. It's OK to brand your titles, but do it concisely",
+		
+		"html-has-lang": "1. To fix this problem, add a lang attribute to the <html> element, \n 2. See 'https://dequeuniversity.com/rules/axe/3.2/html-has-lang' to learn more",
+		
+		"html-lang-valid":" 1. Define an hreflang link for each language version of a URL, \n 2. FTell search engines that these pages are equivalent by adding link elements to the head of your HTML or by adding Link headers to your HTTP response, \n 3. The hreflang value must always specify a language code. The language code must follow ISO 639-1 format. The hreflang value can also include an optional regional code. For example, en-ie is for English speakers in Ireland, whereas es-ie is for Spanish speakers in Ireland. The region code must follow ISO 3166-1 alpha-2 format",
+				
+		"image-alt": "1. Add an alt attribute to img elements, \n 2.  The value of the alt attribute should be text describing the content of the image. If an image is not informative, if it's purely a decorative element, you can tell a screen reader to ignore it using an empty alt="" attribute, \n 3. When writing a description for each image, keep in mind that this is all the information that visually-impaired users have to go by, so try to make it as useful as possible for them. You don't need to explain every detail of the image, instead consider the context in which the image is being used, and try to convey the gist of the scene as efficiently as possible",
+		
+		"label": "1. Associate a label to every form element using any of Implicit labels, Explicit labels, aria-label or aria-labelledby",
+
+		"link-name": "",
+
+		"list": "",
+
+		"listitem": "",
+
+		"meta-viewport": "1. Add a viewport <meta> tag in the <head> of your HTML, \n 2. The width=device-width key-value pair sets the width of the viewport to the width of the device. The initial-scale=1 key-value pair sets the initial zoom level when visiting the page, \n 3. Check out 'https://developers.google.com/web/fundamentals/design-and-ux/responsive/#set-the-viewport' and 'https://developers.google.com/web/fundamentals/design-and-ux/responsive/#set-the-viewport' to learn more",
+
+		"tabindex": "1. Set the tabindex of each of the elements to either -1, for elements that should not be keyboard navigable, or 0, for elements that should. If you need an element to appear earlier in the tab order, consider moving it earlier in the DOM ",
+	}
+}
