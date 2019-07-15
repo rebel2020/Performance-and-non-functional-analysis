@@ -6,7 +6,7 @@ from rest_framework_mongoengine import viewsets as viewsets
 from api.RESTAPI.serializers import LighthouseDataSerializer,GatlingDataSerializer,MetricDetailedSerializer
 from api.RESTAPI.models import *
 import json
-from .script import fun,t_fun
+from .script import fun
 from datetime import datetime
 from .alertScript import get_alerts
 from .recommend_script import get_recommendations
@@ -81,7 +81,7 @@ class LighthouseDataViewSet(viewsets.ModelViewSet):
         except:
             pass
         for url in url_list[0]['urls']:
-            temp=LighthouseData.objects.filter(requestedUrl =url).order_by('-fetchTime')[:14]
+            temp=LighthouseData.objects.filter(requestedUrl =url).order_by('-fetchTime')[:28]
             if len(temp) > 1:
                 newAlertData=get_alerts(temp,url)
                 if len(newAlertData) > 0:
@@ -153,7 +153,7 @@ class GatlingDataViewSet(viewsets.ModelViewSet):
         data=json.dumps(data.data)
         return HttpResponse(data)
 def start_job():
-    scheduler.add_job(LighthouseDataViewSet.alert_by_schedule, 'interval', hours = 6)
+    scheduler.add_job(LighthouseDataViewSet.alert_by_schedule, 'interval', hours = 1)
     try:
         scheduler.start()
     except:

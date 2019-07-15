@@ -57,6 +57,7 @@ const GATLING = gql`
       brand: $brand
       phase: $phase
     ) {
+      phase
       brand
       stats
       fetchTime

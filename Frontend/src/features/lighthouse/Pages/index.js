@@ -10,6 +10,7 @@ import FetchData from 'src/components/graphql/utils';
 import { getPages } from 'src/components/graphql/Queries';
 import searchParams from 'src/utilities/searchParams';
 import { metricMap, pagesMap } from 'src/utilities/map';
+import formatString from 'src/utilities/formatString';
 import 'src/main.scss';
 import './main.scss';
 
@@ -64,7 +65,7 @@ const Pages = props => {
           });
         }}
       >
-        {pagesMap[item.finalUrl]}
+        {formatString(pagesMap[item.finalUrl])}
         <br />
         <br />
         {item.scores.map(i => {

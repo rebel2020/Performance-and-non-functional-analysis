@@ -21,7 +21,7 @@ const Lighthouse = props => {
     p_w_a: <MetricComponent history={history} metric={comp} />,
     s_e_o: <MetricComponent history={history} metric={comp} />,
     recommendations: <Recommendations />,
-    recommendationsPage: <RecommendationsPage />
+    recommendationsPage: <RecommendationsPage history={history} />
     // compare: <Compare />
   };
   const graph = map[comp];

@@ -97,9 +97,9 @@ def getAvgAlerts(referenceAvg,currentAvg,alerts,flag):
                 temp['category'] = catDict[audit]
                 temp['scoreDiff'] = ((referenceAvg[metric]-currentAvg[metric])/referenceAvg[metric])*100
                 if flag==0:
-                    temp['alertClass'] = 'belowTrademark'
+                    temp['alertClass'] = 'below_thresshold'
                 else:
-                    temp['alertClass'] = 'LastToLastWeekComparison'
+                    temp['alertClass'] = 'comparison_to_last_week'
                 t_alert['alert'].append(temp)
                 alerts.append(temp)
 #    if len(t_alert['alert']) > 0:
