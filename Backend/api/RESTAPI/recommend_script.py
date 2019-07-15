@@ -33,11 +33,11 @@ def get_recommendations(data_list,t_url):
     url = t_url
     PADict = Initialize1().copy()
     Audit_list = getAudit_list(Audit_list, data_list[0])
-    recommendations = check_weight(data_list)
+    recommendations = check_weight(data_list, url)
     url_dict = dict()
     url_dict['fetchURL'] = url
     Merge(url_dict, recommendations)
-    print(recommendations)
+    #print(recommendations)
     return recommendations
 
 def Merge(dict1, dict2):
@@ -82,7 +82,7 @@ def getAvg(data_list):
             avgVal[metric]/=len(data_list)
     return avgVal
 
-def check_weight(data_list):
+def check_weight(data_list, url):
     recommendations= dict()
     recommendations['recommended_data']=[]
     avgVal =getAvg(data_list)
@@ -96,18 +96,20 @@ def check_weight(data_list):
                     thresh_weight = thresh_weight + PAList[metric]['weight']
                     count = count + 1
             thresh_weight = thresh_weight/count
-            params = []
-            audit_dict = dict()
-            audit_dict['audit'] = audit
-            for metric in Audit_list[audit]:
-               # params
-                params_list = dict()
-                if(PAList[metric]['weight'] >= thresh_weight):
-                    if(PAList[metric]['score'] < 0.15):
-                        params_list["average_score"] = avgVal[metric]
-                        params_list["weight"] = PAList[metric]['weight']
-                        params_list['name'] = metric
-                        params.append(params_list)
-            audit_dict['recommendations']=params
-            recommendations['recommended_data'].append(audit_dict)
+    for audit in Audit_list:
+        PAList = data['audits'][PADict[audit]]
+        params = []
+        audit_dict = dict()
+        audit_dict['audit'] = audit
+        for metric in Audit_list[audit]:
+           # params
+            params_list = dict()
+            if(PAList[metric]['weight'] >= thresh_weight):
+                if(PAList[metric]['score'] is not None and PAList[metric]['score'] < 0.25):
+                    params_list["average_score"] = avgVal[metric]
+                    params_list["weight"] = PAList[metric]['weight']
+                    params_list['name'] = metric
+                    params.append(params_list)
+        audit_dict['recommendations']=params
+        recommendations['recommended_data'].append(audit_dict)
     return recommendations

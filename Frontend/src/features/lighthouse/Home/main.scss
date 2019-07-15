@@ -6,4 +6,31 @@
 } 
 .note{
     color: white;
+    text-align: center;
+    margin-top: 8px;
+}
+
+.greentxt{
+    color:  #00BC8C;
+}
+
+.redtxt{
+    color:#E74C3C;
+
+}
+
+.yellowtxt{
+    color: #F39C12;
+}
+
+.bluetxt{
+    color: #3498DB;
+}
+
+.customnotecard{
+	background-color: #222222;
+	border-radius: 10px;
+    padding: 15px;
+    width:50%;
+    margin:auto;
 }
