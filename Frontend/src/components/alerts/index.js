@@ -20,7 +20,7 @@ class Alert extends Component {
     // console.log(this.props.history);
     if (this.state.isActive) {
       return (
-        <div className="alert alert-warning text-center bg--ioyellow" role="alert">
+        <div className="alert alert-warning text-center bg--iored" role="alert">
           <span className="close" data-dismiss="alert" onClick={() => this.hideAlert()}>
             &times;
           </span>

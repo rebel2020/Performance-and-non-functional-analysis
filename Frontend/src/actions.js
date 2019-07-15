@@ -1,3 +1,6 @@
+import { pagesMap } from 'src/utilities/map';
+// import formatString from 'src/utilities/formatString';
+
 export const setEnv = (store, newPhase) => {
   store.setState({ phase: newPhase === 'All' ? '' : newPhase });
 };
@@ -28,5 +31,14 @@ export const toggle = store => {
 };
 
 export const setLists = (store, lists) => {
-  store.setState({ filterLists: lists });
+  store.setState({
+    filterLists: {
+      brand: ['All', ...lists.brand],
+      phase: ['All', ...lists.phase],
+      // project: ['All', ...lists.project],
+      finalUrl: ['All', ...lists.finalUrl],
+      track: ['ALL', ...lists.track],
+      components: ['All', ...lists.finalUrl.map(p => pagesMap[p])]
+    }
+  });
 };

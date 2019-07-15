@@ -4,8 +4,8 @@ import previousState from 'src/utilities/previousState';
 import compare from 'src/utilities/compareObjects';
 import ROUTES from './routeDetails';
 import FetchData from './components/graphql/utils';
-import { LIST, gatlingLIST } from './components/graphql/Queries';
-import parseFilterData from './utilities/parseList';
+import { getLists, gatlingLIST } from './components/graphql/Queries';
+// import parseFilterData from './utilities/parseList';
 import useGlobal from './store';
 
 const Router = () => {
@@ -17,12 +17,12 @@ const Router = () => {
   const onMount = useRef(true);
   useEffect(() => {
     if (onMount.current) {
-      setQuery(FetchData(LIST, setData));
+      setQuery(FetchData(getLists, setData));
       onMount.current = false;
       return;
     }
     if (!compare(prevState, data)) {
-      setLists(parseFilterData(data));
+      setLists(data.parameters[0]);
     }
   });
   return (
