@@ -1,22 +1,19 @@
 import React, { useState } from 'react';
 import useGlobal from 'src/store';
-
 import Sidebar from '../Sidebar/index';
-// import './main.scss';
-import MetricComponent from './Gatling_stats/index';
+import GatlingComponent from './Gatling_stats/index';
+import searchParams from 'src/utilities/searchParams';
+import {setSearch} from './utils/search'
 
 const Gatling = props => {
-  const { comp, history } = props;
-  const [globalState, globalActions] = useGlobal();
+  const { history } = props;
+  const [globalState] = useGlobal();
   const { toggle } = globalState;
-  const map = {
-    gatling_stats: <MetricComponent history={history} metric={comp} />
-  };
-  const graph = map[comp];
+  // setSearch(searchParams(history.location.search));
   return (
     <>
       <Sidebar history={history} />
-      <div className={toggle ? 'main' : 'main-extend'}>{graph}</div>
+      <div className={toggle ? 'main' : 'main-extend'}><GatlingComponent history={history} /></div>
     </>
   );
 };
