@@ -51,7 +51,7 @@ const Pages = props => {
     return (
       <div
         key={item.finalUrl}
-        className="col s10 m5 l3 pageCard"
+        className="col s10 m4 l3 pageCard"
         onClick={() => {
           history.push({
             pathname: history.pathname,
@@ -78,7 +78,7 @@ const Pages = props => {
             bgcol = 'bg--iogreen';
           }
           return (
-            <pre>
+            <pre key={i.time}>
               {`${i.time}:  `}
               <div className={`score ${bgcol}`}>{Math.round(i.score * 100)}</div>
             </pre>

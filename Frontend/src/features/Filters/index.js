@@ -5,6 +5,8 @@ import compare from 'src/utilities/compareObjects';
 import previousState from 'src/utilities/previousState';
 import setSearch from 'src/utilities/search';
 import searchParams from 'src/utilities/searchParams';
+import { pagesMap } from 'src/utilities/map';
+// import formatString from 'src/utilities/formatString';
 import Input from 'src/components/Input';
 import useGlobal from 'src/store';
 import './main.scss';
@@ -18,7 +20,7 @@ const Filters = props => {
   const [values, setValues] = useState({
     phase: env || 'All',
     brand: brand || 'All',
-    page: page || 'All',
+    page: pagesMap[page] || 'All',
     date: getHtmlDate(date),
     toDate: getHtmlDate(toDate)
   });
@@ -28,7 +30,7 @@ const Filters = props => {
       setValues({
         phase: env || 'All',
         brand: brand || 'All',
-        page: page || 'All',
+        page: pagesMap[page] || 'All',
         date: getHtmlDate(date),
         toDate: getHtmlDate(toDate)
       });
@@ -83,13 +85,19 @@ const Filters = props => {
           listId="page"
           placeholder="Page"
           value={values.page}
-          options={filterLists.finalUrl}
+          options={filterLists.components}
           onChange={value => {
             setValues({ ...values, page: value });
-            if (filterLists.finalUrl.includes(value)) {
+            if (filterLists.components.includes(value)) {
               history.push({
                 pathname: history.pathname,
-                search: setSearch({ phase: env, brand, page: value, date, toDate })
+                search: setSearch({
+                  phase: env,
+                  brand,
+                  page: Object.keys(pagesMap).filter(p => pagesMap[p] === value)[0],
+                  date,
+                  toDate
+                })
               });
             }
           }}

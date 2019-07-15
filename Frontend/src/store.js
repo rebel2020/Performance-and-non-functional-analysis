@@ -14,8 +14,10 @@ const initialState = {
   filterLists: {
     brand: ['All'],
     phase: ['All'],
-    project: ['All'],
-    finalUrl: ['All']
+    // project: ['All'],
+    finalUrl: ['All'],
+    components: ['All'],
+    track: ['All']
   }
 };
 
