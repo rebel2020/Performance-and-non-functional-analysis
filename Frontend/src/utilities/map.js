@@ -5,6 +5,20 @@ const map = {
   p_w_a: 'pwa_audits',
   s_e_o: 'seo_audits'
 };
+const AuditMap = {
+  performance: 'Performance_Audit',
+  accessibility: 'Accessibility_Audit',
+  best_practices: 'Best_Practices_Audit',
+  p_w_a: 'Performance_Web_App_Audit',
+  s_e_o: 'Search_Engine_Optimization_Audit'
+};
+const mapAuditRecommendations = {
+  performance: 'PerformanceAuditRecommendations',
+  accessibility: 'AccessibilityAuditRecommendations',
+  best_practices: 'BPAAuditRecommendations',
+  p_w_a: 'PWAAuditRecommendations',
+  s_e_o: 'SEOAuditRecommendations'
+};
 const averageMap = {
   performance: 'performanceAverage',
   accessibility: 'accessibilityAverage',
@@ -46,4 +60,4 @@ const pagesMap = {
   'http://fca-qa1-alfaromeousa-sape.test.com/suvs/stelvio:': 'Alfa Stelvio'
 };
 export default map;
-export { averageMap, metricMap, pagesMap };
+export { averageMap, metricMap, pagesMap, AuditMap, mapAuditRecommendations };
