@@ -20,7 +20,14 @@ const setGraph = (history, name, data, setfetchTime) => {
       style: {
         color: 'white'
       },
-      selected: 1
+      selected: 1,
+      inputEnabled: false,
+      buttonTheme: {
+        visibility: 'hidden'
+      },
+      labelStyle: {
+        visibility: 'hidden'
+      }
     },
 
     title: {
@@ -71,7 +78,7 @@ const setGraph = (history, name, data, setfetchTime) => {
 };
 
 const HighStock = props => {
-  const { name, history, data, setfetchTime} = props;
+  const { name, history, data, setfetchTime } = props;
   // let d = data.sort((a,b)=>{
   //   console.log(a,b);
   // })

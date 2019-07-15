@@ -66,11 +66,29 @@ const AlertContent = props => {
       );
     });
   }
-  return (
-    <>
+  let dispnum = <></>;
+  if (numalerts == 0) {
+    dispnum = (
+      <div className="alertpageheader text-center">
+        <h1>{`Hello. You have No Alerts.`}</h1>
+      </div>
+    );
+  } else if (numalerts == 1) {
+    dispnum = (
+      <div className="alertpageheader text-center">
+        <h1>{`Hello. You have ${numalerts} Alert.`}</h1>
+      </div>
+    );
+  } else {
+    dispnum = (
       <div className="alertpageheader text-center">
         <h1>{`Hello. You have ${numalerts} Alerts.`}</h1>
       </div>
+    );
+  }
+  return (
+    <>
+      {dispnum}
       {/* <div className="text-center">
         <h4 className="alerturgenttext">{`There are ${urgentData} urgent alert(s)`}</h4>
       </div> */}
