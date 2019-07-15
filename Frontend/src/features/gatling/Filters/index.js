@@ -49,7 +49,8 @@ const Filters = props => {
   let filter = <></>
   if(!flagFilter){
     filter = <Fragment> 
-    <div className="col s6 m3 l2">
+    <div className="col s6 m2 l2">
+      <div className="color--white">Env</div>
       <SelectList
         className="datalistInput"
         placeholder="Env"
@@ -67,7 +68,8 @@ const Filters = props => {
         }}
       />
     </div>
-    <div className="col s6 m3 l2">
+    <div className="col s6 m2 l2">
+      <div className="color--white">Track</div>
       <SelectList
         className="datalistInput"
         listId="Track"
@@ -85,7 +87,7 @@ const Filters = props => {
         }}
       />
     </div>
-    <div className="col s6 m3 l2">
+    {/* <div className="col s6 m3 l2">
       <SelectList
         className="datalistInput"
         placeholder="Brand"
@@ -102,8 +104,9 @@ const Filters = props => {
           }
         }}
       />
-    </div>
-    <div className="col s6 m3 l2">
+    </div> */}
+    <div className="col s6 m2 l2">
+      <div className="color--white">Profile</div>
       <SelectList
         className="datalistInput"
         listId="page"
@@ -133,7 +136,8 @@ const Filters = props => {
       console.log(newList);
     }
     filter =  <Fragment> 
-    <div className="col m7">
+    <div className="col s6 m6 l6">
+      <div className="color--white">Url</div>
       <SelectList
         className="datalistInput"
         placeholder="Urls"
@@ -155,10 +159,11 @@ const Filters = props => {
   </Fragment>
   }
 return (
-    <Fragment>
+    <Fragment>      
       <div className="filters text-center">
         {filter}
-        <div className="col s6 m4 l2">
+        <div className="col s6 m3 l3">
+          <div className="color--white">From</div>
           <Input
             className="dateInput"
             type="date"
@@ -175,26 +180,29 @@ return (
             }}
           />
         </div>
-        <div className="col s6 m4 l2">
+        <div className="col s6 m3 l3">
           {dateRange === 'range' ? (
-            <Input
-              className="dateInput"
-              type="date"
-              value={dates.toDate}
-              max={getHtmlDate(new Date().getTime())}
-              min="2019-07-01"
-              onChange={value => {
-                setDates({ ...dates, toDate: value });
-                setValues({ ...values, toDate: value ? new Date(value).getTime() : value });
-                history.push({
-                  pathname: history.pathname,
-                  search: search({
-                    ...values,
-                    toDate: value ? new Date(value).getTime() : value
-                  })
-                });
-              }}
-            />
+            <Fragment>
+              <div className="color--white">To</div>
+              <Input
+                className="dateInput"
+                type="date"
+                value={dates.toDate}
+                max={getHtmlDate(new Date().getTime())}
+                min="2019-07-01"
+                onChange={value => {
+                  setDates({ ...dates, toDate: value });
+                  setValues({ ...values, toDate: value ? new Date(value).getTime() : value });
+                  history.push({
+                    pathname: history.pathname,
+                    search: search({
+                      ...values,
+                      toDate: value ? new Date(value).getTime() : value
+                    })
+                  });
+                }}
+              />
+            </Fragment>  
           ) : (
             <></>
           )}
