@@ -1,22 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Highcharts, { Pointer } from 'highcharts/highcharts';
+import Highcharts from 'highcharts/highcharts';
 import stock from 'highcharts/modules/stock';
-import useGlobal from 'src/store';
 import previousState from 'src/utilities/previousState';
 import compare from 'src/utilities/compareObjects';
 import formatString from 'src/utilities/formatString';
 import FetchData from 'src/components/graphql/utils';
 import setSearch from 'src/utilities/search';
-import map, { averageMap, metricMap } from 'src/utilities/map';
+import map, { averageMap, metricMap, pagesMap } from 'src/utilities/map';
 import searchParams from 'src/utilities/searchParams';
-import { getTimeRange, getDate, dateOfAverage } from 'src/utilities/timeConversions';
-import { getPages, getQuery, AVG_SCORES } from 'src/components/graphql/Queries';
-import datal from './datal';
+import { dateOfAverage } from 'src/utilities/timeConversions';
+import { getPages, AVG_SCORES } from 'src/components/graphql/Queries';
 
 const setGraph = (history, name, data) => {
-  const { phase, brand, page, date, toDate, audits, pages } = searchParams(history.location.search);
+  const { phase, brand, page, audits, pages } = searchParams(history.location.search);
   const { audit, metric } = history;
-  const title = page ? `${formatString(name)} - ${page}` : formatString(name);
+  const title = page
+    ? `${formatString(name)} - ${formatString(pagesMap[page])}`
+    : formatString(name);
   return {
     chart: {
       zoomType: 'x',
@@ -195,8 +195,6 @@ const getDays = a => {
   return a.year * 365 + a.month * 30 + a.day;
 };
 const HighStock = props => {
-  const [globalState, globalActions] = useGlobal();
-  // const { phase, brand, page, date, toDate } = globalState;
   const { metric, history, id, average } = props;
   const { phase, brand, page, date, toDate, pages } = searchParams(history.location.search);
   const [data, setData] = useState({});

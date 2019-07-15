@@ -7,9 +7,7 @@ const GatlingData = require('../models/GatlingData').GatlingData;
 const Alerts = require('../models/Alerts').Alerts
 const Alert = require("../models/Alert").Alert
 const Recommendation = require('../models/Recommendation').Recommendation;
-
-console.log(Recommendation);
-
+const Parameters = require("../models/Parameters").Parameters;
 
 const defaultRecommendationData = 
 {
@@ -223,7 +221,6 @@ const resolversPerformance = {
 		},
 
 		gatlingdata: async(root, options) => {
-			// return await GatlingData.find({}).exec();
 			const {url, fetchTimeStart, fetchTimeEnd, phase, brand} = options;
 			var timeStart = fetchTimeStart;
 			var timeEnd = fetchTimeEnd;
@@ -250,12 +247,10 @@ const resolversPerformance = {
 			if(fetchTimeEnd === undefined || fetchTimeEnd == "")
 			{
 				timeEnd = new Date();
-				console.log(timeEnd);
 			}
 			else
 			{
 				timeEnd = new Date(parseInt(fetchTimeEnd));
-				console.log(timeEnd);
 			}
 			
 			return await GatlingData
@@ -288,24 +283,19 @@ const resolversPerformance = {
 			if(timeStart === undefined || timeStart == "")
 			{
 				timeStart = new Date(0000000000000);
-				console.log(timeStart)
 			}
 			else
 			{
 				timeStart = new Date(parseInt(fetchTimeStart));
-				console.log(timeStart)
 			}
 			if(timeEnd === undefined || timeEnd == "")
 			{
 				timeEnd = new Date();
-				console.log(timeEnd);
 			}
 			else
 			{
 				timeEnd = new Date(parseInt(timeEnd));
-				console.log(timeEnd);
 			}
-			console.log("timeEndyopyoy: " + timeEnd);
 
 			return await LighthouseData
 			.find({
@@ -313,26 +303,9 @@ const resolversPerformance = {
 				fetchTime: { $lte : timeEnd, $gte: timeStart} 
 			})
 			.sort({fetchTime: -1});
-
-			// if(finalUrl === undefined || finalUrl == "")
-			// {
-			// 	return await LighthouseData.find({
-			// 		...nonNullOptions,
-			// 		fetchTime: { $lte : timeEnd, $gte: timeStart} 
-			// 	}).sort({fetchTime: -1});	
-			// }
-
-			// else
-			// {
-			// 	return await LighthouseData.find({
-			// 		finalUrl: finalUrl, 
-			// 		fetchTime: { $lte : timeEnd, $gte: timeStart} }).sort({fetchTime: -1});
-			// }
 		},
 
 		average: async (root, options) => {
-
-			// console.log(await LighthouseData.find({}).exec());
 
 			const  { finalUrl, fetchTimeStart, fetchTimeEnd, project, phase, brand } = options;
 			var timeEnd = fetchTimeEnd;
@@ -350,27 +323,21 @@ const resolversPerformance = {
 					return (arr[1] !== "" && arr[0] !== "fetchTimeStart" && arr[0] !== "fetchTimeEnd")  
 				}));
 
-			console.log(newOptions);
-
 			if(timeStart === undefined || timeStart == "")
 			{
 				timeStart = new Date(0000000000000);
-				console.log(timeStart)
 			}
 			else
 			{
 				timeStart = new Date(parseInt(fetchTimeStart));
-				console.log(timeStart)
 			}
 			if(timeEnd === undefined || timeEnd == "")
 			{
 				timeEnd = new Date();
-				console.log(timeEnd);
 			}
 			else
 			{
 				timeEnd = new Date(parseInt(timeEnd));
-				console.log(timeEnd);
 			}
 
 			return await LighthouseData.aggregate(
@@ -417,6 +384,10 @@ const resolversPerformance = {
 
 		recommendationDescription: async() =>{
 			return defaultRecommendationData;
+		},
+
+		parameters: async() =>{
+			return await Parameters.find({}).exec();
 		}
 	}
 }
