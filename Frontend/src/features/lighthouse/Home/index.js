@@ -83,11 +83,9 @@ const HomeComponent = props => {
       <div className="text-center">{alertContainer}</div>
       <div className="container ">
         <Filters dateRange="single" history={history} />
-        <div className="customcontainer text-center">
-          <div className="customnotecard text-center">
-            <div className="flexbox">{flexItems}</div>
-          </div>
-        </div>
+
+        <div className="flexbox">{flexItems}</div>
+
         {auditContainer}
         {query}
         <div className="customcontainer text-center">
