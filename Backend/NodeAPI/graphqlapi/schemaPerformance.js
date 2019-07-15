@@ -383,6 +383,13 @@ type Recommendations
     recommend: [RecommendationData]
 }
 
+type Parameters{
+	urls: [String]
+	brands: [String]
+	environments: [String]
+	tracks: [String]
+}
+
 
 type Query{
 	allLighthousedata: [LighthouseData]
@@ -395,6 +402,7 @@ type Query{
 	recommendation: [Recommendations],
 	recommendationDescription: RecommendationDataDescription,
 	alerts: [Alerts]
+	parameters: [Parameters]
 	
 }
 `;

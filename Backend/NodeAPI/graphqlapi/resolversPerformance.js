@@ -7,6 +7,8 @@ const GatlingData = require('../models/GatlingData').GatlingData;
 const Alerts = require('../models/Alerts').Alerts
 const Alert = require("../models/Alert").Alert
 const Recommendation = require('../models/Recommendation').Recommendation;
+const Parameters = require("../models/Parameters").Parameters;
+
 
 console.log(Recommendation);
 
@@ -417,6 +419,10 @@ const resolversPerformance = {
 
 		recommendationDescription: async() =>{
 			return defaultRecommendationData;
+		},
+
+		parameters: async() =>{
+			return await Parameters.find({}).exec();
 		}
 	}
 }
