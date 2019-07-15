@@ -384,10 +384,10 @@ type Recommendations
 }
 
 type Parameters{
-	urls: [String]
-	brands: [String]
-	environments: [String]
-	tracks: [String]
+	finalUrl: [String]
+	brand: [String]
+	phase: [String]
+	track: [String]
 }
 
 
