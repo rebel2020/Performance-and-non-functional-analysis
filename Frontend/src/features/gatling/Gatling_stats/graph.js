@@ -19,7 +19,7 @@ const Graph = props => {
   );
 
   if (gatlingstats) {
-    const graphdata = gatlingstats.map((i, item) => {
+    gatlingstats.map((i, item) => {
       avgrestime[item] = [parseInt(i.fetchTime), i.meanResponseTime.total];
       percreqsucc[item] = [parseInt(i.fetchTime), i.numberOfRequests.ok];
       numreq[item] = [parseInt(i.fetchTime), i.numberOfRequests.total];
@@ -49,21 +49,29 @@ const Graph = props => {
     }
   }
   return (
-    <div className="row container radiocomp">
-      <div className="col m8">{hscomp}</div>
-      <div className="col m4">
-        <h3>Metrics</h3>
-        <RadioButtons
-          values={[
-            { value: 'avg_response_time', name: 'Average Response Time' },
-            { value: 'perc_req_success', name: '% Requests Succeeded' },
-            { value: 'num_req', name: 'Number of Requests' },
-            { value: 'avg_req_per_sec', name: 'Average Number of Requests per Second' }
-          ]}
-          setRV={setRV}
-        />
+    <>
+      <div className="row"> 
+        <div className="col m1"></div>
+        <div className="col m3 urltext"> URL </div>
+        <div className="col m7 statscard">  {gatlingstats[0].url}  </div>
+        <div className="col m1"> </div>            
       </div>
-    </div>
+      <div className="row container radiocomp">
+        <div className="col m8">{hscomp}</div>
+        <div className="col m4">
+          <h3>Metrics</h3>
+          <RadioButtons
+            values={[
+              { value: 'avg_response_time', name: 'Average Response Time' },
+              { value: 'perc_req_success', name: '% Requests Succeeded' },
+              { value: 'num_req', name: 'Number of Requests' },
+              { value: 'avg_req_per_sec', name: 'Average Number of Requests per Second' }
+            ]}
+            setRV={setRV}
+          />
+        </div>
+      </div>
+   </>   
   );
 };
 

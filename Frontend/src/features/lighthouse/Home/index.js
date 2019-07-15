@@ -9,7 +9,7 @@ import SolidGauge from 'src/components/solidgauge';
 import Alert from 'src/components/alerts/index';
 import searchParams from 'src/utilities/searchParams';
 import ALERTS from '../../AlertPage/graphql/Queries';
-
+import getMessage from './getMessage';
 import Filters from '../../Filters';
 import Audits from '../Audits';
 import './main.scss';
@@ -32,15 +32,13 @@ const HomeComponent = props => {
     setAlertQuery(FetchData(ALERTS, setAlertData));
   }, []);
   let numalerts = 0;
-  // console.log(variables);
-  // console.log(data);
   let alertContainer = <></>;
 
   if (alertData) {
     const parsedata = alertData.alerts;
 
-    parsedata.map((item, i) => {
-      numalerts = numalerts + item.alert.length;
+    parsedata.forEach((item, i) => {
+      numalerts += item.alert.length;
     });
 
     if (numalerts > 0) {
@@ -78,58 +76,7 @@ const HomeComponent = props => {
   let auditContainer = <></>;
   if (metric) auditContainer = <Audits metric={metric} {...props} />;
 
-  let message = <></>;
-  const datetxt = <span className="greentxt">{getDate(date, 0)}</span>;
-  const phasetxt = <span className="redtext">{phase}</span>;
-  const pagetxt = <span className="yellowtext">{page}</span>;
-  const brandtxt = <span className="bluetxt">{brand}</span>;
-  if (!page && !brand && !phase) {
-    message = <div>The Average Metric Scores of All the Pages on {datetxt}</div>;
-  } else if (!page && !brand) {
-    message = (
-      <div>
-        The Average Metric Scores of All the Pages in {phasetxt} Environment on {datetxt}
-      </div>
-    );
-  } else if (!page && !phase) {
-    message = (
-      <div>
-        The Average Metric Scores of All the Pages of {brandtxt} Brand in All Environments on{' '}
-        {datetxt}
-      </div>
-    );
-  } else if (!phase && !brand) {
-    message = (
-      <div>
-        The Average Metric Scores of {pagetxt} in All Environments on {datetxt}
-      </div>
-    );
-  } else if (!phase) {
-    message = (
-      <div>
-        The Average Metric Scores of {pagetxt} of {brandtxt} in All Environments on {datetxt}
-      </div>
-    );
-  } else if (!brand) {
-    message = (
-      <div>
-        The Average Metric Scores of {pagetxt} in ${phasetxt} Environment on {datetxt}
-      </div>
-    );
-  } else if (!page) {
-    message = (
-      <div>
-        The Average Metric Scores of All the Pages of {brandtxt} in {phasetxt} Environment on{' '}
-        {datetxt}
-      </div>
-    );
-  } else {
-    message = (
-      <div>
-        The Average Metric Scores of {pagetxt} in {phasetxt} Environment on {datetxt}
-      </div>
-    );
-  }
+  const message = getMessage(history.location.search);
   return (
     <>
       {alertQuery}
@@ -144,7 +91,6 @@ const HomeComponent = props => {
         {auditContainer}
         {query}
         <div className="customcontainer text-center">
-          {' '}
           <div className="customnotecard text-center">
             <div className="note">{message}</div>
           </div>

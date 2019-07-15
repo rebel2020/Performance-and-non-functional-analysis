@@ -9,9 +9,9 @@ import { FaHome, FaTruckLoading, FaUniversalAccess, FaSearch } from 'react-icons
 import { MdCompareArrows, MdTrendingUp, MdAddAlert } from 'react-icons/md';
 import { GoGraph } from 'react-icons/go';
 import { IoIosArrowForward, IoIosArrowBack, IoIosMenu } from 'react-icons/io';
-
 import { TiMessages, TiStarOutline } from 'react-icons/ti';
 import { GiLighthouse } from 'react-icons/gi';
+import { FiBookOpen, FiGlobe } from 'react-icons/fi';
 
 import './main.scss';
 
@@ -166,11 +166,25 @@ const Sidebar = props => {
 
         <div className={`dropdown ${recomm}`}>
           <Link {...props} className="sidelink" to="/lighthouse/globalRecommendations">
-            <div className="sidelink">{toggle ? 'Global' : ''}</div>
+            <div className="sidelink">
+              <div className="txt-center">
+                <h2>
+                  <FiGlobe />
+                </h2>
+              </div>
+              {toggle ? 'Global' : ''}
+            </div>
           </Link>
 
           <Link {...props} className="sidelink" to="/lighthouse/pageLevelRecommendations">
-            <div className="sidelink">{toggle ? 'PageLevel' : ''}</div>
+            <div className="sidelink">
+              <div className="txt-center">
+                <h2>
+                  <FiBookOpen />
+                </h2>
+              </div>
+              {toggle ? 'PageLevel' : ''}
+            </div>
           </Link>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import './styles.scss';
-import formatString from '../../utilities/formatString';
+import formatString from 'src/utilities/formatString';
+import { pagesMap } from 'src/utilities/map';
 
 const AlertCollapsible = props => {
   const { k, history, title, desc } = props;
@@ -62,8 +63,8 @@ const AlertCollapsible = props => {
         <div className="collapsible al col m11">
           <input type="checkbox" id={`collapsible-${k}`} />
           <label htmlFor={`collapsible-${k}`} className={alcol}>
-            <div className="col s10">{title}</div>
-            <div className="col s3 m2">
+            <div className="col s10">{formatString(pagesMap[title])}</div>
+            <div className="col s2">
               <div className="redtxt">
                 <b>{urgent}</b>
               </div>
@@ -80,9 +81,10 @@ const AlertCollapsible = props => {
                 className="btn--raised btn--red left col m4"
                 onClick={() =>
                   history.push({
-                    pathname: `/lighthouse/pageLevelRecommendations`
+                    pathname: `/lighthouse/pageLevelRecommendations`,
                     // search: `recommendation=${title}`,
                     // recommendation: title
+                    hash: pagesMap[title]
                   })
                 }
               >
