@@ -3,6 +3,7 @@ import { LIGHTHOUSE_RECOMMENDATIONS } from 'src/components/graphql/Queries';
 import FetchData from 'src/components/graphql/utils';
 import formatString from 'src/utilities/formatString';
 import Cards from './Global/global_collapsible';
+import './main.scss';
 
 const Collapsible = props => {
   const [data, setData] = useState([]);
@@ -15,10 +16,10 @@ const Collapsible = props => {
   console.log(data);
   const map = {
     performance: 'PerformanceAuditRecommendations',
-    accessibility: 'PerformanceAuditRecommendations',
-    best_practices: 'PerformanceAuditRecommendations',
-    s_e_o: 'PerformanceAuditRecommendations',
-    progressive_web_app: 'PerformanceAuditRecommendations'
+    accessibility: 'AccessibilityAuditRecommendations',
+    best_practices: 'BPAAuditRecommendations',
+    s_e_o: 'SEOAuditRecommendations',
+    progressive_web_app: 'PWAAuditRecommendations'
   };
   const rec = data.recommendationDescription ? data.recommendationDescription[map[title]] : {};
   const arr = Object.keys(rec);
@@ -31,12 +32,12 @@ const Collapsible = props => {
     <>
       <br />
       <div className="row">
-        <div className="collapsible al col m11">
+        <div className="collapsible al col m11 bg--sidedark ">
           <input type="checkbox" id={`collapsible-${k}`} />
-          <label className="bg--sidedark color--white" htmlFor={`collapsible-${k}`}>
+          <label className="color--white" htmlFor={`collapsible-${k}`}>
             {formatString(title)}
           </label>
-          <div className={`colar collapsible-${k}-area`}>
+          <div className={`border-top colar collapsible-${k}-area`}>
             <div>{display}</div>
           </div>
         </div>

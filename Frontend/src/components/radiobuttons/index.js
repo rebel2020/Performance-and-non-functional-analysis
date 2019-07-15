@@ -14,10 +14,10 @@ const RadioButtons = props => {
 
     if (!item) {
       radiotype = (
-        <input type="radio" name="radio" align="left" value={values[0].value} defaultChecked />
+        <input type="radio" name="radio" align="left" value={values[0].value} defaultChecked key={item}/>
       );
     } else {
-      radiotype = <input type="radio" align="left" name="radio" value={values[item].value} />;
+      radiotype = <input type="radio" align="left" name="radio" value={values[item].value} key={item}/>;
     }
     return (
       <>

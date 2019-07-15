@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Collapsible from '../collapsible';
-
 import './main.scss';
 
 const Recommendations = props => {
