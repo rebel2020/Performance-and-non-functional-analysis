@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+// import ReactDOM from 'react-dom';
 import previousState from 'src/utilities/previousState';
 import { getTimeRange, getDate } from 'src/utilities/timeConversions';
 import compare from 'src/utilities/compareObjects';
@@ -9,7 +10,7 @@ import SolidGauge from 'src/components/solidgauge';
 import Alert from 'src/components/alerts/index';
 import searchParams from 'src/utilities/searchParams';
 import ALERTS from '../../AlertPage/graphql/Queries';
-
+import getMessage from './getMessage';
 import Filters from '../../Filters';
 import Audits from '../Audits';
 import './main.scss';
@@ -22,6 +23,7 @@ const HomeComponent = props => {
   const [alertData, setAlertData] = useState();
   const [query, setQuery] = useState(<></>);
   const [alertQuery, setAlertQuery] = useState(<></>);
+  const C4 = useRef('C4');
   const variables = {
     phase,
     brand,
@@ -31,16 +33,24 @@ const HomeComponent = props => {
   useEffect(() => {
     setAlertQuery(FetchData(ALERTS, setAlertData));
   }, []);
+  useEffect(() => {
+    const hash = history.location.hash.replace('#', '');
+    if (hash) {
+      const node = document.getElementsByName(hash)[0];
+      console.log(node);
+      if (node) {
+        node.scrollIntoView({ block: 'start', behavior: 'smooth' });
+      }
+    }
+  });
   let numalerts = 0;
-  // console.log(variables);
-  // console.log(data);
   let alertContainer = <></>;
 
   if (alertData) {
     const parsedata = alertData.alerts;
 
-    parsedata.map((item, i) => {
-      numalerts = numalerts + item.alert.length;
+    parsedata.forEach((item, i) => {
+      numalerts += item.alert.length;
     });
 
     if (numalerts > 0) {
@@ -78,61 +88,7 @@ const HomeComponent = props => {
   let auditContainer = <></>;
   if (metric) auditContainer = <Audits metric={metric} {...props} />;
 
-  let message = <></>;
-  const datetxt = <span className="greentxt">{getDate(date, 0)}</span>;
-  const phasetxt = <span className="redtxt">{phase}</span>;
-  const pagetxt = <span className="yellowtxt">{page}</span>;
-  const brandtxt = <span className="bluetxt">{brand}</span>;
-  if (!page && !brand && !phase) {
-    message = <div>
-      The Average Metric Scores of All the Pages on
-      {datetxt}.
-      </div>;
-  } else if (!page && !brand) {
-    message = (
-      <div>
-        The Average Metric Scores of All the Pages in {phasetxt} Environment on {datetxt}.
-      </div>
-    );
-  } else if (!page && !phase) {
-    message = (
-      <div>
-        The Average Metric Scores of All the Pages of {brandtxt} Brand in All Environments on{' '}
-        {datetxt}.
-      </div>
-    );
-  } else if (!phase && !brand) {
-    message = (
-      <div>
-        The Average Metric Scores of {pagetxt} in All Environments on {datetxt}.
-      </div>
-    );
-  } else if (!phase) {
-    message = (
-      <div>
-        The Average Metric Scores of {pagetxt} in All Environments on {datetxt}.
-      </div>
-    );
-  } else if (!brand) {
-    message = (
-      <div>
-        The Average Metric Scores of {pagetxt} in ${phasetxt} Environment on {datetxt}.
-      </div>
-    );
-  } else if (!page) {
-    message = (
-      <div>
-        The Average Metric Scores of All the Pages of {brandtxt} in {phasetxt} Environment on{' '}
-        {datetxt}.
-      </div>
-    );
-  } else {
-    message = (
-      <div>
-        The Average Metric Scores of {pagetxt} in {phasetxt} Environment on {datetxt}.
-      </div>
-    );
-  }
+  const message = getMessage(history.location.search);
   return (
     <>
       {alertQuery}
@@ -148,7 +104,7 @@ const HomeComponent = props => {
         {query}
         <div className="customcontainer text-center">
           {' '}
-          <div className="customnotecard text-center">
+          <div name="C4" className="customnotecard text-center">
             <div className="note">{message}</div>
           </div>
         </div>
