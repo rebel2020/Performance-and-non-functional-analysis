@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const ParametersSchema = new Schema({
-    brands: [{type: String}],
-    environments: [{type: String}],
-    urls: [{type: String}],
-    tracks: [{type: String}]
+    brand: [{type: String}],
+    phase: [{type: String}],
+    finalUrl: [{type: String}],
+    track: [{type: String}]
 }, {collection: "parameters"});
 
 
