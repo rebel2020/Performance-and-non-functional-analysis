@@ -7,7 +7,6 @@ const SelectList = props => {
       {item}
     </option>
   ));
-  console.log(value);
   // useEffect(() => {
   //   const selects = document.getElementsByClassName(className);
   //   console.log(selects);
