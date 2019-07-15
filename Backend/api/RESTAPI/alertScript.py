@@ -50,7 +50,7 @@ def get_alerts(data_list,t_url):
     lastToLastWeekAvg = getAvg(data_list[7:14])
 
     getTrendMetric(data_list[:7],alerts)
-    getTrendAudit(data_list[:7],alerts)
+#    getTrendAudit(data_list[:7],alerts)
     getAvgAlerts(globalAvg,lastWeekAvg,alerts,0)
     getAvgAlerts(lastToLastWeekAvg,lastWeekAvg,alerts,1)
     return alerts
@@ -97,7 +97,7 @@ def getAvgAlerts(referenceAvg,currentAvg,alerts,flag):
                 temp['category'] = catDict[audit]
                 temp['scoreDiff'] = ((referenceAvg[metric]-currentAvg[metric])/referenceAvg[metric])*100
                 if flag==0:
-                    temp['alertClass'] = 'below_thresshold'
+                    temp['alertClass'] = 'below_threshold'
                 else:
                     temp['alertClass'] = 'comparison_to_last_week'
                 t_alert['alert'].append(temp)
