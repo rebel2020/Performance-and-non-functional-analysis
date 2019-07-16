@@ -11,6 +11,7 @@ const Datalist = props => {
         value={value}
         onChange={onChange}
         placeholder={placeholder}
+        type="search"
       />
       <datalist id={listId} placeholder={placeholder}>
         {/* <option value="Performance"/>
