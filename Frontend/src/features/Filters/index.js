@@ -126,35 +126,33 @@ const Filters = props => {
           }}
         />
       </div>
-      <div className="col s6 m4 l2">
-        {dateRange === 'range' ? (
-          <>
-            <div className="color--white">To</div>
-            <Input
-              className="dateInput"
-              type="date"
-              value={values.toDate}
-              max={getHtmlDate(new Date().getTime())}
-              min="2019-06-01"
-              onChange={value => {
-                setValues({ ...values, toDate: value });
-                history.push({
-                  pathname: history.pathname,
-                  search: setSearch({
-                    phase: env,
-                    brand,
-                    page,
-                    date,
-                    toDate: new Date(value).getTime() + 66600000 - 1
-                  })
-                });
-              }}
-            />
-          </>
-        ) : (
-          <></>
-        )}
-      </div>
+      {dateRange === 'range' ? (
+        <div className="col s6 m4 l2">
+          <div className="color--white">To</div>
+          <Input
+            className="dateInput"
+            type="date"
+            value={values.toDate}
+            max={getHtmlDate(new Date().getTime())}
+            min="2019-06-01"
+            onChange={value => {
+              setValues({ ...values, toDate: value });
+              history.push({
+                pathname: history.pathname,
+                search: setSearch({
+                  phase: env,
+                  brand,
+                  page,
+                  date,
+                  toDate: new Date(value).getTime() + 66600000 - 1
+                })
+              });
+            }}
+          />
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
