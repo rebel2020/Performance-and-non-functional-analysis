@@ -5,6 +5,8 @@ import compare from 'src/utilities/compareObjects';
 import previousState from 'src/utilities/previousState';
 import setSearch from 'src/utilities/search';
 import searchParams from 'src/utilities/searchParams';
+import { pagesMap } from 'src/utilities/map';
+// import formatString from 'src/utilities/formatString';
 import Input from 'src/components/Input';
 import useGlobal from 'src/store';
 import './main.scss';
@@ -18,7 +20,7 @@ const Filters = props => {
   const [values, setValues] = useState({
     phase: env || 'All',
     brand: brand || 'All',
-    page: page || 'All',
+    page: pagesMap[page] || 'All',
     date: getHtmlDate(date),
     toDate: getHtmlDate(toDate)
   });
@@ -28,7 +30,7 @@ const Filters = props => {
       setValues({
         phase: env || 'All',
         brand: brand || 'All',
-        page: page || 'All',
+        page: pagesMap[page] || 'All',
         date: getHtmlDate(date),
         toDate: getHtmlDate(toDate)
       });
@@ -83,13 +85,19 @@ const Filters = props => {
           listId="page"
           placeholder="Page"
           value={values.page}
-          options={filterLists.finalUrl}
+          options={filterLists.components}
           onChange={value => {
             setValues({ ...values, page: value });
-            if (filterLists.finalUrl.includes(value)) {
+            if (filterLists.components.includes(value)) {
               history.push({
                 pathname: history.pathname,
-                search: setSearch({ phase: env, brand, page: value, date, toDate })
+                search: setSearch({
+                  phase: env,
+                  brand,
+                  page: Object.keys(pagesMap).filter(p => pagesMap[p] === value)[0],
+                  date,
+                  toDate
+                })
               });
             }
           }}
@@ -118,35 +126,33 @@ const Filters = props => {
           }}
         />
       </div>
-      <div className="col s6 m4 l2">
-        {dateRange === 'range' ? (
-          <>
-            <div className="color--white">To</div>
-            <Input
-              className="dateInput"
-              type="date"
-              value={values.toDate}
-              max={getHtmlDate(new Date().getTime())}
-              min="2019-06-01"
-              onChange={value => {
-                setValues({ ...values, toDate: value });
-                history.push({
-                  pathname: history.pathname,
-                  search: setSearch({
-                    phase: env,
-                    brand,
-                    page,
-                    date,
-                    toDate: new Date(value).getTime() + 66600000 - 1
-                  })
-                });
-              }}
-            />
-          </>
-        ) : (
-          <></>
-        )}
-      </div>
+      {dateRange === 'range' ? (
+        <div className="col s6 m4 l2">
+          <div className="color--white">To</div>
+          <Input
+            className="dateInput"
+            type="date"
+            value={values.toDate}
+            max={getHtmlDate(new Date().getTime())}
+            min="2019-06-01"
+            onChange={value => {
+              setValues({ ...values, toDate: value });
+              history.push({
+                pathname: history.pathname,
+                search: setSearch({
+                  phase: env,
+                  brand,
+                  page,
+                  date,
+                  toDate: new Date(value).getTime() + 66600000 - 1
+                })
+              });
+            }}
+          />
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

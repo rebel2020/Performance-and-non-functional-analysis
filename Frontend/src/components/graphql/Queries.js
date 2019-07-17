@@ -281,7 +281,16 @@ const lighthouse_Audit_Score = value => {
     }
     `;
 };
-
+const getLists = gql`
+  {
+    parameters {
+      brand
+      finalUrl
+      phase
+      track
+    }
+  }
+`;
 const LIST = gql`
   query {
     lighthousedata {
@@ -297,6 +306,7 @@ export {
   AVG_LIGHTHOUSE_SCORES,
   getQuery,
   getAudits,
+  getLists,
   LIST,
   AVG_SCORES,
   LIGHTHOUSE_RECOMMENDATIONS,

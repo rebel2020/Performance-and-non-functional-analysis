@@ -36,13 +36,14 @@ const AlertCollapsible = props => {
     return (
       <React.Fragment key={i}>
         <div className="row">
-          <p className=" col m6">{formatString(item.name)}</p>
-          <p className=" col m6 ">
+          <p className=" col m4">{formatString(item.name)}</p>
+          <p className=" col m4 ">
             Average Drop in Score:&nbsp;
             <div className={`score ${scorecol}`}>
               <b>{Math.round(item.scoreDiff)}%</b>
             </div>
           </p>
+          <p className=" col m4">Alert Type: {formatString(item.alertClass)}</p>
         </div>
 
         <div className="row descline">
@@ -65,11 +66,10 @@ const AlertCollapsible = props => {
             <div className="col s10">{formatString(pagesMap[title])}</div>
             <div className="col s2">
               <div className="redtxt">
-                {' '}
-                <b>{urgent}</b>{' '}
+                <b>{urgent}</b>
               </div>
               <div className="yellowtxt">
-                <b>{avg}</b>{' '}
+                <b>{avg}</b>
               </div>
             </div>
           </label>
